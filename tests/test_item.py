@@ -3,6 +3,7 @@
 from src.item import Item
 
 def test_validate_data():
+    """Тестирование класса Item"""
     item = Item('short', 10, 4)
     assert type(item.name) == str
     assert type(item.price) == int
