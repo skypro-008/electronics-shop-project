@@ -4,10 +4,12 @@ version = "0.1.0"
 description = ""
 authors = ["kirillskyeng <kirill.netreba@skyeng.ru>"]
 readme = "README.md"
-packages = [{include = "electronics_shop_project"}]
+packages = [{include = ".."}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pytest = "^7.2.2"
+pytest-cov = "^4.0.0"
 
 
 [build-system]
