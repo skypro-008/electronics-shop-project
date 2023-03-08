@@ -1,14 +1,22 @@
-"""Здесь надо написать тесты с использованием pytest для модуля item."""
-
+import pytest
 from src.item import Item
 
-def test_validate_data():
+@pytest.fixture
+def item():
+    return Item('phone', 10000, 4)
+
+def test_item_init(item):
     """Тестирование класса Item"""
-    item = Item('short', 10, 4)
     assert type(item.name) == str
     assert type(item.price) == int
     assert type(item.quantity) == int
-    assert item.calculate_total_price() == 40
-    item.pay_rate = 0.5
+    assert item.name == 'phone'
+    assert item.price == 10000
+    assert item.quantity == 4
+
+def test_calculate_total_price(item):
+    assert item.calculate_total_price() == 40000
+
+def test_apply_discount(item):
     item.apply_discount()
-    item.price = 5.0
+    assert item.price == 11000.0

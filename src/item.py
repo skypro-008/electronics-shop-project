@@ -2,7 +2,7 @@ class Item:
     """
     Класс для представления товара в магазине.
     """
-    pay_rate = 1
+    pay_rate = 1.1
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
