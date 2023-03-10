@@ -11,6 +11,7 @@
 Добавьте в `Item` следующие методы:
 - `instantiate_from_csv()` - класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_
 - `string_to_number()` - статический метод, возвращающий число из числа-строки
+> Для работы с csv-файлом используйте модуль `csv` и метод [`DictReader`](https://docs.python.org/3/library/csv.html#csv.DictReader)
 
 Тестирование:
 - Напишите тесты для новых методов в `tests/test_item.py`
