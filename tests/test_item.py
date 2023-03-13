@@ -43,3 +43,21 @@ def test_item_apply_disc(item_phone):
     Item.pay_rate = 0.7
     item_phone.apply_discount()
     assert item_phone.price == 7000
+
+def test_setter1(item_phone):
+    item_phone.name = "SmartPhone"
+    assert item_phone.name == "SmartPhone"
+
+def test_setter2(item_phone):
+    with pytest.raises(ValueError):
+        item_phone.name = "SuperSmartPhone"
+
+def test_string_to_number1():
+    assert Item.string_to_number("10") == 10
+
+def test_string_to_number2():
+    assert Item.string_to_number("11.5") == 11.5
+
+def test_string_to_number3():
+    with pytest.raises(ValueError):
+        Item.string_to_number("asd")
