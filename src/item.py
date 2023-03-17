@@ -25,6 +25,11 @@ class Item:
     @name.setter
     def name(self, value):
         self.__name = value
+        if len(value) <= 10:
+            print("Длина наименования товара меньше 10 символов")
+            self.__name = value
+        else:
+            print("Длина наименования товара больше 10 символов")
 
     def calculate_total_price(self) -> float:
         """
