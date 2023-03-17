@@ -49,3 +49,16 @@ def test_item_py_there(test_data_there):
     class_exemplar.pay_rate = 0.8
     class_exemplar.apply_discount()
     assert class_exemplar.price == 4000
+
+def test_item_py_four(test_data_one):
+    class_exemplar = Item(*test_data_one)
+    class_exemplar.name = 'Суперсмартфон'
+    assert class_exemplar.name == 'Смартфон'
+    class_exemplar.name = 'Телефон'
+    assert class_exemplar.name == 'Телефон'
+
+
+def test_item_py_five():
+
+    Item.instantiate_from_csv('src/items.csv')
+    # assert len(Item.all) == 5
