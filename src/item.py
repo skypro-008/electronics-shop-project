@@ -48,20 +48,18 @@ class Item:
         """
         self.price *= self.pay_rate
 
+    @classmethod
+    def instantiate_from_csv(cls, url='../src/items.csv'):
+        cls.all.clear()
+        with open(url, 'r', encoding='windows-1251') as file:
+            file_reader = DictReader(file, delimiter=',')
+            for value in file_reader:
+                name, price, quantity = value.values()
+                cls(name, cls.string_to_number(price), cls.string_to_number(quantity))
 
-@classmethod
-def instantiate_from_csv(cls, url='../src/items.csv'):
-    cls.all.clear()
-    with open(url, 'r', encoding='windows-1251') as file:
-        file_reader = DictReader(file, delimiter=',')
-        for value in file_reader:
-            name, price, quantity = value.values()
-            cls(name, cls.string_to_number(price), cls.string_to_number(quantity))
-
-
-@staticmethod
-def string_to_number(string):
-    return int(float(string))
+    @staticmethod
+    def string_to_number(string):
+        return int(float(string))
 
 
 def __repr__(self):
