@@ -50,6 +50,7 @@ def test_item_py_there(test_data_there):
     class_exemplar.apply_discount()
     assert class_exemplar.price == 4000
 
+
 def test_item_py_four(test_data_one):
     class_exemplar = Item(*test_data_one)
     class_exemplar.name = 'Суперсмартфон'
@@ -59,6 +60,5 @@ def test_item_py_four(test_data_one):
 
 
 def test_item_py_five():
-
     Item.instantiate_from_csv('src/items.csv')
     # assert len(Item.all) == 5
