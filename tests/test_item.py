@@ -15,9 +15,9 @@ def test_item_init(x):
 
 
 def test_item_apply_discount(x):
-    Item.pay_rate = 0.85
+    Item.pay_rate = 0.95
     x.apply_discount()
-    assert x.price == 85
+    assert x.price == 95
 
 
 def test_item_calculate_total_price(x):
