@@ -74,3 +74,10 @@ class Item:
 
     def __str__(self):
         return self._name
+
+
+item1 = Item('Смартфон', 10, 5)
+Item.pay_rate = 0.9
+print(item1.pay_rate)
+item1.apply_discount()
+print(item1.price)
