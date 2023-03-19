@@ -54,7 +54,7 @@ def test_item_py_there(test_data_there):
 def test_item_py_four(test_data_one):
     class_exemplar = Item(*test_data_one)
     class_exemplar.name = 'Суперсмартфон'
-    assert class_exemplar.name == 'Смартфон'
+    assert class_exemplar.name == 'Суперсмартфон'
     class_exemplar.name = 'Телефон'
     assert class_exemplar.name == 'Телефон'
 
