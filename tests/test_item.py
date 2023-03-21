@@ -21,14 +21,14 @@ def test_item_init2():
 
 
 def test_item_init3():
-    """Тестирует метод Item.__init__ с некорректным названием"""
+    """Тестирует метод Item.__init__ с некорректной ценой"""
     with pytest.raises(ValueError):
         Item("phone", "0.0", 2)
     with pytest.raises(ValueError):
         Item("phone", 0, 2)
 
 def test_item_init4():
-    """Тестирует метод Item.__init__ с некорректным названием"""
+    """Тестирует метод Item.__init__ с некорректным количеством"""
     with pytest.raises(ValueError):
         Item("phone", 1000, "asd")
     with pytest.raises(ValueError):
