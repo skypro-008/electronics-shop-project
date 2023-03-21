@@ -34,7 +34,7 @@ class Item:
         return f"Item('{self.__name}', {self.price}, {self.quantity})"
 
     def __str__(self):
-        return self.__name
+        return self.name
 
     def calculate_total_price(self) -> float:
         """
@@ -90,3 +90,9 @@ class Item:
         if value_error:
             raise ValueError("string_to_number: Некорректное число - строка")
         return ret
+
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        else:
+            raise TypeError("ERROR: class Item + other type not implemented")
