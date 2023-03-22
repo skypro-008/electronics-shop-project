@@ -61,7 +61,6 @@ class Item:
     def string_to_number(string):
         return int(float(string))
 
-
     def __repr__(self):
         return f'{self.name}, {self.price}, {self.quantity}'
 
