@@ -62,5 +62,8 @@ class Item:
         return int(float(string))
 
 
-#def __repr__(self):
- #   return f'{self.name}, {self.price}, {self.quantity}'
+    def __repr__(self):
+        return f'{self.name}, {self.price}, {self.quantity}'
+
+    def __str__(self):
+        return f'{self.name}'
