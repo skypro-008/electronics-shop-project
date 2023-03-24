@@ -61,10 +61,10 @@ def test_item_py_four(test_data_one):
 
 def test_item_py_five():
     Item.instantiate_from_csv('src/items.csv')
-    # assert len(Item.all) == 5
+    assert len(Item.all) == 5
 
 
 def test_item_py_six():
     item1 = Item("Смартфон", 10000, 20)
-    assert repr(item1) == "Item('Смартфон', 10000.0, 20)"
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
     assert str(item1) == 'Смартфон'
