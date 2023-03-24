@@ -66,5 +66,5 @@ def test_item_py_five():
 
 def test_item_py_six():
     item1 = Item("Смартфон", 10000, 20)
-    assert repr(item1) == "Item('Смартфон', 10000.0, 20)"
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
     assert str(item1) == 'Смартфон'
