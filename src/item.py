@@ -61,6 +61,9 @@ class Item:
     def string_to_number(string):
         return int(float(string))
 
+    def __add__(self, other):
+        return other.quantity + self.quantity
+
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {int(self.price)}, {self.quantity})"
 
