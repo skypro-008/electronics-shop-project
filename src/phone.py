@@ -15,6 +15,7 @@ class Phone(Item):
         try:
             if 1 <= value == int(value):
                 self.__number_of_sim = value
+                return self.__number_of_sim
             else:
                 raise ValueError
         except ValueError:
