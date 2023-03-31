@@ -63,11 +63,13 @@ class Item:
         return int(float(string))
 
     def __add__(self, other):
-        return other.quantity + self.quantity
+        if isinstance(other, Item):
+            return other.quantity + self.quantity
+        else:
+            raise ValueError("Сложение возможно только для экземпляров Item и Phone")
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {int(self.price)}, {self.quantity})"
 
     def __str__(self):
         return f'{self.name}'
-
