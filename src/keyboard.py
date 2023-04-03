@@ -17,5 +17,5 @@ class MixinLog:
         return self
 
 
-class Keyboard(Item, MixinLog):
+class KeyBoard(Item, MixinLog):
     pass
