@@ -3,7 +3,7 @@ class Item:
     Класс для представления товара в магазине.
     """
     pay_rate = 1.0
-    all = [1]
+    all = []
 
     def __init__(self, name: str, price: float, quantity: int):
         """
@@ -15,9 +15,7 @@ class Item:
         self.name = name
         self.price = price
         self.quantity = quantity
-
-
-
+        Item.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -33,4 +31,7 @@ class Item:
         """
         self.price = self.price * self.pay_rate
 
-
+    def __repr__(self):
+        module_name = "__main__"
+        class_name = self.__class__.__name__
+        return f"<{module_name}.{class_name} object at {hex(id(self))}>"
