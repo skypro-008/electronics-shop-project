@@ -20,7 +20,6 @@ class Item:
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
-
         :return: Общая стоимость товара.
         """
         return self.price * self.quantity
@@ -34,4 +33,4 @@ class Item:
     def __repr__(self):
         module_name = "__main__"
         class_name = self.__class__.__name__
-        return f"<{module_name}.{class_name} object at {hex(id(self))}>"
+        return f"<{module_name}.{class_name} object at {hex(id(all))}>"
