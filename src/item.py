@@ -1,3 +1,4 @@
+import csv
 class Item:
     """
     Класс для представления товара в магазине.
@@ -12,7 +13,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
@@ -34,3 +35,11 @@ class Item:
         module_name = "__main__"
         class_name = self.__class__.__name__
         return f"<{module_name}.{class_name} object at {hex(id(all))}>"
+
+    def instantiate_from_csv(self):
+
+        pass
+
+
+    def string_to_number(self):
+        pass
