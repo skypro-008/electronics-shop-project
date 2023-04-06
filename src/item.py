@@ -1,4 +1,6 @@
 import csv
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -18,6 +20,10 @@ class Item:
         self.quantity = quantity
         Item.all.append(self)
 
+#    @property
+#    def name(self):
+#        pass
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -36,10 +42,12 @@ class Item:
         class_name = self.__class__.__name__
         return f"<{module_name}.{class_name} object at {hex(id(all))}>"
 
-    def instantiate_from_csv(self):
-
+    @classmethod
+    def instantiate_from_csv(cls):
         pass
 
-
-    def string_to_number(self):
-        pass
+    @staticmethod
+    def string_to_number(number):
+        """ статическая функция преобразования строкового представления числа в целое число"""
+        return_number = float(number)
+        return int(return_number)
