@@ -1,3 +1,8 @@
+import csv
+
+CSV_FILE = 'items.csv'
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -24,12 +29,22 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        self.price = int(self.price * self.quantity)
-        return self.price
+        return self.price * self.quantity
 
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
         self.price = int(self.price * self.pay_rate)
+
         return self.price
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        with open(CSV_FILE, 'r') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                cls.all.append(row)
+
+    def string_to_number(self):
+        pass
