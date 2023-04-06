@@ -19,6 +19,10 @@ def test_apply_discount(return_date):
     return_date.apply_discount()
     assert return_date.price == 8000
 
+def test_string_to_number():
+    assert Item.string_to_number("6.67") == 6
+
+
 
 def test_init(return_date):
     """Тест для init, просто интересно было, смысла в нем нет"""
