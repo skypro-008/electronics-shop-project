@@ -52,7 +52,8 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         """Открытие файла csv"""
-        with open("D:\python\electronics-shop-project\src\items.csv") as f:
+        cls.all = []
+        with open("src\items.csv") as f:
             reader = csv.reader(f)
             next(reader)
             for row in reader:
@@ -66,3 +67,4 @@ class Item:
         """ Статическая функция преобразования строкового представления числа в целое число"""
         return_number = float(number)
         return int(return_number)
+
