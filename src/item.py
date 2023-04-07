@@ -67,4 +67,3 @@ class Item:
         """ Статическая функция преобразования строкового представления числа в целое число"""
         return_number = float(number)
         return int(return_number)
-
