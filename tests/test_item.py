@@ -5,6 +5,7 @@ from src.item import Item
 
 @pytest.fixture
 def return_date():
+    """Описание фикстуры для тестов"""
     return Item("Смартфон", 10000, 20)
 
 
@@ -21,6 +22,7 @@ def test_apply_discount(return_date):
 
 
 def test_string_to_number():
+    """тест для статической функции класса"""
     assert Item.string_to_number("6.67") == 6
 
 
@@ -31,13 +33,17 @@ def test_init(return_date):
     assert return_date.quantity == 20
 
 def test_name():
+    """тест для декоратора name, в случае длинного значения, более 10 символов,Значение не вносится! """
     item = Item("Утюг", 5, 10)
     item.name = "Чайник"
     assert item.name == "Чайник"
-    item.name = "Чайник и Чайник и Чайник и Чайник и Чайник"
-    assert item.name == "Чайник и Чайник и Чайник и Чайник и Чайник"
+    item1 = Item("Утюг", 5, 10)
+    item1.name = "Очень длинное слово которе не должно быть принято "
+    assert item1.name == "Утюг"
+
 
 def test_instantiate_from_csv():
+    """Тест для класса - метода открытия файла csv"""
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
     item1 = Item.all[0]

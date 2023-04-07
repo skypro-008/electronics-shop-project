@@ -22,10 +22,12 @@ class Item:
 
     @property
     def name(self):
+        """Реализация сеттера для функции name"""
         return self.__name
 
     @name.setter
     def name(self, value):
+        """Реализация геттера для функции name"""
         if len(value) <= 10:
             self.__name = value
         else:
@@ -45,6 +47,7 @@ class Item:
         self.price = self.price * self.pay_rate
 
     def __repr__(self):
+        """метод вывода"""
         module_name = "__main__"
         class_name = self.__class__.__name__
         return f"<{module_name}.{class_name} object at {hex(id(all))}>"
@@ -58,12 +61,12 @@ class Item:
             next(reader)
             for row in reader:
                 name = row[0]
-                price = row[1]
-                quantity = row[2]
+                price = int(row[1])
+                quantity = int(row[2])
                 cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(number):
-        """ Статическая функция преобразования строкового представления числа в целое число"""
+        """ Статическая функция (метод) преобразования строкового представления числа в целое число"""
         return_number = float(number)
         return int(return_number)
