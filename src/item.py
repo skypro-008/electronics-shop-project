@@ -15,14 +15,21 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
 
-#    @property
-#    def name(self):
-#        pass
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, value):
+        if len(value) <= 10:
+            self.__name = value
+        else:
+            print("Exception: Длина наименования товара превышает 10 символов")
 
     def calculate_total_price(self) -> float:
         """
@@ -44,10 +51,18 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        pass
+        """Открытие файла csv"""
+        with open("D:\python\electronics-shop-project\src\items.csv") as f:
+            reader = csv.reader(f)
+            next(reader)
+            for row in reader:
+                name = row[0]
+                price = row[1]
+                quantity = row[2]
+                cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(number):
-        """ статическая функция преобразования строкового представления числа в целое число"""
+        """ Статическая функция преобразования строкового представления числа в целое число"""
         return_number = float(number)
         return int(return_number)
