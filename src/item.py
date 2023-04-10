@@ -50,7 +50,10 @@ class Item:
         """метод вывода"""
         module_name = "__main__"
         class_name = self.__class__.__name__
-        return f"<{module_name}.{class_name} object at {hex(id(all))}>"
+        return f"{class_name}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self.__name}"
 
     @classmethod
     def instantiate_from_csv(cls):
