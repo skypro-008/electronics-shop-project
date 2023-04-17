@@ -33,7 +33,7 @@ def test_init(return_date):
     assert return_date.quantity == 20
 
 def test_name():
-    """тест для декоратора name, в случае длинного значения, более 10 символов,Значение не вносится! """
+    """Тест для декоратора name, в случае длинного значения, более 10 символов, Значение не вносится! """
     item = Item("Утюг", 5, 10)
     item.name = "Чайник"
     assert item.name == "Чайник"
@@ -61,4 +61,8 @@ def test_str(return_date):
     assert str(return_date) == 'Смартфон'
 
 def test_repr(return_date):
+    """Тест для метода repr"""
     assert repr(return_date) == "Item('Смартфон', 10000, 20)"
+
+
+

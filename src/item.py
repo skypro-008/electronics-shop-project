@@ -48,7 +48,7 @@ class Item:
 
     def __repr__(self):
         """метод вывода"""
-        module_name = "__main__"
+
         class_name = self.__class__.__name__
         return f"{class_name}('{self.__name}', {self.price}, {self.quantity})"
 
@@ -73,3 +73,12 @@ class Item:
         """ Статическая функция (метод) преобразования строкового представления числа в целое число"""
         return_number = float(number)
         return int(return_number)
+
+    def __add__(self, other):
+        """Метод сложения количества"""
+        if not isinstance(other, Item):
+            raise Exception("Складывать можно только наследников класса Item.")
+        elif not isinstance(self, Item):
+            raise Exception("Складывать можно только наследников класса Item.")
+
+        return self.quantity + other.quantity
