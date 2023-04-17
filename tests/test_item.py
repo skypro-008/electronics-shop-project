@@ -18,5 +18,3 @@ def test_apply_discount():
     Item.pay_rate = 0.8
     item3.apply_discount()
     assert item3.price == 36000
-
-
