@@ -43,6 +43,11 @@ class Item:
 
         return self.price
 
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только объекты Item и дочерние от них.')
+        return self.quantity + other.quantity
+
     @property
     def name(self):
         return self.__name
