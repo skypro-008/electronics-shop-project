@@ -5,7 +5,6 @@ class Item:
     pay_rate = 0.8
     all = []
 
-
     def __init__(self, name: str, price: float, quantity: int):
         """
         Создание экземпляра класса item.
@@ -18,7 +17,7 @@ class Item:
         self.price = price
         self.quantity = quantity
         self.general_summ = self.price * self.quantity
-        self.all = all
+        self.all = self.all.append(all)
 
     def calculate_total_price(self) -> str:
         """
@@ -37,7 +36,4 @@ class Item:
 
 
 
-
-all1 = Item("Смартфон", 10000, 20)
-all2 = Item("Ноутбук", 20000, 5)
-all = [all1, all2]
+all = [Item("Смартфон", 10000, 20), Item("Ноутбук", 20000, 5)]
