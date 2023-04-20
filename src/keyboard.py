@@ -4,11 +4,25 @@ from src.item import Item
 class MixinKeyLang:
     """Класс миксин для ввода раскладки клавиатуры"""
     def __init__(self):
-        self.language = "EN"
+        self.__language = "EN"
+    @property
+    def language(self):
+        """Реализация сеттера для language"""
+        return self.__language
+
 
     def change_lang(self):
-        self.language = "RU"
-        return self.language
+        if self.__language == "EN":
+            self.__language = "RU"
+            return self.__language
+        elif self.__language == "RU":
+            self.__language = "EN"
+            return self.__language
+        else:
+            raise AttributeError("property 'language' of 'KeyBoard' object has no setter.")
+
+
+
 
 class KeyBoard(Item, MixinKeyLang):
 
