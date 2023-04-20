@@ -3,6 +3,7 @@ from src.item import Item
 
 class MixinKeyLang:
     """Класс миксин для ввода раскладки клавиатуры"""
+    __slots__ = ('__language')
     def __init__(self):
         self.__language = "EN"
     @property
