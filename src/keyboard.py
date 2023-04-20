@@ -26,6 +26,7 @@ class MixinKeyLang:
         return self
 
 class KeyBoard(Item, MixinKeyLang):
+    """реализация класса KeyBoard, повторяющего функционал KeyBoard + миксин"""
 
     def __init__(self, *args):
         super().__init__(*args)
