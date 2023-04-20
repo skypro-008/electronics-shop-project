@@ -31,6 +31,6 @@ class MixinKeyLang:
 
 class KeyBoard(Item, MixinKeyLang):
 
-    def __init__(self, name: str, price: float, quantity: int):
-        super().__init__(name, price, quantity)
+    def __init__(self, *args):
+        super().__init__(*args)
 
