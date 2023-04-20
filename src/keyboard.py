@@ -25,11 +25,6 @@ class MixinKeyLang:
             self.__language = "EN"
         return self
 
-
-
-
-
-
 class KeyBoard(Item, MixinKeyLang):
 
     def __init__(self, *args):
