@@ -12,11 +12,12 @@ class MixinKeyLang:
 
     @language.setter
     def language(self, value):
-        """Сеттер для language"""
+        """Геттер для language"""
         raise AttributeError("property 'language' of 'KeyBoard' object has no setter.")
 
 
     def change_lang(self):
+        """метод смены раскладки клавиатуры"""
         if self.__language == "EN":
             self.__language = "RU"
         elif self.__language == "RU":
