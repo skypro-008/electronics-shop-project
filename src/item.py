@@ -17,7 +17,20 @@ class Item:
         self.price = price
         self.quantity = quantity
         self.general_summ = self.price * self.quantity
-        self.all = self.all.append(all)
+        self.all.append(self)
+
+    # @property
+    # def name(self):
+    #     return self.name
+
+    # @name.setter
+    # def name(self, name):
+    #     leen = len(name)
+    #     if leen <= 10:
+    #         return self.name
+    #     else:
+    #         return None
+
 
     def calculate_total_price(self) -> str:
         """
@@ -34,6 +47,12 @@ class Item:
         self.price = self.price * self.pay_rate
         return f'Цена с учетом скидки {int((1 - self.pay_rate) * 100)}% составляет {self.price}'
 
+    @classmethod
+    def instantiate_from_csv(cls, ):
+        pass
+
+    @staticmethod
+    def string_to_number(number):
+        pass
 
 
-all = [Item("Смартфон", 10000, 20), Item("Ноутбук", 20000, 5)]
