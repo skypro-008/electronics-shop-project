@@ -5,7 +5,7 @@ class Item:
     """
     Класс для представления товара в магазине.
     """
-    pay_rate = 1.0
+    pay_rate = 1.
     all = []
 
     # path = os.path.join('..', 'electronics-shop-project_AV', 'scr', 'items.csv')
@@ -29,11 +29,12 @@ class Item:
     def verify_name(cls, name):
         """Проверяет, что длина наименования товара не больше 10 символов"""
         if len(name) >= 10:
-            print("Exception: Длина наименования товара превышает 10 символов.")
+            raise "Длина наименования товара превышает 10 символов."
 
     @classmethod
     def instantiate_from_csv(cls):
-        with open('items.csv', encoding='utf-8', newline='') as csvfile:
+        cls.all = []
+        with open('../src/items.csv', encoding='utf-8', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             cls.all = [cls((row['name']), float(row['price']), int(row['quantity'])) for row in reader]
         return cls.all
@@ -67,9 +68,3 @@ class Item:
         self.price *= self.pay_rate
         return self.pay_rate
 
-
-item = Item('Телефон', 10000, 5)
-print(item.name, item.price, item.quantity)
-i = Item.instantiate_from_csv()
-print(i[2].name)
-print(len(Item.all))
