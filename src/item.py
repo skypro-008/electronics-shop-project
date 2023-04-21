@@ -40,7 +40,7 @@ class Item:
 
     @staticmethod
     def string_to_number(str_number):
-        return int(str_number)
+        return int(float(str_number))
 
     @property
     def name(self):
@@ -68,8 +68,8 @@ class Item:
         return self.pay_rate
 
 
-# item = Item('Телефон', 10000, 5)
-# print(item.name, item.price, item.quantity)
-# i = Item.instantiate_from_csv()
-# print(i[2].name)
-# print(len(Item.all))
+item = Item('Телефон', 10000, 5)
+print(item.name, item.price, item.quantity)
+i = Item.instantiate_from_csv()
+print(i[2].name)
+print(len(Item.all))
