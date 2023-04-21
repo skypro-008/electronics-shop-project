@@ -1,7 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 
-# from src import item
 from src.item import Item
 
 item3 = Item('Пылесос', 45000, 5)
@@ -43,7 +42,3 @@ def test_verify_name():
     with pytest.raises(TypeError):
         item3.name = 'СуперСмартфон'
         Item.verify_name(item3.name)
-
-
-
-
