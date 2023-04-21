@@ -1,3 +1,7 @@
+import csv
+import json
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -13,24 +17,22 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         self.general_summ = self.price * self.quantity
         self.all.append(self)
 
-    # @property
-    # def name(self):
-    #     return self.name
+    @property
+    def new_name(self):
+        return self.__name
 
-    # @name.setter
-    # def name(self, name):
-    #     leen = len(name)
-    #     if leen <= 10:
-    #         return self.name
-    #     else:
-    #         return None
-
+    @new_name.setter
+    def new_name(self, name):
+        if len(name) <= 10:
+            self.__name = name
+        else:
+            raise (Exception("Длина наименования товара превышает 10 символов."))
 
     def calculate_total_price(self) -> str:
         """
@@ -38,7 +40,7 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        return f'Общая стоимость {self.name} в магазине составляет: {self.general_summ}'
+        return f'Общая стоимость {self.__name} в магазине составляет: {self.general_summ}'
 
     def apply_discount(self) -> str:
         """
@@ -48,11 +50,22 @@ class Item:
         return f'Цена с учетом скидки {int((1 - self.pay_rate) * 100)}% составляет {self.price}'
 
     @classmethod
-    def instantiate_from_csv(cls, ):
-        pass
+    def instantiate_from_csv(cls):
+        """
+        Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
+        """
+
+        with open('D:\SKY_PRO\Home_work\Home_work_13_1_Electronics-Store\src\items.csv', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                cls.all.append(row)
+        return len(cls.all)
 
     @staticmethod
     def string_to_number(number):
-        pass
+        """
+        Статический метод, возвращающий число из числа-строки
+        """
+        return int(float(number))
 
-
+# print(Item.instantiate_from_csv())
