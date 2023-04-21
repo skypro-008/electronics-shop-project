@@ -29,7 +29,7 @@ class Item:
     def verify_name(cls, name):
         """Проверяет, что длина наименования товара не больше 10 символов"""
         if len(name) >= 10:
-            raise Exception("длина наименования товара больше 10 симвовов")
+            print("Exception: Длина наименования товара превышает 10 символов.")
 
     @classmethod
     def instantiate_from_csv(cls):
@@ -67,8 +67,9 @@ class Item:
         self.price *= self.pay_rate
         return self.pay_rate
 
+
 # item = Item('Телефон', 10000, 5)
 # print(item.name, item.price, item.quantity)
 # i = Item.instantiate_from_csv()
-# print(i[4].name)
+# print(i[2].name)
 # print(len(Item.all))
