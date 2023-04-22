@@ -21,18 +21,17 @@ class Item:
         self.price = price
         self.quantity = quantity
         self.general_summ = self.price * self.quantity
-        self.all.append(self)
 
     @property
-    def new_name(self):
+    def name(self):
         return self.__name
 
-    @new_name.setter
-    def new_name(self, name):
+    @name.setter
+    def name(self, name):
         if len(name) <= 10:
             self.__name = name
         else:
-            return 'Exception: Длина наименования товара превышает 10 символов.'
+            print('Exception: Длина наименования товара превышает 10 символов.')
 
     def calculate_total_price(self) -> str:
         """
@@ -59,8 +58,9 @@ class Item:
             reader = csv.DictReader(csvfile)
             cls.all.clear()
             for row in reader:
-                cls.all.append(row)
+                cls.all.append(cls(row['name'], int(row['price']), int(row['quantity'])))
         return len(cls.all)
+        print(cls.all)
 
     @staticmethod
     def string_to_number(number):
@@ -68,6 +68,5 @@ class Item:
         Статический метод, возвращающий число из числа-строки
         """
         return int(float(number))
-
 
 # print(Item.all[1])
