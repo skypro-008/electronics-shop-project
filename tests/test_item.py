@@ -2,13 +2,15 @@
 # from src.item import calculate_total_price
 import pytest
 
-from src import item
 from src.item import Item
 
 
 def test_name():
+    item = Item('Телефон', 10000, 5)
     item.name = 'Смартфон'
     assert item.name == 'Смартфон'
+    with pytest.raises(Exception, match='Длина наименования товара превышает 10 символов.'):
+        item.name = 'СуперСмартфон'
 
 
 def test_calculate_total_price():
