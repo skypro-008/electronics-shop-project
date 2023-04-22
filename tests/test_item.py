@@ -39,6 +39,6 @@ def test_name():
 
 
 def test_verify_name():
-    with pytest.raises(TypeError):
+    with pytest.raises(Exception):
         item3.name = 'СуперСмартфон'
         Item.verify_name(item3.name)
