@@ -1,7 +1,11 @@
 import csv
 import json
+import pandas as pd
 import os
+
 CSV_FILE = os.path.abspath('items.csv')
+
+
 
 
 class Item:
@@ -10,7 +14,6 @@ class Item:
     """
     pay_rate = 0.8
     all = []
-
 
     def __init__(self, name: str, price: float, quantity: int):
         """
@@ -70,5 +73,3 @@ class Item:
         Статический метод, возвращающий число из числа-строки
         """
         return int(float(number))
-
-
