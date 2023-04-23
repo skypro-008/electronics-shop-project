@@ -1,5 +1,6 @@
 import csv
 import json
+import os
 
 
 class Item:
@@ -54,7 +55,7 @@ class Item:
         Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
 
-        with open('D:\SKY_PRO\Home_work\Home_work_13_1_Electronics-Store\src\items.csv', newline='') as csvfile:
+        with os.path.join('items.csv') as csvfile:
             reader = csv.DictReader(csvfile)
             cls.all.clear()
             for row in reader:
