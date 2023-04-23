@@ -1,6 +1,7 @@
 import csv
 import json
 import os
+CSV_FILE = os.path.abspath('items.csv')
 
 
 class Item:
@@ -9,6 +10,7 @@ class Item:
     """
     pay_rate = 0.8
     all = []
+
 
     def __init__(self, name: str, price: float, quantity: int):
         """
@@ -55,7 +57,7 @@ class Item:
         Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
 
-        with open(os.path.join('items.csv')) as csvfile:
+        with open(CSV_FILE, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             cls.all.clear()
             for row in reader:
