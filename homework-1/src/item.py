@@ -10,7 +10,6 @@ class Item:
 
     def apply_discount(self):
         self.price = self.price * self.pay_rate
-        return self.price
 
     def calculate_total_price(self):
         return self.price * self.quantity
