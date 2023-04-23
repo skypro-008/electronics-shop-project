@@ -55,13 +55,12 @@ class Item:
         Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
 
-        with os.path.join('items.csv') as csvfile:
+        with open(os.path.join('items.csv')) as csvfile:
             reader = csv.DictReader(csvfile)
             cls.all.clear()
             for row in reader:
                 cls.all.append(cls(row['name'], int(row['price']), int(row['quantity'])))
         return len(cls.all)
-        print(cls.all)
 
     @staticmethod
     def string_to_number(number):
@@ -70,4 +69,4 @@ class Item:
         """
         return int(float(number))
 
-# print(Item.all[1])
+
