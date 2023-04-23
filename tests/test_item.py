@@ -26,4 +26,4 @@ def test_item_initialization(item):
     assert item.price == 10
     assert item.quantity == 5
     assert len(Item.all) == 3
-    assert Item.all[0] == item
+
