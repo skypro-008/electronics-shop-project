@@ -1,6 +1,6 @@
 import pytest
 
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 
 
 @pytest.fixture
@@ -56,6 +56,7 @@ def test_instantiate_from_csv():
     assert item2.price == 1000
     assert item2.quantity == 3
 
+
 def test_str(return_date):
     """тест для метода str"""
     assert str(return_date) == 'Смартфон'
@@ -65,4 +66,16 @@ def test_repr(return_date):
     assert repr(return_date) == "Item('Смартфон', 10000, 20)"
 
 
+
+def test_instantiate_from_csv_file_not_found():
+    with pytest.raises(FileNotFoundError) as excinfo:
+        Item.instantiate_from_csv()
+    assert "Отсутствует файл который item.csv" in str(excinfo.value)
+
+def test_instantiate_from_csv_file_corrupted():
+    with open("D:\python\electronics-shop-project\src\items.csv", "w") as f:
+        f.write("name,price\n")
+    with pytest.raises(InstantiateCSVError) as excinfo:
+        Item.instantiate_from_csv()
+    assert "Файл item.csv поврежден" in str(excinfo.value)
 

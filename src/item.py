@@ -1,5 +1,5 @@
 import csv
-#from error import InstantiateCSVError
+
 
 
 class Item:
@@ -61,15 +61,20 @@ class Item:
     def instantiate_from_csv(cls):
         """Открытие файла csv"""
         cls.all = []
-        file_name = "items.csv"
-        with open(file_name) as f:
-            reader = csv.reader(f)
-            next(reader)
-            for row in reader:
-                name = row[0]
-                price = int(row[1])
-                quantity = int(row[2])
-                cls(name, price, quantity)
+        file_name = "D:\python\electronics-shop-project\src\items.csv"
+        try:
+            with open(file_name) as f:
+                reader = csv.reader(f)
+                next(reader)
+                for row in reader:
+                    #if len(row) != 3:
+                    #    raise InstantiateCSVError("Файл item.csv поврежден")
+                    name = row[0]
+                    price = int(row[1])
+                    quantity = int(row[2])
+                    cls(name, price, quantity)
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл который item.csv")
 
     @staticmethod
     def string_to_number(number):
@@ -85,3 +90,7 @@ class Item:
             raise Exception("Складывать можно только наследников класса Item.")
 
         return self.quantity + other.quantity
+
+
+class InstantiateCSVError(Exception):
+    pass
