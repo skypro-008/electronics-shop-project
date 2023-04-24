@@ -1,4 +1,5 @@
 import csv
+from instantiatecsverror.src import InstantiateCSVError
 
 
 class Item:
@@ -60,7 +61,8 @@ class Item:
     def instantiate_from_csv(cls):
         """Открытие файла csv"""
         cls.all = []
-        with open("src\items.csv") as f:
+        file_name = "src\items.csv"
+        with open(file_name) as f:
             reader = csv.reader(f)
             next(reader)
             for row in reader:
