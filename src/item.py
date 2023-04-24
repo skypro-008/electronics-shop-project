@@ -1,5 +1,5 @@
 import csv
-from instantiatecsverror.src import InstantiateCSVError
+#from error import InstantiateCSVError
 
 
 class Item:

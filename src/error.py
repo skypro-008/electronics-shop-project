@@ -8,14 +8,14 @@ class InstantiateCSVError(Exception):
         return self.message
 
 
-class NoFile(InstantiateCSVError):
+class FileNotFoundError(InstantiateCSVError):
     """Класс исключения при отсутствии файла"""
 
     def __init__(self, *args, **kwargs):
         self.message = args[0] if args else 'Отсутствует файл который item.csv.'
 
 
-class FileIsBed(InstantiateCSVError):
+class InstantiateCSVError(InstantiateCSVError):
     """Класс исключения при повреждении csv файла"""
 
     def __init__(self, *args, **kwargs):
