@@ -61,7 +61,7 @@ class Item:
     def instantiate_from_csv(cls):
         """Открытие файла csv"""
         cls.all = []
-        file_name = "src\items.csv"
+        file_name = "items.csv"
         with open(file_name) as f:
             reader = csv.reader(f)
             next(reader)
