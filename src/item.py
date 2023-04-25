@@ -1,17 +1,6 @@
 import csv
 import json
-import pandas as pd
 import os
-
-CSV_FILE = os.path.abspath("items.csv")
-
-# import os
-#
-# dirname = os.path.dirname(__file__)
-# filename = os.path.join(dirname, 'your relative path to the file')
-
-## выведем значение переменной CSV_FILE:
-print(str(CSV_FILE))
 
 
 class Item:
@@ -66,7 +55,7 @@ class Item:
         Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
 
-        with open(CSV_FILE, newline='') as csvfile:
+        with open(os.path.join('../src/items.csv'), newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             cls.all.clear()
             for row in reader:
