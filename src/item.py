@@ -60,15 +60,13 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         """Открытие файла csv"""
-        cls.all = []
-        file_name = 'items.csv'
         try:
-            with open(os.path.join(os.path.dirname(__file__), file_name), 'r') as f:
+            cls.all = []
+            with open(os.path.join(os.path.dirname(__file__), 'items.csv'), 'r') as f:
                 reader = csv.reader(f)
                 next(reader)
                 for row in reader:
-
-                    if len(row) != 6:
+                    if len(row) != 3:
                         raise InstantiateCSVError("Файл item.csv поврежден")
                     name = row[0]
                     price = int(row[1])
