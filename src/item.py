@@ -95,4 +95,5 @@ class Item:
 
 
 class InstantiateCSVError(Exception):
+    """Класс обработки ошибки повреждения csv файла, наследуется полностью от Exception"""
     pass
