@@ -1,3 +1,6 @@
+import csv
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -8,12 +11,11 @@ class Item:
     def __init__(self, name: str, price: float, quantity: int):
         """
         Создание экземпляра класса item.
-
         :param name: Название товара.
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
@@ -33,3 +35,34 @@ class Item:
         """
         self.price *= self.pay_rate
         return self.price
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, name=str):
+        self.__name = name
+        if len(self.__name) > 10:
+            print("Длина наименования товара превышает 10 символов.")
+        else:
+            print("Корректное название")
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        item_list = []
+        with open("../src/items.csv", newline='', encoding='windows-1251') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                name = row['name']
+                price = row['price']
+                quantity = int(row['quantity'])
+                item_list.append(Item(name, price, quantity))
+            cls.all = item_list
+
+    @staticmethod
+    def string_to_number(number):
+        if "." in number:
+            i = number.find(".")
+            return int(number[0:i])
+        return int(number[0])
