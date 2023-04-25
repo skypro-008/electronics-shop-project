@@ -1,5 +1,5 @@
 import csv
-
+import os.path
 
 
 class Item:
@@ -61,14 +61,15 @@ class Item:
     def instantiate_from_csv(cls):
         """Открытие файла csv"""
         cls.all = []
-        file_name = "D:\python\electronics-shop-project\src\items.csv"
+        file_name = 'items.csv'
         try:
-            with open(file_name) as f:
+            with open(os.path.join(os.path.dirname(__file__), file_name), 'r') as f:
                 reader = csv.reader(f)
                 next(reader)
                 for row in reader:
-                    #if len(row) != 3:
-                    #    raise InstantiateCSVError("Файл item.csv поврежден")
+
+                    if len(row) != 6:
+                        raise InstantiateCSVError("Файл item.csv поврежден")
                     name = row[0]
                     price = int(row[1])
                     quantity = int(row[2])
