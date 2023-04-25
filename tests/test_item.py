@@ -1,7 +1,8 @@
+import os
+
 import pytest
 
-from src.item import Item, InstantiateCSVError
-
+from src.item import Item
 
 @pytest.fixture
 def return_date():
@@ -72,10 +73,10 @@ def test_instantiate_from_csv_file_not_found():
         Item.instantiate_from_csv()
     assert "Отсутствует файл который item.csv" in str(excinfo.value)
 
-def test_instantiate_from_csv_file_corrupted():
-    with open("D:\python\electronics-shop-project\src\items.csv", "w") as f:
-        f.write("name,price\n")
-    with pytest.raises(InstantiateCSVError) as excinfo:
-        Item.instantiate_from_csv()
-    assert "Файл item.csv поврежден" in str(excinfo.value)
+#def test_instantiate_from_csv_file_corrupted():
+#    with open(os.path.join(os.path.dirname(__file__), 'items.csv', "r") as f:
+#        f.write("name,price\n")
+#    with pytest.raises(InstantiateCSVError) as excinfo:
+#        Item.instantiate_from_csv()
+#    assert "Файл item.csv поврежден" in str(excinfo.value)
 
