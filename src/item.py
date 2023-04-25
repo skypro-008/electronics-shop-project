@@ -3,9 +3,15 @@ import json
 import pandas as pd
 import os
 
-CSV_FILE = os.path.abspath('items.csv')
+CSV_FILE = os.path.abspath("items.csv")
 
+# import os
+#
+# dirname = os.path.dirname(__file__)
+# filename = os.path.join(dirname, 'your relative path to the file')
 
+## выведем значение переменной CSV_FILE:
+print(str(CSV_FILE))
 
 
 class Item:
