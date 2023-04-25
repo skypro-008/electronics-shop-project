@@ -76,7 +76,7 @@ class Item:
                 quantity = int(row[2])
                 cls(name, price, quantity)
 
-      #      raise FileNotFoundError("Отсутствует файл item.csv")
+    #      raise FileNotFoundError("Отсутствует файл item.csv")
 
     @staticmethod
     def string_to_number(number):
