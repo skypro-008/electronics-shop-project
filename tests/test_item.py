@@ -2,7 +2,8 @@ import os
 
 import pytest
 
-from src.item import Item
+from src.item import Item, InstantiateCSVError
+
 
 @pytest.fixture
 def return_date():
@@ -67,16 +68,21 @@ def test_repr(return_date):
     assert repr(return_date) == "Item('Смартфон', 10000, 20)"
 
 
+def test_csv_file_not_found():
+    """тест для метода instantiate_from_csv в случае отсудствие файла"""
 
-def test_instantiate_from_csv_file_not_found():
-    with pytest.raises(FileNotFoundError) as excinfo:
+    with pytest.raises(FileNotFoundError):
+        Item.file_mame = os.path.join('text.txt')
         Item.instantiate_from_csv()
-    assert "Отсутствует файл который item.csv" in str(excinfo.value)
 
-#def test_instantiate_from_csv_file_corrupted():
-#    with open(os.path.join(os.path.dirname(__file__), 'items.csv', "r") as f:
-#        f.write("name,price\n")
-#    with pytest.raises(InstantiateCSVError) as excinfo:
-#        Item.instantiate_from_csv()
-#    assert "Файл item.csv поврежден" in str(excinfo.value)
+
+def test_csv_file_bed():
+    """тест метода instantiate_from_csv на битость файла, отсудствие некоторых значений """
+
+    with pytest.raises(InstantiateCSVError):
+        Item.file_mame = os.path.join('..', 'src', 'items1.csv')
+        Item.instantiate_from_csv()
+
+
+
 

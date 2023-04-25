@@ -8,6 +8,7 @@ class Item:
     """
     pay_rate = 1.0
     all = []
+    file_mame = os.path.join('..', 'src', 'items.csv')
 
     def __init__(self, name: str, price: float, quantity: int):
         """
@@ -60,20 +61,22 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         """Открытие файла csv"""
-        try:
-            cls.all = []
-            with open(os.path.join(os.path.dirname(__file__), 'items.csv'), 'r') as f:
-                reader = csv.reader(f)
-                next(reader)
-                for row in reader:
-                    if len(row) != 3:
-                        raise InstantiateCSVError("Файл item.csv поврежден")
-                    name = row[0]
-                    price = int(row[1])
-                    quantity = int(row[2])
-                    cls(name, price, quantity)
-        except FileNotFoundError:
-            raise FileNotFoundError("Отсутствует файл item.csv")
+        cls.all = []
+        if not os.path.exists(cls.file_mame):
+            raise FileNotFoundError('Отсутствует файл item.csv')
+
+        with open(os.path.join(cls.file_mame), 'r') as f:
+            reader = csv.reader(f)
+            next(reader)
+            for row in reader:
+                if len(row) != 3:
+                    raise InstantiateCSVError("Файл item.csv поврежден")
+                name = row[0]
+                price = int(row[1])
+                quantity = int(row[2])
+                cls(name, price, quantity)
+
+      #      raise FileNotFoundError("Отсутствует файл item.csv")
 
     @staticmethod
     def string_to_number(number):
