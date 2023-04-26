@@ -13,6 +13,16 @@ def test_name():
         item.name = 'СуперСмартфон'
 
 
+def test_repr():
+    item1 = Item('Телефон', 10000, 20)
+    assert repr(item1) == "Item('Телефон', 10000, 20)"
+
+
+def test_str():
+    item1 = Item('Телефон', 10000, 20)
+    assert str(item1) == "Телефон"
+
+
 def test_calculate_total_price():
     """Когда мы создаем экземпляр класса со значением item1, то calculate_total_price вернет нам результат"""
     assert 10000 * Item.pay_rate == 8000.0
@@ -23,10 +33,6 @@ def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
-
-
-# def instantiate_from_csv():
-#     assert len(Item.all) == 5
 
 
 @pytest.fixture
