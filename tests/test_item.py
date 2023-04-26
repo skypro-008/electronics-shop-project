@@ -10,3 +10,11 @@ def test_Item___init__():
     item1.apply_discount()
     assert item1.price == 9.0
     assert item1.calculate_total_price() == 9000.0
+
+def test_strtonum():
+    assert item1.string_to_number("5.0") == 5
+    assert item1.string_to_number("2") == 2
+
+def test_Item_repr_str():
+    assert repr(item1) == "Item('name', 9.0, 1000)"
+    assert str(item1) == "name"
