@@ -22,9 +22,16 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        from csv import DictReader as read
+        import csv
+        with open("../src/items.csv") as f:
+            data = csv.DictReader(f)
+            for k in data:
+                obj = (cls(name=k["name"], price=k["price"], quantity=k["quantity"]))
+
+            return obj
 
 
+    @property
     def set_name(self, name):
         if len(name) <= 10:
             self.__name = name
@@ -51,6 +58,6 @@ class Item:
     @staticmethod
     def string_to_number(str_num):
         try:
-            return int(str_num)
+            return int(float(str_num))
         except ValueError:
             print("Это не число")
