@@ -1,4 +1,8 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import os
+
+import pytest
+
 from src.item import Item
 
 
@@ -19,3 +23,39 @@ def test_apply_discount():
     item = Item("Смартфон", 10000, 20)
     Item.pay_rate = 0.8
     assert item.apply_discount() == 8000
+
+
+@pytest.fixture
+def test_item_csv():
+    """
+    Декоратор для объявления пути к файлу для тестов
+    """
+    return f'{os.getcwd()}\\tests\\test_items.csv'
+
+
+def test_instantiate_from_csv(test_item_csv):
+    """
+    Тест класс-метода instantiate_from_csv для инициализации класса Item данными из файла
+    """
+    Item.instantiate_from_csv(file=test_item_csv)
+    assert len(Item.all) == 5
+
+
+def test_name():
+    """
+    Тест декоратора Property и сеттера, который не должен пропускать названия товаров длиннее 10 символов
+    """
+    item = Item('Телефон', 10000, 5)
+    item.name = 'Смартфон'
+    assert item.name == 'Смартфон'
+    with pytest.raises(Exception):
+        item.name = 'ПортативнаяЗарядка'
+
+
+def test_string_to_number():
+    """
+    Тест статик-метода преобразующего поступающее число в формате Str/Float в формат Int
+    """
+    assert Item.string_to_number("5555") == 5555
+    assert Item.string_to_number("2222.5") == 2222
+
