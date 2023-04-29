@@ -22,9 +22,17 @@ class Item:
         Item.all.append(self)
 
     def __repr__(self):
+        """
+        Метод возвращающий для разработчика имя класса, название товара, цену и количество товара в магазине
+        return: имя класса ('название товара', цена товара, количество товара в магазине)
+        """
         return str(f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})")
 
     def __str__(self):
+        """
+        Метод возвращающий для пользователя название товара
+        return: название товара
+        """
         return self.__name
 
     @property
