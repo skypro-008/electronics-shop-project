@@ -21,6 +21,12 @@ class Item:
         self.quantity = quantity
         Item.all.append(self)
 
+    def __repr__(self):
+        return str(f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})")
+
+    def __str__(self):
+        return self.__name
+
     @property
     def name(self):
         """
@@ -41,7 +47,7 @@ class Item:
             self.__name = name_len
 
     @classmethod
-    def instantiate_from_csv(cls, file):
+    def instantiate_from_csv(cls, file="items.csv"):
         """
         Функция класс-метода для инициализации класса Item данными из файла
         """
