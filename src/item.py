@@ -9,7 +9,7 @@ class Item:
         self.name = name
         self.price = price
         self.quantity = quantity
-        Item.all.append(hex(id(name)))
+        Item.all.append(str(self))
         """
         Создание экземпляра класса item.
 
