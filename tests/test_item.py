@@ -3,9 +3,22 @@ from src.item import Item
 
 item1 = Item("Смартфон", 10000, 20)
 item2 = Item("Ноутбук", 20000, 5)
+
+
+def test___repr__():
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert repr(item2) == "Item('Ноутбук', 20000, 5)"
+
+
+def test___str__():
+    assert str(item1) == 'Смартфон'
+    assert str(item2) == 'Ноутбук'
+
+
 def test_calculate_total_price():
     assert item1.calculate_total_price() == 200000
     assert item2.calculate_total_price() == 100000
+
 
 def test_apply_discount():
     Item.pay_rate = 0.8
@@ -14,10 +27,12 @@ def test_apply_discount():
     item2.apply_discount()
     assert item2.price == 16000.0
 
+
 def test_instantiate_from_csv():
     Item.all = []
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
+
 
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
