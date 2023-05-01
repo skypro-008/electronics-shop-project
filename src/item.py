@@ -1,4 +1,4 @@
-
+import csv
 
 class Item:
     """
@@ -28,13 +28,13 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        import csv
+        cls.all = []
         with open("../src/items.csv") as f:
             data = csv.DictReader(f)
             for k in data:
                 obj = (cls(name=k["name"], price=k["price"], quantity=k["quantity"]))
 
-            return obj
+
 
 
     @property
