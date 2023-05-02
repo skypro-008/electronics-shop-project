@@ -26,3 +26,13 @@ def test_name():
     item = Item('Телефон', 10000, 5)
     # длина наименования товара меньше 10 символов
     item.name = 'Смартфон'
+
+
+def test_repr():
+    item1 = Item("Телефон", 20000, 10)
+    assert repr(item1) == "Item('Телефон', 20000, 10)"
+
+
+def test_str():
+    item1 = Item("Телефон", 20000, 10)
+    assert str(item1) == 'Телефон'
