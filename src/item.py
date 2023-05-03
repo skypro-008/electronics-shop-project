@@ -37,15 +37,17 @@ class Item:
 
 
 
+
+
     @property
+    def name(self):
+        return self.__name
+
+    @name.setter
     def set_name(self, name):
         if len(name) <= 10:
             self.__name = name
         raise Exception("Длина наименования товара превышает 10 символов")
-
-    def get_name(self):
-        return self.__name
-
     def calculate_total_price(self):
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
