@@ -1,5 +1,6 @@
 import csv
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -26,6 +27,14 @@ class Item:
     def __str__(self):
         return self.__name
 
+    def __add__(self, other):
+        if other.__class__.__name__ in ["Item", "Phone"]:
+            return self.quantity + other.quantity
+        else:
+            assert 'Не поддерживается сложение'
+
+
+
     @classmethod
     def instantiate_from_csv(cls):
         cls.all = []
@@ -48,6 +57,7 @@ class Item:
         if len(name) <= 10:
             self.__name = name
         raise Exception("Длина наименования товара превышает 10 символов")
+
     def calculate_total_price(self):
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
