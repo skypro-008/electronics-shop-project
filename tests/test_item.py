@@ -12,3 +12,6 @@ def test_calculate_total_price(test_hm_1):
     assert test_hm_1.calculate_total_price() == 200000
 
 
+def test_init(test_hm_1):
+    assert test_hm_1.name == "Смартфон"
+    assert test_hm_1.price == 10000
