@@ -1,6 +1,5 @@
 import csv
 
-
 class Item:
     """
     Класс для представления товара в магазине.
@@ -60,12 +59,14 @@ class Item:
 
     @staticmethod
     def string_to_number(num):
-
         return float(num).__int__()
+
+   
+
+  
 
 
 item = Item('Телефон', 10000, 5)
 item.name = 'СуперСмартфон'
 print(item.name)
-print(Item.instantiate_from_csv())
-print(Item.string_to_number('5'))
+
