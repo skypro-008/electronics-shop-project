@@ -1,5 +1,5 @@
 import csv
-
+import os
 class Item:
     """
     Класс для представления товара в магазине.
@@ -11,7 +11,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
-        Item.all.append(str(self))
+
         """
         Создание экземпляра класса item.
 
@@ -51,22 +51,17 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls) -> None:
-        with open('items.csv', 'r', encoding='windows-1251') as csvfile:
+        itemscsv = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), 'src', 'items.csv')
+        with open(itemscsv, 'r', encoding='windows-1251') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 item = cls(row.get('name'), float(row.get('price')), int(row.get('quantity')))
                 cls.all.append(item)
+
 
     @staticmethod
     def string_to_number(num):
         return float(num).__int__()
 
    
-
-  
-
-
-item = Item('Телефон', 10000, 5)
-item.name = 'СуперСмартфон'
-print(item.name)
 
