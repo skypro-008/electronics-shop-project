@@ -3,17 +3,24 @@ from src.item import Item
 
 item1 = Item("Фен", 3000, 20)
 item2 = Item("Ноутбук", 25000, 2)
+item3 = Item("Маршрутизатор", 3500, 3)
 
-
-def test_Item():
+def test_calculate_total_price():
     assert item1.calculate_total_price() == 60000
-    assert item1.apply_discount() == None
-    assert item2.name == "Ноутбук"
-    assert item1.price == 3000
-    assert item2.quantity == 2
+    assert item2.calculate_total_price() == 50000
+    assert item3.calculate_total_price() != 12000
 
 
-def test_Item_prace():
+def test_apply_discount():
     Item.pay_rate = 0.5
     item1.apply_discount()
     assert item1.price == 1500
+
+
+def test_string_to_number():
+    assert Item.string_to_number('10') == 10
+    assert Item.string_to_number('11') != 10
+
+def test_name():
+
+    assert len(item3.name) > 11
