@@ -24,7 +24,29 @@ class Phone(Item):
 
     @number_of_sim.setter
     def number_of_sim(self, number_of_sim):
-        if isinstance(number_of_sim, int) and number_of_sim > 0:
-            return self.__number_of_sim
-        else:
+        if type(number_of_sim) != int or number_of_sim <= 0:
             raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля')
+
+
+# class Keyboard(Item):
+#     def __init__(self, name: str, price: float, quantity: int, language: str):
+#         super().__init__(name, price, quantity)
+#         self.language = language
+#
+#     @property
+#     def change_lang(self):
+#         return self.language
+#
+#     @change_lang.setter
+#     def change_lang(self, language):
+        # if isinstance(number_of_sim, int) and number_of_sim > 0:
+        #     return self.__number_of_sim
+        # else:
+        #     raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля')
+
+
+
+
+
+# class Mixin_storage_warehousing():
+#     storage = []
