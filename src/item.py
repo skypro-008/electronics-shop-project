@@ -35,6 +35,15 @@ class Item:
         """
         return self.__name
 
+    def __add__(self, other):
+        """
+         Add функция для сложения экземпляров класса Phone и Item по общему количеству товара
+        выдающая исключение Exception в случе если складываются не экземпляры классов Phone и Item
+        """
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        raise Exception
+
     @property
     def name(self):
         """
@@ -88,5 +97,3 @@ class Item:
         """
         self.price = self.pay_rate * self.price
         return self.price
-
-
