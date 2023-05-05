@@ -5,6 +5,8 @@ import pytest
 
 from src.item import Item
 
+from src.phone import Phone
+
 
 def test_calculate_total_price():
     """
@@ -68,3 +70,17 @@ def test_repr():
 def test_str():
     item = Item('Ноутбук', 80000, 24)
     assert str(item) == 'Ноутбук'
+
+
+def test_add():
+    """
+    Тест для add функции на сложение экземпляров класса Phone и Item по общему количеству товара в магазине
+    """
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    item1 = Item("Смартфон", 10000, 20)
+    assert item1 + phone1 == 25
+    assert phone1 + phone1 == 10
+    with pytest.raises(Exception):
+        assert item1 + 1
+    with pytest.raises(Exception):
+        assert phone1 + 1
