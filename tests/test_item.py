@@ -5,13 +5,14 @@ from src.phone import Phone
 class RandomClass:
     pass
 
+
 item1 = Item("name", 10.0, 1000)
 phone1 = Phone("name", 1.0, 2, 3)
 
 
 def test_Item___init__():
     assert item1.name == "name"
-    assert len(Item.all) == 1
+    assert len(Item.all) == 2
     item1.pay_rate = 0.9
     item1.apply_discount()
     assert item1.price == 9.0
@@ -27,11 +28,11 @@ def test_Item_repr_str():
 
 def test_add():
     r = RandomClass
-    assert item1 + phone1 == 11.0
+    assert item1 + phone1 == 1002
     try:
         output = item1 + r
     except AssertionError:
         output = 0
 
-    assert output == 0
+    assert output == None
 

@@ -38,15 +38,10 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         cls.all = []
-        with open("../src/items.csv") as f:
+        with open("../src/items.csv", encoding="utf-8") as f:
             data = csv.DictReader(f)
             for k in data:
                 obj = (cls(name=k["name"], price=k["price"], quantity=k["quantity"]))
-
-
-
-
-
 
     @property
     def name(self):
@@ -56,7 +51,8 @@ class Item:
     def name(self, name):
         if len(name) <= 10:
             self.__name = name
-        raise Exception("Длина наименования товара превышает 10 символов")
+        else:
+            raise Exception("Длина наименования товара превышает 10 символов")
 
     def calculate_total_price(self):
         """
