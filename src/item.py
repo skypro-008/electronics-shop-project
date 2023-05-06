@@ -22,6 +22,7 @@ class Item:
         self.price = price
         self.quantity = quantity
         self.general_summ = self.price * self.quantity
+        super().__init__()
 
     def __repr__(self):
         """
