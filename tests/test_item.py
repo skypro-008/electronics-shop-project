@@ -13,5 +13,15 @@ def test_calculate_total_price(test_hm_1):
 
 
 def test_init(test_hm_1):
-    assert test_hm_1.name == "Смартфон"
     assert test_hm_1.price == 10000
+
+
+def test_name(test_hm_1):
+    assert test_hm_1.name == "Смартфон"
+
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
+
