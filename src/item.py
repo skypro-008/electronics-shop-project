@@ -35,6 +35,12 @@ class Item:
         """
         return f"{self.name}"
 
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        else:
+            raise ValueError("Сложение возможно только с объектами класса Item и дочерних от него")
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
