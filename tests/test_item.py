@@ -1,5 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
+from src.phone import Phone
 
 
 def test_class_item():
@@ -24,5 +25,20 @@ def test_string_to_number():
 
 def test_name():
     item = Item('Телефон', 10000, 5)
-    # длина наименования товара меньше 10 символов
     item.name = 'Смартфон'
+
+
+def test_item_add():
+    item1 = Item("Смартфон", 10000, 20)
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    assert item1 + phone1 == 25
+    assert phone1 + phone1 == 10
+
+def test_phone_repr():
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    assert repr(phone1) == "Phone('iPhone 14', 120000, 5, 2)"
+
+
+def test_number_of_sim():
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    phone1.number_of_sim = 1
