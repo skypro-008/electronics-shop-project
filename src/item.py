@@ -47,6 +47,9 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        """
+        Читает файл csv и берет нужные значения в класс, преобразуя строчные в числовые
+        """
         with open("../src/items.csv", encoding="windows-1251") as file:
             file_csv = csv.DictReader(file, delimiter=",")
             data = []
@@ -62,6 +65,9 @@ class Item:
 
     @staticmethod
     def string_to_number(num) -> int:
+        """
+        преобразует строчное значение в числовое int
+        """
         if '.' in num:
             float_number = float(num)
             number = int(float_number)
