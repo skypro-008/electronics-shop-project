@@ -1,5 +1,7 @@
 from src.item import Item
 
+LANG_LIST = ["EN", "RU"]
+
 
 class Phone(Item):
 
@@ -22,8 +24,6 @@ class Phone(Item):
     def number_of_sim(self):
         return self.__number_of_sim
 
-
-
     @number_of_sim.setter
     def number_of_sim(self, number_of_sim):
         if type(number_of_sim) != int or number_of_sim <= 0:
@@ -31,22 +31,30 @@ class Phone(Item):
         self.__number_of_sim = number_of_sim
 
 
-# class Mixin_storage_warehousing():
-#     storage = []
-#
-#
-# class KeyBoard(Item, Mixin_storage_warehousing):
-#     def __init__(self, name: str, price: float, quantity: int, language="EN"):
-#         super().__init__(name, price, quantity)
-#         self.language = language
-#
-#     @property
-#     def change_lang(self):
-#         return self.language
-#
-#     @change_lang.setter
-#     def change_lang(self, language):
-# if language and number_of_sim > 0:
-#     return self.__number_of_sim
-# else:
-#     raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля')
+class Mixin_storage_warehousing:
+    """
+    Mixin_storage_warehousing храним и изменению раскладки клавиатуры, “подмешивается”
+    в цепочку наследования класса `Keyboard`
+    """
+
+    def __init__(self):
+        self.__lang = "EN"
+
+    def change_lang(self):
+        """
+        Изменение язык в LANG_LIST
+        ко всему, что не соответствует текущему языку
+        """
+        for challenger in LANG_LIST:
+            if self.__lang != challenger:
+                self.__lang = challenger
+                break
+        return self
+
+    @property
+    def language(self):
+        return self.__lang
+
+
+class KeyBoard(Item, Mixin_storage_warehousing):
+    pass
