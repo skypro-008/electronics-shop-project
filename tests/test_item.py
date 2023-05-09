@@ -21,3 +21,19 @@ def test_apply_discount(test_item):
 def test_name_getter(test_item):
     assert test_item.name == "Смартфон"
 
+
+def test_name_setter(test_item):
+    with pytest.raises(Exception):
+        test_item.name = 'СуперСмартфон'
+
+
+def test_string_to_number():
+    assert Item.string_to_number('10') == 10
+    assert Item.string_to_number(10) == 10
+    assert Item.string_to_number('12586') == 12586
+
+
+
+def test_setter_name(test_item):
+    test_item.name = "Тестфон"
+    assert test_item.name == "Тестфон"
