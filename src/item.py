@@ -20,6 +20,7 @@ class Item:
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
+        super().__init__()
 
     def __repr__(self):
         """
