@@ -2,6 +2,8 @@
 from src.item import Item
 import pytest
 
+from src.phone import Phone
+
 
 def test_calculate_total_price():
     item1 = Item("Смартфон", 10000, 20)
@@ -45,3 +47,10 @@ def test_repr():
 def test_str():
     item3 = Item("PS5", 30000, 6)
     assert str(item3) == "PS5"
+
+def test__add__():
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    item1 = Item("Смартфон", 10000, 20)
+    assert item1 + phone1 == 25
+    assert phone1 + phone1 == 10
+    assert phone1 + 10 == ValueError
