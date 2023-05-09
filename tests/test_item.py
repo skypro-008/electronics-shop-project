@@ -24,3 +24,12 @@ def test_string_to_number():
 def test_name():
 
     assert len(item3.name) > 11
+
+
+def test__repr__():
+    assert repr(item3) == "Item('Маршрутизатор', 3500, 3)"
+
+
+def test__str__():
+    assert str(item2) == 'Ноутбук'
+    assert str(item3) == 'Маршрутизатор'
