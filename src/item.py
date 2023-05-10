@@ -26,6 +26,12 @@ class Item:
         :param quantity: Количество товара в магазине.
         """
 
+    """Phone` и `Item`  метод сложения по количеству товара в магазине"""
+    def __add__(self, other):
+        if issubclass(other.__class__, self.__class__):
+            return self.quantity + other.quantity
+        return None
+
     def calculate_total_price(self) -> float:
         total = self.price * self.quantity
         """
