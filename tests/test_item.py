@@ -1,4 +1,5 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import pytest
 from src.item import Item
 from src.phone import Phone
 item1 = Item("Фен", 3000, 20)
@@ -28,10 +29,13 @@ def test_string_to_number():
 
 def test_number_of_sim():
     assert phone1.number_of_sim == 2
+    with pytest.raises(ValueError):
+        phone1.number_of_sim = 0
 
 def test_name():
-
-    assert len(item3.name) > 11
+    with pytest.raises(Exception):
+        item3.name = 13
+    assert len(item2.name) == 7
 
 
 def test__repr__():
