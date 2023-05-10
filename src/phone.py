@@ -31,7 +31,7 @@ class Phone(Item):
         self.__number_of_sim = number_of_sim
 
 
-class Mixin_storage_warehousing:
+class MixinStorageWarehousing:
     """
     Mixin_storage_warehousing храним и изменению раскладки клавиатуры, “подмешивается”
     в цепочку наследования класса `Keyboard`
@@ -56,5 +56,7 @@ class Mixin_storage_warehousing:
         return self.__lang
 
 
-class KeyBoard(Item, Mixin_storage_warehousing):
-    pass
+class Keyboard(Item, MixinStorageWarehousing):
+
+    def __init__(self, name: str, price: float, quantity: int):
+        super().__init__(name, price, quantity)
