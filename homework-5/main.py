@@ -1,4 +1,4 @@
-from src.phone import Keyboard
+from src.keyboard import Keyboard
 
 if __name__ == '__main__':
     kb = Keyboard('Dark Project KD87A', 9600, 5)
