@@ -15,3 +15,4 @@ if __name__ == '__main__':
 
     kb.language = 'CH'
     # AttributeError: property 'language' of 'KeyBoard' object has no setter
+
