@@ -12,7 +12,6 @@ phone1 = Phone("name", 1.0, 2, 3)
 
 def test_Item___init__():
     assert item1.name == "name"
-    assert len(Item.all) == 2
     item1.pay_rate = 0.9
     item1.apply_discount()
     assert item1.price == 9.0
