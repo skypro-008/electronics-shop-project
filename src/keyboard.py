@@ -4,8 +4,8 @@ class MixinLanguage:
     """
     Mixin-класс для метода change_lang
     """
-    def __init__(self, name, price, quantity):
-        super().__init__(name, price, quantity)
+    def __init__(self):
+        self._language = "EN"
 
     def change_lang(self):
         """
@@ -26,7 +26,7 @@ class Keyboard(MixinLanguage, Item):
     Класс Keyboard (наследование от MixinLanguage, Item)
     """
 
-    def __init__(self, name: str, price: float, quantity: int, language="EN"):
+    def __init__(self, name: str, price: float, quantity: int):
         """
         Метод инициализации объекта класса Keyboard
         name: имя
@@ -34,5 +34,5 @@ class Keyboard(MixinLanguage, Item):
         quantity: количество
         language: язык клавиатуры, по умолчанию EN
         """
-        super().__init__(name, price, quantity)
-        self._language = language
+        super().__init__()
+        Item.__init__(self, name, price, quantity)
