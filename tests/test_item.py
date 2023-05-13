@@ -37,3 +37,11 @@ def test_string_to_number():
 def test_setter_name(test_item):
     test_item.name = "Тестфон"
     assert test_item.name == "Тестфон"
+
+
+def test___str__(test_item):
+    assert str(test_item) == 'Смартфон'
+
+
+def test___repr__(test_item):
+    assert repr(test_item) == "Item('Смартфон', 10000, 20)"
