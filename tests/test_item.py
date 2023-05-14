@@ -33,3 +33,9 @@ def test_instantiate_from_csv():
     assert items[0].price == 100
     assert items[0].quantity == 1
 
+def test_repr_of_class():
+    assert repr(Item("Имя", 100, 2)) == "Item('Имя', 100, 2)"
+
+
+def test_str_of_class():
+    assert str(Item("Смартфон", 100, 2)) == 'Смартфон'
