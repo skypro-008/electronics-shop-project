@@ -2,6 +2,8 @@
 import pytest
 from src.item import Item
 from src.phone import Phone
+from src.keyboard import MixinLog, Keyboard
+
 item1 = Item("Фен", 3000, 20)
 item2 = Item("Ноутбук", 25000, 2)
 item3 = Item("Маршрутизатор", 3500, 3)
@@ -46,3 +48,13 @@ def test__str__():
     assert str(item2) == 'Ноутбук'
     assert str(item3) == 'Маршрутизатор'
     assert str(phone1) == 'iPhone 14'
+
+kb = Keyboard('Dark Project KD98B', 12000, 7)
+def test_language():
+    assert str(kb.language) != "RU"
+
+def test_change_lang():
+    kb.change_lang().change_lang()
+    assert str(kb.language) == "EN"
+    kb.change_lang()
+    assert str(kb.language) == "RU"
