@@ -26,10 +26,9 @@ class MixinLog:
 
 class Keyboard(Item, MixinLog):
     def __init__(self, name: str, price: float, quantity: int) -> None:
-        super().__init__(name, price, quantity)
+        Item.__init__(self, name, price, quantity)
+        MixinLog.__init__(self)
 
 
 
-kb = Keyboard('Dark Project KD87A', 9600, 5)
 
-kb.language
