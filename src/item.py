@@ -8,6 +8,7 @@ class Item:
     pay_rate = 1.0
     all = []
 
+
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
         Создание экземпляра класса item.
@@ -21,8 +22,10 @@ class Item:
         self.quantity = quantity
         Item.all.append(self)
 
+
     @classmethod
     def instantiate_from_csv(cls, path='../src/items.csv'):
+        # В аргументы добавлен путь по умолчанию. В тестах вылетает ошибка, если не не менять путь
         Item.all = []
         with open(path) as file:
             reader = csv.DictReader(file)
@@ -32,9 +35,11 @@ class Item:
                 quantity = row['quantity']
                 cls(name, price, quantity)
 
+
     @staticmethod
     def string_to_number(string):
         return int(float(string))
+
 
     @property
     def name(self):
@@ -42,6 +47,7 @@ class Item:
         Возвращает наименование товара.
         """
         return self.__name
+
 
     @name.setter
     def name(self, name):
@@ -51,8 +57,8 @@ class Item:
         if len(name) <= 10:
             self.__name = name
         else:
-            # Создать свою ошибку и воспользоваться try - except?
-            print("Exception: Длина наименования товара превышает 10 символов.")
+            raise Exception("Длина наименования товара превышает 10 символов.")
+
 
     def calculate_total_price(self) -> float:
         """
@@ -62,9 +68,12 @@ class Item:
         """
         return self.price * self.quantity
 
+
     def apply_discount(self) -> float:
         """
         Применяет установленную скидку для конкретного товара.
+
+        :return: Стоимость товара с учетом скидки.
         """
         self.price *= Item.pay_rate
         return self.price
