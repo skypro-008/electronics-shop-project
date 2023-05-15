@@ -1,4 +1,5 @@
 import csv
+from src.Exceptions import *
 
 
 class Item:
@@ -38,10 +39,17 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         cls.all = []
-        with open("../src/items.csv", encoding="utf-8") as f:
-            data = csv.DictReader(f)
-            for k in data:
-                obj = (cls(name=k["name"], price=k["price"], quantity=k["quantity"]))
+        try:
+            with open("../src/item.csv", encoding="utf-8") as f:
+                data = csv.DictReader(f)
+                for k in data:
+                    try:
+                        obj = (cls(name=k["name"], price=k["price"], quantity=k["quantity"]))
+                    except KeyError:
+                        raise InstantiateCSVError
+        except FileNotFoundError:
+            raise FileNotFoundError
+            print("Отсутствует файл item.csv")
 
     @property
     def name(self):
