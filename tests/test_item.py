@@ -16,11 +16,26 @@ def test_apply_discount():
     item.apply_discount()
     assert item.price == 8
 
+
 def test_all_instances():
     Item.all.clear()
     item1 = Item("Product1", 10, 5)
     item2 = Item("Product2", 20, 3)
     assert Item.all == [item1, item2]
+
+
+def test_item_repr():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item('Ноутбук', 20000, 5)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert repr(item2) == "Item('Ноутбук', 20000, 5)"
+
+
+def test_item_str():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item('Ноутбук', 20000, 5)
+    assert str(item1) == 'Смартфон'
+    assert str(item2) == 'Ноутбук'
 
 
 @pytest.fixture(scope="module")
@@ -30,16 +45,18 @@ def csv_data():
         csv_reader = DictReader(csv_file)
         return [item for item in csv_reader]
 
+
 def test_load_csv(csv_data):
     assert len(csv_data) > 0
+
 
 def test_instantiate_from_csv(csv_data):
     Item.instantiate_from_csv()
     assert len(Item.all) == len(csv_data)
 
+
 def test_string_to_number():
     assert Item.string_to_number('15') == 15
     assert Item.string_to_number('15.5') == 15
     assert Item.string_to_number('17.0') == 17
-
 

@@ -35,7 +35,10 @@ class Item:
         self.all.append(self)
 
     def __repr__(self):
-        return f"{self.name}, {self.price}, {self.quantity}"
+        return f"Item('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.name
 
     def set_name(self, name):
         self.name = name
