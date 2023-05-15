@@ -48,7 +48,6 @@ class Item:
                     except KeyError:
                         raise InstantiateCSVError
         except FileNotFoundError:
-            raise FileNotFoundError
             print("Отсутствует файл item.csv")
 
     @property

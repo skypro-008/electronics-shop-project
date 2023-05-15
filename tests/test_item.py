@@ -35,3 +35,6 @@ def test_add():
 
     assert output == None
 
+def test_instant_except():
+
+
