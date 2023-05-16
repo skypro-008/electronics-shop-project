@@ -10,6 +10,10 @@ packages = [{include = "electronics_shop_project"}]
 python = "^3.11"
 
 
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.3.1"
+pytest-cov = "^4.0.0"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
