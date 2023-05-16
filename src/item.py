@@ -38,7 +38,13 @@ class Item:
         return f"Item('{self.name}', {self.price}, {self.quantity})"
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
+
+    def __add__(self, other):
+        """ Переопределяет метод сложения количества товаров"""
+        if not isinstance(other, self.__class__):
+            raise ValueError("Невозможно сложить разные товары")
+        return self.quantity + other.quantity
 
     def set_name(self, name):
         self.name = name
@@ -106,3 +112,4 @@ class Item:
     def test_instantiate_from_csv(self):
         Item.instantiate_from_csv()
         assert len(Item.all) == 5
+

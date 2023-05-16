@@ -60,3 +60,6 @@ def test_string_to_number():
     assert Item.string_to_number('15.5') == 15
     assert Item.string_to_number('17.0') == 17
 
+def test_get_name():
+    item = Item("Товар", 100, 5)
+    assert item.get_name() == "Товар"
