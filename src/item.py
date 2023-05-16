@@ -23,9 +23,27 @@ class Item:
         Item.all.append(self)
 
 
+    def __repr__(self):
+        """
+        Вывод информации об объекте для разработчика (в режиме отладки)
+
+        :return: Класс объекта с текущими атрибтами
+        """
+        return f"Item('{self.__name}', {self.price}, {self.quantity})"
+
+
+    def __str__(self):
+        """
+        Вывод информации об объекте для пользователя
+
+         :return: Наименование товара
+        """
+        return self.name
+
+
     @classmethod
     def instantiate_from_csv(cls, path='../src/items.csv'):
-        # В аргументы добавлен путь по умолчанию. В тестах вылетает ошибка, если не не менять путь
+        # В аргументы добавлен путь по умолчанию. В тестах вылетает ошибка, если не менять путь
         Item.all = []
         with open(path) as file:
             reader = csv.DictReader(file)
@@ -38,6 +56,11 @@ class Item:
 
     @staticmethod
     def string_to_number(string):
+        """
+        Возвращает число из числа-строки
+
+        :return: число класса int
+        """
         return int(float(string))
 
 
