@@ -9,6 +9,14 @@ def item():
     return Item("Ноутбук", 50000, 3)
 
 
+def test__repr__(item):
+    assert repr(item) == "Item('Ноутбук', 50000, 3)"
+
+
+def test__str__(item):
+    assert str(item) == 'Ноутбук'
+
+
 def test_calculate_total_price(item):
     assert item.calculate_total_price() == 150000
 
