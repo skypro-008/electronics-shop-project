@@ -45,12 +45,12 @@ class Item:
         """ Для отладки: выводит товар и его свойства """
         return f'[Item: name={self.name}, price={self.price}, quantity={self.quantity}]'
 
-    @staticmethod
-    def get_all_items():
+    @classmethod
+    def get_all_items(cls):
         """ Возвращаем список товаров """
-        return Item.all
+        return all
 
-    @staticmethod
-    def get_count_items():
+    @classmethod
+    def get_count_items(cls):
         """ Подсчёт общего количества товаров """
-        return len(Item.all)
+        return len(all)
