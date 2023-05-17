@@ -37,10 +37,10 @@ class Item:
 
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, path:str):
         cls.all = []
         try:
-            with open("../src/item.csv", encoding="utf-8") as f:
+            with open(f"../src/{path}", encoding="utf-8") as f:
                 data = csv.DictReader(f)
                 for k in data:
                     try:
@@ -48,7 +48,8 @@ class Item:
                     except KeyError:
                         raise InstantiateCSVError
         except FileNotFoundError:
-            print("Отсутствует файл item.csv")
+            print("Отсутствует файл items.csv")
+            raise FileNotFoundError
 
     @property
     def name(self):

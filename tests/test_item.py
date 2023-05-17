@@ -1,6 +1,9 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import pytest
+
 from src.item import Item
 from src.phone import Phone
+
 
 class RandomClass:
     pass
@@ -35,6 +38,9 @@ def test_add():
 
     assert output == None
 
+
 def test_instant_except():
+    with pytest.raises(FileNotFoundError):
+        item1.instantiate_from_csv("l")
 
 
