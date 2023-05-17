@@ -24,20 +24,33 @@ class Item:
 
         :return: Общая стоимость товара.
         """
+        if self.price < 0 or self.quantity < 0:
+            return 'Проверьте товары. Цена или количество не должны быть отрицательными.'
+        if self.price * self.quantity == 0:
+            return 0
         return self.price * self.quantity
 
-    def apply_discount(self) -> float:
+    def apply_discount(self):
         """
         Применяет установленную скидку для конкретного товара.
         """
         self.pay_rate = 0.8
+        if self.price * self.pay_rate == 0.0:
+            return 'Проверьте значения скидки или цены. Одно из них равно нулю.'
+        if self.price * self.pay_rate < 0:
+            return 'Проверьте значения скидки или цены. Одно из них меньше нуля'
         return self.price * self.pay_rate
 
     def __repr__(self):
         """ Для отладки: выводит товар и его свойства """
-        return f'[Item: name = {self.name}, price = {self.price}, quantity = {self.quantity}]'
+        return f'[Item: name={self.name}, price={self.price}, quantity={self.quantity}]'
 
-    @property
-    def get_all_items(self):
-        """Возвращаем список товаров"""
-        return all
+    @staticmethod
+    def get_all_items():
+        """ Возвращаем список товаров """
+        return Item.all
+
+    @staticmethod
+    def get_count_items():
+        """ Подсчёт общего количества товаров """
+        return len(Item.all)
