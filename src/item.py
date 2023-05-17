@@ -48,9 +48,9 @@ class Item:
     @classmethod
     def get_all_items(cls):
         """ Возвращаем список товаров """
-        return all
+        return cls.all
 
     @classmethod
     def get_count_items(cls):
         """ Подсчёт общего количества товаров """
-        return len(all)
+        return len(cls.all)
