@@ -36,6 +36,7 @@ def test_repr_str(item_smartphone_10000_20, item_notebook_20000_5):
 
 
 def test_get_all_items(item_smartphone_10000_20, item_notebook_20000_5):
+    """ Тестируем возвращаемость списка товаров"""
     Item.all = [item_smartphone_10000_20.__repr__(), item_notebook_20000_5.__repr__()]
     assert Item.all == ['[Item: name=Смартфон, price=10000, quantity=20]',
                         '[Item: name=Ноутбук, price=20000, quantity=5]']
