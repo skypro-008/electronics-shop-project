@@ -3,7 +3,7 @@ import os
 
 import pytest
 
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 
 from src.phone import Phone
 
@@ -38,9 +38,28 @@ def test_item_csv():
 def test_instantiate_from_csv(test_item_csv):
     """
     Тест класс-метода instantiate_from_csv для инициализации класса Item данными из файла
+    и обработки исключения "FileNotFoundError"
     """
     Item.instantiate_from_csv(file=test_item_csv)
     assert len(Item.all) == 5
+    with pytest.raises(Exception):
+        assert Item.instantiate_from_csv(file='items.csv')
+
+
+@pytest.fixture
+def test_item_csv_new():
+    """
+    Декоратор для объявления пути к файлу для тестов
+    """
+    return f'{os.getcwd()}\\tests\\test_items_new.csv'
+
+
+def test_InstantiateCSVError(test_item_csv_new):
+    """
+    Тест для обработки исключения в случае повреждения файла
+    """
+    with pytest.raises(InstantiateCSVError):
+        assert Item.instantiate_from_csv(file=test_item_csv_new)
 
 
 def test_name():
