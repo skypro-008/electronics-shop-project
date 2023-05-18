@@ -3,6 +3,15 @@ import json
 import os
 
 
+class InstantiateCSVError(Exception):
+    """Класс-исключение для ошибок повреждения файла """
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'Файл item.csv поврежден.'
+
+    def __str__(self):
+        return self.message
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -70,13 +79,18 @@ class Item:
         """
         Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
+        try:
+            with open(os.path.join('../homework-4/items.csv'), newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                cls.all.clear()
+                for row in reader:
+                    cls.all.append(cls(row['name'], int(row['price']), int(row['quantity'])))
+            return len(cls.all)
+        except FileNotFoundError:
+            print("_Отсутствует файл item.csv_")
+        except InstantiateCSVError:
+            print("_Файл item.csv поврежден_")
 
-        with open(os.path.join('../src/items.csv'), newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            cls.all.clear()
-            for row in reader:
-                cls.all.append(cls(row['name'], int(row['price']), int(row['quantity'])))
-        return len(cls.all)
 
     @staticmethod
     def string_to_number(number):
