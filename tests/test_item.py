@@ -41,7 +41,8 @@ class TestItem:
 
         Args:
             item: An item object to apply a discount to.
-            expected: The expected price of the item after applying the discount.
+            expected: The expected price of the item after
+            applying the discount.
 
         Returns:
             None.
