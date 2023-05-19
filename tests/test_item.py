@@ -1,15 +1,25 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import pytest as pytest
+
 from src.item import Item
 
-# TestCase#1 TotalPrise
-item1 = Item('product1', 10000, 2)
-assert item1.calculate_total_price() == 20000
 
-# TestCase#2  ApplyDiscount
-item1 = Item('product1', 20000, 2)
-item1.apply_discount()
-assert item1.calculate_total_price() == 40000
-assert item1.apply_discount() is None
+@pytest.fixture
+def item():
+    return Item("item1", 10.0, 5)
 
 
+def test_calculate_total_price(item):
+    assert item.calculate_total_price() == 50.0
 
+
+def test_apply_discount(item):
+    item.pay_rate = 0.9
+    item.apply_discount()
+    assert item.price == 9.0
+
+
+def test_all_items():
+    if __name__ == "__main__":
+        item1 = Item("item1", 10, 5)
+        item2 = Item("item2", 20, 2)
