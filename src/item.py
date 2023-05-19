@@ -1,31 +1,48 @@
-# pylint: skip-file
+""" Item Class module """
+
+
 class Item:
     """
-    Класс для представления товара в магазине.
+    Class representing product in store.
+
+    Class Attributes:
+    ---------------
+    pay_rate - discount rate (default: 1.0)
+    all - list of all created entities
+
+    Methods:
+    ------------------
+    calculate_total_price() - Calculates total price of specific
+                                product in store
+    apply_discount() - Applies set discount to specific product
     """
     pay_rate = 1.0
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
-        Создание экземпляра класса item.
+        Create item class entity.
 
-        :param name: Название товара.
-        :param price: Цена за единицу товара.
-        :param quantity: Количество товара в магазине.
+        :param name: product name.
+        :param price: product price per unit.
+        :param quantity: quantity of product in store.
         """
-        pass
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        Item.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
-        Рассчитывает общую стоимость конкретного товара в магазине.
+        Calculates total price of specific product in store
 
-        :return: Общая стоимость товара.
+        :return: total product cost.
+        :rtype: float
         """
-        pass
+        return self.quantity * self.price
 
     def apply_discount(self) -> None:
         """
-        Применяет установленную скидку для конкретного товара.
+        Applies set discount to specific product
         """
-        pass
+        self.price *= self.pay_rate
