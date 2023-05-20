@@ -58,3 +58,11 @@ def test_change_lang():
     assert str(kb.language) == "EN"
     kb.change_lang()
     assert str(kb.language) == "RU"
+
+
+def test_instantiate_from_csv():
+    # проверка на отсутствие файла
+    try:
+        Item.instantiate_from_csv()
+    except FileNotFoundError:
+        pytest.fail('Файл не найден.')

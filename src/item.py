@@ -63,16 +63,20 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls) -> None:
         itemscsv = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), 'src', 'items.csv')
-        with open(itemscsv, 'r', encoding='windows-1251') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                item = cls(row.get('name'), float(row.get('price')), int(row.get('quantity')))
-                cls.all.append(item)
+        try:
+            with open(itemscsv, 'r', encoding='windows-1251') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    item = cls(row.get('name'), float(row.get('price')), int(row.get('quantity')))
+                    cls.all.append(item)
+        except FileNotFoundError:
+            print("Отсутствует файл item.csv")
+
 
 
     @staticmethod
     def string_to_number(num):
         return float(num).__int__()
 
-   
+
 
