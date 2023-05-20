@@ -46,3 +46,29 @@ def test_get_count_items(test_all_items):
     """Тест подсчёта общего количества товаров"""
     Item.all = test_all_items
     assert Item.get_count_items() == 2
+
+
+def test_name(item_notebook_lenovo_0_0, item_smartphone_10000_20):
+    """ Тест проверки наименования """
+    assert item_notebook_lenovo_0_0.name == 'Наименование должно быть меньше 10 символов.'
+    assert item_smartphone_10000_20.name == "Смартфон"
+    item_smartphone_10000_20.name = "Смартфон_S"
+    assert item_smartphone_10000_20.name == "Смартфон_S"
+    item_smartphone_10000_20.name = "Смартфон"
+
+
+def test_instantiate_from_csv():
+    """ Проверка создания объектов из файла """
+    Item.instantiate_from_csv()  # создание объектов из данных файла
+    assert len(Item.all) == 5 # в файле 5 записей с данными по товарам
+
+
+def test_string_to_number(strings):
+    """
+    Проверка перевода строки в число
+    """
+    string_1, string_2, string_3 = strings.split(', ')
+
+    assert Item.string_to_number(string_1) == 0
+    assert Item.string_to_number(string_2) == 5
+    assert Item.string_to_number(string_3) == 5
