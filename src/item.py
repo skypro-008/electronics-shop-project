@@ -1,13 +1,14 @@
 import csv
 import os
 
+from src.phone import Phone
+
 
 class Item:
     pay_rate = 1.0
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
-
         self.__name = name
         self.price = price
         self.quantity = quantity
@@ -15,10 +16,18 @@ class Item:
         Item.all.append(self)
 
     def __repr__(self):
-        return f'{self.__class__.__name__}{self.__name, self.price, self.quantity}'
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
     def __str__(self):
         return f'{self.__name}'
+
+    def __add__(self, other):
+        if isinstance(other, Item):
+            total_quantity = self.quantity + other.quantity
+            return total_quantity
+        elif isinstance(other, Phone):
+            total_quantatity = self.quantity +other.quantity
+            return total_quantatity
 
     @property
     def name(self):

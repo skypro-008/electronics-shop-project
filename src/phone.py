@@ -4,18 +4,20 @@ class Phone(Item):
 
     def __init__(self, name, price, quantity, number_of_sim):
         super().__init__(name=name, price=price, quantity=quantity)
+        if not isinstance(number_of_sim, int) or number_of_sim <= 0:
+            raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
         self.number_of_sim = number_of_sim
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.number_of_sim})"
+
     def __str__(self):
         return f'{self.name}'
 
     def __add__(self, other):
-        if issubclass(other.__class__, self.__class__):
-            return self.quantity + other.quantity
-        else:
-            raise TypeError(f"can not")
-
-
-
+        if isinstance(other, Phone):
+            total_quantity = self.quantity + other.quantity
+            return total_quantity
+        elif isinstance(other, Item):
+            total_quantatity = self.quantity +other.quantity
+            return total_quantatity
