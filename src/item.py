@@ -58,7 +58,7 @@ class Item:
         """Вызываем классы из файла"""
 
         cls.all.clear()
-        with open('/home/yaroslav/PycharmProjects/electronics-shop-project/src/items.csv', newline='') as csvfile:
+        with open('../src/items.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
 
             for row in reader:
