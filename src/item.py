@@ -1,4 +1,5 @@
 import csv
+import os
 
 class Item:
     """
@@ -16,7 +17,7 @@ class Item:
         :param quantity: Количество товара в магазине.
         """
 
-        self.__name = name  # Название товара сделали приватным
+        self.name = name  # Название товара
         self.price = price  # Цена за единицу товара.
         self.quantity = quantity  # Количество товара в магазине
 
@@ -58,7 +59,8 @@ class Item:
         """Вызываем классы из файла"""
 
         cls.all.clear()
-        with open('../src/items.csv', newline='') as csvfile:
+        csv_file = os.path.join('src', 'items.csv')
+        with open(csv_file, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
 
             for row in reader:
