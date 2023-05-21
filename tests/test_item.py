@@ -22,7 +22,16 @@ def test_apply_discount(Item):
     assert item.price == 10000.0
 
 
+def test_instantiate_from_csv(cls) -> None:
+    item.name = 'Смартфон'
+    assert item.name == 'Смартфон'
 
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+
+
+    
 
 
 
