@@ -1,14 +1,16 @@
 import csv
 import os
+
+
 class Item:
     """
     Класс для представления товара в магазине.
     """
     pay_rate = 1.0
     all = []
+
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
-
 
     def __str__(self):
         return f"{self.__name}"
@@ -27,6 +29,7 @@ class Item:
         """
 
     """Phone` и `Item`  метод сложения по количеству товара в магазине"""
+
     def __add__(self, other):
         if issubclass(other.__class__, self.__class__):
             return self.quantity + other.quantity
@@ -69,6 +72,8 @@ class Item:
                 for row in reader:
                     item = cls(row.get('name'), float(row.get('price')), int(row.get('quantity')))
                     cls.all.append(item)
+                if not item:
+                    raise InstantiateCSVError
         except FileNotFoundError:
             print("Отсутствует файл item.csv")
 
@@ -77,6 +82,13 @@ class Item:
     @staticmethod
     def string_to_number(num):
         return float(num).__int__()
+
+class InstantiateCSVError(Exception):
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'Файл item.csv поврежден.'
+
+    def __str__(self):
+        return self.message
 
 
 
