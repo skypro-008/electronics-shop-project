@@ -49,6 +49,12 @@ def test_string_to_number():
         Item.string_to_number('word')
 
 
+def test_repr():
+    item1 = Item("Смартфон", 10000, 20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+
+
 
 
 
