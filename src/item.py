@@ -59,8 +59,10 @@ class Item:
         """Вызываем классы из файла"""
 
         cls.all.clear()
-        csv_file = os.path.join('src', 'items.csv')
-        with open(csv_file, newline='') as csvfile:
+        # csv_file = os.path.join('../src', 'items.csv')
+        # with open(csv_file, newline='') as csvfile:
+        # Требуется изменить полный путь из за тестов
+        with open('/home/yaroslav/PycharmProjects/electronics-shop-project/src/items.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
 
             for row in reader:

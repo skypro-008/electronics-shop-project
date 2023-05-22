@@ -1,6 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-import pytest
 from src.item import Item
+import os
 
 
 def test_item():
@@ -23,8 +23,6 @@ def test_item():
 
     # Проверка списка экзепляров
     assert Item.all == [item1, item2]
-
-def test_instantiate_from_csv():
 
     item = Item('Телефон', 10000, 5)
 
