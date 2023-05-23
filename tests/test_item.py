@@ -19,7 +19,32 @@ def test_apply_discount(item):
     assert item.price == 9.0
 
 
+# def test_instantiate_from_csv(item):
+#     item.instantiate_from_csv()
+#
+#     assert len(item.all) == 5
+
+
 def test_all_items():
     if __name__ == "__main__":
         item1 = Item("item1", 10, 5)
         item2 = Item("item2", 20, 2)
+        assert Item.all == [item1, item2]
+        # self.assertEqual(item.all(), [item1, item2])
+
+
+def test_instantiate_from_csv(item):
+    item.instantiate_from_csv()
+
+    assert len(item.all) == 5
+
+
+def test_string_to_number(item):
+    assert item.string_to_number("10000") == 10000
+    assert item.string_to_number("3.024") == 3
+
+
+def test_personal_name_setter(item):
+    """Тестируем сеттер """
+    item.name = "Сони"
+    assert item.name == "Сони"

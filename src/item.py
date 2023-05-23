@@ -1,3 +1,7 @@
+import csv
+import os.path
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -13,7 +17,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
@@ -31,3 +35,40 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
+    @classmethod
+    def instantiate_from_csv(cls, ):
+        items = []
+        with open('/home/renat/PycharmProjects/electronics-shop-project/src/items.csv', 'r',
+                  encoding='windows-1251') as file:
+            reader = csv.DictReader(file)
+            next(reader)
+            for data in reader:
+                item = Item(data['name'], float(data['price']), int(data['quantity']))
+                items.append(item)
+            return items
+            # item.name = data[0]
+            # item.price = cls.string_to_number(data[1])
+            # item.quantity = int(data[2])
+            # item = cls('name', 'price', 'quantity')
+            # Item(data['name'], float(data['price']), int(data['quantity']))
+
+    @staticmethod
+    def string_to_number(number: str) -> int:
+        "Преобразуем число из строки"
+        return int(number.split(".")[0])
+
+    @property
+    def personal_name(self):
+        'Геттер для названия товара'
+        return self.__name
+
+    @personal_name.setter
+    def name(self, value):
+        """Сеттер для названия товара"""
+        if len(value) < 10:
+            #     raise ValueError("Personal name is too long")
+            # self.personal_name = value
+            self.__name = value
+        else:
+            raise ValueError("Name mast be no more than 10 characters long.")
