@@ -1,4 +1,6 @@
 import csv
+from src.error import InstantiateCSVError
+
 
 
 class Item:
@@ -20,6 +22,12 @@ class Item:
         self.price = price
         self.quantity = quantity
         self.all.append(self)
+
+    def __repr__(self):
+        """
+        Вывод для разаработчика данные экземпляра
+        """
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
     def calculate_total_price(self) -> float:
         """
@@ -48,9 +56,20 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, csv_path='../src/items.csv'):
         cls.all = []
-        with open(csv_path) as file_items:
-            items = csv.DictReader(file_items, delimiter=',')
-            [cls(row['name'], row['price'], row['quantity']) for row in items]
+        try:
+            with open(csv_path) as file_items:
+                items = csv.DictReader(file_items, delimiter=',')
+                for row in items:
+                    if len(items.fieldnames) == 3 and len(row) == 3:
+                        cls(row['name'], row['price'], row['quantity'])
+                    else:
+                        raise InstantiateCSVError
+        except FileNotFoundError:
+            print("FileNotFoundError: Отсутствует файл item.csv")
+            raise
+        except InstantiateCSVError:
+            print(InstantiateCSVError())
+            raise
 
     @staticmethod
     def string_to_number(str_num: str) -> int:
@@ -61,9 +80,3 @@ class Item:
         Вывод данные именования по товару
         """
         return f"{self.name}"
-
-    def __repr__(self):
-        """
-        Вывод для разаработчика данные экземпляра
-        """
-        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
