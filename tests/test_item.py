@@ -22,20 +22,25 @@ def test_name():
 @pytest.fixture
 def item():
     Item.all = []
-    item = Item(name="Товар",price=45.97, quantity=40)
+    item = Item(name="Мерседес-Бенз",price=45.97, quantity=40)
     return item
 def test_all_items_list(item):
     assert len(Item.all) == 1
-    assert Item.all[0] ==item
+    assert Item.all[0] == item
 
-# def test_len_name(item):
-#     with pytest.raises(ValueError) as e:
-#         item.name = "Мерседес-Бенз"
-#     assert str(e.value) == "Длина наименования товара превышает 10 символов"
-
+def test_len_name(item):
+    with pytest.raises(Exception) as e:
+        item.name = "Мерседес-Бенз"
+        assert str(e.value) == "Длина наименования товара превышает 10 символов"
+def test_len_name2(item):
+    item.name = "test"
+    assert item.name == "test"
 def test_instantiate_from_csv(item):
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
     assert isinstance(Item.all[0], Item)
+
+
+
 
 
