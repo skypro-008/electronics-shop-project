@@ -17,7 +17,7 @@ class Item:
         :param quantity: Количество товара в магазине.
         """
 
-        self.__name = name  # Название товара
+        self.name = name  # Название товара
         self.price = price  # Цена за единицу товара.
         self.quantity = quantity  # Количество товара в магазине
 
@@ -73,7 +73,4 @@ class Item:
         """метод, возвращающий число из числа-строки"""
         a = float(line)
         return int(a)
-
-
-
 
