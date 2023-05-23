@@ -1,5 +1,8 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import csv
+
 from src.item import Item
+
 
 
 def test_constructor():
@@ -7,6 +10,7 @@ def test_constructor():
     assert item.name == "Товар 1", "Неверный формат данных: должен быть текст"
     assert item.price == 1000.5, "Неверный формат данных: должено быть число с плавающей точкой"
     assert item.quantity == 10, "Неверный формат данных: должен быть число"
+    assert item.name == 'Товар 1'
 
 
 def test_calculate_total_price():
@@ -31,3 +35,19 @@ def test_all():
     assert Item.all == [item1, item2], "Неверный формат ячеек"
     item3 = Item("Товар 3", 3000, 15)
     assert Item.all == [item1, item2, item3], "Неверный формат ячеек"
+
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
+
+
+def test_instantiate_from_csv():
+    Item.all = []
+    with open("/home/polexa/electronics-shop-project/src/items.csv", newline="") as file:
+        reader = csv.DictReader(file)
+        for line in reader:
+            Item.all.append(line)
+    assert Item.all[0] == {'name': 'Смартфон', 'price': '100', 'quantity': '1'}
+    assert len(Item.all) == 5
