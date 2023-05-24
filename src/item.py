@@ -38,6 +38,10 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, ):
+        """
+        Считываем файл и инициализируем экземпляры класса
+
+        """
         items = []
         with open('/home/renat/PycharmProjects/electronics-shop-project/src/items.csv', 'r',
                   encoding='windows-1251') as file:
@@ -47,28 +51,30 @@ class Item:
                 item = Item(data['name'], float(data['price']), int(data['quantity']))
                 items.append(item)
             return items
-            # item.name = data[0]
-            # item.price = cls.string_to_number(data[1])
-            # item.quantity = int(data[2])
-            # item = cls('name', 'price', 'quantity')
-            # Item(data['name'], float(data['price']), int(data['quantity']))
 
     @staticmethod
     def string_to_number(number: str) -> int:
-        "Преобразуем число из строки"
+        """
+        Преобразуем число из строки
+        """
         return int(number.split(".")[0])
 
     @property
     def personal_name(self):
-        'Геттер для названия товара'
+        """
+        Геттер для названия товара
+        """
         return self.__name
 
     @personal_name.setter
     def name(self, value):
-        """Сеттер для названия товара"""
+        """
+        Сеттер для названия товара
+        """
         if len(value) < 10:
             #     raise ValueError("Personal name is too long")
             # self.personal_name = value
             self.__name = value
         else:
-            raise ValueError("Name mast be no more than 10 characters long.")
+            print("Name mast be no more than 10 characters long.")
+ #raise ValueError("Name mast be no more than 10 characters long.")
