@@ -77,4 +77,3 @@ class Item:
             self.__name = value
         else:
             print("Name mast be no more than 10 characters long.")
- #raise ValueError("Name mast be no more than 10 characters long.")

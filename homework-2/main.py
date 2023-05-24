@@ -17,10 +17,10 @@ if __name__ == '__main__':
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
 
-    try:
-        'СуперСмартфон'
-    except ValueError:
-        print("Имя слишком длинное")
+    # try:
+    #     'СуперСмартфон'
+    # except ValueError:
+    #     print("Имя слишком длинное")
 
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
