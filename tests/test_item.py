@@ -33,8 +33,8 @@ def test_len_name(item):
         item.name = "Мерседес-Бенз"
         assert str(e.value) == "Длина наименования товара превышает 10 символов"
 def test_len_name2(item):
-    item.name = "test"
-    assert item.name == "test"
+    item.name = "Шоколад"
+    assert item.name == "Шоколад"
 def test_instantiate_from_csv(item):
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
