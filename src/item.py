@@ -29,13 +29,11 @@ class Item:
 
     @name.setter
     def name(self, add_name: str):
-        try:
-            if len(add_name) >= 10:
-                raise ValueError()
+        if len(add_name) <= 10:
+            self.__name = add_name
 
-            self.__name = add_name
-        except:
-            self.__name = add_name
+        else:
+            raise ValueError()
 
 
     def calculate_total_price(self) -> float:
