@@ -31,10 +31,12 @@ class Item:
     def name(self, add_name: str):
         try:
             if len(add_name) >= 10:
-                self.__name = add_name
+                raise ValueError()
 
-        except Exception :
-            print('Длина наименования товара превышает 10 символов')
+            self.__name = add_name
+        except:
+            self.__name = add_name
+
 
     def calculate_total_price(self) -> float:
         """
@@ -59,10 +61,10 @@ class Item:
         """Вызываем классы из файла"""
 
         cls.all.clear()
-        # csv_file = os.path.join('../src', 'items.csv')
-        # with open(csv_file, newline='') as csvfile:
+        csv_file = os.path.join('../src', 'items.csv')
+        with open(csv_file, newline='') as csvfile:
         # Требуется изменить полный путь из за тестов
-        with open('/home/yaroslav/PycharmProjects/electronics-shop-project/src/items.csv', newline='') as csvfile:
+        #with open('/home/yaroslav/PycharmProjects/electronics-shop-project/src/items.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
 
             for row in reader:
