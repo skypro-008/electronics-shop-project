@@ -154,4 +154,5 @@ class Item:
                 number = int(string)
             except ValueError:
                 raise ValueError("Нельзя превратить в целое число!")
-            return number
+            return number|
+
