@@ -2,8 +2,9 @@ from items import Item
 
 class Phone(Item):
 
-    def __init__(self, name, price, quantity, __number_of_sim):
+    def __init__(self, name, price, quantity, number_of_sim):
         super().__init__(name=name, price=price, quantity=quantity)
+        self.__number_of_sim = number_of_sim
 
 
     def __repr__(self):
