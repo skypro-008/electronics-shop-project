@@ -1,4 +1,5 @@
 from csv import DictReader
+import os
 
 
 class Item:
@@ -16,10 +17,20 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.__name = name
+        self.name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
+
+    def __repr__(self):
+        """ Для отладки: выводит товар и его свойства """
+        # "Item('Смартфон', 10000, 20)"
+        return f"{__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """Вывод элемента класса для пользователя"""
+        # 'Смартфон'
+        return f'{self.__name}'
 
     @property
     def name(self):
@@ -56,10 +67,6 @@ class Item:
             return 'Проверьте значения скидки или цены. Одно из них меньше нуля'
         return self.price * self.pay_rate
 
-    def __repr__(self):
-        """ Для отладки: выводит товар и его свойства """
-        return f'[Item: name={self.__name}, price={self.price}, quantity={self.quantity}]'
-
     @classmethod
     def get_all_items(cls):
         """ Возвращаем список товаров """
@@ -74,7 +81,7 @@ class Item:
     def instantiate_from_csv(cls):
         """ Создание объектов из данных файла """
         items = []
-        with open('/home/fniad/PycharmProjects/electronics-shop-project/src/items.csv', 'r', newline='') as csvfile:
+        with open(os.path.abspath('src/items.csv'), 'r', newline='') as csvfile:
             reader = DictReader(csvfile)
             for row in reader:
                 item = cls(row['name'], float(row['price']), int(row['quantity']))

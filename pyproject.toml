@@ -7,10 +7,15 @@ readme = "README.md"
 packages = [{include = "electronics_shop_project"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.10"
 pytest = "^7.3.1"
 pandas = "^2.0.1"
+pytz = "^2023.3"
 
+
+[tool.poetry.dev-dependencies]
+pytest-cov = "^4.0.0"
+pytest = "^7.3.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest-cov = "^4.0.0"
