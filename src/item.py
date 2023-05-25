@@ -9,6 +9,7 @@ class Item:
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
+        super().__init__()
         self.__name = name
         self.price = price
         self.quantity = quantity
@@ -84,3 +85,14 @@ class Item:
         return number
 
 
+class MixinLang:
+    def __init__(self):
+        self.lang_list = ['EN', 'RU']
+        self.language = 'EN'
+
+    def change_lang(self):
+        if self.language == self.lang_list[0]:
+            self.language = self.lang_list[1]
+        else:
+            self.language = self.lang_list[1]
+        return self
