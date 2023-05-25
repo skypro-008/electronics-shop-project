@@ -1,6 +1,7 @@
 import csv
 import os
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -23,6 +24,12 @@ class Item:
 
         Item.all.append(self)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f'{self.name}'
+
     @property
     def name(self):
         return self.__name
@@ -35,7 +42,6 @@ class Item:
         else:
             raise Exception('Длина наименования товара превышает 10 символов')
 
-
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -45,14 +51,12 @@ class Item:
 
         return self.price * self.quantity
 
-
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
         return self.price
-
 
     @classmethod
     def instantiate_from_csv(cls) -> None:
@@ -72,4 +76,3 @@ class Item:
         """метод, возвращающий число из числа-строки"""
         a = float(line)
         return int(a)
-
