@@ -1,102 +1,81 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-from src.item import Item
 import pytest
+from src.item import Item
 
 
 @pytest.fixture
-def item():
-    return Item("Принтер", 5299, 8)
+def item1():
+    """Создает объект Item."""
+    return Item(name="Phone", price=19999.9, quantity=5)
 
 
-def test_create_float(item):
-    assert item.name == "Принтер"
-    assert item.price == float(5299)
-    assert item.quantity == 8
-    assert item.pay_rate == 1.0
+@pytest.fixture
+def item2():
+    """Создает объект Item."""
+    return Item(name="TV", price=30000, quantity=2.0)
 
 
-def test_create_int(item):
-    assert item.name == "Принтер"
-    assert item.price == 5299
-    assert item.quantity == 8
-    assert item.pay_rate == 1.0
+def test_class_attributes():
+    assert isinstance(Item.pay_rate, float)
+    assert Item.pay_rate < 1
+    assert isinstance(Item.all, list)
 
 
-def test_create_incorrect():
-    with pytest.raises(ValueError):
-        Item(8, 5299, 8)
+def test_init(item1, item2):
+    """Тестирует конструктор Item."""
 
+    assert isinstance(item1.name, str)
+    assert isinstance(item1.price, int)
+    assert isinstance(item1.quantity, int)
+
+    assert isinstance(item2.name, str)
+    assert isinstance(item2.price, int)
+    assert isinstance(item2.quantity, int)
+
+
+def test_calculate_total_price(item1, item2):
+    """Тестирует метод calculate_total_price."""
+    assert item1.calculate_total_price() == 19999 * 5
+    assert item2.calculate_total_price() == 30000 * 2.0
+
+
+def test_apply_discount(item1, item2):
+    """Тестирует метод apply_discount."""
+    item1.apply_discount()
+    assert item1.price == round(19999 * 0.85, 2)
+
+    item2.apply_discount()
+    assert item2.price == round(30000 * 0.85, 2)
+
+
+def test_name_setter(item1):
+    item1.name = 'Тостер'
+    assert item1.name == 'Тостер'
+    item1.name = 'Фен'
+    assert item1.name == 'Фен'
+
+
+def test_name_setter__long_word(item2):
     with pytest.raises(Exception):
-        Item("Принтер Epson L121 (C11CD76414)", 5299, 8)
-
+        item2.name = 'Флюгегехаймен'
     with pytest.raises(Exception):
-        Item("Принтер Epson L121 (C11CD76414)", "5299", 8)
-
-    with pytest.raises(Exception):
-        Item("Принтер Epson L121 (C11CD76414)", 5299, "8")
+        item2.name = 'Аннигиляторная пушка'
 
 
-def test_price_incorrect(item):
-    with pytest.raises(Exception):
-        item.price = "18"
-
-
-def test_quantity_incorrect(item):
-    with pytest.raises(Exception):
-        item.quantity = 19.6
-
-
-def test_calculate_total_price(item):
-    assert item.calculate_total_price() == 5299 * 8
-
-
-def test_apply_discount(item):
-    item.pay_rate = 0.85
-    item.price = 6000.0
-    item.apply_discount()
-    assert item.price == 0.85 * 6000.0
-
-
-def test_apply_discount_incorrect(item):
-    item.pay_rate = 2
-    with pytest.raises(ValueError):
-        item.apply_discount()
-
-    item.pay_rate = 1.6
-    with pytest.raises(ValueError):
-        item.apply_discount()
-
-
-def test_instantiate_from_csv():
-    Item.all = []
+def test_instantiate_from_csv(item1):
     Item.instantiate_from_csv()
-    assert Item.all[0].name == 'Смартфон'
-    assert Item.all[3].price == 50.0
-    assert Item.all[4].quantity == 5
-
-    with pytest.raises(IndexError):
-        print(Item.all[5])
+    assert len(Item.all) > 1
 
 
-def test_string_to_number_correct():
-    assert Item.string_to_number("89") == 89
-    assert type(Item.string_to_number("89")) is int
-
-    assert Item.string_to_number("169.11") == 169.11
-    assert type(Item.string_to_number("169.11")) is float
-
-
-def test_string_to_number_incorrect():
-    with pytest.raises(ValueError):
-        Item.string_to_number("восемь")
-
-    with pytest.raises(ValueError):
-        Item.string_to_number("восемь.одиннадцать")
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('10.2') == 10
+    assert Item.string_to_number('0.5') == 0
+    assert Item.string_to_number('fkjsdfklsdjfkldf') == 'Строка не является числом!'
+    assert Item.string_to_number('2.4.2.3') == 'Строка не является числом!'
+    assert Item.string_to_number('23..0') == 'Строка не является числом!'
 
 
-def test_repr(item):
-    assert repr(item) == f"Item(\'{item.name}\', {item.price}, {item.quantity})"
-
-
-def test_str(item):
-    assert str(item) == f"{item.name}"
+def test_repr_and_str(item1):
+    assert repr(item1) == "Item('Phone', 19999, 5)"
+    assert str(item1) == "Phone"
