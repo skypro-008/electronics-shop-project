@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
 import os
+import pytest
 
 
 def test_item():
@@ -30,13 +31,18 @@ def test_item():
     item6 = Item('Телефон', 10000, 5)
 
     # проверяем сеттер отправляя товар, у которого наименование более 10 символов
-    # item6.name = 'СуперСмартфон'
+     #item6.name = 'СуперСмартфон'
+
     # Exception: Длина наименования товара превышает 10 символов.
+
     assert item6.name == 'Телефон'
 
     # проверяем сеттер товар, у которого наименование менее 10 символов
     item6.name = 'Смартфон'
     assert item6.name == 'Смартфон'
+    with pytest.raises(Exception):
+        item6.name = 'СуперСмартфон'
+
 
     # Запускаем метод вызывающий класс из файла
     Item.instantiate_from_csv()
