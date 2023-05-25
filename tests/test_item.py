@@ -45,9 +45,5 @@ def test_string_to_number():
 
 def test_instantiate_from_csv():
     Item.all = []
-    with open("/home/polexa/electronics-shop-project/src/items.csv", newline="") as file:
-        reader = csv.DictReader(file)
-        for line in reader:
-            Item.all.append(line)
-    assert Item.all[0] == {'name': 'Смартфон', 'price': '100', 'quantity': '1'}
+    Item.instantiate_from_csv()
     assert len(Item.all) == 5
