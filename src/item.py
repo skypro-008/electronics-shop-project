@@ -1,5 +1,7 @@
 import csv
-import os.path
+import os
+
+CSV_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'src', 'items.csv'))
 
 
 class Item:
@@ -43,12 +45,12 @@ class Item:
 
         """
         items = []
-        with open('/home/renat/PycharmProjects/electronics-shop-project/src/items.csv', 'r',
-                  encoding='windows-1251') as file:
+        with open(CSV_PATH, 'r', encoding='windows-1251') as file:
             reader = csv.DictReader(file)
             next(reader)
             for data in reader:
-                item = Item(data['name'], float(data['price']), int(data['quantity']))
+                item = cls(data['name'], float(data['price']), int(data['quantity']))
+                # cls.all.append(item)
                 items.append(item)
             return items
 
@@ -60,20 +62,18 @@ class Item:
         return int(number.split(".")[0])
 
     @property
-    def personal_name(self):
+    def name(self):
         """
         Геттер для названия товара
         """
         return self.__name
 
-    @personal_name.setter
+    @name.setter
     def name(self, value):
         """
         Сеттер для названия товара
         """
-        if len(value) < 10:
-            #     raise ValueError("Personal name is too long")
-            # self.personal_name = value
+        if len(value) <= 10:
             self.__name = value
         else:
-            print("Name mast be no more than 10 characters long.")
+            print("Длинна наименования товара превышает 10 символов ")
