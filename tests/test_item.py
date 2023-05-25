@@ -27,19 +27,30 @@ def test_apply_discount(pay_rate_1,
     assert item_notebook_aser_minus_25000_minus_15.apply_discount() == 'Проверьте значения скидки или цены. Одно из них меньше нуля'
 
 
-def test_repr_str(item_smartphone_10000_20, item_notebook_20000_5):
+def test_repr(item_smartphone_10000_20, item_notebook_20000_5, item_notebook_lenovo_0_0):
+    """
+    Тест на правильность преобразования объекта Item в строку для вывода в отладке
+    """
+    assert item_smartphone_10000_20.__repr__() == "Item('Смартфон', 10000, 20)"
+    assert item_notebook_20000_5.__repr__() == "Item('Ноутбук', 20000, 5)"
+    assert item_notebook_lenovo_0_0.__repr__() == "Item('Ноутбук_lenovo', 0, 0)"
+
+
+def test_str(item_smartphone_10000_20, item_notebook_20000_5, item_notebook_lenovo_0_0):
     """
     Тест на правильность преобразования объекта Item в строку
+    для представления элемента класса пользователю
     """
-    assert str(item_smartphone_10000_20) == '[Item: name=Смартфон, price=10000, quantity=20]'
-    assert str(item_notebook_20000_5) == '[Item: name=Ноутбук, price=20000, quantity=5]'
+    assert item_smartphone_10000_20.__str__() == 'Смартфон'
+    assert item_notebook_20000_5.__str__() == 'Ноутбук'
+    assert item_notebook_lenovo_0_0.__str__() == 'Ноутбук_lenovo'
 
 
 def test_get_all_items(item_smartphone_10000_20, item_notebook_20000_5):
     """ Тестируем возвращаемость списка товаров"""
     Item.all = [item_smartphone_10000_20.__repr__(), item_notebook_20000_5.__repr__()]
-    assert Item.all == ['[Item: name=Смартфон, price=10000, quantity=20]',
-                        '[Item: name=Ноутбук, price=20000, quantity=5]']
+    assert Item.all == ["Item('Смартфон', 10000, 20)",
+                        "Item('Ноутбук', 20000, 5)"]
 
 
 def test_get_count_items(test_all_items):
@@ -60,7 +71,7 @@ def test_name(item_notebook_lenovo_0_0, item_smartphone_10000_20):
 def test_instantiate_from_csv():
     """ Проверка создания объектов из файла """
     Item.instantiate_from_csv()  # создание объектов из данных файла
-    assert len(Item.all) == 5 # в файле 5 записей с данными по товарам
+    assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
 
 
 def test_string_to_number(strings):
