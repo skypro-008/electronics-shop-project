@@ -43,10 +43,9 @@ def test_item():
     with pytest.raises(Exception):
         item6.name = 'СуперСмартфон'
 
-
     # Запускаем метод вызывающий класс из файла
     Item.instantiate_from_csv()
-     # Проверяем корректность работы метода, подсчетом записей
+    # Проверяем корректность работы метода, подсчетом записей
     assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
 
     item6 = Item.all[0]
@@ -55,3 +54,12 @@ def test_item():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
+    # Создаем экземпляр класса для проверки магических методов
+    item = Item("Смартфон", 10000, 20)
+
+    # Проверяем магический метод __repr__
+    assert repr(item) == "Item('Смартфон', 10000, 20)"
+
+    # Проверяем магический метод __str__
+    assert str(item) == 'Смартфон'
