@@ -51,13 +51,10 @@ class Item:
 
         :param new_name: Новое наименование товара.
         """
-        try:
-            if len(new_name) <= 10:
-                self._name = new_name
-            else:
-                raise ValueError("Длина наименования товара превышает 10 символов.")
-        except ValueError as e:
-            print(e)
+        if len(new_name) <= 10:
+            self._name = new_name
+        else:
+            raise ValueError("Длина наименования товара превышает 10 символов.")
 
     @classmethod
     def instantiate_from_csv(cls) -> None:
@@ -66,7 +63,7 @@ class Item:
         """
         cls.all.clear()
         try:
-            with open('/home/polexa/electronics-shop-project/src/items.csv', newline='') as csvfile:
+            with open('../src/items.csv', newline='', encoding="utf-8") as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
                     cls(row['name'], row['price'], row['quantity'])
