@@ -156,3 +156,5 @@ class Item:
                 raise ValueError("Нельзя превратить в целое число!")
             return number|
 
+
+#
