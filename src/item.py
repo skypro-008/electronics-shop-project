@@ -43,6 +43,7 @@ class Item:
     @property
     def name(self):
         return self._name
+
     @name.setter
     def name(self, newname):
         try:
@@ -50,8 +51,6 @@ class Item:
                 self._name = newname
         except Exception:
             raise Exception("Длина наименования товара превышает 10 символов")
-
-
 
     @classmethod
     def instantiate_from_csv(cls):
@@ -62,12 +61,15 @@ class Item:
             reader = csv.DictReader(f)
 
             for row in reader:
-                cls(row["name"],row["price"],row["quantity"])
-
-
+                cls(row["name"], row["price"], row["quantity"])
 
     @staticmethod
     def string_to_number(num):
         number = int(math.floor(float(num.strip())))
         return number
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self.name}"

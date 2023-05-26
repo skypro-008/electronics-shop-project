@@ -9,38 +9,51 @@ def test_calculate_total_price():
 
     assert Item.calculate_total_price(prod1) == 250
 
+
 def test_apply_discount():
     prod1 = Item("Телевизор", 50, 5)
     pay_rate = 2
 
     assert Item.apply_discount(prod1) == None
 
+
 def test_name():
     Item.name = 'Шкода'
     assert Item.name == 'Шкода'
 
+
 @pytest.fixture
 def item():
     Item.all = []
-    item = Item(name="Мерседес-Бенз",price=45.97, quantity=40)
+    item = Item(name="Мерседес-Бенз", price=45.97, quantity=40)
     return item
+
+
 def test_all_items_list(item):
     assert len(Item.all) == 1
     assert Item.all[0] == item
+
 
 def test_len_name(item):
     with pytest.raises(Exception) as e:
         item.name = "Мерседес-Бенз"
         assert str(e.value) == "Длина наименования товара превышает 10 символов"
+
+
 def test_len_name2(item):
     item.name = "Шоколад"
     assert item.name == "Шоколад"
+
+
 def test_instantiate_from_csv(item):
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
     assert isinstance(Item.all[0], Item)
 
 
+def test_repr(item):
+    assert repr(item) == "Item('Мерседес-Бенз', 45.97, 40)"
 
 
-
+def test_str(item):
+    assert str(item) == "Мерседес-Бенз"
