@@ -19,7 +19,7 @@ def item_class():
 
 
 @pytest.fixture
-def test_item():
+def item():
     """
     Fixture that returns two instances of Item class for testing.
 
@@ -27,5 +27,5 @@ def test_item():
         tuple: A tuple containing two Item instances.
     """
     ent_1 = Item("Test1", 6.6, 65)
-    ent_2 = Item("Test2", 196.0, 100)
+    ent_2 = Item("Test Product", 10.0, 5)
     return ent_1, ent_2
