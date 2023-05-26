@@ -73,38 +73,38 @@ class TestItem:
         assert len(item.all) == expected
 
 
-def test_name_getter(test_item):
+def test_name_getter(item):
     """
     Test the getter for the name property of Item.
 
     Args:
-        test_item (fixture): Fixture that provides instances
+        item (fixture): Fixture that provides instances
         of Item for testing.
 
     Returns:
         None
     """
-    assert test_item[0].name == 'Test1'
-    assert test_item[1].name == 'Test2'
+    assert item[0].name == 'Test1'
+    assert item[1].name == 'Test Product'
 
 
-def test_name_setter(test_item):
+def test_name_setter(item):
     """
     Test the setter for the name property of Item.
 
     Args:
-        test_item (fixture): Fixture that provides instances of
+        item (fixture): Fixture that provides instances of
         Item for testing.
 
     Returns:
         None
     """
-    test_item[0].name = 'Test10'
-    assert test_item[0].name == 'Test10'
-    test_item[1].name = 'Test20'
-    assert test_item[1].name == 'Test20'
+    item[0].name = 'Test10'
+    assert item[0].name == 'Test10'
+    item[1].name = 'Test20'
+    assert item[1].name == 'Test20'
     with pytest.raises(ValueError):
-        test_item[1].name = 'СуперСмартфон'
+        item[1].name = 'СуперСмартфон'
 
 
 def test_instantiate_from_csv(monkeypatch):
@@ -144,3 +144,25 @@ def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('0') == 0
     assert Item.string_to_number('-10') == -10
+
+
+def test_repr(item):
+    """
+    Test the __repr__ method of the Product class.
+
+    Args:
+        item: An instance of the Item class.
+    """
+    expected_repr = "Item('Test Product', 10.0, 5)"
+    assert repr(item[1]) == expected_repr
+
+
+def test_str(item):
+    """
+    Test the __str__ method of the Product class.
+
+    Args:
+        item: An instance of the Item class.
+    """
+    expected_str = "Test Product"
+    assert str(item[1]) == expected_str
