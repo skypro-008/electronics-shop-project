@@ -20,19 +20,18 @@ class Item:
         self.quantity = int(quantity)
         self.all.append(self)
 
-        # Геттер для name
-        @property
-        def name(self):
-            """Возвращает наименование товара"""
-            return self.name
+    @property
+    def name(self):
+        """Геттер для работы с .__name"""
+        return self.__name
 
-        # Геттер для name
-        @name.setter
-        def set_name(self, quantity):
-            """Метод срабатывает при операции присваивания. К наимерованию товара мы добавляем его колличество"""
-            quantity, name = quantity.split(' ')
-            self.quantity = quantity
-            self.name = name
+    @name.setter
+    def name(self, name_inp: str) -> None:
+        """Сеттер для записей атрибутов класса"""
+        if len(name_inp) <= 10:
+            self.__name = name_inp
+        else:
+            raise Exception("Наименование товара превышает 10 символов")
 
 
 
