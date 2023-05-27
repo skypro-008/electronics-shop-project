@@ -23,8 +23,8 @@ def test_apply_discount(Item):
 
 
 def test_instantiate_from_csv(cls) -> None:
-    item.name = 'Смартфон'
-    assert item.name == 'Смартфон'
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
 
 
 def test_string_to_number():
