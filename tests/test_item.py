@@ -13,13 +13,13 @@ def Item():
 
 """Выводим стоимость товара"""
 def test_calculate_total_price(Item):
-    assert item.calculate_total_price == 200000
+    assert Item.calculate_total_price == 200000
 
 
 """Устанавливаем скидку на товары"""
 def test_apply_discount(Item):
-    item.apply_discount()
-    assert item.price == 10000.0
+    Item.apply_discount()
+    assert Item.price == 10000.0
 
 
 def test_instantiate_from_csv(cls) -> None:
