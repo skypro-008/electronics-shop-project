@@ -1,4 +1,5 @@
 from src.item import Item
+import pytest
 
 
 def test_calculate_total_price(item_smartphone_10000_20,
@@ -59,13 +60,20 @@ def test_get_count_items(test_all_items):
     assert Item.get_count_items() == 2
 
 
-def test_name(item_notebook_lenovo_0_0, item_smartphone_10000_20):
-    """ Тест проверки наименования """
-    assert item_notebook_lenovo_0_0.name == 'Наименование должно быть меньше 10 символов.'
-    assert item_smartphone_10000_20.name == "Смартфон"
-    item_smartphone_10000_20.name = "Смартфон_S"
-    assert item_smartphone_10000_20.name == "Смартфон_S"
-    item_smartphone_10000_20.name = "Смартфон"
+def test_get_name(item_notebook_lenovo_0_0):
+    assert item_notebook_lenovo_0_0.name == 'Ноутбук_lenovo'
+
+
+def test_set_name_valid(item_notebook_lenovo_0_0):
+    item_notebook_lenovo_0_0.name = 'Lenovo'
+    assert item_notebook_lenovo_0_0.name == 'Lenovo'
+
+
+def test_set_name_invalid(item_notebook_lenovo_0_0):
+    with pytest.raises(Exception) as exc_info:
+        item_notebook_lenovo_0_0.name = '12345678901'
+    assert str(exc_info.value) == 'Длина товара превышает 10 символов.'
+    assert item_notebook_lenovo_0_0.name == 'Ноутбук_lenovo'
 
 
 def test_instantiate_from_csv():
