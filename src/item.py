@@ -43,8 +43,9 @@ class Item:
             print("Файл не найден")
 
     @staticmethod
-    def string_to_number():
-        return int(str)
+    def string_to_number(line):
+        numb = int(float(line))
+        return numb
 
     def calculate_total_price(self, price) -> float:
         """ Рассчитывает общую стоимость конкретного товара в магазине. """
