@@ -20,26 +20,37 @@ class Item:
         self.quantity = int(quantity)
         self.all.append(self)
 
-        Item.all.append(self)
+        # Геттер для name
+        @property
+        def name(self):
+            """Возвращает наименование товара"""
+            return self.name
 
-        @classmethod
-        def instantiate_from_csv(cls) -> None:
-            """
-            Инициализирует экземпляры класса,
-            получая объекты из csv файла
-            """
-            cls.all.clear()
-            try:
-                with open(cls.CSV, newline='') as csvfile:
-                    reader = csv.DictReader(csvfile)
-                    for row in reader:
-                        cls(row['name'], row['price'], row['quantity'])
-            except FileNotFoundError:
-                print("Файл не найден")
+        # Геттер для name
+        @name.setter
+        def set_name(self, quantity):
+            """Метод срабатывает при операции присваивания. К наимерованию товара мы добавляем его колличество"""
+            quantity, name = quantity.split(' ')
+            self.quantity = quantity
+            self.name = name
 
-        @staticmethod
-        def string_to_number():
-            return int(str)
+
+
+    @classmethod
+    def instantiate_from_csv(cls) -> None:
+        """Инициализирует экземпляры класса, получая объекты из csv файла"""
+        cls.all.clear()
+        try:
+            with open(cls.CSV, newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    Item.all.append(cls(row['name'], row['price'], row['quantity']))
+        except FileNotFoundError:
+            print("Файл не найден")
+
+    @staticmethod
+    def string_to_number():
+        return int(str)
 
     def calculate_total_price(self, price) -> float:
         """
