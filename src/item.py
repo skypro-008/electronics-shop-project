@@ -9,7 +9,7 @@ class Item:
     pay_rate = 1.0
     all = []
 
-    def __init__(self, name: str, price: float, quantity: int) -> None:
+    def __init__(self, name, price, quantity):
         """
         Создание экземпляра класса item.
 
@@ -17,7 +17,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
@@ -35,13 +35,13 @@ class Item:
     @property
     def name(self):
         """геттер для name"""
-        if len(self.__name) <= 10:
-            return self.__name
-        return 'Наименование должно быть меньше 10 символов.'
+        return self.__name
 
     @name.setter
     def name(self, new_name):
         """сеттер для name"""
+        if len(new_name) > 10:
+            raise Exception('Длина товара превышает 10 символов.')
         self.__name = new_name
 
     def calculate_total_price(self):
