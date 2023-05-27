@@ -1,7 +1,6 @@
 import csv
 import os
 
-from src.phone import Phone
 
 
 class Item:
