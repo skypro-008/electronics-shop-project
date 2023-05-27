@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
 
+
 item1 = Item("Смартфон", 10000, 20)
 item2 = Item('Ноутбук', 20000, 5)
 def test_item1():
