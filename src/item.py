@@ -70,3 +70,6 @@ class Item:
             return int(number)
         except ValueError:
             return 'Строка не является числом!'
+
+
+        #
