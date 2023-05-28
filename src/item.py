@@ -33,7 +33,3 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= Item.pay_rate
-
-item1 = Item("Смартфон", 10000, 20)
-Item.pay_rate = 0
-print(item1.apply_discount())
