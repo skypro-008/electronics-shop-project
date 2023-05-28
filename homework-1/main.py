@@ -26,3 +26,5 @@ if __name__ == '__main__':
     assert Item.string_to_number('5.5') == 5
     assert Item.string_to_number('ываыа') == 'Строка не является числом!'
     assert Item.string_to_number('5.5.7') == 'Строка не является числом!'=
+
+#
