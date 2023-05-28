@@ -79,3 +79,5 @@ def test_string_to_number():
 def test_repr_and_str(item1):
     assert repr(item1) == "Item('Phone', 19999, 5)"
     assert str(item1) == "Phone"
+
+#
