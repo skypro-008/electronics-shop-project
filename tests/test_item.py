@@ -12,3 +12,12 @@ def test_item1_price():
     item1.apply_discount()
     assert item1.price == 8000.0
     assert item2.price == 20000
+
+def test_string_to_number():
+    assert Item.string_to_number('7') == 7
+    assert Item.string_to_number('7.6') == 7
+    assert Item.string_to_number('7.4') == 7
+
+def test_instantiate_from_csv():
+    lists = Item.instantiate_from_csv()
+    assert type(lists) == list
