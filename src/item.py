@@ -4,6 +4,7 @@ import os
 """Создаём путь к файлу items.csv"""
 PATH = os.path.abspath('..')
 PATH_TO_FILE = os.path.join(PATH, 'src', 'items.csv')
+
 class Item:
     """
            Создание экземпляра класса item.

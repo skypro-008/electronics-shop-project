@@ -4,6 +4,7 @@ from src.item import Item
 
 item1 = Item("Смартфон", 10000, 20)
 item2 = Item('Ноутбук', 20000, 5)
+
 def test_item1():
     assert item1.calculate_total_price() == 200000
     assert item2.calculate_total_price() == 100000
