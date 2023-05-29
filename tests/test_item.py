@@ -1,4 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import os
+
 import pytest
 
 from src.item import Item
@@ -29,3 +31,30 @@ def test_apply_discount(item1):
 def test_class_attribute(item1):
     assert isinstance(Item.pay_rate, float)
     assert isinstance(Item.all, list)
+
+
+def test_property_name(item1):
+    assert item1.name == 'Смартфон'
+    item1.name = 'Телефон'
+    assert item1.name == 'Телефон'
+
+    with pytest.raises(Exception):
+        item1.name = 'СуперСмартфон'
+
+
+def test_instantiate_from_csv():
+    path = os.path.join(os.getcwd(), 'src', 'items.csv')
+    Item.instantiate_from_csv(path)
+
+    assert len(Item.all) == 5
+    assert Item.all[1].name == 'Ноутбук'
+    assert Item.all[1].price == 1000
+    assert Item.all[1].quantity == 3
+
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
+    assert Item.string_to_number(None) == None
+    assert Item.string_to_number('not_number') == None
