@@ -4,7 +4,6 @@ import csv
 from src.item import Item
 
 
-
 def test_constructor():
     item = Item("Товар 1", 1000.5, 10)
     assert item.name == "Товар 1", "Неверный формат данных: должен быть текст"
@@ -47,3 +46,13 @@ def test_instantiate_from_csv():
     Item.all = []
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
+
+
+def test_repr():
+    item1 = Item('Smartphone', 10000, 20)
+    assert repr(item1) == "Item('Smartphone', 10000, 20)"
+
+
+def test_str():
+    item1 = Item('Smartphone', 10000, 20)
+    assert str(item1) == 'Smartphone'
