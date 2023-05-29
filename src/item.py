@@ -23,7 +23,7 @@ class Item:
         Item.all.append(self)
 
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """
         Вывод информации об объекте для разработчика (в режиме отладки)
 
@@ -41,7 +41,7 @@ class Item:
         return self.name
 
 
-    def __add__(self, other) -> int:
+    def __add__(self, other: object) -> int:
         """
         Сложение товара в магазине (строго по классу)
 
@@ -80,7 +80,7 @@ class Item:
 
 
     @staticmethod
-    def string_to_number(string):
+    def string_to_number(string: str) -> int:
         """
         Возвращает число из числа-строки
 
@@ -90,7 +90,7 @@ class Item:
 
 
     @property
-    def name(self):
+    def name(self) -> str:
         """
         Возвращает наименование товара.
         """
@@ -98,7 +98,7 @@ class Item:
 
 
     @name.setter
-    def name(self, name):
+    def name(self, name: str) -> None:
         """
         Проверка на длину наименования товара при инициализации
         """
