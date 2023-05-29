@@ -1,4 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import os
+
 import pytest
 
 from src.item import Item
@@ -36,17 +38,18 @@ def test_property_name(item1):
     item1.name = 'Телефон'
     assert item1.name == 'Телефон'
 
-    with pytest.raises(Exception, match=r'* 10 *'):
+    with pytest.raises(Exception):
         item1.name = 'СуперСмартфон'
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv()
+    path = os.path.join(os.getcwd(), 'src', 'items.csv')
+    Item.instantiate_from_csv(path)
 
     assert len(Item.all) == 5
     assert Item.all[1].name == 'Ноутбук'
-    assert Item.all[1].price == '1000'
-    assert Item.all[1].quantity == '3'
+    assert Item.all[1].price == 1000
+    assert Item.all[1].quantity == 3
 
 
 def test_string_to_number():

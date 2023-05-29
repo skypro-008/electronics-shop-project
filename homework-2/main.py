@@ -1,3 +1,5 @@
+import os
+
 from src.item import Item
 
 if __name__ == '__main__':
@@ -11,7 +13,8 @@ if __name__ == '__main__':
     item.name = 'СуперСмартфон'
     # Exception: Длина наименования товара превышает 10 символов.
 
-    Item.instantiate_from_csv()  # создание объектов из данных файла
+    path = os.path.join(os.getcwd(), '..', 'src', 'items.csv')
+    Item.instantiate_from_csv(path)  # создание объектов из данных файла
     assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
 
     item1 = Item.all[0]
