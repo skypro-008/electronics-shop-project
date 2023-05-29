@@ -41,15 +41,26 @@ class Item:
         return self.name
 
 
-    def __add__(self, other):
+    def __add__(self, other) -> int:
         """
         Сложение товара в магазине (строго по классу)
 
          :return: Количество товаров
         """
-        # if self.__class__ == other.__class__:  # сложение строго по классу
-        if isinstance(other, self.__class__):  # для выполнения assert в main
+        if isinstance(other, self.__class__) or issubclass(self.__class__, other.__class__):
             return self.quantity + other.quantity
+        raise Exception('Складывать можно только товары и телефоны')
+
+    # Вариант для сложения строго в определенном классе
+    # def __add__(self, other) -> int:
+    #     """
+    #     Сложение товара в магазине (строго по классу)
+    #
+    #      :return: Количество товаров
+    #     """
+    #     if self.__class__ == other.__class__:
+    #         return self.quantity + other.quantity
+    #     raise Exception('Складывать можно только экземпляры одного класса')
 
 
     @classmethod
@@ -63,8 +74,8 @@ class Item:
             reader = csv.DictReader(file)
             for row in reader:
                 name = row['name']
-                price = row['price']
-                quantity = row['quantity']
+                price = int(row['price'])
+                quantity = int(row['quantity'])
                 cls(name, price, quantity)
 
 
