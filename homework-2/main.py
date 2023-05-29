@@ -20,3 +20,6 @@ if __name__ == '__main__':
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
+    print(repr(item1))
+    print(item1)

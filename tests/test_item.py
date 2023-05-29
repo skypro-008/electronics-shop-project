@@ -8,6 +8,14 @@ def item():
     return Item("item1", 10.0, 5)
 
 
+def test__repr__(item):
+    assert repr(item) == "Item(item1, 10.0, 5)"
+
+
+def test__str__(item):
+    assert str(item) == "item1"
+
+
 def test_calculate_total_price(item):
     assert item.calculate_total_price() == 50.0
 
@@ -57,5 +65,5 @@ def test_name():
     assert item.name == "Test Item"
 
     item.name = "This is a very long name for an item"
-    assert item.name is "Test Item"
+    assert item.name == "Test Item"
     assert "Длинна наименования товара превышает 10 символов"
