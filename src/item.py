@@ -47,11 +47,11 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, path):
-        Item.clear()
+        cls.clear()
         with open(path, encoding='utf-8') as file:
             data_file = csv.DictReader(file, delimiter=',')
             for row in data_file:
-                Item(row.get('name'),
+                cls(row.get('name'),
                      cls.string_to_number(row.get('price')),
                      cls.string_to_number(row.get('quantity')))
 
