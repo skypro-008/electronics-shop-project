@@ -166,3 +166,21 @@ def test_str(item):
     """
     expected_str = "Test Product"
     assert str(item[1]) == expected_str
+
+
+def test_item_addition(phone):
+    item = Item("Test Item", 100, 5)
+    total_quantity = phone + item
+    assert total_quantity == 15
+
+
+def test_phone_to_item_addition(phone):
+    item = Item("Test Item", 100, 5)
+    total_quantity = item + phone
+    assert total_quantity == 15
+
+
+def test_addition_other_is_not_instance():
+    item = Item("Test Item", 100, 5)
+    total_quantity = item + 10
+    assert total_quantity is None

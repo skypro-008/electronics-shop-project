@@ -2,6 +2,7 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 
 
 def item_class():
@@ -29,3 +30,13 @@ def item():
     ent_1 = Item("Test1", 6.6, 65)
     ent_2 = Item("Test Product", 10.0, 5)
     return ent_1, ent_2
+
+
+@pytest.fixture
+def phone() -> Phone:
+    """Fixture for creating a Phone object for testing.
+
+    Returns:
+        Phone: A Phone object with test values.
+    """
+    return Phone("Test Phone", 500, 10, 2)
