@@ -20,4 +20,5 @@ def test_apply_discount(smartphone):
     """Вводим скидку 50%, должно вернуть = price * 0.5"""
 
     Item.pay_rate = 0.5
-    assert smartphone.apply_discount() == 5000
+    smartphone.apply_discount()
+    assert smartphone.price == 5000

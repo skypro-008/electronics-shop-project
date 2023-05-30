@@ -2,7 +2,7 @@ class Item:
     """
     Класс для представления товара в магазине.
     """
-    pay_rate = 0.85
+    pay_rate = 1.0
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
@@ -32,4 +32,3 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
-        return self.price
