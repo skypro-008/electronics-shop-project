@@ -12,11 +12,11 @@ def item_class():
     Returns:
         tuple: A tuple containing two item objects.
     """
-    phone = Item('iSung', 1500.50, 34)
-    phone.pay_rate = 1.5
+    phone_item = Item('iSung', 1500.50, 34)
+    phone_item.pay_rate = 1.5
     console = Item('XStation', 987.50, 23)
     console.pay_rate = 0.5
-    return phone, console
+    return phone_item, console
 
 
 @pytest.fixture
