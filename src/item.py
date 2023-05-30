@@ -21,7 +21,6 @@ class Item:
     def __str__(self):
         return f'{self.__name}'
 
-
     def calculate_total_price(self) -> float:
         """Возвращает общую стоимость конкретного товара"""
         return self.price * self.quantity
@@ -40,8 +39,7 @@ class Item:
         """Проверяет наименование на количество символов"""
         if len(__name) < 10:
             self.__name = __name
-        else:
-            print('Длина наименования товара превышает 10 символов.')
+        raise ValueError('Длина наименования товара превышает 10 символов.')
 
     @classmethod
     def instantiate_from_csv(cls):
@@ -59,3 +57,9 @@ class Item:
             return int(value)
         else:
             return int(float(value))
+
+    def __add__(self, other):
+        if not issubclass(other.__class__, self.__class__):
+            raise TypeError('Сложить можно только экземпляры классов Phone и Item')
+        return self.quantity + other.quantity
+

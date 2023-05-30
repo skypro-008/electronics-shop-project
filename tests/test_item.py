@@ -1,4 +1,5 @@
 from src.item import Item
+from src.phone import Phone
 import csv
 import pytest
 
@@ -39,6 +40,13 @@ def test_from_csv():
     assert item_3.quantity == 5
 
 
+def test_name():
+    item = Item('test', 10000, 10)
+    assert item.name == 'test'
+
+    with pytest.raises(ValueError):
+        item.name = 'Больше 10 символов'
+
 
 def test_string_to_number():
     assert Item.string_to_number('1000') == 1000
@@ -53,6 +61,19 @@ def test_repr_str():
     item1 = Item("Смартфон", 10000, 20)
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
     assert str(item1) == 'Смартфон'
+
+def test_add():
+    item1 = Item("Смартфон", 10000, 50)
+    phone1 = Phone("iPhone 14", 120_000, 30, 2)
+    assert item1 + phone1 == 80
+
+    with pytest.raises(TypeError):
+        item1 + 100
+        phone1 + '200'
+
+
+
+
 
 
 
