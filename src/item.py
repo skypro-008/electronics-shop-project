@@ -1,5 +1,6 @@
 import csv
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -30,7 +31,6 @@ class Item:
         # setter
         if len(string) < 11:
             self.__name = string
-
 
     def calculate_total_price(self) -> float:
         """
@@ -72,4 +72,3 @@ class Item:
             except ValueError:
                 number = None
         return number
-
