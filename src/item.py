@@ -5,19 +5,26 @@ import os
 
 class Item:
     """
-    Class representing product in store.
+    Class representing a product in a store.
 
     Class Attributes:
-    ---------------
-    pay_rate - discount rate (default: 1.0)
-    all - list of all created entities
+        pay_rate (float): The discount rate for products (default: 1.0).
+        all (list): A list of all created item objects.
 
     Methods:
-    ------------------
-    calculate_total_price() - Calculates total price of specific
-                                product in store
-    apply_discount() - Applies set discount to specific product
+        __init__: Initialize an Item instance.
+        __repr__: Return a string representation of the Item object.
+        __str__: Return a string representation of the Item object.
+        name: Get the name of the item.
+        name.setter: Set the name of the item.
+        calculate_total_price: Calculate the total price of the item.
+        apply_discount: Apply a discount to the item's price.
+        instantiate_from_csv: Instantiate objects from a CSV file.
+        string_to_number: Convert a string representation of a number
+        to a numeric type.
+        __add__: Add the quantities of two Item objects.
     """
+
     pay_rate = 1.0
     all = []
 
@@ -38,11 +45,23 @@ class Item:
         self.quantity = quantity
         Item.all.append(self)
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        Return a string representation of the Item object.
+
+        Returns:
+            str: The string representation of the Item object.
+        """
         return f"{self.__class__.__name__}('{self.__name}', " \
                f"{self.price}, {self.quantity})"
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """
+        Return a string representation of the Item object.
+
+        Returns:
+            str: The string representation of the Item object.
+        """
         return self.__name
 
     @property
@@ -71,7 +90,8 @@ class Item:
         """
         if len(name) > 10:
             raise ValueError(
-                "Длина наименования товара превышает 10 символов."
+                "Длина наименования товара превышает "
+                "10 символов."
             )
         self.__name = name
 
@@ -126,8 +146,7 @@ class Item:
 
     @staticmethod
     def string_to_number(number: str) -> int:
-        """
-        Convert a string representation of a number to a numeric type.
+        """Convert a string representation of a number to a numeric type.
 
         Args:
             number (str): String representation of a number.
@@ -136,3 +155,16 @@ class Item:
             int: Numeric representation of the input number.
         """
         return int(float(number))
+
+    def __add__(self, other) -> int | None:
+        """Add the quantities of two Item objects.
+
+        Args:
+            other (Phone, Item): The other Item or Phone object to add.
+
+        Returns:
+            int: The sum of the quantities of the two Item objects.
+        """
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        return None

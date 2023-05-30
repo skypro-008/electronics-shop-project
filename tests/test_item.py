@@ -166,3 +166,46 @@ def test_str(item):
     """
     expected_str = "Test Product"
     assert str(item[1]) == expected_str
+
+
+def test_item_addition(phone):
+    """
+    Test the addition of quantities between a Phone object and an Item object.
+
+    Args:
+        phone (Phone): The Phone object fixture.
+
+    Returns:
+        None
+    """
+    item = Item("Test Item", 100, 5)
+    total_quantity = phone + item
+    assert total_quantity == 15
+
+
+def test_phone_to_item_addition(phone):
+    """
+    Test the addition of quantities between an Item object and a Phone object.
+
+    Args:
+        phone (Phone): The Phone object fixture.
+
+    Returns:
+        None
+    """
+    item = Item("Test Item", 100, 5)
+    total_quantity = item + phone
+    assert total_quantity == 15
+
+
+def test_addition_other_is_not_instance():
+    """
+    Test the addition of quantities when the other object is not an
+    instance of the same class.
+
+    Returns:
+        None
+    """
+    item = Item("Test Item", 100, 5)
+    total_quantity = item + 10
+    assert total_quantity is None
