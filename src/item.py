@@ -4,6 +4,8 @@ import math
 import os.path
 
 
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -73,3 +75,8 @@ class Item:
 
     def __str__(self):
         return f"{self.name}"
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError("Нельзя складывать")
+        return int(self.quantity) + int(other.quantity)

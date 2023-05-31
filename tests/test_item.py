@@ -2,6 +2,7 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 
 
 def test_calculate_total_price():
@@ -27,6 +28,7 @@ def item():
     Item.all = []
     item = Item(name="Мерседес-Бенз", price=45.97, quantity=40)
     return item
+
 
 
 def test_all_items_list(item):
@@ -57,3 +59,14 @@ def test_repr(item):
 
 def test_str(item):
     assert str(item) == "Мерседес-Бенз"
+
+def test_add(item):
+    phone = Phone("Хонда",50, 40, 1)
+    assert item + phone == 80
+
+def test_not_add(item):
+    with pytest.raises(ValueError) as y:
+        item + 10
+        assert str(y.value) == "Нельзя складывать"
+
+
