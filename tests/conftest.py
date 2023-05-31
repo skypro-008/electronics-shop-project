@@ -1,5 +1,6 @@
 import pytest
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture
@@ -54,3 +55,21 @@ def pay_rate_1():
 def strings():
     """ Строка с числами для проверки теста string_to_number """
     return '0.5, 5, 5.5'
+
+
+@pytest.fixture
+def phone_iphone14_120000_5_2():
+    """
+    Товар с параметрами:
+    name='iPhone14', price=120000, quantity=5, number_of_sim=2
+    """
+    return Phone("iPhone 14", 120000, 5, 2)
+
+
+@pytest.fixture
+def phone_samsung_16000_4_3():
+    """
+    Товар с параметрами:
+    name='Samsung', price=16000, quantity=4, number_of_sim=3
+    """
+    return Phone("Samsung", 16000, 4, 3)
