@@ -81,24 +81,33 @@ class Item:
 
     @staticmethod
     def load_csv() -> list:
-        data = []
         filedir = os.path.dirname(os.path.abspath(__file__))
-        with open(os.path.join(f'{filedir}', 'items.csv'), 'r+', encoding='windows-1251') as csv_file:
+        filename = os.path.join(filedir, 'items.csv')
+        if not os.path.exists(filename):
+            raise FileNotFoundError(f"Отсутствует файл {filename}")
+
+        data = []
+        with open(filename, 'r+', encoding='windows-1251') as csv_file:
             csv_reader = DictReader(csv_file)
             for item in csv_reader:
                 data.append(item)
-            return data
+        return data
 
     @classmethod
     def instantiate_from_csv(cls) -> None:
-        cls.all = []
-        data = cls.load_csv()
-        for line in data:
-            cls(
-                line['name'],
-                cls.string_to_number(line['price']),
-                cls.string_to_number(line['quantity'])
-            )
+        try:
+            cls.all = []
+            data = Item.load_csv()
+            for line in data:
+                cls(
+                    line['name'],
+                    cls.string_to_number(line['price']),
+                    cls.string_to_number(line['quantity'])
+                )
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        except KeyError:
+            raise InstantiateCSVError("Файл item.csv поврежден")
 
     @staticmethod
     def string_to_number(string) -> int:
@@ -113,3 +122,5 @@ class Item:
         Item.instantiate_from_csv()
         assert len(Item.all) == 5
 
+class InstantiateCSVError(Exception):
+    pass
