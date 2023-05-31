@@ -1,5 +1,5 @@
-from csv import DictReader
 import os
+import csv
 
 
 class Item:
@@ -31,6 +31,11 @@ class Item:
         """Вывод элемента класса для пользователя"""
         # 'Смартфон'
         return f'{self.__name}'
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Можно складывать только экземпляры классов Item и Phone')
+        return self.quantity + other.quantity
 
     @property
     def name(self):
@@ -82,7 +87,7 @@ class Item:
         """ Создание объектов из данных файла """
         items = []
         with open(os.path.abspath('src/items.csv'), 'r', newline='') as csvfile:
-            reader = DictReader(csvfile)
+            reader = csv.DictReader(csvfile, delimiter=',')
             for row in reader:
                 item = cls(row['name'], float(row['price']), int(row['quantity']))
                 items.append(item)

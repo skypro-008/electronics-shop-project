@@ -91,3 +91,12 @@ def test_string_to_number(strings):
     assert Item.string_to_number(string_1) == 0
     assert Item.string_to_number(string_2) == 5
     assert Item.string_to_number(string_3) == 5
+
+
+def test_add(item_notebook_lenovo_0_0, item_smartphone_10000_20, item_notebook_20000_5):
+    """
+    Сложение количества товаров
+    """
+    assert item_notebook_lenovo_0_0.__add__(item_smartphone_10000_20) == 20
+    assert item_smartphone_10000_20.__add__(item_notebook_20000_5) == 25
+
