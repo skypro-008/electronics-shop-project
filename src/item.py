@@ -15,6 +15,7 @@ class Item:
         self.quantity = int(quantity)
         self.all.append(self)
 
+
     @property
     def name(self):
         """Геттер для работы с .__name"""
@@ -29,18 +30,18 @@ class Item:
             raise Exception("Наименование товара превышает 10 символов")
 
 
-
     @classmethod
-    def instantiate_from_csv(cls) -> None:
+    def instantiate_from_csv(cls, filename) -> str:
         """Инициализирует экземпляры класса, получая объекты из csv файла"""
         cls.all.clear()
         try:
-            with open(cls.CSV, newline='') as csvfile:
+            with open(filename, encoding='UTF-8', newline='') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
-                    Item.all.append(cls(row['name'], row['price'], row['quantity']))
+                    cls(row['name'], row['price'], row['quantity'])
         except FileNotFoundError:
             print("Файл не найден")
+            return "Файл не найден"
 
     @staticmethod
     def string_to_number(line):
@@ -51,7 +52,7 @@ class Item:
         """ Рассчитывает общую стоимость конкретного товара в магазине. """
         return self.quantity * self.price
 
-    def apply_discount(self, total_price=None, pay_rate=None) -> None:
+    def apply_discount(self, total_price=None, pay_rate=None) -> float:
         """ Применяет установленную скидку для конкретного товара. """
         return self.price * self.pay_rate
 
