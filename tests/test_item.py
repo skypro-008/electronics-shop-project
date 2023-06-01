@@ -1,8 +1,9 @@
 """Тесты для модуля Item"""
 import pytest
-from src.item import Item
-from src.phone import Phone
 
+from src.item import Item
+
+from src.phone import Phone
 
 @pytest.fixture
 def item():
@@ -58,6 +59,17 @@ def test_name(item):
     assert item.name == "Айфон"
     with pytest.raises(Exception):
         item.name = 'СуперПуперАйфон'
+
+
+
+def test_addition(make_item, make_phone):
+    item1 = make_item
+    phone1 = make_phone
+    assert item1 + phone1 == 25
+    assert phone1 + phone1 == 10
+    with pytest.raises(ValueError):
+        assert item1 + 10 == 40
+        assert phone1 + 5 == 20
 
 
 
