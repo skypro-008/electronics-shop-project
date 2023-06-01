@@ -1,5 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
+from src.phone import Phone
 import os
 import pytest
 
@@ -29,9 +30,6 @@ def test_item():
 
     # Создаем класс для проверки новых методов
     item6 = Item('Телефон', 10000, 5)
-
-    # проверяем сеттер отправляя товар, у которого наименование более 10 символов
-     #item6.name = 'СуперСмартфон'
 
     # Exception: Длина наименования товара превышает 10 символов.
 
@@ -63,3 +61,22 @@ def test_item():
 
     # Проверяем магический метод __str__
     assert str(item) == 'Смартфон'
+
+def test_Phone():
+
+    # Проверяем новый класс
+    phone1 = Phone("iPhone 14", 120000, 5, 2)
+    # Проверяем методы
+    assert str(phone1) == 'iPhone 14'
+    assert repr(phone1) == "Phone('iPhone 14', 120000, 5, 2)"
+    assert phone1.number_of_sim == 2
+
+    # Еще один класс для проверки
+    item1 = Item("Смартфон", 10000, 20)
+    # Проверяем сложение - правильно
+    assert item1 + phone1 == 25
+    # Проверяем сложение - нельзя складывать
+    assert phone1 + phone1 == 10
+
+    with pytest.raises(ValueError):
+        phone1.number_of_sim = 0
