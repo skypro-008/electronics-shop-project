@@ -43,7 +43,7 @@ def test_property_name(item1):
 
 
 def test_instantiate_from_csv():
-    path = os.path.join(os.getcwd(), 'src', 'items.csv')
+    path = os.path.join('src', 'items.csv')
     Item.instantiate_from_csv(path)
 
     assert len(Item.all) == 5
@@ -58,3 +58,9 @@ def test_string_to_number():
     assert Item.string_to_number('5.5') == 5
     assert Item.string_to_number(None) == None
     assert Item.string_to_number('not_number') == None
+
+def test_repr(item1):
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+def test_str(item1):
+    assert str(item1) == 'Смартфон'
