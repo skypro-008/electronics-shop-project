@@ -60,3 +60,13 @@ def test_instantiate_from_csv(csv_data):
     for item, (name, price, quantity) in zip(items, csv_data):
         assert item.name == name
         assert item.price == price
+
+
+def test_repr():
+    item = Item("Test Item", 10.0, 5)
+    assert repr(item) == "Item('Test Item', 10.0, 5)"
+
+
+def test_str():
+    item = Item("Test Item", 10.0, 5)
+    assert str(item) == "Test Item"
