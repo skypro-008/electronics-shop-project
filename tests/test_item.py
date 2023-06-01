@@ -1,7 +1,7 @@
 """Тесты для модуля Item"""
 import pytest
-
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture
