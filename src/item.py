@@ -30,6 +30,11 @@ class Item:
     def __str__(self):
         return f'{self.name}'
 
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Нельзя складывать')
+        return int(self.quantity) + int(other.quantity)
+
     @property
     def name(self):
         return self.__name
