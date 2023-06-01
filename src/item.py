@@ -20,16 +20,26 @@ class Item:
         self.price = price
         self.quantity = quantity
 
+    def __repr__(self):
+        """Возвращает данные для разработчика"""
+        return f"Item('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """Возвращает данные для пользователя"""
+        return self.__name
+
     @property
     def name(self):
-        # getter
+        """Возвращает приватную __name"""
         return self.__name
 
     @name.setter
     def name(self, string):
-        # setter
+        """Получает string и записывает в __name, проверяя длину string"""
         if len(string) < 11:
             self.__name = string
+        else:
+            print('Слишком длинная строка')
 
     def calculate_total_price(self) -> float:
         """
