@@ -1,4 +1,6 @@
 import csv
+from src.phone import Phone
+
 
 class Item:
     """Класс для представления товара в магазине."""
@@ -63,6 +65,13 @@ class Item:
     def __str__(self):
         """Вывод пользовательской информации"""
         return self.name
+
+    def __add__(self, other):
+        if issubclass(other.__class__, self.__class__):
+            return int(self.quantity) + int(other.quantity)
+        raise ValueError("Складывать можно только экземпляры классов Item и Phone")
+
+
 
 
 
