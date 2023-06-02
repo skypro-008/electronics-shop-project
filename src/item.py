@@ -39,7 +39,7 @@ class Item:
         if len(string) < 11:
             self.__name = string
         else:
-            print('Слишком длинная строка')
+            print('Длина наименования товара не больше 10 символов')
 
     def calculate_total_price(self) -> float:
         """
@@ -62,8 +62,8 @@ class Item:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 name = row['name']
-                price = float(row['price'])
-                quantity = int(row['quantity'])
+                price = cls.string_to_number(row['price'])
+                quantity = cls.string_to_number(row['quantity'])
                 item = cls(name, price, quantity)
                 items.append(item)
 
