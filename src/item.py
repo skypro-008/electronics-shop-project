@@ -40,7 +40,8 @@ class Item:
         Returns:
             None
         """
-        self.__name = name
+        super().__init__()
+        self._name = name
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
@@ -52,7 +53,7 @@ class Item:
         Returns:
             str: The string representation of the Item object.
         """
-        return f"{self.__class__.__name__}('{self.__name}', " \
+        return f"{self.__class__.__name__}('{self._name}', " \
                f"{self.price}, {self.quantity})"
 
     def __str__(self) -> str:
@@ -62,7 +63,7 @@ class Item:
         Returns:
             str: The string representation of the Item object.
         """
-        return self.__name
+        return self._name
 
     @property
     def name(self) -> str:
@@ -72,7 +73,7 @@ class Item:
         Returns:
             str: The name of the item.
         """
-        return self.__name
+        return self._name
 
     @name.setter
     def name(self, name: str) -> None:
@@ -93,7 +94,7 @@ class Item:
                 "Длина наименования товара превышает "
                 "10 символов."
             )
-        self.__name = name
+        self._name = name
 
     def calculate_total_price(self) -> float:
         """
