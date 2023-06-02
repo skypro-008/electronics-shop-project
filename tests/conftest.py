@@ -2,6 +2,7 @@
 import pytest
 
 from src.item import Item
+from src.keyboard import KeyBoard
 from src.phone import Phone
 
 
@@ -40,3 +41,15 @@ def phone() -> Phone:
         Phone: A Phone object with test values.
     """
     return Phone("Test Phone", 500, 10, 2)
+
+
+@pytest.fixture
+def keyboard():
+    """
+    Fixture that creates an instance of the KeyBoard class for testing.
+
+    Returns:
+        KeyBoard: An instance of the KeyBoard class with the specified
+        parameters.
+    """
+    return KeyBoard('Keyboard', 10.0, 5)
