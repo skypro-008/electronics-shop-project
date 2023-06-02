@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 from src.item import Item, CSV_PATH
+from src.phone import Phone
 
 
 @pytest.fixture
@@ -8,15 +9,18 @@ def item():
     return Item("item1", 10.0, 5)
 
 
-def test__repr__(item):
-    assert repr(item) == "Item(item1, 10.0, 5)"
+def test__repr__():
+    item2 = Item('Samsung S20', 9000, 4)
+    assert repr(item2) == "Item('Samsung S20', 9000, 4)"
 
 
-def test__str__(item):
-    assert str(item) == "item1"
+def test__str__():
+    item2 = Item('Samsung S20', 9000, 4)
+    assert str(item2) == "Samsung S20"
 
 
-def test_calculate_total_price(item):
+def test_calculate_total_price():
+    item = Item("item1", 10.0, 5)
     assert item.calculate_total_price() == 50.0
 
 
@@ -67,3 +71,28 @@ def test_name():
     item.name = "This is a very long name for an item"
     assert item.name == "Test Item"
     assert "Длинна наименования товара превышает 10 символов"
+
+
+# def test_add_invalid():
+#     phone2 = Phone("Samsung", 120.0, 10, 1)
+#     # item3 = Item("Samsung S10", 50.0, 30)
+#     item2 = Item("Nokia", 80.0, 10)
+#     assert phone2.add(item2) == 20
+#     # assert item3.add(item2) == 40
+#
+#
+# def test_add():
+#     phone = Phone("Samsung", 120.0, 10, 1)
+#     assert phone.add(5) is None
+#
+#
+# def test_addition():
+#     phone = Phone('iPhone 13', 10000, 10, 2)
+#     item1 = Item('Samsung S20', 5000, 14)
+#     total = phone + item1
+#     assert total == 24
+
+def test_add():
+    phone = Phone("Samsung", 120.0, 10, 1)
+    item = Item("Nokia", 80.0, 10)
+    assert phone.add(item).quantity == 20

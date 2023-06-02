@@ -25,7 +25,7 @@ class Item:
         self.all.append(self)
 
     def __repr__(self):
-        return f'{self.__class__.__name__}({self.__name}, {self.price}, {self.quantity})'
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
     def __str__(self):
         return f'{self.__name}'
@@ -83,3 +83,14 @@ class Item:
             self.__name = value
         else:
             print("Длинна наименования товара превышает 10 символов ")
+
+    def __add__(self, other):
+        """
+        Реализуем метод сложения двух классов по количеству товара
+        """
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        return None
+        # if issubclass(other.__class__, self.__class__):
+        #     return self.quantity + other.quantity
+        # return None
