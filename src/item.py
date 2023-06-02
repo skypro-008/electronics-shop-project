@@ -74,4 +74,7 @@ class Item:
             return None
         return num
 
-
+    def __add__(self, other):
+        if not issubclass(other.__class__, Item):
+            raise TypeError('Можно складывать между собой только объекты класса Item и дочерних классов')
+        return self.quantity + other.quantity
