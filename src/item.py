@@ -50,6 +50,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        cls.all = []
         with open("../src/items.csv", encoding="utf-8") as file:
             data = csv.DictReader(file)
             for i in data:
