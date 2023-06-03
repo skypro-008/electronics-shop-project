@@ -24,6 +24,11 @@ class Item:
     def __str__(self) -> str:
         return f"{self.name}"
 
+    def __add__(self, other):
+        if issubclass(other.__class__, self.__class__):
+            return int(self.quantity) + int(other.quantity)
+        raise ValueError("Складывать можно только экземпляры классов Item и Phone")
+
     @property
     def name(self):
         return self.__name
