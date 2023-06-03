@@ -1,7 +1,11 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import csv
 
+import pytest
+
 from src.item import Item
+from src.phone import Phone
+
 
 
 def test_constructor():
@@ -56,3 +60,13 @@ def test_repr():
 def test_str():
     item1 = Item('Smartphone', 10000, 20)
     assert str(item1) == 'Smartphone'
+
+
+def test_addition():
+    item1 = Item('Telephone', 10000, 39)
+    phone1 = Phone("iPhone 15", 140000, 6, 2)
+    assert item1 + phone1 == 45
+    assert phone1 + phone1 == 12
+    with pytest.raises(ValueError):
+        assert item1 + 10 == 49
+        assert phone1 + 5 == 11
