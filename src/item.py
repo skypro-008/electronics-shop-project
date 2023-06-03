@@ -45,28 +45,30 @@ class Item:
 
     # Cеттер для name
     @name.setter
-    def name(self, x):
-        self.__name = x
-        if len(x) <= 10:
-            return x
+    def name(self, name):
+        """Сеттер проверяет, что длина наименования товара не больше 10 символов."""
+        self.__name = name
+        if len(name) <= 10:
+            print(name)
         else:
-            return "Длина наименования товара превышает 10 символов."
+            print("Длина наименования товара превышает 10 символов.")
 
     @classmethod
     def instantiate_from_csv(cls):
         cls.all.clear()
-        with open(filename, encoding='utf-8') as r_file:
+        with open(filename, encoding='cp1251') as r_file:
             file_reader = csv.DictReader(r_file, delimiter=",")
-            count = 0
             for row in file_reader:
-                if count == 0:
-                    return "Файл не содержит строк"
-                else:
-                    cls.all.append(row[0])
-                    return cls.all
-            count += 1
+                cls(row["name"], (row["price"]), (row["quantity"]))
+                cls.all.append(row["name"])
+            return cls.all
 
     @staticmethod
     def string_to_number(str_number):
-        return (int(str_number))
+        number = float(str_number)
+        number = int(number)
+        return number
+
+print(Item.all)
+
 
