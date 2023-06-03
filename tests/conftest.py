@@ -1,6 +1,7 @@
 import pytest
 from src.item import Item
 from src.phone import Phone
+from src.keyboard import Keyboard
 
 
 @pytest.fixture
@@ -73,3 +74,12 @@ def phone_samsung_16000_4_3():
     name='Samsung', price=16000, quantity=4, number_of_sim=3
     """
     return Phone("Samsung", 16000, 4, 3)
+
+
+@pytest.fixture
+def keyboard_dark_project_kd87a_9600_5():
+    """
+    Товар с параметрами:
+    name='Dark Project KD87A', price=9600, quantity=5
+    """
+    return Keyboard('Dark Project KD87A', 9600, 5)

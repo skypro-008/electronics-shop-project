@@ -11,7 +11,7 @@ class Item:
 
     def __init__(self, name, price, quantity):
         """
-        Создание экземпляра класса item.
+        Инициализация экземпляра класса item.
 
         :param name: Название товара.
         :param price: Цена за единицу товара.
@@ -34,7 +34,7 @@ class Item:
 
     def __add__(self, other):
         if not isinstance(other, Item):
-            raise ValueError('Можно складывать только экземпляры классов Item и Phone')
+            raise ValueError('Можно складывать только экземпляры классов Item')
         return self.quantity + other.quantity
 
     @property
