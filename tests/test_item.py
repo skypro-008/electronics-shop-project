@@ -9,8 +9,15 @@ from src.phone import Phone
 def item():
     return Item("Смартфон", 10000, 20)
 
+@pytest.fixture()
+def make_item():
+    return Item("Смартфон", 10000, 20)
 
-"""Выводим стоимость товара"""
+
+@pytest.fixture()
+def make_phone():
+    return Phone("iPhone 14", 120000, 5, 2)
+
 
 
 def test_init(item):
@@ -19,6 +26,7 @@ def test_init(item):
     assert item.quantity == 20
 
 
+"""Выводим стоимость товара"""
 def test_calculate_total_price(item):
     assert item.calculate_total_price() == 200000
 
@@ -35,7 +43,7 @@ def test_apply_discount(item):
 
 def test_instantiate_from_csv() -> None:
     Item.all.clear()
-    Item.instantiate_from_csv('test.csv')
+    Item.instantiate_from_csv('C:\Users\gtrpy\PycharmProjects\electronics-shop-project\src\items.csv')
     assert len(Item.all) == 5
     assert Item.instantiate_from_csv('no_file') == 'Файл не найден'
 
@@ -46,7 +54,7 @@ def test_string_to_number():
 
 def test__repr__():
     item1 = Item("Смартфон", 10000, 20)
-    assert repr(item1) == "Item(Смартфон, 10000.0, 20)"
+    assert repr(item1) == "Item('Смартфон', '10000.0', 20)"
 
 
 def test__str__():

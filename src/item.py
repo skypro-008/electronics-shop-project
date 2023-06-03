@@ -1,5 +1,5 @@
 import csv
-from src.phone import Phone
+# from src.phone import Phone
 
 
 class Item:
@@ -50,17 +50,17 @@ class Item:
         numb = int(float(line))
         return numb
 
-    def calculate_total_price(self, price) -> float:
+    def calculate_total_price(self) -> float:
         """ Рассчитывает общую стоимость конкретного товара в магазине. """
         return self.quantity * self.price
 
-    def apply_discount(self, total_price=None, pay_rate=None) -> float:
+    def apply_discount(self) -> None:
         """ Применяет установленную скидку для конкретного товара. """
-        return self.price * self.pay_rate
+        return self.price *= self.pay_rate
 
     def __repr__(self):
         """Метод repr возвращает строку с данными, которые мы зададим. Ввела данные по требованиям в файле main"""
-        return f"{self.__class__.__name__}('{self.name}', '{self.price}', {self.quantity})"
+        return f"{self.__class__.__name__}('{self.name}', \'{self.price}', \'{self.quantity})"
 
     def __str__(self):
         """Вывод пользовательской информации"""
@@ -72,7 +72,8 @@ class Item:
         raise ValueError("Складывать можно только экземпляры классов Item и Phone")
 
 
-
+item = Item('name', 0, 0)
+print(repr(item))
 
 
     
