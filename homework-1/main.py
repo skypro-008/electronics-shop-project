@@ -1,19 +1,5 @@
 from src.item import Item
 
-
-class Item:
-
-    def __init__(self, name, price, count):
-        self.name = name
-        self.price = price
-        self.count = count
-
-    def save_price_sale(self):
-        price_item = f"{self.name} {self.count * self.price}"
-        price_sale = f"Цена со скидкой товара {self.name} = {price_item} "
-    def save_new_class(self):
-        pass
-
 if __name__ == '__main__':
     item1 = Item("Смартфон", 10000, 20)
     item2 = Item("Ноутбук", 20000, 5)
