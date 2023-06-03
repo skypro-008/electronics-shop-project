@@ -20,6 +20,7 @@ class Item:
         self.price = price
         self.quantity = quantity
         self.name = name
+        Item.all.append(self)
 
     def __repr__(self):
         """Возвращает данные для разработчика"""
@@ -58,19 +59,15 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        items = []
+        cls.all = []
+
         with open('../src/items.csv', newline='', encoding="cp1251") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 name = row['name']
                 price = cls.string_to_number(row['price'])
                 quantity = cls.string_to_number(row['quantity'])
-                item = cls(name, price, quantity)
-                items.append(item)
-
-                cls.all = items
-
-        return items
+                cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(string):
