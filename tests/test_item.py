@@ -1,5 +1,6 @@
-from src.item import Item
 import pytest
+
+from src.item import Item
 
 
 def test_calculate_total_price(item_smartphone_10000_20,
@@ -50,8 +51,8 @@ def test_str(item_smartphone_10000_20, item_notebook_20000_5, item_notebook_leno
 def test_get_all_items(item_smartphone_10000_20, item_notebook_20000_5):
     """ Тестируем возвращаемость списка товаров"""
     Item.all = [item_smartphone_10000_20.__repr__(), item_notebook_20000_5.__repr__()]
-    assert Item.all == ["Item('Смартфон', 10000, 20)",
-                        "Item('Ноутбук', 20000, 5)"]
+    assert Item.get_all_items() == ["Item('Смартфон', 10000, 20)",
+                                    "Item('Ноутбук', 20000, 5)"]
 
 
 def test_get_count_items(test_all_items):
@@ -100,3 +101,17 @@ def test_add(item_notebook_lenovo_0_0, item_smartphone_10000_20, item_notebook_2
     assert item_notebook_lenovo_0_0.__add__(item_smartphone_10000_20) == 20
     assert item_smartphone_10000_20.__add__(item_notebook_20000_5) == 25
 
+
+def test_fail_add(item_notebook_lenovo_0_0):
+    """
+    Нельзя складывать экземпляры Item с экземплярами не Item классов.
+    """
+
+    class Test:
+        def __init__(self):
+            self.quantity = 10
+
+    test = Test()
+    with pytest.raises(ValueError) as excinfo:
+        item_notebook_lenovo_0_0.__add__(test)
+    assert str(excinfo.value) == 'Можно складывать только экземпляры классов Item'

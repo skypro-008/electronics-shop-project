@@ -1,4 +1,3 @@
-from src.phone import Phone
 import pytest
 
 
@@ -60,5 +59,3 @@ def test_number_of_sim(phone_iphone14_120000_5_2):
     with pytest.raises(ValueError) as excinfo:
         phone_iphone14_120000_5_2.number_of_sim = 1.5
     assert str(excinfo.value) == 'Количество физических SIM-карт должно быть целым числом.'
-
-
