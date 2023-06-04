@@ -1,7 +1,5 @@
 import csv
 
-filename = "../src/items.csv"
-
 class Item:
     """
     Класс для представления товара в магазине.
@@ -49,6 +47,7 @@ class Item:
         """Сеттер проверяет, что длина наименования товара не больше 10 символов."""
         self.__name = name
         if len(name) <= 10:
+            self.__name = name
             print(name)
         else:
             print("Длина наименования товара превышает 10 символов.")
@@ -56,19 +55,17 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         cls.all.clear()
-        with open(filename, encoding='cp1251') as r_file:
-            file_reader = csv.DictReader(r_file, delimiter=",")
-            for row in file_reader:
-                cls(row["name"], (row["price"]), (row["quantity"]))
-                cls.all.append(row["name"])
-            return cls.all
+        filename = '../src/items.csv'
+
+        try:
+            with open(filename, 'r', encoding='cp1251', newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    cls(row["name"], row["price"], row["quantity"])
+        except FileNotFoundError:
+            print('Файл не найден')
 
     @staticmethod
     def string_to_number(str_number):
         number = float(str_number)
-        number = int(number)
-        return number
-
-print(Item.all)
-
-
+        print(int(number))
