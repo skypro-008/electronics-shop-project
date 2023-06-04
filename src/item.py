@@ -56,7 +56,7 @@ class Item:
 
     def apply_discount(self) -> None:
         """ Применяет установленную скидку для конкретного товара. """
-        return self.price *= self.pay_rate
+        self.price *= self.pay_rate
 
     def __repr__(self):
         """Метод repr возвращает строку с данными, которые мы зададим. Ввела данные по требованиям в файле main"""

@@ -43,7 +43,7 @@ def test_apply_discount(item):
 
 def test_instantiate_from_csv() -> None:
     Item.all.clear()
-    Item.instantiate_from_csv('C:\Users\gtrpy\PycharmProjects\electronics-shop-project\src\items.csv')
+    Item.instantiate_from_csv('..\src\items.csv')
     assert len(Item.all) == 5
     assert Item.instantiate_from_csv('no_file') == 'Файл не найден'
 
@@ -54,7 +54,7 @@ def test_string_to_number():
 
 def test__repr__():
     item1 = Item("Смартфон", 10000, 20)
-    assert repr(item1) == "Item('Смартфон', '10000.0', 20)"
+    assert repr(item1) == "Item('Смартфон', '10000.0', '20')"
 
 
 def test__str__():
