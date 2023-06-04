@@ -34,3 +34,11 @@ def test_name(item):
     with pytest.raises(Exception):
         item.name = "knbknknelnblenwblnbl"
 
+def test_repr_(item):
+    item1 = Item("Смартфон", 10000, 20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+
+def test_str_(item):
+    item1 = Item("Смартфон", 10000, 20)
+    assert str(item1) == 'Смартфон'
