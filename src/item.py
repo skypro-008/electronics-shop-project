@@ -19,6 +19,8 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
+        super().__init__()
+
 
     def __repr__(self):
         return f"Item('{self.__name}', {self.price}, {self.quantity})"
@@ -77,3 +79,4 @@ class Item:
         Статический метод, возвращающий число из строки
         """
         return int(float(string))
+
