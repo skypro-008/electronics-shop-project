@@ -20,6 +20,9 @@ def test_name(items):
     assert items.name == "Ноутбук"
     items.new_name = "Смартфон"
     assert items.new_name == "Смартфон"
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
 
 
 
