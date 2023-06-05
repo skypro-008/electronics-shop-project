@@ -60,7 +60,7 @@ class Item:
 
     def __repr__(self):
         """Метод repr возвращает строку с данными, которые мы зададим. Ввела данные по требованиям в файле main"""
-        return f"{self.__class__.__name__}('{self.name}', \'{self.price}', \'{self.quantity}')"
+        return f"{self.__class__.__name__}('{self.name}', \'{self.price}', \'{self.quantity})"
 
     def __str__(self):
         """Вывод пользовательской информации"""
