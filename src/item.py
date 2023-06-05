@@ -23,12 +23,30 @@ class Item:
 
         Item.all.append(self)
 
+    def __repr__(self):
+        """
+        :return: Возвращает представление объекта для разработки
+        """
+        return f"Item('{self.name}',{self.price},{self.quantity})"
+
+    def __str__(self):
+        """
+        :return: Возвращает представление объекта для пользователя
+        """
+        return f'{self.name}'
+
     @property
     def name(self):
+        """
+        :return: Возвращает название экземпляра класса
+        """
         return self.__name
 
     @name.setter
     def name(self, name):
+        """
+        Устанавливает название в экземпляр класса
+        """
         try:
             if len(name) <= 10:
                 self.__name = name
