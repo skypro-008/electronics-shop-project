@@ -13,8 +13,18 @@ def test_str(item):
 def test_repr(item):
     assert repr(item) == "Phone('Мерседес', 45.97, 40, 5)"
 
+def test_value_sim(item):
+    assert item.number_of_sim == 5
+    item.number_of_sim = 6
+    assert item.number_of_sim == 6
 
 def test_number_of_sim():
-    with pytest.raises(ValueError) as t:
-        phone = Phone('Iphone 12', 12000, 35, 0)
-        assert str(t.value) == "Количество физических SIM-карт должно быть целым числом больше нуля."
+    phone = Phone('Iphone 12', 12000, 35, 2)
+    with pytest.raises(ValueError):
+        phone.number_of_sim = 2.5
+
+def test_number_of_sim2():
+    phone = Phone('Iphone 12', 12000, 35, 0)
+    with pytest.raises(ValueError):
+        phone.number_of_sim = -2
+

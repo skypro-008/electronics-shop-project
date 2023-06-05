@@ -1,6 +1,8 @@
+import pytest
+
 from src.keyboard import Keyboard
 
-if __name__ == '__main__':
+def test_change_lang():
     kb = Keyboard('Dark Project', 9600, 5)
     assert str(kb) == "Dark Project"
 
@@ -9,9 +11,14 @@ if __name__ == '__main__':
     kb.change_lang()
     assert str(kb.language) == "RU"
 
-    # Сделали RU -> EN -> RU
+
     kb.change_lang().change_lang()
     assert str(kb.language) == "RU"
 
-    kb.language = 'CH'
-    # AttributeError: property 'language' of 'KeyBoard' object has no setter
+def test_erorr():
+    kb = Keyboard('Dark Project', 9600, 5)
+    with pytest.raises(AttributeError):
+        kb.language = 'CH'
+
+
+

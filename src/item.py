@@ -4,8 +4,6 @@ import math
 import os.path
 
 
-
-
 class Item:
     """
     Класс для представления товара в магазине.
@@ -49,7 +47,7 @@ class Item:
     @name.setter
     def name(self, newname):
         try:
-            if len(newname) <= 10:
+            if len(newname) <= 15:
                 self._name = newname
         except Exception:
             raise Exception("Длина наименования товара превышает 10 символов")
