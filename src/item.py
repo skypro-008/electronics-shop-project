@@ -2,8 +2,16 @@ import csv
 import os
 
 
+class InstantiateCSVError:
+    def __init__(self, filename: str):
+        self.filename = filename
+
+        if '!' in self.filename:
+            raise Exception(f'{self.filename} повреждён')
+
 
 class Item:
+
     pay_rate = 1.0
     all = []
 
@@ -58,16 +66,21 @@ class Item:
         self.price = self.price*Item.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls) -> list:
+    def instantiate_from_csv(cls, filename=""):
         cls.all = []
         ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+        try:
+            with open(os.path.join(ROOT_DIR, filename), newline='') as file:
+                rows = csv.DictReader(file)
+                for row in rows:
+                    name, price, quantity = row['name'], float(row['price']), int(row['quantity'])
+                    item = cls(name, price, quantity)
+                    cls.all.append(item)
+        except FileNotFoundError:
+            return f'Отсутствует файл {filename}'
+        except InstantiateCSVError(filename) as e:
+            return e
 
-        with open(os.path.join(ROOT_DIR, 'items.csv'), newline='') as file:
-            rows = csv.DictReader(file)
-            for row in rows:
-                name, price, quantity = row['name'], float(row['price']), int(row['quantity'])
-                item = cls(name, price, quantity)
-                cls.all.append(item)
         # проверяем уникальность имен и оставляем только уникальные комбинации имя: ключ и преобразует экземпляры классов(ключи) в список
         cls.all = list({item.name: item for item in cls.all}.values())
         return cls.all
