@@ -21,15 +21,6 @@ class Item:
         self.pay_rate = Item.pay_rate
         self.all.append(self)
 
-    def __repr__(self) -> str:
-        """Метод для отображения информации об объекте класса в режиме отладки (для разработчиков)"""
-        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
-
-
-    def __str__(self) -> str:
-        """Метод для отображения информации об объекте класса для пользователей"""
-        return f"{self.__name}"
-
 
     def calculate_total_price(self) -> float:
         """
@@ -37,6 +28,7 @@ class Item:
         :return: Общая стоимость товара.
         """
         return self.price * self.quantity
+
 
     def apply_discount(self) -> None:
         """
@@ -54,13 +46,11 @@ class Item:
     @name.setter
     def name(self, name):
         """Сеттер проверяет, что длина наименования товара не больше 10 символов."""
-        self.__name = name
         if len(name) <= 10:
             self.__name = name
             print(name)
         else:
             print("Длина наименования товара превышает 10 символов.")
-
 
 
     @classmethod
