@@ -21,6 +21,16 @@ class Item:
         self.pay_rate = Item.pay_rate
         self.all.append(self)
 
+    def __repr__(self) -> str:
+        """Метод для отображения информации об объекте класса в режиме отладки (для разработчиков)"""
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+
+
+    def __str__(self) -> str:
+        """Метод для отображения информации об объекте класса для пользователей"""
+        return f"{self.__name}"
+
 
     def calculate_total_price(self) -> float:
         """
@@ -52,6 +62,8 @@ class Item:
         else:
             print("Длина наименования товара превышает 10 символов.")
 
+
+
     @classmethod
     def instantiate_from_csv(cls):
         cls.all.clear()
@@ -66,9 +78,12 @@ class Item:
             print('Файл не найден')
 
     @staticmethod
-    def string_to_number(str_num) -> None:
+    def string_to_number(str_num):
         number = float(str_num)
         res = int(number)
         return res
 
-print(Item.string_to_number('5.5'))
+
+item1 = Item("Смартфон", 10000, 20)
+print(repr(item1))
+print(str(item1))
