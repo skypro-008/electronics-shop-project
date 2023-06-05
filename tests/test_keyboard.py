@@ -1,10 +1,13 @@
 import pytest
+from src.item import Item
+from src.phone import Phone
+from src.keyboard import KeyBoard
 
 
 def test_init(test_keyboard):
-    assert test_keyboard.name == 'Oklick 760G GENESIS'
-    assert test_keyboard.price == 1400
-    assert test_keyboard.quantity == 30
+    assert test_keyboard.name == 'Logitech Wireless MX Keys Mini (920-010501)'
+    assert test_keyboard.price == 1600
+    assert test_keyboard.quantity == 10
     assert test_keyboard.language == 'EN'
     with pytest.raises(AttributeError):
         test_keyboard.language = 'RU'

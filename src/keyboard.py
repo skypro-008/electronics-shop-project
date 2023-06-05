@@ -25,3 +25,5 @@ class KeyBoard(MixinLang, Item):
     def __init__(self, name, price, quantity):
         super().__init__(name, price, quantity)
 
+
+keyboard = KeyBoard('Logitech Wireless MX Keys Mini', 1600, 10)
