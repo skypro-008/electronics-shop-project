@@ -66,6 +66,9 @@ class Item:
             print('Файл не найден')
 
     @staticmethod
-    def string_to_number(str_number):
-        number = float(str_number)
-        print(int(number))
+    def string_to_number(str_num) -> None:
+        number = float(str_num)
+        res = int(number)
+        return res
+
+print(Item.string_to_number('5.5'))
