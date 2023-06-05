@@ -26,7 +26,6 @@ class Item:
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
 
-
     def __str__(self) -> str:
         """Метод для отображения информации об объекте класса для пользователей"""
         return f"{self.__name}"
@@ -82,8 +81,3 @@ class Item:
         number = float(str_num)
         res = int(number)
         return res
-
-
-item1 = Item("Смартфон", 10000, 20)
-print(repr(item1))
-print(str(item1))
