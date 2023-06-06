@@ -80,6 +80,13 @@ def test_addition(make_item, make_phone):
         assert phone1 + 5 == 20
 
 
+def test_instantiate_from_csv(instantiate_from_csv):
+    """Тестируем работу с csv файлом"""
+    assert (len(instantiate_from_csv)) == 5
+    assert instantiate_from_csv[4].name == 'Keyboard'
+    assert Item.instantiate_from_csv('123.csv') == 'Отсутствует файл items.csv'
+    assert Item.instantiate_from_csv('test_corrupted.csv') == 'Файл item.csv поврежден'
+
 
     
 
