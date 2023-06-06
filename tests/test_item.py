@@ -63,6 +63,7 @@ def test_item():
     # Проверяем магический метод __str__
     assert str(item) == 'Смартфон'
 
+
 def test_Phone():
 
     # Проверяем новый класс
@@ -83,7 +84,7 @@ def test_Phone():
         phone1.number_of_sim = 0
 
 
-def KeyBoard():
+def test_KeyBoard():
     # Создаем экземпляр класса для проверки
     kb = KeyBoard('DarkKD87A', 9600, 5)
     assert str(kb) == "DarkKD87A"
