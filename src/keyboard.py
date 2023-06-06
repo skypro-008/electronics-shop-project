@@ -27,3 +27,4 @@ class KeyBoard(MixinLang, Item):
 
 
 keyboard = KeyBoard('Logitech Wireless MX Keys Mini', 1600, 10)
+print(keyboard)
