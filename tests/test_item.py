@@ -1,9 +1,13 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
+from src.phone import Phone
 
 
 item1 = Item("Смартфон", 10000, 20)
 item2 = Item('Ноутбук', 20000, 5)
+
+phone1 = Phone("iPhone 14", 120_000, 5, 2)
+phone2 = Phone("iPhone 5 SE", 10000, 3, 6)
 
 
 def test_repr():
@@ -31,3 +35,9 @@ def test_string_to_number():
 def test_instantiate_from_csv():
     lists = Item.instantiate_from_csv()
     assert type(lists) == list
+
+def test_add_():
+    assert item1 + phone1 == 25
+    assert item2 + phone1 == 10
+    assert item1 + phone2  == 23
+    assert phone1 + phone1 == 10
