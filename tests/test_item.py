@@ -33,3 +33,10 @@ def test_item_magic_mathods():
     item1 = Item("Смартфон", 10000, 20)
     assert repr(item1) == "Item('Смартфон',10000,20)"
     assert str(item1) == 'Смартфон'
+
+
+def test_item_add():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item("Смартфон2", 10000, 22)
+    assert item1 + item2 == 42
+    assert item1 + "stroka" == None
