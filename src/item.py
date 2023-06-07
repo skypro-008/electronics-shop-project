@@ -2,6 +2,14 @@ import csv
 import os
 
 
+class InstantiateCSVError(Exception):
+    def __init__(self):
+        self.message = 'Файл item.csv поврежден'
+
+class CSVNotFoundError(InstantiateCSVError):
+    def __init__(self):
+        self.message = 'Файл отсутствует'
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -64,20 +72,48 @@ class Item:
         return self.price
 
     @classmethod
-    def instantiate_from_csv(cls) -> None:
+    def instantiate_csv(cls, filename) -> None:
         """Вызываем классы из файла"""
 
-        cls.all.clear()
-        csv_file = os.path.join('../src', 'items.csv')
-        with open(csv_file, newline='') as csvfile:
+        try:
+            cls.all.clear()
 
-            reader = csv.DictReader(csvfile)
+            with open(filename, newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    cls(row['name'], row['price'], row['quantity'])
 
-            for row in reader:
-                cls(row['name'], row['price'], row['quantity'])
+                    if not row['name']:
+                        raise InstantiateCSVError
+                    if not row['price']:
+                        raise InstantiateCSVError
+                    if not row['quantity']:
+                        raise InstantiateCSVError
+        # Обработка ошибки файл не найден
+        except FileNotFoundError:
+            raise CSVNotFoundError
+        # Обработка ошибки файл поврежден
+        except KeyError:
+            raise InstantiateCSVError
+
+    @classmethod
+    def instantiate_from_csv(cls) -> None:
+
+        '''
+        класс-метод, инициализирующий экземпляры класса `Item`
+        данными из файла _src/items.csv
+        '''
+        address_file = '../src/items.csv'
+        try:
+            cls.instantiate_csv(address_file)
+        except CSVNotFoundError as ex:
+            print(ex.message)
+        except InstantiateCSVError as ex:
+            print(ex.message)
 
     @staticmethod
     def string_to_number(line):
         """метод, возвращающий число из числа-строки"""
         a = float(line)
         return int(a)
+
