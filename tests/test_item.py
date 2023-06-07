@@ -1,7 +1,8 @@
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 import csv
 import pytest
+import os
 
 
 def test_item():
@@ -70,6 +71,27 @@ def test_add():
     with pytest.raises(TypeError):
         item1 + 100
         phone1 + '200'
+
+
+def test_instantiate_from_csv_missing_file():
+
+    with pytest.raises(FileNotFoundError):
+       Item.instantiate_from_csv('file_not_exist.csv')
+
+
+def test_instantiate_from_csv_invalid_file():
+
+    with pytest.raises(InstantiateCSVError):
+       raise InstantiateCSVError
+
+
+
+
+
+
+
+
+
 
 
 
