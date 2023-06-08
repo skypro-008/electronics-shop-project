@@ -30,6 +30,15 @@ class Item:
         """Метод для отображения информации об объекте класса для пользователей"""
         return f"{self.__name}"
 
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только объекты Item  и дочерние от ним')
+        else:
+            a = float(self.quantity)
+            b = float(other.quantity)
+            return int(a + b)
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -77,5 +86,5 @@ class Item:
     @staticmethod
     def string_to_number(str_num):
         number = float(str_num)
-        res = int(number)
-        return res
+        result = int(number)
+        return result
