@@ -1,6 +1,7 @@
 import os
 from csv import DictReader
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -44,7 +45,10 @@ class Item:
         if len(new_name) <= 10:
             self.__name = new_name
         else:
-            return print("Длина наименования товара превышает 10 символов.")
+            print("Длина наименования товара превышает 10 символов.")
+
+    @name.getter
+    def name(self): return self.__name
 
     @classmethod
     def instantiate_from_csv(cls):
@@ -61,3 +65,9 @@ class Item:
     def string_to_number(data):
         num = float(data)
         return int(num)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self.__name}"

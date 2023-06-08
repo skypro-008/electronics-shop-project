@@ -29,8 +29,22 @@ def test_name(test_item):
     test_item.name = "test_notebook"
     assert test_item.name == "test_PC"
 
+
+def test_initiate_from_csv():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
+
+
 def test_item_string_to_number():
     assert Item.string_to_number('15') == 15
     assert Item.string_to_number("123456789098765") == 123456789098765
     assert Item.string_to_number('8.0') == 8
     assert Item.string_to_number('2.5') == 2
+
+
+def test_repr(test_item):
+    assert repr(test_item) == "Item('test_PC', 35000, 4)"
+
+
+def test_str(test_item):
+    assert str(test_item) == "test_PC"
