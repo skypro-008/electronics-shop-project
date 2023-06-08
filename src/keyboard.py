@@ -2,24 +2,25 @@ from src.item import Item
 
 
 class MixinLang:
-    def __init__(self, name: str, price: float, quantity: int):
-        super().__init__(name, price, quantity)
-        def __init__(self):
-            self._language = "EN"
+    __lang = "EN"
+
 
     @property
     def language(self):
-        return self._language
+        return self.__lang
 
     def change_lang(self):
-        if self._language == "EN":
-             self._language = "RU"
+        if self.__lang == "EN":
+            self.__lang = "RU"
         else:
-             self._language = "EN"
+             self.__lang = "EN"
              return self
 
 class KeyBoard(MixinLang, Item):
-    pass
+    def __init__(self, name: str, price: float, quantity: int):
+        super().__init__(name, price, quantity)
+
+
 
 
 keyboard = KeyBoard('Logitech Wireless MX Keys Mini', 1600, 10)
