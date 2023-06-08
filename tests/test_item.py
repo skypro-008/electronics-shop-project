@@ -5,6 +5,8 @@ from src.item import Item
 
 
 @pytest.fixture
+
+
 def item1():
     return Item('Наушники', 5000, 10)
 
