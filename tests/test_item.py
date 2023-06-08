@@ -21,3 +21,25 @@ def test_apply_discount():
     Item.pay_rate = 0.8
     item1.apply_discount()
     assert item1.price == 8000.0
+
+
+def test_name_getter():
+    assert item1.name == "Смартфон"
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
+
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
+
+
+def test_name_setter():
+    item1.name = "Смартфон"
+    assert item1.name == "Смартфон"
+    item1.name = "АвадаКедавра"
+    assert Exception
