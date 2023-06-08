@@ -48,6 +48,7 @@ class Item:
             self.__name = name_length
         else:
             print("Exception: Длина наименования товара превышает 10 символов")
+            # raise Exception('Длина наименования товара превышает 10 символов')
 
     @classmethod
     def instantiate_from_csv(cls):
