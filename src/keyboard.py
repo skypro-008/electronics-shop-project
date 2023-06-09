@@ -13,8 +13,9 @@ class MixinLang:
         if self.__lang == "EN":
             self.__lang = "RU"
         else:
-             self.__lang = "EN"
-             return self
+            self.__lang = "EN"
+
+        return self
 
 class KeyBoard(MixinLang, Item):
     def __init__(self, name: str, price: float, quantity: int):
