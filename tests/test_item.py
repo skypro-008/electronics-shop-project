@@ -99,8 +99,8 @@ def test_KeyBoard():
     assert str(kb.language) == "RU"
 
     # Проверяем ошибку на язык, только EN & RU
-    # with pytest.raises(AttributeError):
-    #    kb.language = 'CH'
+    with pytest.raises(AttributeError):
+       kb.language = 'CH'
     # AttributeError: property 'language' of 'KeyBoard' object has no setter
 
 

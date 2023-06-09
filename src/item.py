@@ -83,11 +83,7 @@ class Item:
                 for row in reader:
                     cls(row['name'], row['price'], row['quantity'])
 
-                    if not row['name']:
-                        raise InstantiateCSVError
-                    if not row['price']:
-                        raise InstantiateCSVError
-                    if not row['quantity']:
+                    if not row['name'] or not row['price'] or not row['quantity']:
                         raise InstantiateCSVError
         # Обработка ошибки файл не найден
         except FileNotFoundError:
