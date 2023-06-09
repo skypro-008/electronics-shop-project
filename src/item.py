@@ -72,6 +72,11 @@ class Item:
     def __repr__(self):
         return f"Item('{self.name}', {self.price}, {self.quantity})"
 
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        raise TypeError("Unsupported operand type(s) for +: 'Item' and '{}'".format(type(other)))
+
     @classmethod
     def get_all_items(cls):
         return [str(item) for item in cls.all]
