@@ -27,4 +27,25 @@ def test_instantiate_from_csv():
     # Проверка значений объектов, созданных из CSV файла
     item1 = Item.all[0]
     assert item1.name == "Смартфон"
-    assert item
+    assert item1.price == 100
+    assert item1.quantity == 1
+
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
+
+
+def test_invalid_name_length():
+    prod1 = Item("Товар", 50, 5)
+    prod1.name = "Наименование, которое не должно пройти проверку"
+    assert prod1.name == "Товар"
+
+
+def test_repr(item):
+    assert repr(item) == "Item('Товар', 45.97, 40)"
+
+
+def test_str(item):
+    assert str(item) == 'Товар'
