@@ -33,6 +33,4 @@ def test_name():
     test_item_2.name = 'new_test_name_2'
 
     assert test_item_1.name == 'new_1'
-    assert test_item_2.name == 'Длина наименования товара превышает 10 символов'
-
-
+    assert test_item_2.name == 'test_2'
