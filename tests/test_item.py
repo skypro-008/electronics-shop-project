@@ -13,13 +13,13 @@ def test_calculate_total_price():
 def test_apply_discount():
     test_item_1.apply_discount()
     test_item_2.apply_discount()
-    assert test_item_1.price_with_discount == 999.99
-    assert test_item_2.price_with_discount == 50
+    assert test_item_1.price == 999.99
+    assert test_item_2.price == 50
 
     Item.pay_rate = 0.9
 
     test_item_1.apply_discount()
     test_item_2.apply_discount()
     
-    assert test_item_1.price_with_discount == 899.991
-    assert test_item_2.price_with_discount == 45
+    assert test_item_1.price == 899.991
+    assert test_item_2.price == 45
