@@ -34,3 +34,12 @@ def test_name():
 
     assert test_item_1.name == 'new_1'
     assert test_item_2.name == 'test_2'
+
+
+def test_instantiate_from_csv():
+    assert len(Item.all) == 5
+
+    item1 = Item.all[3]
+    assert item1.name == 'Мышка'
+    assert item1.price == 50
+    assert item1.quantity == 5
