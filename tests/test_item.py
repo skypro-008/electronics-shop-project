@@ -23,3 +23,16 @@ def test_apply_discount():
     
     assert test_item_1.price == 899.991
     assert test_item_2.price == 45
+
+
+def test_name():
+    assert test_item_1.name == 'test_1'
+    assert test_item_2.name == 'test_2'
+
+    test_item_1.name = 'new_1'
+    test_item_2.name = 'new_test_name_2'
+
+    assert test_item_1.name == 'new_1'
+    assert test_item_2.name == 'Длина наименования товара превышает 10 символов'
+
+
