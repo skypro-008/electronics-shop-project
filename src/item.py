@@ -1,3 +1,6 @@
+import csv
+import os
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -55,7 +58,12 @@ class Item:
         """
         Класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
         """
-        pass
+        with open(os.path.join(os.path.dirname(__file__), 'items.csv'), newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+
+            for row in reader:
+                name, price, quantity = row['name'], row['price'], row['quantity']
+                cls(name, float(price), int(quantity))
 
     @staticmethod
     def string_to_number():
