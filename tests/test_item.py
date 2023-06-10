@@ -26,3 +26,6 @@ def test_repr():
     item1 = Item("Смартфон", 10000, 20)
     assert  Item.__repr__(item1) == "Item('Смартфон', 10000, 20)"
 
+def test_str():
+    item1 = Item("Смартфон", 10000, 20)
+    assert  Item.__str__(item1) == 'Смартфон'
