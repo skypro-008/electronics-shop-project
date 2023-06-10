@@ -1,6 +1,7 @@
 import csv
 import os
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -45,7 +46,7 @@ class Item:
     @name.setter
     def name(self, new_name) -> None:
         """
-        Сеттер для атрибута name. Позволяет изменить наименование товара
+        Сеттер для атрибута name. Позволяет изменить наименование товара.
         Проводит проверку длины наименования (не более 10 символов)
         """
         if len(new_name) <= 10:
@@ -71,6 +72,6 @@ class Item:
         Статический метод, возвращающий число из числа-строки
         """
         if '.' in num_str:
-            return float(num_str)
+            return int(float(num_str))
         else:
             return int(num_str)
