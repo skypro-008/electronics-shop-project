@@ -13,7 +13,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
@@ -31,3 +31,32 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * self.pay_rate
+
+    @property
+    def name(self) -> str:
+        """
+        Геттер для атрибута name. Возвращает наименование товара
+        """
+        pass
+
+    @name.setter
+    def name(self, new_name) -> None:
+        """
+        Сеттер для атрибута name. Позволяет изменить наименование товара
+        Проводит проверку длины наименования (не более 10 символов)
+        """
+        pass
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        """
+        Класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
+        """
+        pass
+
+    @staticmethod
+    def string_to_number():
+        """
+        Статический метод, возвращающий число из числа-строки
+        """
+        pass
