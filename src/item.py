@@ -37,7 +37,7 @@ class Item:
         """
         Геттер для атрибута name. Возвращает наименование товара
         """
-        pass
+        return self.__name
 
     @name.setter
     def name(self, new_name) -> None:
@@ -45,7 +45,10 @@ class Item:
         Сеттер для атрибута name. Позволяет изменить наименование товара
         Проводит проверку длины наименования (не более 10 символов)
         """
-        pass
+        if len(new_name) <= 10:
+            self.__name = new_name
+        else:
+            print('Длина наименования товара превышает 10 символов')
 
     @classmethod
     def instantiate_from_csv(cls):
