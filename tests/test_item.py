@@ -44,3 +44,9 @@ def test_instantiate_from_csv():
     assert item1.name == 'Мышка'
     assert item1.price == 50
     assert item1.quantity == 5
+
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('20.4') == 20.4
+    assert Item.string_to_number('0') == 0
