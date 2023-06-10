@@ -37,9 +37,10 @@ def test_name():
 
 
 def test_instantiate_from_csv():
-    assert len(Item.all) == 5
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 7
 
-    item1 = Item.all[3]
+    item1 = Item.all[5]
     assert item1.name == 'Мышка'
     assert item1.price == 50
     assert item1.quantity == 5
