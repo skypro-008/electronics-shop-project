@@ -66,8 +66,11 @@ class Item:
                 cls(name, float(price), int(quantity))
 
     @staticmethod
-    def string_to_number():
+    def string_to_number(num_str: str):
         """
         Статический метод, возвращающий число из числа-строки
         """
-        pass
+        if '.' in num_str:
+            return float(num_str)
+        else:
+            return int(num_str)
