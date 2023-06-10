@@ -59,6 +59,7 @@ class Item:
         """
         Класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
         """
+        cls.all.clear()
         with open(os.path.join(os.path.dirname(__file__), 'items.csv'), newline='') as csvfile:
             reader = csv.DictReader(csvfile)
 
