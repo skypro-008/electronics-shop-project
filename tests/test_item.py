@@ -1,11 +1,11 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import csv
+import os
 
 import pytest
 
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
-
 
 
 def test_constructor():
@@ -70,3 +70,16 @@ def test_addition():
     with pytest.raises(ValueError):
         assert item1 + 10 == 49
         assert phone1 + 5 == 11
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    item1 = Item.all[0]
+    assert item1.name == 'Смартфон'
+    assert len(Item.all) == 5
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_csv('../tests/items.csv')
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_csv('../tests/items1.csv')
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_csv('../tests/items2.csv')
