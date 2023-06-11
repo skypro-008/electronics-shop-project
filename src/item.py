@@ -2,6 +2,18 @@ import csv
 from csv import DictReader
 
 
+class InstantiateCSVError(Exception):
+    """
+    Класс исключения если файл item.csv поврежден или его нет
+    """
+
+    def __init__(self, *args):
+        self.message = args[0] if args else "InstantiateCSVError: файл item.csv поврежден"
+
+    def __str__(self):
+        return self.message
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -40,15 +52,37 @@ class Item:
         else:
             raise Exception("Длина названия больше 10 символов")
 
+    @classmethod
+    def instantiate_csv(cls, path_to_file) -> None:
+        """
+        Класс-метод, инициирующий экземпляры класса из файла .csv
+        """
+
+        cls.all.clear()
+
+        with open(path_to_file, newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for line in reader:
+                cls(line['name'], line['price'], line['quantity'])
+
+                if not line['name'] or not line['price'] or not line['quantity']:
+                    raise InstantiateCSVError
+            if len(cls.all) < 5:
+                raise InstantiateCSVError
 
     @classmethod
     def instantiate_from_csv(cls) -> None:
-        """Инициализируем экземпляры класса данными из файла"""
-        cls.all.clear()
-        with open('/home/polexa/electronics-shop-project/src/items.csv', newline="") as csv_file:
-            reader = csv.DictReader(csv_file)
-            for line in reader:
-                cls(line["name"], line["price"], line["quantity"])
+
+        '''
+        Класс-метод для отлова ошибок при инициализации экземпляров класса из файла .csv
+        '''
+        path_to_file = '../src/items.csv'
+        try:
+            cls.instantiate_csv(path_to_file)
+        except FileNotFoundError:
+            print("FileNotFoundError: Отсутствует файл item.csv")
+        except InstantiateCSVError as ex:
+            print(ex.message)
 
     @staticmethod
     def string_to_number(line):
