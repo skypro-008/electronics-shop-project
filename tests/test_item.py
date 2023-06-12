@@ -43,3 +43,11 @@ def test_name_setter():
     assert item1.name == "Смартфон"
     item1.name = "АвадаКедавра"
     assert Exception
+
+
+def test_repr():
+    assert repr(item1) == "Item('Смартфон', 8000.0, 20)"
+
+
+def test_str():
+    assert str(item1) == 'Смартфон'
