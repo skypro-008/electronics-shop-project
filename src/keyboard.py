@@ -1,15 +1,5 @@
-class Developer:
-    def __init__(self, name, price, quantity):
-        self.name = name
-        self.price = price
-        self.quantity = quantity
-        self.language = 'EN'
-    def __str__(self):
-        return f'{self.name}'
+from src.item import Item
 
-    @property
-    def languages(self):
-        return self.language
 
 
 class MixinLog:
@@ -22,5 +12,7 @@ class MixinLog:
             return self
 
 
-class Keyboard(Developer, MixinLog):
-    pass
+class Keyboard(Item, MixinLog):
+    def __init__(self, name, price, quantity):
+        super().__init__(name, price, quantity)
+        self.language = 'EN'
