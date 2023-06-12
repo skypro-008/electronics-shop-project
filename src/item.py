@@ -39,30 +39,30 @@ class Item:
         if len(new_name) <= 10:
             self.__name = new_name
         else:
-            raise Exception("Название не соответсвует")
+            raise Exception('Длина наименования товара превышает 10 символов.')
 
-    # @classmethod
-    # def instantiate_from_csv(cls):
-    #     cls.all = []
-    #     with open("items.csv", encoding='utf-8') as r_file:
-    #         file_reader = csv.DictReader(r_file, delimiter=",")
-    #
-    # @staticmethod
-    # def string_to_number(string: str):
-    #     return int(string)
-    #
-    # def calculate_total_price(self) -> float:
-    #     """
-    #     Рассчитывает общую стоимость конкретного товара в магазине.
-    #
-    #     :return: Общая стоимость товара.
-    #     """
-    #     price_global = self.price * self.quantity
-    #     return price_global
-    #
-    # def apply_discount(self) -> float:
-    #     """
-    #     Применяет установленную скидку для конкретного товара.
-    #     """
-    #     make_discount = self.price * self.pay_rate
-    #     return make_discount
+    @classmethod
+    def instantiate_from_csv(cls):
+        cls.all = []
+        with open("items.csv", encoding='utf-8') as r_file:
+            file_reader = csv.DictReader(r_file, delimiter=",")
+
+    @staticmethod
+    def string_to_number(string: str):
+        return int(string)
+
+    def calculate_total_price(self) -> float:
+        """
+        Рассчитывает общую стоимость конкретного товара в магазине.
+
+        :return: Общая стоимость товара.
+        """
+        price_global = self.price * self.quantity
+        return price_global
+
+    def apply_discount(self) -> float:
+        """
+        Применяет установленную скидку для конкретного товара.
+        """
+        make_discount = self.price * self.pay_rate
+        return make_discount
