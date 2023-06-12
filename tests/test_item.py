@@ -78,8 +78,8 @@ def test_instantiate_from_csv():
     assert item1.name == 'Смартфон'
     assert len(Item.all) == 5
     with pytest.raises(FileNotFoundError):
-        Item.instantiate_csv('../tests/items.csv')
+        Item.instantiate_from_csv('../tests/items.csv')
     with pytest.raises(InstantiateCSVError):
-        Item.instantiate_csv('../tests/items1.csv')
+        Item.instantiate_from_csv('../tests/items1.csv')
     with pytest.raises(InstantiateCSVError):
-        Item.instantiate_csv('../tests/items2.csv')
+        Item.instantiate_from_csv('../tests/items2.csv')
