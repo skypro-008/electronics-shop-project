@@ -20,4 +20,19 @@ def test_item_calculate_total_price(item1):
 
 
 def test_item_apply_discount(item1):
-    assert item1.apply_discount() is None
+    pay_rate = 0.5
+    assert item1.price * pay_rate == 2500
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
+
+    item1 = Item.all[4]
+    assert item1.name == 'Клавиатура'
+    assert item1.price == 75
+    assert item1.quantity == 5
+
+
+def test_string_to_number():
+    assert Item.string_to_number('4') == 4
