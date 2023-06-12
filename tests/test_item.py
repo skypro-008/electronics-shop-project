@@ -15,3 +15,32 @@ def test_apply_discount():
     item1.apply_discount()
     assert item1.price == 8000.0
     assert item2.price == 20000
+
+
+def test_name():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item("СуперСмартфон", 10000, 20)
+    assert item1.name == "Смартфон"
+    assert item2.name == "СуперСмартфон"
+    assert print(item2.name) == print("Наименования товара должно быть не больше 10 симвовов")
+
+
+def test_instantiate_from_csv():
+    items = Item.instantiate_from_csv()
+    assert len(items) == 5
+
+    item1 = items[0]
+    assert item1.name == 'Смартфон'
+    assert item1.price == 100
+    assert item1.quantity == 1
+
+
+def test_string_to_number():
+    Item.instantiate_from_csv()
+    item1 = Item.all[0]
+    assert item1.name == 'Смартфон'
+
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
+
