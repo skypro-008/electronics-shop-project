@@ -3,15 +3,15 @@ from csv import DictReader
 
 
 class InstantiateCSVError(Exception):
-    """
-    Класс исключения если файл item.csv поврежден или его нет
-    """
+    '''
+    Исключения повреждения CSV-файла
+    '''
 
-    def __init__(self, *args):
-        self.message = args[0] if args else "InstantiateCSVError: файл item.csv поврежден"
+    def __init__(self, message):
+        self.message = message
 
     def __str__(self):
-        return self.message
+        return f'{self.message}'
 
 
 class Item:
@@ -53,36 +53,23 @@ class Item:
             raise Exception("Длина названия больше 10 символов")
 
     @classmethod
-    def instantiate_csv(cls, path_to_file) -> None:
-        """
-        Класс-метод, инициирующий экземпляры класса из файла .csv
-        """
-
-        cls.all.clear()
-
-        with open(path_to_file, newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for line in reader:
-                cls(line['name'], line['price'], line['quantity'])
-
-                if not line['name'] or not line['price'] or not line['quantity']:
-                    raise InstantiateCSVError
-            if len(cls.all) < 5:
-                raise InstantiateCSVError
-
-    @classmethod
     def instantiate_from_csv(cls) -> None:
-
         '''
-        Класс-метод для отлова ошибок при инициализации экземпляров класса из файла .csv
+        Инициализирует экземпляры класса,
+        получая обьекты из csv файла
         '''
         path_to_file = '../src/items.csv'
+        cls.all.clear()
         try:
-            cls.instantiate_csv(path_to_file)
+            with open(path_to_file, newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    if len(row['name']) == 0 or int(row['price']) < 1 or int(row['quantity']) < 0:
+                        raise InstantiateCSVError('Файл item.csv поврежден')
+                    cls(row['name'], row['price'], row['quantity'])
         except FileNotFoundError:
-            print("FileNotFoundError: Отсутствует файл item.csv")
-        except InstantiateCSVError as ex:
-            print(ex.message)
+            raise FileNotFoundError('Отсутствует файл item.csv')
+
 
     @staticmethod
     def string_to_number(line):
