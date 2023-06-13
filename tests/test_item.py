@@ -50,3 +50,9 @@ def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('20.4') == 20
     assert Item.string_to_number('0') == 0
+
+
+def test_str():
+    assert str(test_item_1) == 'test_1'
+    assert str(test_item_2) == 'test_2'
+
