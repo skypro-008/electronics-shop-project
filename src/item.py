@@ -26,7 +26,7 @@ class Item:
         return self.name
 
     def __repr__(self):
-        pass
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
 
     def calculate_total_price(self) -> float:
         """
