@@ -23,7 +23,7 @@ class Item:
         self.all.append(self)
 
     def __str__(self):
-        pass
+        return self.name
 
     def __repr__(self):
         pass
