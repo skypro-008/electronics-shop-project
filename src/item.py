@@ -1,3 +1,14 @@
+import csv
+
+
+class InstantiateCSVError(Exception):
+    def __init__(self):
+        self.message = 'файл item.csv поврежден'
+
+class CSVNotFoundError(InstantiateCSVError):
+    def __init__(self):
+        self.message = 'файл отсутсвтует'
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -13,7 +24,10 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
+        self.__name = name
+        self.price = price
+        self.quantity = quantity
+        Item.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -21,10 +35,54 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        pass
+        self.price += self.quantity
 
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        pass
+        self.price += self.pay_rate
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, value: str):
+        if len(value) > 10:
+            raise Exception('Наименование товара превышает 10 знаков')
+
+    @classmethod
+    def instantiate_from_csv(cls) -> None:
+
+        address_file = '../src/items.csv'
+        try:
+            cls.instantiate_csv(address_file)
+        except CSVNotFoundError as ex:
+            print(ex.message)
+        except InstantiateCSVError as ex:
+            print(ex.message)
+
+    @classmethod
+    def instantiate_csv(cls, filename) -> None:
+
+        try:
+            cls.all.clear()
+
+            with open(filename, newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    cls(row['name'],row['price'],row['quantity'])
+
+                    if not row ['name']
+                        raise InstantiateCSVError
+                    if not row ['price']
+                        raise InstantiateCSVError
+                    if not row ['quantity']
+                        raise InstantiateCSVError
+
+        except FileNotFoundError:
+            raise CSVNotFoundError
+
+        except KeyError:
+            raise InstantiateCSVError
