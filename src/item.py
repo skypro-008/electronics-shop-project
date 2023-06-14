@@ -59,22 +59,22 @@ class Item:
             raise Exception("Длина наименования товара превышает 10 символов")
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, file="item.csv"):
         Item.all = []
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        data = os.path.join(current_dir, 'items.csv')
+        data = os.path.join(current_dir, file)
         try:
             with open(data, encoding="cp1251") as f:
                 reader = csv.DictReader(f)
                 if all(field in reader.fieldnames for field in ["name", "price", "quantity"]):
                     for row in reader:
                         cls(name=row["name"], price=float(row["price"]), quantity=int(row["quantity"]))
-                    else:
-                        raise InstantiateCSVError("Файл items.csv поврежден")
+                else:
+                    raise InstantiateCSVError(f"Файл {file} поврежден")
         except InstantiateCSVError as erorr:
             print(erorr)
         except FileNotFoundError:
-            print("_Отсутствует файл item.csv_")
+            print(f"_Отсутствует файл {file}_")
 
 
     @staticmethod

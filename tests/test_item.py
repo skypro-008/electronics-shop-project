@@ -52,6 +52,16 @@ def test_instantiate_from_csv(item):
     assert len(Item.all) == 5
     assert isinstance(Item.all[0], Item)
 
+def test_instantiate_from_csv_invalid_file(capfd):
+    Item.instantiate_from_csv("test.csv")
+    captured = capfd.readouterr()
+    assert f"_Отсутствует файл test.csv_" in captured.out
+
+def test_instantiate_from_csv_invalid_error(capfd):
+    Item.instantiate_from_csv("../tests/test2.csv")
+    captured = capfd.readouterr()
+    assert f"Файл ../tests/test2.csv поврежден" in captured.out
+
 
 def test_repr(item):
     assert repr(item) == "Item('Мерседес-Бенз', 45.97, 40)"
