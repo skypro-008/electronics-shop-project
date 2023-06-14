@@ -1,4 +1,7 @@
 import csv
+
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -27,6 +30,12 @@ class Item:
     def __str__(self):
 
         return f'{self.__name}'
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('нельзя складывать')
+        return int(self.quantity) + int(other.quantity)
+
 
 
     def calculate_total_price(self) -> float:
