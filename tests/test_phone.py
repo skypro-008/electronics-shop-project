@@ -2,7 +2,7 @@ from src.item import Item
 from src.phone import Phone
 
 
-def test_calculate_total_price():
+def test_phone_init():
 
     phone1 = Phone("iPhone 14", 120_000, 5, 2)
     assert str(phone1) == 'iPhone 14'
