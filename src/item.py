@@ -2,7 +2,13 @@ import csv
 import math
 
 import os.path
+class InstantiateCSVError(Exception):
+    def __init__(self, message):
+        super().__init__(message)
+        self.message = message
 
+    def __str__(self):
+        return self.message
 
 class Item:
     """
@@ -57,11 +63,19 @@ class Item:
         Item.all = []
         current_dir = os.path.dirname(os.path.abspath(__file__))
         data = os.path.join(current_dir, 'items.csv')
-        with open(data, encoding="cp1251") as f:
-            reader = csv.DictReader(f)
+        try:
+            with open(data, encoding="cp1251") as f:
+                reader = csv.DictReader(f)
+                if all(field in reader.fieldnames for field in ["name", "price", "quantity"]):
+                    for row in reader:
+                        cls(name=row["name"], price=float(row["price"]), quantity=int(row["quantity"]))
+                    else:
+                        raise InstantiateCSVError("Файл items.csv поврежден")
+        except InstantiateCSVError as erorr:
+            print(erorr)
+        except FileNotFoundError:
+            print("_Отсутствует файл item.csv_")
 
-            for row in reader:
-                cls(row["name"], row["price"], row["quantity"])
 
     @staticmethod
     def string_to_number(num):
