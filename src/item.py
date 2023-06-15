@@ -40,7 +40,7 @@ class Item:
             self.__name = new_name
             return new_name
         else:
-            return 'Длина наименования товара превышает 10 символов.'
+            return f'{new_name} - Длина наименования товара превышает 10 символов.'
 
     @classmethod
     def instantiate_from_csv(cls):
