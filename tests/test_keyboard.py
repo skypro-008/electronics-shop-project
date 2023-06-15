@@ -16,8 +16,7 @@ def test_phone_init():
     assert str(kb.language) == "RU"
 
     # Сделали RU -> EN -> RU
-    kb.change_lang()
-    kb.change_lang()
+    kb.change_lang().change_lang()
     assert str(kb.language) == "RU"
 
     with pytest.raises(AttributeError):
