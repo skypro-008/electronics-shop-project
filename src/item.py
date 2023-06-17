@@ -1,6 +1,8 @@
 import csv
+import os.path
 
 from pathlib import Path
+from src.exceptions import InstantiateCSVError
 
 PATH_TO_SRC = f'{Path(__file__).parent.parent}/src'
 PATH_TO_CSV = f'{PATH_TO_SRC}/items.csv'
@@ -49,10 +51,15 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, path=PATH_TO_CSV):
-        cls.all.clear()
-        with open(path, 'r', encoding='utf-8') as csv_file:
-            reader = csv.DictReader(csv_file)
-            [Item(**row) for row in reader]
+        if os.path.exists(path):
+            cls.all.clear()
+            with open(path, 'r', encoding='utf-8') as csv_file:
+                reader = csv.DictReader(csv_file)
+                if len(reader.fieldnames) != 3:
+                    raise InstantiateCSVError('Файл item.csv поврежден')
+                [Item(**row) for row in reader]
+        else:
+            raise FileNotFoundError("Отсутствует файл item.csv")
 
     def calculate_total_price(self) -> float:
         """

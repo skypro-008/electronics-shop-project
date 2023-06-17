@@ -1,7 +1,11 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-import pytest
-from src.item import Item
+import csv
 
+import pytest
+import os.path
+
+from src.item import Item
+from src.exceptions import InstantiateCSVError
 
 @pytest.fixture
 def item1():
@@ -65,6 +69,11 @@ def test_name_setter__long_word(item2):
 def test_instantiate_from_csv(item1):
     Item.instantiate_from_csv()
     assert len(Item.all) > 1
+
+
+def test_instantiate_from_csv__file_not_exist():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('not_exist.csv')
 
 
 def test_string_to_number():
