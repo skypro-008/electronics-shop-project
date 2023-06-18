@@ -39,3 +39,17 @@ def test_name():
 def test_name():
     item1.name = "Ноутбук"
     assert item1.name == "Ноутбук"
+
+
+def test__str__():
+    items1 = Item("Смартфон", 10000, 20)
+    assert str(items1) == "Смартфон"
+    items1 = Item("Ноутбук", 20000, 20)
+    assert str(items1) == "Ноутбук"
+
+
+def test__repr__():
+    items1 = Item("Смартфон", 10000, 20)
+    assert repr(items1) == "Item('Смартфон', 10000, 20)"
+    items1 = Item("Ноутбук", 20000, 20)
+    assert repr(items1) == "Item('Ноутбук', 20000, 20)"
