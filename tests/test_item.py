@@ -2,6 +2,7 @@
 import pytest
 from src.item import Item
 from src.phone import Phone
+from src.keyboard import KeyBoard
 
 
 @pytest.fixture
@@ -56,3 +57,22 @@ def test_count_sim():
     item1 = Item("Смартфон", 10000, 20)
     assert item1 + phone1 == 25
     assert phone1 + phone1 == 10
+
+
+def test_property_en():
+    kb = KeyBoard('Dark Project KD87A', 9600, 5)
+    assert kb.language == "EN"
+    assert str(kb) == 'Dark Project KD87A'
+
+
+def test_change_lang():
+    kb = KeyBoard('Dark Project KD87A', 9600, 5)
+    kb.change_lang()
+    assert kb.language == "RU"
+
+
+def test_init():
+    kb = KeyBoard('Dark Project KD87A', 9600, 5)
+    assert kb.name == 'Dark Project KD87A'
+    assert kb.price == 9600
+    assert kb.quantity == 5
