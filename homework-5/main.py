@@ -14,4 +14,4 @@ if __name__ == '__main__':
     assert str(kb.language) == "RU"
 
     kb.language = 'CH'
-    # AttributeError: property 'language' of 'KeyBoard' object has no setter
+    # AttributeError: property 'language' of 'Keyboard' object has no setter
