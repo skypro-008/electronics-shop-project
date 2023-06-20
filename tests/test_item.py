@@ -1,4 +1,5 @@
 from src.item import Item
+from src.phone import Phone
 
 
 def test_calculate_total_price():
@@ -53,3 +54,12 @@ def test_repr():
 def test_str():
     item1 = Item("Смартфон", 10000, 20)
     assert str(item1) == 'Смартфон'
+
+
+def test_get_price():
+    phone1 = Phone("Смартфон", 10000, 5, 2)
+    item1 = Item("Смартфон", 10000, 20)
+    assert item1 + phone1 == 25
+    assert phone1 + phone1 == 10
+    assert item1 + 50 == 'Не экземпляр класса Item'
+    assert phone1 + 50 == 'Не экземпляр класса Item'
