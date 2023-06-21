@@ -45,7 +45,8 @@ class Item:
         if len(new_name) <= 10:
             self.__name = new_name
         else:
-            print("Длина наименования товара превышает 10 символов.")
+            # print("Длина наименования товара превышает 10 символов.")
+            raise "Длина наименования товара превышает 10 символов."
 
     @name.getter
     def name(self): return self.__name
@@ -72,10 +73,7 @@ class Item:
     def __str__(self):
         return f"{self.__name}"
 
-
     def __add__(self, other):
         if not isinstance(other, Item):
-            raise ValueError("Складываеть можно только значения Item и дочерние от них")
+            return "Складываеть можно только значения Item и дочерние от них"
         return self.quantity + other.quantity
-
-

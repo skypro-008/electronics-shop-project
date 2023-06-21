@@ -14,10 +14,10 @@ class Phone(Item):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.__number_of_sim})"
 
 
-    def __add__(self, other):
-        if not isinstance(other, Item):
-            raise ValueError("Складываеть можно только значения Item и дочерние от них")
-        return self.quantity + other.quantity
+#    def __add__(self, other):
+#        if not isinstance(other, Item):
+#            raise ValueError("Складываеть можно только значения Item и дочерние от них")
+#        return self.quantity + other.quantity
 
     @property
     def number_of_sim(self):

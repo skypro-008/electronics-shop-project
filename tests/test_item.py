@@ -3,11 +3,6 @@ import pytest
 from src.item import Item
 
 
-@pytest.fixture
-def test_item():
-    return Item("test_PC", 35000, 4)
-
-
 def test_init(test_item):
     assert test_item.name == "test_PC"
     assert test_item.price == 35000
@@ -26,8 +21,8 @@ def test_apply_discount(test_item):
 
 def test_name(test_item):
     assert test_item.name == "test_PC"
-    test_item.name = "test_notebook"
-    assert test_item.name == "test_PC"
+    test_item.name = "test_nbook"
+    assert test_item.name == "test_nbook"
 
 
 def test_initiate_from_csv():
@@ -49,5 +44,8 @@ def test_repr(test_item):
 def test_str(test_item):
     assert str(test_item) == "test_PC"
 
+def test__add__(test_item, test_phone):
+    assert test_item + test_phone == 8
+    assert test_item + 150000 == "Складываеть можно только значения Item и дочерние от них"
 
 
