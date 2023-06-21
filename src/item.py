@@ -72,3 +72,9 @@ class Item:
     def string_to_number(number):
         number = float(number)
         return int(number)
+
+    def __add__(self, other):
+        """Сложение экземпляров класса по количеству товара в магазине"""
+        if not isinstance(other, Item):
+            raise ValueError
+        return self.quantity + other.quantity

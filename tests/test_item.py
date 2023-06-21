@@ -38,11 +38,13 @@ def test_string_to_number():
     assert Item.string_to_number('4') == 4
 
 
-def test_item_repr():
-    item1 = Item('Наушники', 5000, 10)
+def test_item_repr(item1):
     assert repr(item1) == "Item('Наушники', 5000, 10)"
 
 
-def test_item_str():
-    item1 = Item('Наушники', 5000, 10)
+def test_item_str(item1):
     assert str(item1) == 'Наушники'
+
+def test_item_add(item1):
+    item2 = Item('Клавиатура', 10000, 5)
+    assert item1 + item2 == 15
