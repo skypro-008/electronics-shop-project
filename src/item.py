@@ -1,13 +1,14 @@
 import csv
+import math
 
-
+import os.path
 class InstantiateCSVError(Exception):
-    def __init__(self):
-        self.message = 'файл item.csv поврежден'
+    def __init__(self, message):
+        super().__init__(message)
+        self.message = message
 
-class CSVNotFoundError(InstantiateCSVError):
-    def __init__(self):
-        self.message = 'файл отсутсвтует'
+    def __str__(self):
+        return self.message
 
 class Item:
     """
@@ -24,10 +25,10 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.__name = name
+        Item.all.append(self)
+        self.name = name
         self.price = price
         self.quantity = quantity
-        Item.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -35,71 +36,59 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        self.price *= self.quantity
+        total_price = self.price * self.quantity
+        return total_price
 
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
+
         self.price *= self.pay_rate
 
     @property
     def name(self):
-        return self.__name
+        return self._name
 
     @name.setter
-    def name(self, value: str):
-        if len(value) > 10:
-            raise Exception('Наименование товара превышает 10 знаков')
+    def name(self, newname):
+        try:
+            if len(newname) <= 15:
+                self._name = newname
+        except Exception:
+            raise Exception("Длина наименования товара превышает 10 символов")
 
     @classmethod
-    def instantiate_from_csv(cls) -> None:
-
-        address_file = '../src/items.csv'
+    def instantiate_from_csv(cls, file="item.csv"):
+        Item.all = []
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        data = os.path.join(current_dir, file)
         try:
-            cls.instantiate_csv(address_file)
-        except CSVNotFoundError as ex:
-            print(ex.message)
-        except InstantiateCSVError as ex:
-            print(ex.message)
-
-    @classmethod
-    def instantiate_csv(cls, filename) -> None:
-
-        try:
-            cls.all.clear()
-
-            with open(filename, newline='') as csvfile:
-                reader = csv.DictReader(csvfile)
-                for row in reader:
-                    cls(row['name'],row['price'],row['quantity'])
-
-                    if not row ['name']
-                        raise InstantiateCSVError
-                    if not row ['price']
-                        raise InstantiateCSVError
-                    if not row ['quantity']
-                        raise InstantiateCSVError
-
+            with open(data, encoding="cp1251") as f:
+                reader = csv.DictReader(f)
+                if all(field in reader.fieldnames for field in ["name", "price", "quantity"]):
+                    for row in reader:
+                        cls(name=row["name"], price=float(row["price"]), quantity=int(row["quantity"]))
+                else:
+                    raise InstantiateCSVError(f"Файл {file} поврежден")
+        except InstantiateCSVError as erorr:
+            print(erorr)
         except FileNotFoundError:
-            raise CSVNotFoundError
+            print(f"_Отсутствует файл {file}_")
 
-        except KeyError:
-            raise InstantiateCSVError
-
-
-    def __repr__(self):
-        return f"{self.__class__.__name__}({self.__name}', {self.price}, {self.quantity})"
-
-    def __str__(self):
-        return self.__name
-
-    def __add__(self, other):
-        if not isinstance(other, Item):
-            raise ValueError('складывать можно только объекты Item')
-        return int(self.quantity) + int(other.quantity)
 
     @staticmethod
     def string_to_number(num):
-        numb = float(num)
-        return int(numb)
+        number = int(math.floor(float(num.strip())))
+        return number
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self.name}"
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError("Нельзя складывать")
+        return int(self.quantity) + int(other.quantity)
