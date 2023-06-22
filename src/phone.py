@@ -20,10 +20,3 @@ class Phone(Item):
     def __repr__(self):
         super().__repr__()
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.__number_of_sim})"
-
-    def __add__(self, other):
-        """Сложение экземпляров класса по количеству товара в магазине"""
-        super().__add__(other)
-        if not isinstance(other, Phone) and not isinstance(other, Item):
-            raise ValueError('Нельзя сложить Phone или Item с экземплярами не Phone или Item классов')
-        return self.quantity + other.quantity
