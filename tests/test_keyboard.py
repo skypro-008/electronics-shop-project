@@ -14,3 +14,8 @@ def test_keyboard_init():
     assert k2.quantity == 5
     assert k1.language == "EN"
     assert k2.language == "EN"
+
+
+def test_keyboard_change_language():
+    assert k1.change_language == "RU"
+    assert k2.change_language == "EN"
