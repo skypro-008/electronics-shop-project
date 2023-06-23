@@ -82,12 +82,22 @@ class Item:
         Инициализирует экземпляры класса `Item`
         """
         cls.all = []
-        with open('../src/items.csv', 'r', newline='') as csvfile:
+        FILE_PATH = '../src/'
+        FILE_NAME = 'items2.csv'
 
-            reader = csv.DictReader(csvfile)
-            for row in reader:
+        try:
+            with open(FILE_PATH + FILE_NAME, 'r', newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    Item(row["name"], row["price"], row["quantity"])
 
-                Item(row["name"], row["price"], row["quantity"])
+        except FileNotFoundError:
+            print(f"FileNotFoundError: Отсутствует файл {FILE_NAME}")
+        except KeyError:
+            try:
+                raise InstantiateCSVError(FILE_NAME)
+            except InstantiateCSVError as e:
+                print(e)
 
     @staticmethod
     def string_to_number(num):
@@ -95,3 +105,12 @@ class Item:
         Возвращает число из числа-строки
         """
         return math.floor(float(num))
+
+
+class InstantiateCSVError(Exception):
+    """Исключение ошибки повреждения файла"""
+    def __init__(self, *args):
+        self.message = f"InstantiateCSVError: _Файл {args[0]} поврежден_"
+
+    def __str__(self):
+        return self.message
