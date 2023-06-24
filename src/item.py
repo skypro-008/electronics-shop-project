@@ -1,10 +1,15 @@
 from csv import DictReader
+from src.CSVError import InstantiateCSVError
+
+FILE_CSV = "../src/items.csv"
+
 class Item:
     """
     Класс для представления товара в магазине.
     """
-    pay_rate = 0.85
+    pay_rate = 1.0
     all = []
+
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -44,15 +49,26 @@ class Item:
             self.__name = new_name
 
     @classmethod
-    def instantiate_from_csv(cls):
-        cls.all = []
-        PATH = '../src/items.csv'
-        for dict_ in DictReader(open(PATH, encoding='cp1251')):
-            cls(dict_["name"], float(dict_['price']), int(dict_['quantity']))
+    def instantiate_from_csv(cls, filename=FILE_CSV):
+        Item.all.clear()
+        try:
+            with open(filename, encoding='cp1251') as csvfile:
+                reader = DictReader(csvfile)
+                for row in reader:
+                    if list(row.keys()) == ['name', 'price', 'quantity']:
+                        Item(row["name"], row['price'], row['quantity'])
+                    else:
+                        raise InstantiateCSVError("Файл item.csv поврежден")
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        except InstantiateCSVError:
+            raise InstantiateCSVError("Файл item.csv поврежден")
 
     @staticmethod
-    def string_to_number(string):
-        return int(float(string))
+    def string_to_number(file):
+        """Возвращаем число"""
+        file = float(file)
+        return int(file)
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"

@@ -2,14 +2,17 @@ from src.item import Item
 
 
 class MixinLang:
-    """Внедрение дополнительного функционала"""
+    """Механизм смены языкаМеханизм смены языка"""
+
     def __init__(self, name: str, price: float, quantity: int):
         super().__init__(name, price, quantity)
         self.__language = "EN"
 
+
     @property
     def language(self):
         return self.__language
+
 
     @language.setter
     def language(self, other_language):
@@ -17,6 +20,7 @@ class MixinLang:
         if other_language == ["EN", "RU"]:
             self.__language = other_language
         raise AttributeError("property 'language' of 'KeyBoard' object has no setter")
+
 
     def change_lang(self):
         """Функция по возможности изменения языка"""
@@ -27,9 +31,14 @@ class MixinLang:
 
 
 class KeyBoard(MixinLang, Item):
-"""Добавление MixinLang в цепочку наследования"""
+
+
+    """Товар - Клавиатура"""
+
+
     def __init__(self, name: str, price: float, quantity: int):
         super().__init__(name, price, quantity)
+
 
     def __str__(self):
         return f'{self.name}'

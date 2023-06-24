@@ -1,5 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
+from src.CSVError import InstantiateCSVError
 from src.item import Item
 from src.phone import Phone
 from src.keyboard import KeyBoard
@@ -76,3 +77,20 @@ def test_init():
     assert kb.name == 'Dark Project KD87A'
     assert kb.price == 9600
     assert kb.quantity == 5
+
+def test_not_found():
+    try:
+        Item.instantiate_from_csv("../src/items.csv")
+        assert True
+    except FileNotFoundError:
+        Item.instantiate_from_csv()
+        assert True
+
+
+def test_exception():
+    try:
+        Item.instantiate_from_csv("../src/items.csv")
+        assert True
+    except InstantiateCSVError:
+        Item.instantiate_from_csv()
+        assert False
