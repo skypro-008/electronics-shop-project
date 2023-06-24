@@ -80,3 +80,7 @@ class Item:
         Статический метод, возвращающий число из числа-строки
         """
         return int(float(file))
+
+    def __add__(self, other):
+        if issubclass(other.__class__, self.__class__):
+            return self.quantity + other.quantity
