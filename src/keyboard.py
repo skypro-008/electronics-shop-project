@@ -2,7 +2,7 @@ from src.item import Item
 
 
 class MixinLang:
-    """Механизм смены языкаМеханизм смены языка"""
+    """Механизм смены языка"""
 
     def __init__(self, name: str, price: float, quantity: int):
         super().__init__(name, price, quantity)
