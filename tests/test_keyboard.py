@@ -17,5 +17,7 @@ def test_keyboard_init():
 
 
 def test_keyboard_change_language():
-    assert k1.change_language == "RU"
-    assert k2.change_language == "EN"
+    k1.change_lang()
+    k2.change_lang().change_lang()
+    assert k1.language == "RU"
+    assert k2.language == "EN"
