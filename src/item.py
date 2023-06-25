@@ -43,13 +43,14 @@ class Item:
         if len(name) <=10:
             self.__name = name
         else:
-            print("Длина наименования превышает 10 символов")
+            self.__name = name[:10]
 
     def instantiate_from_csv():
         with open('../src/items.csv', encoding='windows-1251') as f:
             reader = csv.DictReader(f)
             for row in reader:
-                print(row['name'], row['price'])
+                print(row['name'], row['price'], row['quantity'])
+
 
     @staticmethod
     def string_to_number():
