@@ -1,4 +1,4 @@
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 
 
@@ -37,3 +37,10 @@ def test_add():
     assert item1 + phone1 == 25
     assert phone1 + phone1 == 10
 
+def test_file_not_found_error():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv()
+
+def test_instantiate_csv_error():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv()
