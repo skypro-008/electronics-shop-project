@@ -1,3 +1,10 @@
+
+import csv
+import os
+
+#items_csv = os.path.join("items.csv")
+items_csv = r'D:\PycharmProjects\pythonProject\electronics-shop-project\src\items.csv'
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -14,7 +21,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
@@ -34,3 +41,43 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
+
+    @property
+    def name(self):
+        """
+        Выводит имя объекта класса Item
+        """
+        return self.__name
+
+
+    @name.setter
+    def name(self, name):
+        """
+        Присваивает новое имя объекту класса Item, длинной не более 10 символов
+        """
+        if len(name) > 10:
+            self.__name = name[:10]
+        else:
+            self.__name = name
+
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        """
+        Создает объекты класса Item на основе файла "items.csv"
+        """
+        with open(items_csv, encoding="windows-1251") as csvfile:
+            file = csv.DictReader(csvfile)
+            for line in file:
+                name, price, quantity = line["name"], float(line["price"]), int(line["quantity"])
+                Item(name, price, quantity)
+
+
+    @staticmethod
+    def string_to_number(string):
+        """
+        статический метод, возвращающий число из числа-строки
+        """
+        return int(float(string))
+

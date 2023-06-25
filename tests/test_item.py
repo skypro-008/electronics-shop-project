@@ -23,3 +23,21 @@ def test_apply_discount(item_test):
     Item.pay_rate = 0.5
     item_test.apply_discount()
     assert item_test.price == 25000
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    assert Item.all[5].name == "Кабель"
+    assert Item.all[5].price == 10.0
+    assert Item.all[5].quantity == 5
+
+
+def test_string_to_number():
+    assert Item.string_to_number('7.0') == 7
+
+
+def test_name():
+    Item.all[6].name = "ИгроваяМышка"
+    assert Item.all[6].name == "ИгроваяМыш"
+    Item.all[6].name = "ИгроваяМ"
+    assert Item.all[6].name == "ИгроваяМ"
