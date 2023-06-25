@@ -70,8 +70,8 @@ class Item:
         with open(items_csv, encoding="windows-1251") as csvfile:
             file = csv.DictReader(csvfile)
             for line in file:
-                name, price, quantity = line["name"], float(line["price"]), int(line["quantity"])
-                Item(name, price, quantity)
+                name, price, quantity = line["name"], float(line["price"]), cls.string_to_number(line["quantity"])
+                cls(name, price, quantity)
 
 
     @staticmethod
