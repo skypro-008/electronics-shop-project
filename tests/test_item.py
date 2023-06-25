@@ -6,7 +6,9 @@ from src.item import Item
 
 def test_item_init():
     item = Item("bananas", 10, 1.99)
-    assert item.calculate_total_price() == 19.9
+    assert item.name == "bananas"
+    assert item.price == 10
+    assert item.quantity == 1.99
 
 def test_calculate_total_price():
     item = Item("bananas", 10, 1.99)
