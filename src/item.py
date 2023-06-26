@@ -64,19 +64,20 @@ class Item:
         Инициализирует экземпляр класса Item с данными из файла _src/items.csv_
         """
 
-        with open('../src/items.csv', newline='', encoding='windows-1251') as csv_file:
+        cls.all.clear()
+
+        with open('../src/items.csv', newline='', encoding="utf-8") as csv_file:
             reader_csv_file = csv.DictReader(csv_file)
             for row in reader_csv_file:
-                name, price, quantity = row.split(',')
+                name = row['name']
+                price = cls.string_to_number(row['price'])
+                quantity = cls.string_to_number(row['quantity'])
                 cls(name, price, quantity)
 
+    @staticmethod
+    def string_to_number(string):
+        """
+        Возвращающий число из числа-строки
+        """
 
-
-
-                # return print()
-
-
-
-
-
-    # `string_to_number()` - статический метод, возвращающий число из числа-строки
+        return int(float(string))
