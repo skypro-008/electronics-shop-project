@@ -63,4 +63,4 @@ class Item:
 
     @staticmethod
     def string_to_number(string_num):
-        return round(int(float(string_num)), 0)
+        return int(float(string_num))
