@@ -42,7 +42,6 @@ class Item:
         """
         self.price = self.price * Item.pay_rate
 
-
     @property
     def name(self):
         return self.__name
