@@ -10,7 +10,8 @@ class Item(ABC):
 
 
 class MixinLog:
-    def __init__(self, language):
+    def __init__(self, name, price, quantity, language):
+        super().__init__(name, price, quantity)
         self.language = language
 
     def change_lang(self):
