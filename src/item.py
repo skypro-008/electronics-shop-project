@@ -1,5 +1,6 @@
 import csv
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -7,7 +8,7 @@ class Item:
     pay_rate = 1.0
     all = []
 
-    def __init__(self, name : str, price: float, quantity: int) -> None:
+    def __init__(self, name: str, price: float, quantity: int) -> None:
         """
         Создание экземпляра класса item.
 
@@ -18,6 +19,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
+        Item.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -25,8 +27,8 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        total_price = self.price * self.quantity
-        return total_price
+        return self.price * self.quantity
+
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
@@ -38,23 +40,23 @@ class Item:
         return self.__name
 
     @name.setter
-
-    def name(self, name):
-        if len(name) <=10:
-            self.__name = name
+    def name(self, doc_string):
+        if len(doc_string) > 10:
+            self.__name = doc_string[:10]
         else:
-            self.__name = name[:10]
+            self.__name = doc_string
 
-    def instantiate_from_csv():
-        with open('../src/items.csv', encoding='windows-1251') as f:
-            reader = csv.DictReader(f)
+    @classmethod
+    def instantiate_from_csv(cls):
+        cls.all = []
+        with open("../src/items.csv", "r", encoding="windows-1251") as file:
+            reader = csv.DictReader(file)
             for row in reader:
-                print(row['name'], row['price'], row['quantity'])
-
+                Item(row['name'], float(row['price']), Item.string_to_number(row['quantity']))
 
     @staticmethod
-    def string_to_number():
-        return int(float())
-
-
-
+    def string_to_number(string_in):
+        try:
+            return int(float(string_in))
+        except:
+            return "This is not a string"

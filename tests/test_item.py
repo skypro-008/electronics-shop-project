@@ -1,29 +1,42 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-from src.item import Item
+
 import pytest
+from src.item import Item
+
 
 @pytest.fixture
-def exmp():
-    return Item("Смарфтон", 10000, 20)
+def notebook():
+    return Item("notebook", 1000, 50)
 
-def calc(exmp):
-    assert exmp.calculate_total_price() == 10000
 
-def test_apply_discount(exmp):
-    exmp.pay_rate = 0.8
-    exmp.apply_discount()
-    assert exmp.price == 8000
+def test_init_(notebook):
+    assert notebook.name == "notebook"
+    assert notebook.price == 1000
+    assert notebook.quantity == 50
+    assert len(notebook.all) == 1
 
-def test_name_setter(item):
-    item.name="Телефон"
-    assert item.name == "Телефон"
-    item.name = "Супертелефон"
-    assert item.name == "Супертелефон"
 
-def test_instantiate_from_csv(item):
-    item.instantiate_from_csv(5)
-    assert len(item.all) == 5
-    assert item.all[0].name == "Смарфтон"
+def test_calculate_total_price(notebook):
+    assert notebook.calculate_total_price() == 50000
 
-def test_string_to_nember(item):
-    assert isinstance(item.string_to_number(item.quantity), int)
+
+Item.pay_rate = 0.8
+
+
+def test_apply_discount(notebook):
+    notebook.apply_discount()
+    assert notebook.price == 800
+
+
+def test_name(notebook):
+    assert notebook.name == "notebook"
+    notebook.name = "Ноутбук"
+    assert notebook.name == "Ноутбук"
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
+
+def test_string_to_number():
+    assert Item.string_to_number("54.8") == 54
