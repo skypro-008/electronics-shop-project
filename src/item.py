@@ -1,5 +1,6 @@
 import csv
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -19,6 +20,12 @@ class Item:
         self.quantity = quantity
         self.all.append(self)
         self.__name = name
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f'{self.name}'
 
     @staticmethod
     def string_to_number(score):
@@ -60,11 +67,3 @@ class Item:
             self.__name = value
         else:
             self.__name = value[:10]
-
-
-
-
-
-
-
-
