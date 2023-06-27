@@ -42,7 +42,7 @@ class Item:
 
     @name.setter
     def name(self, new_name):
-        if len(new_name) <= 10:
+        if len(new_name) <= 100:
             self.__name = new_name
         else:
             # print("Длина наименования товара превышает 10 символов.")
