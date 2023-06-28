@@ -1,4 +1,6 @@
-from src.item import Item
+import pytest
+
+from src.item import Item, InstantiateCSVError
 
 test_item_1 = Item('test_1', 999.99, 100)
 test_item_2 = Item('test_2', 50, 3)
@@ -44,6 +46,20 @@ def test_instantiate_from_csv():
     assert item1.name == 'Мышка'
     assert item1.price == 50
     assert item1.quantity == 5
+
+
+def test_instantiate_from_csv_exception_FileNotFoundError():
+    Item.file_name = 'test'
+
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv()
+
+
+def test_instantiate_from_csv_exception_InstantiateCSVError():
+    Item.file_name = 'test_items.csv'
+
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv()
 
 
 def test_string_to_number():
