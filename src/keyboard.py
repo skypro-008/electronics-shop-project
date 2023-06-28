@@ -8,6 +8,8 @@ class MixinLang:
         self.__language = 'EN'
 
     def change_lang(self):
+        """Изменяет язык (раскладку) клавиатуры.
+        Доступные языки "EN", "RU" """
         if self.__language == 'EN':
             self.__language = 'RU'
         else:
@@ -15,6 +17,7 @@ class MixinLang:
 
     @property
     def language(self):
+        """Возвращает язык клавиатуры"""
         return self.__language
 
 
