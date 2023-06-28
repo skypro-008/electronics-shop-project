@@ -41,3 +41,11 @@ def test_name():
     assert Item.all[6].name == "ИгроваяМыш"
     Item.all[6].name = "ИгроваяМ"
     assert Item.all[6].name == "ИгроваяМ"
+
+
+def test___repr__(item_test):
+    assert repr(item_test) == "Item('Ноутбук', 50000, 5)"
+
+
+def test___str__(item_test):
+    assert str(item_test) == 'Ноутбук'
