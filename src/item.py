@@ -2,12 +2,19 @@ import csv
 import os
 
 
+class InstantiateCSVError(Exception):
+    """Класс ошибки при открытии файла CSV"""
+    def __init__(self, massage='Файл item.csv поврежден') -> None:
+        self.massage = massage
+
+
 class Item:
     """
     Класс для представления товара в магазине.
     """
     pay_rate = 1.0
     all = []
+    file_name = 'items.csv'
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -72,8 +79,17 @@ class Item:
         Класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
         """
         cls.all.clear()
-        with open(os.path.join(os.path.dirname(__file__), 'items.csv'), newline='') as csvfile:
+
+        way = os.path.join(os.path.dirname(__file__), cls.file_name)
+
+        if not os.path.exists(way):
+            raise FileNotFoundError('Отсутствует файл item.csv')
+
+        with open(os.path.join(os.path.dirname(__file__), cls.file_name), newline='') as csvfile:
             reader = csv.DictReader(csvfile)
+
+            if 'name' not in reader.fieldnames or 'price' not in reader.fieldnames or 'quantity' not in reader.fieldnames:
+                raise InstantiateCSVError('Файл item.csv поврежден')
 
             for row in reader:
                 name, price, quantity = row['name'], row['price'], row['quantity']
