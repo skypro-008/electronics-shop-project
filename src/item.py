@@ -2,6 +2,15 @@ import csv
 import os
 
 
+class InstantiateCSVError(Exception):
+    """Класс исключения при повреждении файла"""
+    def __init__(self, *args):
+        self.message = args[0] if args else 'Файл item.csv поврежден'
+
+    def __str__(self):
+        return self.message
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -47,13 +56,21 @@ class Item:
         класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
         """
         cls.all.clear()
-        with open(os.path.join(os.path.dirname(__file__), 'items.csv'), newline='', encoding='cp1251') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                name = row['name']
-                price = float(row['price'])
-                quantity = int(row['quantity'])
-                cls(name, price, quantity)
+        try:
+            with open(os.path.join(os.path.dirname(__file__), 'items.csv'), newline='', encoding='cp1251') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    if 'quantity' not in row:
+                        raise InstantiateCSVError
+
+                    else:
+                        name = row['name']
+                        price = float(row['price'])
+                        quantity = int(row['quantity'])
+                        cls(name, price, quantity)
+
+        except FileNotFoundError:
+            print("FileNotFoundError: Отсутствует файл items.csv")
 
     def calculate_total_price(self) -> float:
         """

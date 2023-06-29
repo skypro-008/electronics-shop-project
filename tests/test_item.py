@@ -26,6 +26,7 @@ def test_item_apply_discount(item1):
 
 def test_instantiate_from_csv():
     Item.instantiate_from_csv()
+
     assert len(Item.all) == 5
 
     item1 = Item.all[4]
@@ -45,6 +46,12 @@ def test_item_repr(item1):
 def test_item_str(item1):
     assert str(item1) == 'Наушники'
 
+
 def test_item_add(item1):
     item2 = Item('Клавиатура', 10000, 5)
     assert item1 + item2 == 15
+
+
+def test_file_not_found_error():
+    with pytest.raises(FileNotFoundError, match='Отсутствует файл items.csv'):
+        Item.instantiate_from_csv()
