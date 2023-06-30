@@ -40,3 +40,12 @@ def test_instantiate_from_csv():
 
 def test_string_to_number():
     assert Item.string_to_number("54.8") == 54
+
+def test_repr():
+    """Тестирует метод repr."""
+    assert repr() == "Item('Смартфон', 10000, 20)"
+
+
+def test_str():
+    """Тестирует метод str."""
+    assert str() == 'Смартфон'
