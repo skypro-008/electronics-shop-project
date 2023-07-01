@@ -25,3 +25,34 @@ def test_apply_discount(test_case_item1, test_case_item2):
     assert test_case_item1.price == 8000.0
     assert test_case_item2.price == 20000
 
+
+def test_getter(test_case_item1):
+    """Тест геттера"""
+    assert test_case_item1.name == "Смартфон"
+
+
+def test_setter(test_case_item1):
+    """Тест сеттера"""
+    test_case_item1.name = 'Супер'
+    assert test_case_item1.name == 'Супер'
+
+    test_case_item1.name = 'СуперСмартфон'
+    assert test_case_item1.name == 'СуперСмарт'
+
+
+def test_instantiate_from_csv():
+    """Тест чтения"""
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
+
+    item1 = Item.all[0]
+    assert item1.name == 'Смартфон'
+    assert item1.price == 100 and (type(item1.price) == float or type(item1.price) == int)
+    assert item1.quantity == 1 and type(item1.quantity) == int
+
+
+def test_string_to_number():
+    """Тест перевода из строки в число"""
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
