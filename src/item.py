@@ -1,4 +1,5 @@
 import csv
+import os.path
 class Item:
     """
     Класс для представления товара в магазине.
@@ -24,7 +25,7 @@ class Item:
         return self.__name
 
     @name.setter
-    def name(self,name):
+    def name(self, name):
         if len(self.__name) > 10:
             raise ValueError('Длинна товара превышает 10 символов')
         else:
@@ -49,20 +50,24 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        with open('C:/Users/Ruslan/PycharmProjects/electronics-shop-project/src/items.csv ', 'r', newline='') as cvsfile:
-            cls.all = []
-            reader = csv.DictReader(cvsfile)
+
+        with open('C:/Users/Ruslan/PycharmProjects/electronics-shop-project/src/items.csv ', 'r', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            cls.all.clear()
             for row in reader:
-                cls.__name = row['name']
-                cls.price = float(row['price'])
-                cls.quantity = int(row['quantity'])
-                item = Item(name, price, quantity)
-                cls.all.append(item)
-            print(cls.all)
+                name = row['name']
+                price = float(row['price'])
+                quantity = int(row['quantity'])
+                item = cls(name,price,quantity)
+            cls.all.append(item)
+            cls.all.pop()
+
+
+    def __repr__(self):
+        return f'{self.name},{self.price},{self.quantity}'
 
     @staticmethod
     def string_to_number(stroka):
-        return int(''.join(filter(str.isdigit, stroka)))
-
-
-
+        num = float(stroka)
+        int_num = int(num)
+        return int_num
