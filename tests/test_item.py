@@ -19,3 +19,16 @@ def test_apply_discount(item):
     item.apply_discount()
     assert item.price == 8000.0
     assert isinstance(item.price, float)
+
+
+def test_instantiate_from_csv(item):
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
+    item1 = Item.all[0]
+    assert item1.name == 'Смартфон'
+
+
+def test_string_to_number(item):
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
