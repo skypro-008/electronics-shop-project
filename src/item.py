@@ -1,5 +1,5 @@
 import csv
-
+import math
 
 class Item:
     """
@@ -56,5 +56,4 @@ class Item:
 
     @staticmethod
     def string_to_number(number_str):
-        digit = int(number_str[:1])
-        return digit
+        return math.floor(float(number_str))
