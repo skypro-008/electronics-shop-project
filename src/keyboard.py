@@ -1,9 +1,23 @@
-class KeyBoard:
-    def __init__(self, language: str, price: float, quantity: int):
-        self.language = language
-        self.price = price
-        self.quantity = quantity
+from src.item import Item
 
 
-kb = KeyBoard('Dark Project KD87A', 9600, 5)
-print(kb.__dict__)
+class MixinLang:
+    """Класс-Миксин, хранит и меняет раскладку на клавиатуре"""
+    def __init__(self):
+        self.__language = "EN"
+
+    @property
+    def language(self):
+        return self.__language
+
+    def change_lang(self):
+        if self.__language == "EN":
+            self.__language = "RU"
+        else:
+            self.__language = "EN"
+        return self
+
+
+class KeyBoard(Item, MixinLang):
+    """Класс клавиатура"""
+    pass
