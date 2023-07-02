@@ -1,6 +1,7 @@
 import csv
 import math
 
+
 class Item:
     """
     Класс для представления товара в магазине.
