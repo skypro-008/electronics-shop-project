@@ -1,6 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 
 
 def test_init(test_item):
@@ -25,9 +25,13 @@ def test_name(test_item):
     assert test_item.name == "test_nbook"
 
 
-def test_initiate_from_csv():
+def test_instantiate_from_csv():
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv(filename="No_name.csv")
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv(filename="bad_items.csv")
 
 
 def test_item_string_to_number():
@@ -44,8 +48,7 @@ def test_repr(test_item):
 def test_str(test_item):
     assert str(test_item) == "test_PC"
 
+
 def test__add__(test_item, test_phone):
     assert test_item + test_phone == 8
-    assert test_item + 150000 == "Складываеть можно только значения Item и дочерние от них"
-
-
+    assert test_item + 150000 == "Складывать можно только значения Item и дочерние от них"

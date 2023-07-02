@@ -52,15 +52,23 @@ class Item:
     def name(self): return self.__name
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, filename='items.csv'):
 
         cls.all.clear()
-        file = os.path.join(os.path.dirname(__file__), 'items.csv')
-        with open(file, 'r', encoding="windows-1251") as file:
-            reader_csv = DictReader(file)
-            for row in reader_csv:
-                name, price, quantity = row['name'], float(row['price']), int(row['quantity'])
-                cls(name, price, quantity)
+
+        file = os.path.join(os.path.dirname(__file__), filename)
+
+        try:
+            with open(file, 'r', encoding="windows-1251") as file:
+                reader_csv = DictReader(file)
+                for row in reader_csv:
+                    name, price, quantity = row['name'], float(row['price']), int(row['quantity'])
+                    cls(name, price, quantity)
+
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        except Exception:
+            raise InstantiateCSVError
 
     @staticmethod
     def string_to_number(data):
@@ -75,5 +83,13 @@ class Item:
 
     def __add__(self, other):
         if not isinstance(other, Item):
-            return "Складываеть можно только значения Item и дочерние от них"
+            return "Складывать можно только значения Item и дочерние от них"
         return self.quantity + other.quantity
+
+
+class InstantiateCSVError(Exception):
+    def __init__(self):
+        self.message = "файл item.csv поврежден"
+
+    def __str__(self):
+        return self.message
