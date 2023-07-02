@@ -1,4 +1,5 @@
 import csv
+import math
 
 
 class Item:
@@ -48,7 +49,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        with open('D:\electronics-shop-project\src\items.csv', newline='') as csvfile:
+        with open('items.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
 
@@ -56,5 +57,4 @@ class Item:
 
     @staticmethod
     def string_to_number(number_str):
-        digit = int(number_str[:1])
-        return digit
+        return math.floor(float(number_str))
