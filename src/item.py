@@ -2,7 +2,7 @@ import csv
 import os
 
 
-class InstantiateCSVError:
+class InstantiateCSVError(Exception):
     def __init__(self, filename: str):
         self.filename = filename
 
