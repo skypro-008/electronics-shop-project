@@ -29,8 +29,8 @@ class Item:
     @name.setter
     def name(self, new_name: str) -> None:
         """Сеттер названия"""
-        if len(new_name) > 10:
-            self.__name = new_name[:10]
+        if len(new_name) >= 10:
+            raise ValueError('More than 10 letters in the name')
         else:
             self.__name = new_name
 

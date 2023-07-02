@@ -1,5 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
+import pytest
 
 
 def test_init_item(test_case_item1):
@@ -36,8 +37,9 @@ def test_setter(test_case_item1):
     test_case_item1.name = 'Супер'
     assert test_case_item1.name == 'Супер'
 
-    test_case_item1.name = 'СуперСмартфон'
-    assert test_case_item1.name == 'СуперСмарт'
+    with pytest.raises(ValueError):
+        test_case_item1.name = 'СуперСмартфон'
+
 
 
 def test_instantiate_from_csv():
