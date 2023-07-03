@@ -4,16 +4,6 @@ from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 
 
-# Добавьте в метод instantiate_from_csv() класса Item обработку исключений:
-#
-# если файл items.csv, из которого по умолчанию считываются данные, не найден → выбрасывается исключение FileNotFoundError с сообщением “Отсутствует файл item.csv"
-# если файл item.csv поврежден (например, отсутствует одна из колонок данных) → выбрасывается исключение InstantiateCSVError с сообщением “Файл item.csv поврежден”.
-# Класс-исключение InstantiateCSVError реализуйте самостоятельно.
-#
-# Тестирование:
-#
-# Напишите тесты для нового функционала
-
 def test_calculate_total_price():
     item1 = Item("Смартфон", 10000, 20)
     item2 = Item("Ноутбук", 20000, 5)
@@ -77,18 +67,11 @@ def test_get_price():
     assert phone1 + 50 == 'Не экземпляр класса Item'
 
 
-def test_instantiate_from_csv_file_not_found():
-    try:
-        if Item.instantiate_from_csv() is None:
-            pytest.fail("Expected FileNotFoundError")
-    except FileNotFoundError as e:
-        assert str(e) == "Отсутствует файл item.csv"
+def test_read_file():
+    assert str(Item.instantiate_from_csv()) == "[Item('Смартфон', 100, 1), Item('Ноутбук', 1000, 3), Item('Кабель', 10, 5), Item('Мышка', 50, 5), Item('Клавиатура', 75, 5)]"
 
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('items_none.csv')
 
-def test_instantiate_from_csv_file_wrong_format():
-    try:
-        if Item.instantiate_from_csv() is None:
-            pytest.fail("Expected InstantiateCSVError")
-
-    except InstantiateCSVError as e:
-        assert str(e) == "Файл item.csv поврежден"
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv('item.csv')
