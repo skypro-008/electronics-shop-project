@@ -2,8 +2,8 @@
 import csv
 import os
 
-#items_csv = os.path.join("items.csv")
-items_csv = r'D:\PycharmProjects\pythonProject\electronics-shop-project\src\items.csv'
+items_csv = os.path.join("src", "items.csv")
+#items_csv = r'D:\PycharmProjects\pythonProject\electronics-shop-project\src\items.csv'
 
 class Item:
     """
