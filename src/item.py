@@ -1,6 +1,7 @@
 import csv
 import math
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -48,7 +49,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        with open('items.csv', newline='') as csvfile:
+        with open('src/items.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
 
