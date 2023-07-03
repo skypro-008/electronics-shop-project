@@ -49,25 +49,30 @@ class Item:
     @name.setter
     def name(self, name: str):
         if len(name) > 10:
-            raise Exception('Наименования товара должно быть не больше 10 симвовов')
+            raise Exception('Наименования товара должно быть не больше 10 символов')
         else:
             self.__name = name
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, file_path='items.csv'):
         """
         Класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv
         """
         items = []
-        with open(os.path.join(os.path.dirname(__file__), 'items.csv'), newline='', encoding='cp1251') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                name = row['name']
-                price = int(row['price'])
-                quantity = int(row['quantity'])
-                item = cls(name, price, quantity)
-                items.append(item)
-                cls.all.append(item)
+        try:
+            with open(os.path.join(os.path.dirname(__file__), file_path), newline='', encoding='cp1251') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    name = row['name']
+                    price = int(row['price'])
+                    quantity = int(row['quantity'])
+                    item = cls(name, price, quantity)
+                    items.append(item)
+                    cls.all.append(item)
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        except ValueError:
+            raise InstantiateCSVError("Файл item.csv поврежден")
         return items
 
     @staticmethod
@@ -84,3 +89,17 @@ class Item:
         if isinstance(other, self.__class__):
             return self.quantity + other.quantity
         return 'Не экземпляр класса Item'
+
+
+class InstantiateCSVError(Exception):
+    """
+    Класс-исключение, возникающее при некорректных данных в файле items.csv
+    """
+    def __init__(self, message="Файл item.csv поврежден"):
+        super().__init__(message)
+        self.message = message
+
+
+
+# print(Item.instantiate_from_csv())
+# print(Item.instantiate_from_csv('item.csv'))
