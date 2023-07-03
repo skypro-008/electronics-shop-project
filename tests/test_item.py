@@ -18,12 +18,20 @@ def test_string_to_number(item):
     assert item.string_to_number(item.stroka) == 3123
     item.floatchislo = 5.0
     assert item.string_to_number(item.floatchislo) == 5
+
 def test_instantiate_from_csv():
     Item.instantiate_from_csv()
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
     assert len(Item.all) == 5
 
+def test__repr__(item):
+    item1 = Item('Смартфон',10000,20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+def test__str__(item):
+    item1 = Item('Смартфон',10000,20)
+    assert str(item1) == 'Смартфон'
 
 
 
