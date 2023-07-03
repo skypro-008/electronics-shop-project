@@ -95,11 +95,7 @@ class InstantiateCSVError(Exception):
     """
     Класс-исключение, возникающее при некорректных данных в файле items.csv
     """
+
     def __init__(self, message="Файл item.csv поврежден"):
         super().__init__(message)
         self.message = message
-
-
-
-# print(Item.instantiate_from_csv())
-# print(Item.instantiate_from_csv('item.csv'))
