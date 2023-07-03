@@ -1,5 +1,8 @@
 import csv
 import math
+import os
+
+path_to_file = os.path.join(os.path.dirname(__file__), 'items.csv')
 
 
 class Item:
@@ -19,6 +22,12 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self.__name}"
 
     def calculate_total_price(self) -> float:
         """
@@ -48,11 +57,12 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        with open('src/items.csv', newline='') as csvfile:
+        cls.all.clear()
+        with open(path_to_file, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
 
-                Item.all.append(Item(row['name'], float(row['price']), int(row['quantity'])))
+                Item.all.append(cls(row['name'], float(row['price']), int(row['quantity'])))
 
     @staticmethod
     def string_to_number(number_str):
