@@ -14,6 +14,16 @@ def cls_item_2():
     return item.name
 
 
+def test_repr(cls_item):
+    assert repr(cls_item) == "Item('Смартфон', 10000, 20)"
+    assert repr(cls_item) == f"{cls_item.__class__.__name__}('{cls_item.name}', {cls_item.price}, {cls_item.quantity})"
+
+
+def test_str(cls_item):
+    assert str(cls_item) == 'Смартфон'
+    assert str(cls_item) == f"{cls_item.name}"
+
+
 def test_calculate_total_price(cls_item):
     assert cls_item.calculate_total_price() == cls_item.quantity*cls_item.price
     assert cls_item.calculate_total_price() == 200000
