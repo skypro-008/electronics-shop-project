@@ -76,3 +76,4 @@ def test_read_file():
 
     with pytest.raises(InstantiateCSVError):
         Item.instantiate_from_csv('item.csv')
+
