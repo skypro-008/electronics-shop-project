@@ -68,7 +68,8 @@ def test_get_price():
 
 
 def test_read_file():
-    assert str(Item.instantiate_from_csv()) == "[Item('Смартфон', 100, 1), Item('Ноутбук', 1000, 3), Item('Кабель', 10, 5), Item('Мышка', 50, 5), Item('Клавиатура', 75, 5)]"
+    assert str(
+        Item.instantiate_from_csv()) == "[Item('Смартфон', 100, 1), Item('Ноутбук', 1000, 3), Item('Кабель', 10, 5), Item('Мышка', 50, 5), Item('Клавиатура', 75, 5)]"
 
     with pytest.raises(FileNotFoundError):
         Item.instantiate_from_csv('items_none.csv')
