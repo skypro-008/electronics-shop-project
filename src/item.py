@@ -69,6 +69,9 @@ class Item:
     def __str__(self):
         return f'{self.name}'
 
+    def __add__(self, other):
+        return int(self.quantity) + int(other.quantity)
+
     @staticmethod
     def string_to_number(stroka):
         num = float(stroka)
