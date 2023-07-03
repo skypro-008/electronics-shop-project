@@ -18,6 +18,15 @@ class Item:
         self.quantity = quantity
         Item.all.append(self)
 
+    @classmethod
+    def instantiate_from_csv(cls):
+        pass
+
+    @staticmethod
+    def string_to_number(str_number: str):
+        """возвращает число из числа-строки"""
+        return int(str_number)
+
     @property
     def name(self) -> str:
         return self.__name
