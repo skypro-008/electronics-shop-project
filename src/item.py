@@ -37,7 +37,6 @@ class Item:
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
-
         :return: Общая стоимость товара.
         """
         total_cost = self.quantity*self.price
