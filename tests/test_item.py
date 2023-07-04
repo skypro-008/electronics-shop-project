@@ -1,5 +1,6 @@
 import pytest
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture
@@ -12,6 +13,11 @@ def cls_item_2():
     item = Item('Телефон', 10000, 5)
     item.name = 'СуперСмартфон'
     return item.name
+
+
+@pytest.fixture
+def cls_phone():
+    return Phone("iPhone 14", 120_000, 5, 2)
 
 
 def test_repr(cls_item):
@@ -44,3 +50,14 @@ def test_string_to_number(cls_item):
     assert cls_item.string_to_number('5') == 5
     assert cls_item.string_to_number('5.0') == 5
     assert cls_item.string_to_number('5.5') == 5
+
+
+def test_add(cls_phone, cls_item):
+
+    assert cls_phone + cls_item == 25
+    assert cls_item + cls_phone == 25
+    assert cls_phone + cls_item == cls_phone.quantity + cls_item.quantity
+
+    assert cls_item + cls_item == 40
+    assert cls_phone + cls_phone == 10
+    assert cls_phone + cls_phone == cls_phone.quantity + cls_phone.quantity
