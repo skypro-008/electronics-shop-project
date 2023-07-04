@@ -11,6 +11,9 @@ if __name__ == '__main__':
     Item.pay_rate = 0.8
     # применяем скидку
     item1.apply_discount()
+    # сохраняем созданные экземляры класса
+    Item.all.append(item1)
+    Item.all.append(item2)
 
     print(item1.price)  # 8000.0
     print(item2.price)  # 20000
