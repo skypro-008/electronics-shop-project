@@ -1,3 +1,6 @@
+from csv import DictReader
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -20,12 +23,18 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        pass
+        # читаем CSV файл как список словарей, ключи
+        # которого заданы первой строкой файла 'names.csv'
+        with open('../src/items.csv', 'r', encoding='windows-1251') as csvfile:
+            reader = DictReader(csvfile)
+            for row in reader:
+                cls(row['name'], float(row['price']), cls.string_to_number(row['quantity']))
+
 
     @staticmethod
     def string_to_number(str_number: str):
         """возвращает число из числа-строки"""
-        return int(str_number)
+        return int(float(str_number))
 
     @property
     def name(self) -> str:
