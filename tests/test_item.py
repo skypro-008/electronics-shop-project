@@ -56,8 +56,7 @@ def test_add(cls_phone, cls_item):
 
     assert cls_phone + cls_item == 25
     assert cls_item + cls_phone == 25
-    assert cls_phone + cls_item == cls_phone.quantity + cls_item.quantity
-
     assert cls_item + cls_item == 40
     assert cls_phone + cls_phone == 10
+    assert cls_phone + cls_item == cls_phone.quantity + cls_item.quantity
     assert cls_phone + cls_phone == cls_phone.quantity + cls_phone.quantity
