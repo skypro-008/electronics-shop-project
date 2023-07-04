@@ -2,6 +2,8 @@
 from pytest import fixture
 from src.item import Item
 from src.phone import Phone
+from src.keyboard import Keyboard
+from src.keyboard import MixinLan
 
 @fixture
 def item():
@@ -47,6 +49,24 @@ def test_adding_objs(item):
     phone1 = Phone("iPhone 14", 120_000, 5, 2)
     assert item1 + phone1 == 25
     assert phone1 + phone1 == 10
+
+def test_Keyboard_class(item):
+    kb1 = Keyboard('Dark Project KD87A', 9600, 5)
+    assert str(kb1) == 'Dark Project KD87A'
+    assert str(kb1.language) == 'EN'
+
+def test_Keyboard_MixinLan_class(item):
+    kb1 = Keyboard('Dark Project KD87A', 9600, 5)
+    assert str(kb1.language) == 'EN'
+    kb1.change_lang()
+    assert str(kb1.language) == 'RU'
+    kb1.change_lang().change_lang()
+    assert str(kb1.language) == 'RU'
+
+def test_change_language_Mixin_class(item):
+    kb1 = Keyboard('Dark Project KD87A', 9600, 5)
+    kb1.language = 'CH'
+    assert kb1.language == 'CH'
 
 
 
