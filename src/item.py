@@ -79,4 +79,4 @@ class Item:
 
     @classmethod
     def get_all_items(cls):
-        return [str(item) for item in cls.all]
+        return cls.all

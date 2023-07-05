@@ -1,9 +1,36 @@
 from src.item import Item
 
 
-class Keyboard(Item):
+class KeyboardLayoutMixin:
     """
-    Класс для товара “клавиатура”
+    Миксин для хранения и изменения раскладки клавиатуры.
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._layout = 'EN'
+
+    @property
+    def layout(self):
+        return self._layout
+
+    @layout.setter
+    def layout(self, value):
+        if value in ['EN', 'RU']:
+            self._layout = value
+        else:
+            raise ValueError("Недопустимая раскладка клавиатуры. Допустимые значения: 'EN', 'RU'")
+
+    def change_layout(self):
+        if self.layout == 'EN':
+            self.language = 'RU'
+        else:
+            self.language = 'EN'
+        return self
+
+
+class Keyboard(KeyboardLayoutMixin, Item):
+    """
+    Класс для товара "клавиатура".
     """
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
@@ -26,13 +53,6 @@ class Keyboard(Item):
             self._language = value
         else:
             raise ValueError("Недопустимый язык. Допустимые значения: 'EN', 'RU'")
-
-    def change_lang(self):
-        if self.language == 'EN':
-            self.language = 'RU'
-        else:
-            self.language = 'EN'
-        return self
 
     def __str__(self):
         return self.name
