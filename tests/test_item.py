@@ -13,11 +13,6 @@ def test_item2():
     return Item("Товар2", 50, 3)
 
 
-@pytest.fixture
-def test_item_all():
-    return Item.all
-
-
 def test_repr(test_item1):
     assert test_item1.__repr__() == "Item('Товар1', 100, 2)"
 
