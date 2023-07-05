@@ -30,19 +30,24 @@ class Item:
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
     @classmethod
-    def instantiate_from_csv(cls) -> dict:
+    def instantiate_from_csv(cls):
         """Открываем файл items.csv для чтения, с помощью модуля "csv" и метода "DictReader" делаем итерацию по нему и
         в каждой итерации создаем новый экземпляр класса item
         """
-
         cls.all = []
-        with open(Item.csv_file, newline="", encoding="latin-1") as file:
-            read_file = csv.DictReader(file)
-            for product in read_file:
-                name = product['name']
-                price = product['price']
-                quantity = product['quantity']
-                item = cls(name, float(price), int(quantity))
+        try:
+            with open(Item.csv_file, newline="", encoding="latin-1") as file:
+                read_file = csv.DictReader(file)
+                for product in read_file:
+                    name = product['name']
+                    price = product['price']
+                    quantity = product['quantity']
+                    item = cls(name, float(price), int(quantity))
+        except FileNotFoundError:
+            print("FileNotFoundError: Отсутствует файл item.csv")
+        except KeyError:
+            raise InstantiateCSVError from None
+        else:
             return item
 
     @staticmethod
@@ -89,3 +94,10 @@ class Item:
             return self.quantity + other.quantity
         else:
             return None
+
+
+class InstantiateCSVError(Exception):
+    """В этом классе мы переопределяем сообщение в родительском классе Exception"""
+    def __init__(self, massage="Файл item.csv поврежден"):
+        super().__init__(massage)
+        self.massage = massage
