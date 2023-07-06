@@ -67,7 +67,6 @@ class Item:
         """
         Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
-
         cls.all.clear()
         try:
             with open(file, newline="") as csvfile:
@@ -83,6 +82,7 @@ class Item:
             print(error.message)
             return error.message
 
+
     @staticmethod
     def string_to_number(file):
         """
@@ -97,6 +97,5 @@ class Item:
 
 class InstantiateCSVError(Exception):
     """Класс-исключение"""
-
     def __init__(self, *args, **kwargs):
         self.message = "Файл item.csv поврежден"
