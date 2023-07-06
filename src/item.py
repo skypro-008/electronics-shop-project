@@ -27,14 +27,20 @@ class Item:
 # Добавим статический метод string_to_number(), возвращающий число из числа-строки.
 
     @staticmethod
-    def string_to_number(namber):
-        return int(float(namber))
+    def string_to_number(number):
+        return int(float(number))
 
     def __repr__(self):
         """
         Возвращает строковое представление экземпляров класса Item.
         """
         return f"Item(name={self.name}, price={self.price}, quantity={self.quantity})"
+
+    def __str__(self):
+        """
+        Вывод информацию об объекте класса Item для пользователя.
+        """
+        return self.name
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -73,3 +79,8 @@ class Item:
             raise ValueError('Длина наименования товара превышает 10 символов')
         else:
             self.__name = add_name
+
+
+if __name__ == "__main__":
+    item1 = Item("Смартфон", 10000, 20)
+    print(item1)

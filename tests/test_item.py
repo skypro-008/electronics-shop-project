@@ -28,10 +28,6 @@ def test_apply_discount(product_list_1):
     assert product_list_1.price == 12500
 
 
-def test__repr__(product_list_2):
-    assert repr(product_list_2) == "Item(name=Плеер, price=4000, quantity=8)"
-
-
 def test_name(product_list_2):
     assert product_list_2.name == "Плеер"
 
@@ -52,3 +48,11 @@ def test_instantiate_from_csv():
     Item.all.clear()
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
+
+
+def test__repr__(product_list_2):
+    assert repr(product_list_2) == "Item(name=Плеер, price=4000, quantity=8)"
+
+
+def test__str__(product_list_3):
+    assert str(product_list_3) == "Соковыжималка"
