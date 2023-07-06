@@ -64,6 +64,7 @@ class Item:
             self.__name = value
     @classmethod
     def instantiate_from_csv(cls):
+        Item.all.clear()
         with open('../src/items.csv', 'r', encoding='windows-1251') as file:
             file_dict = csv.DictReader(file)
             for row in file_dict:
