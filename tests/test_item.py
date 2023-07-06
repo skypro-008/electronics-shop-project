@@ -1,7 +1,7 @@
 import pytest
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
-
+import csv
 
 item1 = Item("Смартфон", 10000, 20)
 
@@ -29,7 +29,8 @@ def test_name_getter():
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv()
+    file = '../src/items.csv'
+    Item.instantiate_from_csv(file)
     assert len(Item.all) == 5
 
 
@@ -58,3 +59,14 @@ def test_add():
     phone1 = Phone("iPhone 14", 120_000, 5, 2)
     assert item1 + phone1 == 25
     assert phone1 + phone1 == 10
+
+
+def test_file_not_found():
+    with pytest.raises(FileNotFoundError):
+        file = '../src/item.csv'
+        assert Item.instantiate_from_csv(file)
+
+
+def test_instantiate_csv():
+    file = '../src/items2.csv'
+    assert Item.instantiate_from_csv(file) == "Файл item.csv поврежден"
