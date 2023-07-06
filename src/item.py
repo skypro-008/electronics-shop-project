@@ -67,12 +67,22 @@ class Item:
         """
         Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
-        file = '../src/items.csv'
+        # file = '../src/items.csv'
+        file = '../src/items2.csv'
+        # file = '../src/item.csv'
         cls.all.clear()
-        with open(file, newline="") as csvfile:
-            item = csv.DictReader(csvfile)
-            for row in item:
-                cls(row['name'], row['price'], row["quantity"])
+        try:
+            with open(file, newline="") as csvfile:
+                item = csv.DictReader(csvfile)
+                for row in item:
+                    if len(row) == 3:
+                        cls(row['name'], row['price'], row["quantity"])
+                    else:
+                        raise InstantiateCSVError
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        except InstantiateCSVError as error:
+            print(error.message)
 
     @staticmethod
     def string_to_number(file):
@@ -84,3 +94,9 @@ class Item:
     def __add__(self, other):
         if issubclass(other.__class__, self.__class__):
             return self.quantity + other.quantity
+
+
+class InstantiateCSVError(Exception):
+
+    def __init__(self, *args, **kwargs):
+        self.message = "Файл item.csv поврежден"
