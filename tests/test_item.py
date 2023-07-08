@@ -60,3 +60,13 @@ def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
+
+def test_repr_item(test_case_item1):
+    """Тест магического метода repr"""
+    assert repr(test_case_item1) == "Item('Смартфон', 10000, 20)"
+
+
+def test_str_item(test_case_item1):
+    """Тест магического метода str"""
+    assert  str(test_case_item1) == 'Смартфон'
