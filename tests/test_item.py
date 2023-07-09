@@ -1,5 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
+import csv
 
 from src.item import Item
 
@@ -10,6 +11,35 @@ def item1():
     return item1
 
 
+@pytest.fixture
+def item2():
+    item2 = Item("СуперСмартфон", 100000, 5)
+    return item2
+
+
+@pytest.fixture
+def new_name():
+    new_name = "СуперСмартфон"
+    return new_name
+
+
+@pytest.fixture
+def value():
+    value = '99.9'
+    return value
+
+
+@pytest.fixture
+def row1():
+    items_csv = 'C:/Users/user/PycharmProjects/electronics-shop-project/src/items.csv'
+    with open(items_csv, newline='') as csvfile:
+        reader = csv.DictReader(csvfile, delimiter=',')
+        # Item.all = []
+        list_row = [row for row in reader]
+        row1 = list_row[0]
+        return row1
+
+
 def test_calculate_total_price(item1):
     """
     При создании экземпляра класса со значениями name, price, quantity,
@@ -17,7 +47,6 @@ def test_calculate_total_price(item1):
     total_price = price * quantity
     """
     assert item1.calculate_total_price() == 200000
-    # assert item2.calculate_total_price() == 100000
 
 
 def test_apply_discount(item1):
@@ -34,3 +63,58 @@ def test_apply_discount(item1):
     item1.apply_discount()
 
     assert item1.price == 5000.0
+
+
+def test_property_name(item2):
+    """
+    Геттер для `name` с использованием @property позволяет получить приватное значение
+    'name' экземпляра
+    """
+    assert item2.name == "СуперСмартфон"
+
+
+def test_name_setter(item2, new_name):
+    """
+    Cеттер `name` позволяет задать новое значение для 'name' экземпляра
+    с учетом заданных условий для 'name': допускается наименование
+    не больше 10 симвовов, в противном случае, строка обрезается
+    (остаются первые 10 символов)
+    """
+    item2.name = new_name
+    assert item2.name == "СуперСмарт"
+
+
+def test_classmethod_instantiate_from_csv(row1):
+    """
+    Класс-метод instantiate_from_csv(), инициализирующий экземпляры
+    класса `Item` данными из файла _src/items.csv. Считывает данные
+    файла в вмде словаря с первой строкой row[0] с данными по ключам
+    'name', 'price', 'quantity'
+    """
+    assert row1 == {'name': 'Смартфон', 'price': '100', 'quantity': '1'}
+    name = Item.check_to_str(row1['name'])
+    assert name == 'Смартфон'
+    price = Item.check_to_float(row1['price'])
+    assert price == 100.0
+    quantity = Item.check_to_int(row1['quantity'])
+    assert quantity == 1
+
+
+def test_staticmethod_string_to_number(value):
+    """Cтатический метод string_to_number() возвращает целое число из числа-строки"""
+    assert Item.string_to_number(value) == 99
+
+
+def test_staticmethod_check_to_str(value):
+    """Cтатический метод check_to_str() возвращает тип str"""
+    assert Item.check_to_str(value) == '99.9'
+
+
+def test_staticmethod_check_to_float(value):
+    """Cтатический метод check_to_float() возвращает тип float"""
+    assert Item.check_to_float(value) == 99.9
+
+
+def test_staticmethod_check_to_int(value):
+    """Cтатический метод check_to_int(), возвращает тип int"""
+    assert Item.check_to_int(value) == 99
