@@ -8,7 +8,7 @@ class Phone(Item):
     def __repr__(self):
         return f'{self.__class__.__name__}(\'{self.name}\', {self.price}, {str(self.quantity)}, {self.number_of_sim})'
 
-     @property
+    @property
     def number_of_sim(self):
         return self.__number_of_sim
 
