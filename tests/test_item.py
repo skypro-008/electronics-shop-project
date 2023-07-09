@@ -1,5 +1,6 @@
 import pytest
 from src.item import Item
+from tests.test_phone import test_phone1
 
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 
