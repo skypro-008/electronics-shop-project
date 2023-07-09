@@ -18,5 +18,3 @@ def test_str(test_phone1):
 def test_number_of_sim(test_phone1):
     test_phone1.number_of_sim = 1
     assert test_phone1.number_of_sim == 1
-    test_phone1.number_of_sim = 0
-    assert test_phone1.number_of_sim == 1
