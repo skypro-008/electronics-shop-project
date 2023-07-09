@@ -1,11 +1,12 @@
 import csv
 import math
 import os
+from abc import ABC, abstractmethod
 
 path_to_file = os.path.join(os.path.dirname(__file__), 'items.csv')
 
 
-class Item:
+class Item(ABC):
     """
     Класс для представления товара в магазине.
     """
@@ -19,9 +20,11 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
+        #super().__init__()
         self.__name = name
         self.price = price
         self.quantity = quantity
+
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
