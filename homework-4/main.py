@@ -10,8 +10,8 @@ if __name__ == '__main__':
     assert phone1.number_of_sim == 2
 
     item1 = Item("Смартфон", 10000, 20)
-    assert item1 + phone1 == 25
-    assert phone1 + phone1 == 10
+    assert item1.quantity + phone1.quantity == 25
+    assert phone1.quantity + phone1.quantity == 10
 
     phone1.number_of_sim = 0
     # ValueError: Количество физических SIM-карт должно быть целым числом больше нуля.
