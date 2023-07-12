@@ -41,7 +41,6 @@ def test_setter(test_case_item1):
         test_case_item1.name = 'СуперСмартфон'
 
 
-
 def test_instantiate_from_csv():
     """Тест чтения"""
     Item.instantiate_from_csv()
@@ -69,4 +68,9 @@ def test_repr_item(test_case_item1):
 
 def test_str_item(test_case_item1):
     """Тест магического метода str"""
-    assert  str(test_case_item1) == 'Смартфон'
+    assert str(test_case_item1) == 'Смартфон'
+
+
+def test_add_items(test_case_item1, test_case_item2):
+    """Тест сложения"""
+    assert test_case_item1 + test_case_item2 == 25
