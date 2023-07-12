@@ -29,6 +29,13 @@ class Item:
         """Возвращает название"""
         return f"{self.name}"
 
+    def __add__(self, other):
+        """Определение сложения товаров"""
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        else:
+            raise TypeError("Unsupported class.")
+
     @property
     def name(self) -> str:
         """Геттер названия"""
