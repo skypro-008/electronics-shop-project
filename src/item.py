@@ -1,5 +1,7 @@
 import csv
 
+from src import *
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -63,8 +65,7 @@ class Item:
         Класс-метод, инициализирующий экземпляры класса `Item`
         данными из файла _src/items.csv
         """
-        items_csv = 'C:/Users/user/PycharmProjects/electronics-shop-project/src/items.csv'
-        with open(items_csv, newline='') as csvfile:
+        with open('../src/items.csv', 'r', encoding='windows-1251') as csvfile:
             reader = csv.DictReader(csvfile, delimiter=',')
             Item.all = []
             for row in reader:
