@@ -1,7 +1,5 @@
 import csv
 
-from src import *
-
 class Item:
     """
     Класс для представления товара в магазине.
