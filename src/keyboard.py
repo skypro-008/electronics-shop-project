@@ -1,5 +1,6 @@
 from src.item import Item
 
+
 class MixinLanguage:
     def __init__(self):
         self.__language = 'EN'
@@ -14,7 +15,6 @@ class MixinLanguage:
         else:
             self.__language = 'RU'
         return self
-
 
 
 class Keyboard(Item, MixinLanguage):
