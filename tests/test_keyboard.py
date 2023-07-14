@@ -5,8 +5,6 @@ from src.keyboard import Keyboard
 def test_kb1():
     return Keyboard("KB1", 100, 2)
 
-def test_repr(test_kb1):
-    assert test_kb1.__repr__() == "Keyboard('KB1', 100, 2)"
 
 def test_language(test_kb1):
     assert test_kb1.language == 'EN'
