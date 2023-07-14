@@ -11,12 +11,10 @@ class MixinLog:
 
     def change_lang(self):
         if self.__language == "EN":
-            MixinLog.Language = "RU"
-            self.__language = MixinLog.Language
+            self.__language = "RU"
             return self
         elif self.__language == "RU":
-            MixinLog.Language = "EN"
-            self.__language = MixinLog.Language
+            self.__language = "EN"
             return self
 
     @property
