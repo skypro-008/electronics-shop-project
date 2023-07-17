@@ -35,3 +35,17 @@ def test_name_setter():
     assert item.name == "Смартфон"
     item.name = 'Кондиционер'
     assert item.name == "Кондиционе"
+
+
+def test_repr():
+    item1 = Item('Смартфон', 10000, 5)
+    assert repr(item1) == "Item('Смартфон', 10000, 5)"
+    item2 = Item('Телевизор', 60000, 2)
+    assert repr(item2) == "Item('Телевизор', 60000, 2)"
+
+
+def test_str():
+    item1 = Item('Смартфон', 10000, 5)
+    assert str(item1) == 'Смартфон'
+    item2 = Item('Телевизор', 60000, 2)
+    assert str(item2) == 'Телевизор'
