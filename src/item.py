@@ -50,8 +50,13 @@ class Item:
         """
         self.price *= Item.pay_rate
 
-    @staticmethod
-    def instantiate_from_csv(file_name) -> None:
+    @classmethod
+    def instantiate_from_csv(cls, file_name: str) -> None:
+        """
+        Инициализирует экземпляры класса Item данными из файла items.csv
+        :param file_name: имя csv файла
+        """
+
         import csv
         with open(file_name, encoding='Windows-1251') as r_file:
 
@@ -61,5 +66,18 @@ class Item:
             # Считывание данных из CSV файла
             for row in file_reader:
                 if count != 0:
-                    Item(row[0], float(row[1]), int(row[2]))
+                    cls(row[0], float(row[1]), int(row[2]))
                 count += 1
+
+
+    @staticmethod
+    def string_to_number(string: str):
+        """
+        Статический метод, возвращающий число из числа-строки
+        :param string: строка, из которой нужно вернуть число
+        :return: число или сообщение об ошибке
+        """
+        if string.isdigit():
+            return int(string)
+        else:
+            return "Error"
