@@ -27,7 +27,10 @@ class Item:
 
     @name.setter
     def name(self, new_name):
-        self.__name = new_name
+        if len(new_name) <= 10:
+            self.__name = new_name
+        else:
+            self.__name = new_name[:10]
 
 
     def calculate_total_price(self) -> float:
