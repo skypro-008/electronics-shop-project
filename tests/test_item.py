@@ -26,3 +26,23 @@ def test_discount():
 
     assert test_item1.price == 12000
     assert test_item2.price == 4800
+
+
+def test_read_from_csv():
+    item.Item.instantiate_from_csv()
+    assert len(item.Item.all) == 5
+
+    item_test = item.Item.all[2]
+    assert item_test.name == "Кабель"
+
+    for product in item.Item.all:
+        assert isinstance(product, item.Item)
+
+
+def test_string_to_number():
+    assert item.Item.string_to_number('7') == 7
+    assert item.Item.string_to_number('7.0') == 7
+    assert item.Item.string_to_number('7.5') == 7
+
+    with pytest.raises(ValueError):
+        item.Item.string_to_number("hello")
