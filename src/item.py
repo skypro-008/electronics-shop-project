@@ -23,11 +23,15 @@ class Item:
 
 
     @property
+
+
     def name(self):
         return self.__name
 
 
     @name.setter
+
+
     def name(self, new_name):
         if len(new_name) <= 10:
             self.__name = new_name
@@ -59,9 +63,9 @@ class Item:
         cls.all = []
 
         import csv
-        with open("items.csv", encoding='Windows-1251') as r_file:
+        with open("items.csv", encoding = 'Windows - 1251') as r_file:
 
-            file_reader = csv.reader(r_file, delimiter=",")
+            file_reader = csv.reader(r_file, delimiter = ",")
             count = 0
 
             # Считывание данных из CSV файла
@@ -72,9 +76,11 @@ class Item:
 
 
     @staticmethod
+
+
     def string_to_number(string: str) -> int:
         """
-        Статический метод, возвращающий число из числа-строки
+        Статический метод, возвращающий число из числа - строки
         :param string: строка, из которой нужно вернуть число
         :return: число
         """
