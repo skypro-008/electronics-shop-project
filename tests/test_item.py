@@ -31,13 +31,22 @@ def value():
 
 @pytest.fixture
 def row1():
-    items_csv = 'C:/Users/user/PycharmProjects/electronics-shop-project/src/items.csv'
+    # items_csv = 'C:/Users/user/PycharmProjects/electronics-shop-project/src/items.csv'
+    items_csv = '../src/items.csv'
     with open(items_csv, newline='') as csvfile:
         reader = csv.DictReader(csvfile, delimiter=',')
         # Item.all = []
         list_row = [row for row in reader]
         row1 = list_row[0]
         return row1
+
+
+def test_repr(item1):
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+
+def test_str(item1):
+    assert str(item1) == 'Смартфон'
 
 
 def test_calculate_total_price(item1):
