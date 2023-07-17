@@ -26,3 +26,11 @@ def test_discount():
 
     assert test_item1.price == 12000
     assert test_item2.price == 4800
+
+
+def test_read_from_csv():
+    item.Item.instantiate_from_csv()
+    assert len(item.Item.all) == 5
+
+    item_test = item.Item.all[2]
+    assert item_test.name == "Кабель"
