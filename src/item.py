@@ -1,3 +1,5 @@
+import csv
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -47,3 +49,17 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= Item.pay_rate
+
+    @staticmethod
+    def instantiate_from_csv(file_name) -> None:
+        import csv
+        with open(file_name, encoding='Windows-1251') as r_file:
+
+            file_reader = csv.reader(r_file, delimiter=",")
+            count = 0
+
+            # Считывание данных из CSV файла
+            for row in file_reader:
+                if count != 0:
+                    Item(row[0], float(row[1]), int(row[2]))
+                count += 1
