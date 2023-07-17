@@ -34,3 +34,15 @@ def test_read_from_csv():
 
     item_test = item.Item.all[2]
     assert item_test.name == "Кабель"
+
+    for product in item.Item.all:
+        assert isinstance(product, item.Item)
+
+
+def test_string_to_number():
+    assert item.Item.string_to_number('7') == 7
+    assert item.Item.string_to_number('7.0') == 7
+    assert item.Item.string_to_number('7.5') == 7
+
+    with pytest.raises(ValueError):
+        item.Item.string_to_number("hello")
