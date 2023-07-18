@@ -20,3 +20,9 @@ class TestItem:
     def test_calculate_total_price(self, item):
         assert isinstance(item.calculate_total_price(), int)
         assert item.calculate_total_price() == 200000
+
+    def test_apply_discount(self, item):
+        item.pay_rate = 0.8
+        item.apply_discount()
+        assert item.price == 8000.0
+
