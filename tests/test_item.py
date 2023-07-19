@@ -1,8 +1,14 @@
 import pytest
+import os
 from src.item import Item
-from tests.test_phone import test_phone1
+from src.item import InstantiateCSVError
 
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+
+
+@pytest.fixture
+def test_item():
+    return Item
 
 
 @pytest.fixture
@@ -16,8 +22,18 @@ def test_item2():
 
 
 @pytest.fixture
-def test_item_all():
-    return Item.all
+def test_item_1_file():
+    return os.path.join("..", "tests", "test_items1.csv")
+
+
+@pytest.fixture
+def test_item_2_file():
+    return os.path.join("..", "tests", "test_items2.csv")
+
+
+@pytest.fixture
+def test_item_3_file():
+    return os.path.join("..", "tests", "test_items.csv")
 
 
 def test_repr(test_item1):
@@ -28,8 +44,23 @@ def test_str(test_item2):
     assert test_item2.__str__() == 'Товар2'
 
 
-def test_instantiate_from_csv(test_item_all):
-    assert len(test_item_all) == 2
+def test_instantiate_from_csv(test_item1):
+    assert len(test_item1.all) == 5
+
+
+def test_instantiate_from_csv1(test_item_1_file):
+    with pytest.raises(InstantiateCSVError, match='Файл item.csv поврежден'):
+        Item.instantiate_from_csv(test_item_1_file)
+
+
+def test_instantiate_from_csv2(test_item_2_file):
+    with pytest.raises(InstantiateCSVError, match='Файл item.csv поврежден'):
+        Item.instantiate_from_csv(test_item_2_file)
+
+
+def test_instantiate_from_csv3(test_item_3_file):
+    with pytest.raises(FileNotFoundError, match='Отсутствует файл item.csv'):
+        Item.instantiate_from_csv(test_item_3_file)
 
 
 def test_calculate_total_price(test_item1):
@@ -56,3 +87,8 @@ def test_string_to_number():
 
 def test_add(test_item1, test_phone1):
     assert test_item1 + test_phone1 == 4
+
+
+def test_add2(test_item1):
+    with pytest.raises(ValueError):
+        test_item1 + 1

@@ -6,10 +6,7 @@ PATH_TO_ITEMS_CSV = os.path.join("..", "src", "items.csv")
 
 class InstantiateCSVError(Exception):
     def __init__(self):
-        self.message = 'InstantiateCSVError: Файл item.csv поврежден'
-
-    def __str__(self):
-        return self.message
+        self.message = 'Файл item.csv поврежден'
 
 
 class Item:
@@ -71,11 +68,11 @@ class Item:
             self.__name = name_string
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, file=PATH_TO_ITEMS_CSV):
 
         try:
             Item.all = []
-            with open(PATH_TO_ITEMS_CSV, newline='') as csvfile:
+            with open(file, newline='') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
                     cls(row['name'], float(row['price']), int(row['quantity']))
