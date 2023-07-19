@@ -12,9 +12,6 @@ class InstantiateCSVError(Exception):
         return self.message
 
 
-InstantiateCSV = InstantiateCSVError()
-
-
 class Item:
     """
     Класс для представления товара в магазине.
@@ -83,13 +80,13 @@ class Item:
                 for row in reader:
                     cls(row['name'], float(row['price']), int(row['quantity']))
         except FileNotFoundError:
-            print('FileNotFoundError: Отсутствует файл item.csv')
+            raise FileNotFoundError('Отсутствует файл item.csv')
         except TypeError:
-            print(InstantiateCSV)
+            raise InstantiateCSVError
         except ValueError:
-            print(InstantiateCSV)
+            raise InstantiateCSVError
         except KeyError:
-            print(InstantiateCSV)
+            raise InstantiateCSVError
 
     @staticmethod
     def string_to_number(string_num):
