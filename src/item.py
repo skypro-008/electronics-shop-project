@@ -22,6 +22,14 @@ class Item:
         self.quantity = quantity
         self.all.append(self)
 
+    def __repr__(self):
+        """Возвращает информацию о классе по шаблону <Item(name, price, quantity)>"""
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """Возвращает название товара указанного класса"""
+        return self.__name
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -43,6 +51,7 @@ class Item:
 
     @name.setter
     def name(self, name):
+        """Оставляет от наименования товара первые 10 букв"""
         if len(name) > 10:
             self.__name = name[:10]
         else:
@@ -50,12 +59,18 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        """Класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv"""
         cls.all = []
-        with open(os.path.join("..", "src", "items.csv"), encoding='windows-1251') as csvfile:
+        src_path = os.path.dirname(__file__)
+        src_filename = "items.csv"
+        file_path = os.path.join(src_path, src_filename)
+
+        with open(file_path, encoding='windows-1251') as csvfile:
             reader = csv.DictReader(csvfile)
             for item in reader:
                 cls(item['name'], float(item['price']), int(item['quantity']))
 
     @staticmethod
     def string_to_number(string):
+        """Статический метод, возвращающий число из числа-строки"""
         return int(float(string))
