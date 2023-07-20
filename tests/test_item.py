@@ -46,3 +46,19 @@ def test_string_to_number():
 
     with pytest.raises(ValueError):
         item.Item.string_to_number("hello")
+
+
+def test_repr():
+    test_item1 = item.Item("Робот - пылесос", 23000, 10)
+    test_item2 = item.Item("Планшет", 16000, 8)
+
+    assert repr(test_item1) == "Item('Робот - пылесос', 23000, 10)"
+    assert repr(test_item2) == "Item('Планшет', 16000, 8)"
+
+
+def test_str():
+    test_item1 = item.Item("Смартфон", 15000, 5)
+    test_item2 = item.Item("Фен", 6000, 15)
+
+    assert str(test_item1) == 'Смартфон'
+    assert str(test_item2) == 'Фен'
