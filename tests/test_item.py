@@ -26,3 +26,10 @@ class TestItem:
         item.apply_discount()
         assert item.price == 8000.0
 
+    def test_name(self, item):
+        assert item.name == 'Смартфон'
+
+    def test_string_to_number(self, item):
+        assert Item.string_to_number('5') == 5
+        assert Item.string_to_number('5.0') == 5
+        assert Item.string_to_number('5.5') == 5
