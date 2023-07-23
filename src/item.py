@@ -24,16 +24,21 @@ class Item:
         self.quantity = quantity
         Item.all.append(self)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f'{self.name}'
     @property
     def name(self):
         return self.__name
 
     @name.setter
-    def name(self, name):
-        if len(name) <= 10:
-            self.__name = name
+    def name(self, new_name):
+        if len(new_name) >= 10:
+            raise ValueError('More than 10 letters in the name')
         else:
-            self.__name = name[:10]
+            self.__name = new_name
     @classmethod
     def instantiate_from_csv(cls):
         cls.all = []

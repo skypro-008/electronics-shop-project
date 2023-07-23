@@ -10,12 +10,12 @@ def item():
 
 
 class TestItem:
+
     def test_init_item(self, item):
         assert item.price == 10000
         assert item.name == "Смартфон"
         assert item.quantity == 20
         assert item.all == [item]
-
 
     def test_calculate_total_price(self, item):
         assert isinstance(item.calculate_total_price(), int)
@@ -26,10 +26,11 @@ class TestItem:
         item.apply_discount()
         assert item.price == 8000.0
 
-    def test_name(self, item):
-        assert item.name == 'Смартфон'
-
     def test_string_to_number(self, item):
         assert Item.string_to_number('5') == 5
         assert Item.string_to_number('5.0') == 5
         assert Item.string_to_number('5.5') == 5
+
+    def test_repr_item(self, item):
+        assert repr(item) == "Item('Смартфон', 10000, 20)"
+        assert str(item) == 'Смартфон'
