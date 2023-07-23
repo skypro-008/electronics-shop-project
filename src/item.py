@@ -1,5 +1,6 @@
 import csv
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -20,19 +21,20 @@ class Item:
         self.quantity = quantity
         self.all.append(self)
 
-
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
-
 
     def __str__(self):
         return f'{self.__name}'
 
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Складывть можно только объекты класса Item и дочерних классоы')
+        return self.quantity + other.quantity
 
     @property
     def name(self):
         return self.__name
-
 
     @name.setter
     def name(self, new_name: str):
@@ -47,7 +49,6 @@ class Item:
         else:
             self.__name = new_name
 
-
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -57,13 +58,11 @@ class Item:
         total_price = self.price * self.quantity
         return total_price
 
-
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * self.pay_rate
-
 
     @classmethod
     def instantiate_from_csv(cls):
@@ -81,7 +80,6 @@ class Item:
                 item = Item(name, price, quantity)
                 item.name = name
 
-
     @staticmethod
     def string_to_number(number: str):
         """Cтатический метод, возвращающий число из числа-строки"""
@@ -89,7 +87,6 @@ class Item:
             return int(float(number))
         else:
             print("String must be digit")
-
 
     @staticmethod
     def check_to_str(value):
@@ -100,7 +97,6 @@ class Item:
             value_str = str(value)
         return value_str
 
-
     @staticmethod
     def check_to_float(value):
         """Cтатический метод, возвращающий float"""
@@ -109,7 +105,6 @@ class Item:
         else:
             value_float = float(value)
         return value_float
-
 
     @staticmethod
     def check_to_int(value):
