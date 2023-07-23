@@ -1,4 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import pytest
+
 from src.item import Item
 from src.phone import Phone
 
@@ -57,4 +59,7 @@ def test_add():
     phone = Phone("iPhone 14", 120_000, 5, 2)
     assert item + phone == 25
     assert phone + phone == 10
-    assert phone + 15 == ValueError
+
+    with pytest.raises(ValueError):
+        phone + 15
+        item + 10
