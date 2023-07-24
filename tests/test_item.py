@@ -27,3 +27,9 @@ def test_apply_discount(make_items):
     item1.apply_discount()
     assert item1.price == 8000.0
     assert item2.price == 20000
+
+
+def test_add_element(make_items):
+    item1 = make_items[0]
+    item2 = make_items[1]
+    assert len(Item.all) == 2
