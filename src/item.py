@@ -1,4 +1,5 @@
 import csv
+from src.exceptions import InstantiateCSVError
 
 
 class Item:
@@ -7,7 +8,6 @@ class Item:
     """
     pay_rate = 1.0
     all = []
-
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -24,7 +24,6 @@ class Item:
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
-
 
     def __str__(self):
         return f'{self.name}'
@@ -49,7 +48,6 @@ class Item:
         """
         return self.price * self.quantity
 
-
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
@@ -58,14 +56,20 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        try:
+            open('items.csv')
+        except FileNotFoundError:
+            print('Отсутствует файл item.csv')
+
         with open('items.csv', newline='') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
+                if len(row) != 3:
+                    raise InstantiateCSVError
                 cls.__name = row['name']
                 cls.price = row['price']
                 cls.quantity = row['quantity']
                 return Item(cls.__name, cls.price, cls.quantity)
-
 
     @staticmethod
     def string_to_number(number):
