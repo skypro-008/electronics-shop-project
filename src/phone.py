@@ -17,16 +17,6 @@ class Phone(Item):
         """Возвращает информацию о классе по шаблону <Phone(name, price, quantity, number_of_sim)>"""
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.number_of_sim})"
 
-    def __str__(self):
-        """Возвращает название телефона указанного класса"""
-        return self.name
-
-    def __add__(self, other):
-        """Складывает экземпляры классов `Phone` и `Item` по количеству товара в магазине"""
-        if not isinstance(other, Phone):
-            raise ValueError('Складывать можно только объекты Phone и Item.')
-        return self.quantity + other.quantity
-
     @property
     def number_of_sim(self):
         return self._number_of_sim
