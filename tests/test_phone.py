@@ -17,11 +17,6 @@ def phone2():
     return phone2
 
 
-@pytest.fixture
-def num_zero():
-    return 0
-
-
 def test__init__(phone1):
     assert phone1.number_of_sim == 2
     assert len(Phone.all_phone) == 1
