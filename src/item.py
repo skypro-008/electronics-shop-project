@@ -11,7 +11,7 @@ class Item:
     all = []
     items_csv_path = PATH_ITEMS_CSV
 
-    def __init__(self, name: str, price: float, quantity: int) -> None:
+    def __init__(self, name, price, quantity):
         """
         Создание экземпляра класса item.
 
@@ -29,6 +29,11 @@ class Item:
 
     def __str__(self):
         return f'{self.name}'
+
+    def __add__(self, other):
+        if issubclass(other.__class__, self.__class__):
+            return self.quantity + other.quantity
+        return None
     @property
     def name(self):
         return self.__name
