@@ -33,3 +33,6 @@ def test_add_element(make_items):
     item1 = make_items[0]
     item2 = make_items[1]
     assert len(Item.all) == 2
+
+def test_instantiate_from_csv():
+    pass

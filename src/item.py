@@ -1,3 +1,5 @@
+import csv
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -42,3 +44,16 @@ class Item:
         self.__name = new_name
         if len(new_name) > 10:
             self.__name = new_name[:10]
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        """Метод класса для создания экземпляров из файла"""
+        with open('items.csv') as f:
+            data = list(csv.reader(f))
+        for item in data[1:]:
+            name = item[0]
+            price = float(item[1])
+            quantity = int(item[2])
+            cls(name, price, quantity)
+
+
