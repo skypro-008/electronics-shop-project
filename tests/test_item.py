@@ -35,4 +35,5 @@ def test_add_element(make_items):
     assert len(Item.all) == 2
 
 def test_instantiate_from_csv():
-    pass
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
