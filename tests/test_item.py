@@ -1,7 +1,9 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
+import csv
+import os
 
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 
 test_item1 = Item("Утюг", 2000, 15)
@@ -63,3 +65,28 @@ def test_add():
     with pytest.raises(ValueError):
         phone + 15
         item + 10
+
+
+def test_instantiate_from_csv_error():
+    try:
+        with open('../src/items.csv', newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                if row['name'] is None or row['price'] is None or row['quantity'] is None:
+                    raise InstantiateCSVError
+    except InstantiateCSVError as err:
+        assert str(err) == "Файл item.csv поврежден"
+    else:
+        assert "name" in row
+        assert "price" in row
+        assert "quantity" in row
+
+
+def test_instantiate_from_csv_not_found_error():
+    try:
+        with pytest.raises(FileNotFoundError):
+            open('item.csv', newline='')
+            if not os.path.isfile('D:/PycharmProjects/electronics-shop-project1/tests/item.csv'):
+                raise InstantiateCSVError
+    except FileNotFoundError as err:
+        assert str(err) == "Отсутствует файл item.csv"
