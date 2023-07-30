@@ -6,6 +6,11 @@ from src.item import Item
 
 # TestCase#1
 test_item = Item("Смартфон", 10000, 20)
-assert test_item.calculate_total_price() == 10000
+assert test_item.calculate_total_price() == 200000
 test_item_2 = Item("Ноутбук", 20000, 5)
-assert test_item_2.calculate_total_price() == 20000
+assert test_item_2.calculate_total_price() == 100000
+
+# TestCase#2
+assert test_item.apply_discount() == None
+test_item.pay_rate = 0.8
+assert test_item.apply_discount() == None
