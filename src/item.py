@@ -29,7 +29,7 @@ class Item:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        self.price = self.price * self.quantity
+        self.price = self.price * Item.pay_rate
 
     def __repr__(self):
         return f"Item(name={self.name}, price={self.price}, quantity={self.quantity})"
