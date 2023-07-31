@@ -1,5 +1,4 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-import pytest
 
 from item import Item
 
@@ -40,3 +39,11 @@ def test_apply_discount_with_hundred_percent_discount():
     item2 = Item("Ноутбук", 20000, 5)
     item2.apply_discount(100)
     assert item2.price == 0.0
+
+def test_repr():
+    item1 = Item("Смартфон", 10000, 20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+def test_str():
+    item1 = Item("Смартфон", 10000, 20)
+    assert str(item1) == 'Смартфон'
