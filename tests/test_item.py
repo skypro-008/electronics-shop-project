@@ -1,5 +1,6 @@
 import pytest
 from src import item
+from src import phone
 
 
 def test_constructor():
@@ -62,3 +63,14 @@ def test_str():
 
     assert str(test_item1) == 'Смартфон'
     assert str(test_item2) == 'Фен'
+
+
+def test_add():
+    phone1 = phone.Phone("iPhone 14", 150000, 5, 2)
+    phone2 = phone.Phone("Xiomi Redme 9 Note", 15000, 10, 2)
+    item1 = item.Item("Робот - пылесос", 23000, 10)
+    item2 = item.Item("Планшет", 16000, 8)
+
+    assert phone1 + phone2 == 15
+    assert phone1 + item2 == 13
+    assert item1 + item2 == 18
