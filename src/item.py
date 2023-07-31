@@ -55,13 +55,15 @@ class Item:
             with open(filename, newline='') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
-                    cls(row['name'], row['price'], row['quantity'])
-                    if row['name'] is None or row['price'] is None or row['quantity'] is None:
+                    if len(row) != 3 or row['name'] is None or row['price'] is None or row['quantity'] is None:
                         raise InstantiateCSVError
+                    cls(row['name'], row['price'], row['quantity'])
         except FileNotFoundError:
             print("Отсутствует файл item.csv")
+            raise
         except InstantiateCSVError as err:
             print(err.message)
+            raise
 
     @staticmethod
     def string_to_number(number: str):
