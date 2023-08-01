@@ -1,7 +1,5 @@
-"""Здесь надо написать тесты с использованием pytest для модуля item."""
-import pytest
 
-from item import Item
+from src.item import Item
 
 
 def test_calculate_total_price():
