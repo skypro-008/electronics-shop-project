@@ -33,3 +33,36 @@ def test_add_element(make_items):
     item1 = make_items[0]
     item2 = make_items[1]
     assert len(Item.all) == 2
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
+
+
+def test_name(make_items):
+    item1 = make_items[0]
+    item2 = make_items[1]
+    isinstance(item1.name, str)
+    isinstance(item2.name, str)
+    assert item1.name == "Смартфон"
+    item2.name = 'СуперСмартфон'
+    assert item2.name == 'СуперСмарт'
+
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+
+
+def test_repr(make_items):
+    item1 = make_items[0]
+    item2 = make_items[1]
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert repr(item2) == "Item('Ноутбук', 20000, 5)"
+
+
+def test_str(make_items):
+    item1 = make_items[0]
+    item2 = make_items[1]
+    assert str(item1) == 'Смартфон'
+    assert str(item2) == 'Ноутбук'
