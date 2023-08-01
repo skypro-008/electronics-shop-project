@@ -53,3 +53,11 @@ def test_name(make_items):
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
 
+
+def test_repr(make_items):
+    item1 = make_items[0]
+    item2 = make_items[1]
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert repr(item2) == "Item('Ноутбук', 20000, 5)"
+
+
