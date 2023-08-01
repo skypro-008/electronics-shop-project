@@ -30,6 +30,8 @@ class Item:
     def __add__(self, other):
         if issubclass(other.__class__, self.__class__):
             return self.quantity + other.quantity
+        else:
+            return None
 
     def calculate_total_price(self) -> float:
         """
