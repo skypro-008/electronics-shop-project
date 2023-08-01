@@ -61,3 +61,8 @@ def test_repr(make_items):
     assert repr(item2) == "Item('Ноутбук', 20000, 5)"
 
 
+def test_str(make_items):
+    item1 = make_items[0]
+    item2 = make_items[1]
+    assert str(item1) == 'Смартфон'
+    assert str(item2) == 'Ноутбук'
