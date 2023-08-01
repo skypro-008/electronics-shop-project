@@ -1,6 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture
@@ -66,3 +67,9 @@ def test_str(make_items):
     item2 = make_items[1]
     assert str(item1) == 'Смартфон'
     assert str(item2) == 'Ноутбук'
+
+
+def test_phone():
+    assert issubclass(Phone, Item)
+    phone = Phone('Iphone', 100000, 5, 2)
+    assert isinstance(phone, Item)
