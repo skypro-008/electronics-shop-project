@@ -49,6 +49,7 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         """Метод класса для создания экземпляров из файла"""
+        Item.all = []
         with open('items.csv') as f:
             data = list(csv.reader(f))
         for item in data[1:]:
