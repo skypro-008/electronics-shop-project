@@ -63,6 +63,7 @@ def test_apply_discount():
     assert item.price == 0.9
 
 def test_instantiate_from_csv():
+    Item.all = []
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
 
@@ -73,18 +74,10 @@ def test_instantiate_from_csv():
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
 
-if __name__ == '__main__':
-    test_name()
-    test_set_name()
-    test_set_long_name()
-    test_calculate_total_price()
-    test_apply_discount()
-    test_instantiate_from_csv()
-
 
 def test_repr():
-    item1 = Item("Смартфон", 10000, 20)
-    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    item1 = Item('Смартфон', 10000, 20)
+    assert repr(item1) == "Item(Смартфон, 10000, 20)"
 
 
 def test_str():
