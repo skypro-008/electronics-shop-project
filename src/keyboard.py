@@ -2,8 +2,14 @@ from src.item import Item
 
 
 class MixinLang:
-
+    """
+    Класс-миксин, который “подмешивает” в цепочку наследования класса `Keyboard` дополнительный функционал
+    по хранению и изменению раскладки клавиатуры
+    """
     def __init__(self):
+        """
+        Создание экземпляра класса MixinLang
+        """
         self.__language = 'EN'
 
     @property
@@ -11,10 +17,11 @@ class MixinLang:
         return self.__language
 
     def change_lang(self):
-        if self.__language == 'EN':
-            self.__language = 'RU'
-            return self
-        self.__language = 'EN'
+        """
+        Возвращает измененную раскладку клавиатуры
+        Раскладка может быть только "RU" или "EN"
+        """
+        self.__language = ({"RU", "EN"} - {self.__language}).pop()
         return self
 
 
