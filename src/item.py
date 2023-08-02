@@ -28,7 +28,6 @@ class Item:
             name = name[0:10]
         self._name = name
 
-
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -45,12 +44,5 @@ class Item:
         self.price = self.price * self.pay_rate
         return self.price
 
-    #@classmethod
-    #def instantiate_from_csv(self):
-
-
-
-
-
-
-
+    # @classmethod
+    # def instantiate_from_csv(self):
