@@ -16,3 +16,13 @@ if __name__ == '__main__':
     print(item2.price)  # 20000
     Item.all = [item1, item2]
     print(Item.all)  # [<__main__.Item object at 0x000001EC6250C690>, <__main__.Item object at 0x000001EC6250C6D0>]
+
+
+
+import os
+"""PROJECT_DIRECTORY хранит абсолютный путь к корневой директории проекта"""
+PROJECT_DIRECTORY = os.path.abspath(os.path.dirname(__file__))
+
+if __name__ == '__main__':
+    print(PROJECT_DIRECTORY)
+    print()
