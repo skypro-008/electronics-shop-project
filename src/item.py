@@ -1,6 +1,6 @@
 import csv
 import os
-from main import PROJECT_DIRECTORY
+from setting import PROJECT_DIRECTORY
 
 
 class InstantiateCSVError(Exception):
@@ -31,7 +31,7 @@ class Item:
         self.__name = name if len(name) < 11 else print('Exception: Длина наименования товара превышает 10 символов.')
 
     @classmethod
-    def instantiate_from_csv(cls, file_name='data.csv') -> None:
+    def instantiate_from_csv(cls, file_name='item.csv') -> None:
         """ Класс-метод, инициализирующий экземпляры класса `Item` данными из файла src/items.csv"""
 
         """

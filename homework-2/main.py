@@ -1,8 +1,5 @@
 from src.item import Item
 
-import os
-"""PROJECT_DIRECTORY хранит абсолютный путь к корневой директории проекта"""
-PROJECT_DIRECTORY = os.path.abspath(os.path.dirname(__file__))
 
 if __name__ == '__main__':
     item = Item('Телефон', 10000, 5)
