@@ -71,7 +71,8 @@ class Item:
         """
         метод __str___
         """
-        return f'{self.name} в количестве {self.quantity} шт по цене {self.price} руб.'
+        return f'{self.name} в количестве {self.quantity} шт ' \
+               f'по цене {self.price} руб.'
 
 # проверяем работу класса
 # temp_item = Item('Молоко 3,5%', 95, 5)

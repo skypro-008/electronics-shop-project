@@ -6,7 +6,7 @@ def test_class_item():
     temp_item = my_item.Item('Смартфон',100,1)
     assert temp_item.name == 'Смартфон'
     assert int((1-temp_item.pay_rate)*100) == 15
-    assert temp_item.__str__() == 'Смартфон в количестве 1 шт по цене 100 руб.'
+    assert temp_item.__str__() == "Смартфон в количестве 1 шт по цене 100 руб."
     assert temp_item.__repr__() == "Item('Смартфон', 100, 1)"
     assert temp_item.calculate_total_price() == 100
     temp_item.apply_discount()
