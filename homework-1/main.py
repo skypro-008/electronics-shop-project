@@ -4,8 +4,10 @@ if __name__ == '__main__':
     item1 = my_item.Item("Смартфон", 10000, 20)
     item2 = my_item.Item("Ноутбук", 20000, 5)
 
+    #  1 вариант
     # print(item1.calculate_total_price())  # 200000
     # print(item2.calculate_total_price())  # 100000
+    #  2 вариант
     print(*[item.calculate_total_price() for item in my_item.Item.all], sep='\n')
 
     # устанавливаем новый уровень цен
@@ -13,8 +15,10 @@ if __name__ == '__main__':
     # применяем скидку на первый товар
     item1.apply_discount()
 
+    #  1 вариант
     # print(item1.price)  # 8000.0
     # print(item2.price)  # 20000
+    #  2 вариант
     print(*[item.price for item in my_item.Item.all], sep='\n')
 
     print(my_item.Item.all)  # [<__main__.Item object at 0x000001EC6250C690>, <__main__.Item object at 0x000001EC6250C6D0>]
