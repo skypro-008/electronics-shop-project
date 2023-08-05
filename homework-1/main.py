@@ -8,7 +8,8 @@ if __name__ == '__main__':
     # print(item1.calculate_total_price())  # 200000
     # print(item2.calculate_total_price())  # 100000
     #  2 вариант
-    print(*[item.calculate_total_price() for item in my_item.Item.all], sep='\n')
+    print(*[item.calculate_total_price() for item in my_item.Item.all],
+          sep='\n')
 
     # устанавливаем новый уровень цен
     my_item.Item.pay_rate = 0.8
@@ -21,12 +22,14 @@ if __name__ == '__main__':
     #  2 вариант
     print(*[item.price for item in my_item.Item.all], sep='\n')
 
-    print(my_item.Item.all)  # [<__main__.Item object at 0x000001EC6250C690>, <__main__.Item object at 0x000001EC6250C6D0>]
+    print(my_item.Item.all)
 
     #мой вывод
     print()
     for item in my_item.Item.all:
-        print(f'{item.name} в количестве {item.quantity} по цене {my_item.nice_number_output(item.price)} руб. '
-              f'Итоговая сумма = {my_item.nice_number_output(item.calculate_total_price())} руб.')
-    # print(f'{item2.name} в количестве {item2.quantity} по цене {my_item.nice_number_output(item2.price)} руб. '
-    #       f'Итоговая сумма = {my_item.nice_number_output(item2.calculate_total_price())} руб.')
+        print(f'{item.name} в количестве {item.quantity} '
+              f'по цене {my_item.nice_number_output(item.price)} руб. '
+              f'Итоговая сумма = '
+              f'{my_item.nice_number_output(item.calculate_total_price())} '
+              f' руб.')
+
