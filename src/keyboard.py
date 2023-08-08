@@ -1,25 +1,25 @@
+import pytest
+
 from src.item import Item
 
 class MixinChangeLang:
     """Добавляем функционал - клавиатуру"""
 
-    ch_lang = ('EN', 'RU')
-    __slots__ = '__language'
-
     def __init__(self):
-        self.__language = self.ch_lang[0]
+        self.__language = "EN"
 
     def change_lang(self):
-        if self.language == self.ch_lang[0]:
-            self.__language = self.ch_lang[1]
-            return self
-        elif self.language == self.ch_lang[1]:
-            self.__language = self.ch_lang[0]
+        """Меняем раскладку клавиатуры"""
+
+        if self.__language == "EN":
+            self.__language = "RU"
+        else:
+            self.__language = "EN"
         return self
 
     @property
     def language(self):
-        return self
+        return self.__language
 
     @language.setter
     def language(self, value):
@@ -27,23 +27,21 @@ class MixinChangeLang:
 
 
 class Keyboard(Item, MixinChangeLang):
-    def __init__(self, name: str, price: float, quantity: int):
+    def __init__(self, name: str, price: float, quantity: int) -> None:
         super().__init__(name, price, quantity)
 
-    def test__repr__(self):
-        assert Keyboard.__repr__(Keyboard('Dark Project KD87A', 9600, 5)) == "Keyboard('Dark Project KD87A', 9600, 5)"
+def test_language():
+    kb = Keyboard('Dark Project KD87A', 9600, 5)
+    assert str(kb) == 'Dark Project KD87A'
+    assert str(kb.language) == 'EN'
 
-    def test__str__(self):
-        kb = Keyboard('Dark Project KD87A', 9600, 5)
-        assert str('Dark Project KD87A') == 'Dark Project KD87A'
+    kb.change_lang()
+    assert str(kb.language) == "RU"
 
-    def test_language(self):
-        kb = Keyboard('Dark Project KD87A', 9600, 5, 'EN')
-        assert str(kb.language) == 'EN'
+    kb.change_lang().change_lang()
+    assert str(kb.language) == "RU"
 
-    def test_change_lang(self):
-        kb = Keyboard('Dark Project KD87A', 9600, 5, 'EN')
-        kb.change_lang()
-        assert str(kb.language) == "RU"
+    with pytest.raises(AttributeError):
+        kb.language = "CH"
 
 
