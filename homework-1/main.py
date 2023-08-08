@@ -1,3 +1,4 @@
+import export_parent_folder
 from src.item import Item
 
 if __name__ == '__main__':
