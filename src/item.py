@@ -70,14 +70,25 @@ class Item:
         """Класс-метод, инициализирующий экземпляры класса Item"""
 
         cls.all = []
-        with open('..\src\items.csv', encoding='windows-1251') as file:
-            DictReader_obj = csv.DictReader(file)
-            for item in DictReader_obj:
-                print(item)
-                new = cls(item['name'], float(item['price']), int(item['quantity']))
-                cls.all.append(new)
+        try:
+            with open('..\src\items.csv', encoding='windows-1251') as file:
+                DictReader_obj = csv.DictReader(file)
+                for item in DictReader_obj:
+                    print(item)
+                    new = cls(item['name'], float(item['price']), int(item['quantity']))
+                    cls.all.append(new)
+        except FileNotFoundError:
+            raise FileNotFoundError("Файл item.csv отсутствует")
+        except InstantiateCSVError:
+            raise InstantiateCSVError("Файл item.csv поврежден")
 
     @staticmethod
     def string_to_number(string):
         """Возвращает число из числа-строки"""
         return int(float(string))
+
+class InstantiateCSVError(Exception):
+    """Исключения, связанные с повреждением файла"""
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else "Файл поврежден"
