@@ -36,3 +36,8 @@ def test_item_name(item_data):
     item_data.name = 'СуперСмартфон'
     assert item_data.name == "СуперСмарт"
 
+def test_item_repr(item_data):
+    assert repr(item_data) == "Item('Смартфон', 10000, 20)"
+def test_item_srt(item_data):
+    assert str(item_data) == 'Смартфон'
+

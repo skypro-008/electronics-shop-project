@@ -20,6 +20,12 @@ class Item:
         self.price = price
         self.quantity = quantity
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {int(self.price)}, {int(self.quantity)})"
+
+    def __str__(self):
+        return f"{self.__name}"
+
 
     @property
     def name(self):
