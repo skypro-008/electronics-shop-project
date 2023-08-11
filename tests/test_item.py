@@ -28,5 +28,19 @@ def test_apply_discount():
     assert item1.price == 5000
     assert item2.price == 2500
 
+def test_repr():
+    item1 = Item("Ноут", 10000, 2)
+    item2 = Item("Смарт", 5000, 10)
+
+    assert repr(item1) == "Item('Ноут', 10000, 2)"
+    assert repr(item2) == "Item('Смарт', 5000, 10)"
+
+def test_str():
+    item1 = Item("Ноут", 10000, 2)
+    item2 = Item("Смарт", 5000, 10)
+
+    assert str(item1) == 'Ноут'
+    assert str(item2) == 'Смарт'
+
 
 
