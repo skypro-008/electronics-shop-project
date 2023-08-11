@@ -24,6 +24,3 @@ class Keyboard(LanguageMixin):
     def __str__(self):
         return self.model
 
-    @LanguageMixin.language.setter
-    def language(self, value):
-        self._language = value
