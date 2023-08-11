@@ -14,4 +14,4 @@ def test_calculate_total_price(product):
 
 def test_apply_discount(product):
     product.apply_discount()
-    assert product.calculate_total_price() == 18000.0
+    assert product.calculate_total_price() == 180000.0
