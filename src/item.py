@@ -2,7 +2,7 @@ class Item:
     """
     Класс для представления товара в магазине.
     """
-    pay_rate = 1.0
+    pay_rate = 1
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
@@ -13,7 +13,11 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+
+        self.all.append(Item)
 
     def calculate_total_price(self) -> float:
         """
@@ -21,10 +25,10 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        pass
+        return self.price * self.quantity
 
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        pass
+        self.price *= self.pay_rate
