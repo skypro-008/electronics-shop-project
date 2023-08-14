@@ -44,6 +44,13 @@ class Item:
         return f'{self.__name}'
 
 
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        else:
+            print('Складывать можно только количество на складе')
+
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
