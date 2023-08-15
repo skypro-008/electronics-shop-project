@@ -14,10 +14,17 @@ class Item:
         :param quantity: Количество товара в магазине.
         """
         self.name = name.strip()
+        if not (isinstance(price, float) or isinstance(price, int)):
+            raise ValueError('Цена за единицу товара должна быть только числом.')
+        if price <= 0:
+            raise ValueError('Цена за единицу товара может быть положительным числом!')
         self.price = price
+        if not isinstance(quantity, int):
+            raise ValueError('Количество товара должно быть только числом.')
+        if quantity <= 0:
+            raise ValueError('Количество товара может быть только положительным числом"')
         self.quantity = quantity
         self.all.append(self)
-
 
     def calculate_total_price(self) -> float:
         """
