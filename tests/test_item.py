@@ -3,6 +3,13 @@ import pytest
 from src.item import Item
 
 
+def test_count_objects():
+    """Тестируем счетчик количества объектов экземпляров класса Item"""
+    Item("Телевизор", 12500, 220)
+    Item("Ноутбук", 70000, 15)
+    Item("Смартфон", 21000, 20)
+    assert len(Item.all) == 3
+
 @pytest.fixture
 def get_test_item():
     return Item("Телевизор", 12500, 220)
