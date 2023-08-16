@@ -28,6 +28,7 @@ class Item:
         return self.__name
 
     @name.setter
+
     def name(self, name):
         """Устанавливает новое имя товара"""
         self.__name = name if len(name) < 11 else print('Exception: Длина наименования товара превышает 10 символов.')
