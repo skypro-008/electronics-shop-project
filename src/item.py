@@ -59,3 +59,13 @@ class Item:
                 price = float(line['price'])
                 quantity = int(line['quantity'])
                 Item(name, price, quantity)
+
+    @staticmethod
+    def string_to_number(digit):
+        numbers = ''
+        for i in range(len(digit)):
+            if digit[i].isdigit():
+                numbers += digit[i]
+            else:
+                break
+        return int(numbers)
