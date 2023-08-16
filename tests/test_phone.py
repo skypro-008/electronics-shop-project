@@ -1,6 +1,5 @@
-import pytest
-from src.phone import Phone
 from src.item import Item
+from src.phone import Phone
 
 phone1 = Phone("iPhone 14", 120_000, 5, 2)
 
