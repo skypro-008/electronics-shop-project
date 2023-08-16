@@ -1,6 +1,8 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+
+
 import pytest
-from src import item
+
 from src.item import Item
 
 #item_1 = Item('Ноутбук', 1000, 3)
@@ -31,3 +33,5 @@ def test_apply_discount():
     assert item1.price == 8000.0
     assert item2.price == 20000
 
+def test_length_of_the_name():
+    pass
