@@ -31,7 +31,7 @@ class Item:
         if quantity <= 0:
             raise ValueError('Количество товара может быть только положительным числом"')
         self.quantity = quantity
-        self.all.append(self)
+        Item.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -45,7 +45,7 @@ class Item:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        self.price *= self.pay_rate
+        self.price *= Item.pay_rate
 
     @property
     def name(self):
