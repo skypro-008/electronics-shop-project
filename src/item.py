@@ -72,5 +72,3 @@ class Item:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 Item(row.get('name'), float(row.get('price')), int(row.get('quantity')))
-
-
