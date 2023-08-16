@@ -52,3 +52,29 @@ def test_item_price_not_float():
     """Когда мы создаем экземпляр класса с нечисловым значением цены за единицу товара, вернется ошибка."""
     with pytest.raises(ValueError):
         Item("Телевизор", '20000', 220)
+
+def test_string_to_number():
+    """Тестируем статический метод, возвращающий число из числа-строки."""
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
+
+def test_name_getter(get_test_item):
+    """Тестируем работу сеттера name"""
+    # Отрезаем первые 10 символов названия товарной позиции
+    get_test_item.name = 'СуперСмартфон'
+    assert get_test_item.name == 'СуперСмарт'
+
+def test_instantiate_from_csv():
+    """Тестируем инициализацию списка элементов класса Item из файла src/items.csv"""
+    Item.instantiate_from_csv()
+    # Общее количество элементов в загруженном списке
+    assert len(Item.all) == 5
+    # Проверяем корректность загрузки первого элемента
+    item_test = Item.all[0]
+    assert item_test.name == 'Смартфон'
+    # Проверяем корректность загрузки четвертого элемента
+    item_test = Item.all[3]
+    assert item_test.name == 'Мышка'
+    assert item_test.price == 50
+
