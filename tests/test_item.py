@@ -53,17 +53,20 @@ def test_item_price_not_float():
     with pytest.raises(ValueError):
         Item("Телевизор", '20000', 220)
 
+
 def test_string_to_number():
     """Тестируем статический метод, возвращающий число из числа-строки."""
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
 
+
 def test_name_getter(get_test_item):
     """Тестируем работу сеттера name"""
     # Отрезаем первые 10 символов названия товарной позиции
     get_test_item.name = 'СуперСмартфон'
     assert get_test_item.name == 'СуперСмарт'
+
 
 def test_instantiate_from_csv():
     """Тестируем инициализацию списка элементов класса Item из файла src/items.csv"""
@@ -77,4 +80,3 @@ def test_instantiate_from_csv():
     item_test = Item.all[3]
     assert item_test.name == 'Мышка'
     assert item_test.price == 50
-
