@@ -1,12 +1,8 @@
-"""Здесь надо написать тесты с использованием pytest для модуля item."""
-import pytest as pytest
+import os
 
-from src.item import Item
+import pytest
 
-
-@pytest.fixture
-def test_item():
-    return Item("Ноутбук", 20000, 5, 2)
+from src.item import Item, InstantiateCSVError
 
 
 @pytest.fixture
@@ -16,11 +12,6 @@ def test_bad_filename():
 
 
 @pytest.fixture
-def test_bad_data():
-    Item.csv_file_name = 'items_bad.csv'
-    Item.instantiate_from_csv('items_bad.csv')
-
-
 def test_init(test_item):
     assert test_item.name == "Ноутбук"
     assert test_item.price == 20000
@@ -70,6 +61,21 @@ def test_repr(test_item):
 def test_str(test_item):
     assert str(test_item) == 'Ноутбук'
 
+
+def test_instantiate_csv_error():
+    with pytest.raises(InstantiateCSVError):
+        error = InstantiateCSVError('Exception: Файл поврежден.')
+        raise error
+
+def test_instantiate_from_csv_error():
+    with pytest.raises(InstantiateCSVError):
+        if not os.path.exists('corrupted.csv'):
+            raise InstantiateCSVError('Exception: Файл поврежден.')
+        Item.instantiate_from_csv('corrupted.csv')
+
+
+
+
     # def test_add(test_item):
     #     phone1 = Phone("iPhone 14", 120_000, 5, 2)
     #     assert test_item + test_item == 10
@@ -77,4 +83,4 @@ def test_str(test_item):
     #     assert test_item + phone1 == 10
     #     assert phone1 + test_item == 10
 
-    """ pytest --cov=src --cov-report=html """
+""" pytest --cov=src --cov-report=html """

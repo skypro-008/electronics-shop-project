@@ -5,8 +5,7 @@ from setting import PROJECT_DIRECTORY
 
 
 class InstantiateCSVError(Exception):
-    def name(self, name):
-        self.__name = name if len(name) < 11 else print('Exception: Длина наименования товара превышает 10 символов.')
+    """Данные в csv файле повреждены"""
 
 
 class Item:
