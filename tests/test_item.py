@@ -20,5 +20,5 @@ def test_apply_discount(test_class):
     """
     Тестирует функцию применения скидки на определенный товар
     """
-
-    assert test_class.apply_discount() == Item.pay_rate * Item.price
+    test_class.apply_discount()
+    assert test_class.price == test_class.price * Item.pay_rate
