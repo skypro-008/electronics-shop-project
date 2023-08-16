@@ -47,3 +47,15 @@ class Item:
         else:
             self.__name = name
 
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        """Загружает данные из файла csv"""
+        cls.all = []
+        with open('/home/fedor/PycharmProjects/electronics-shop-project/src/items.csv', newline='') as f:
+            reader = csv.DictReader(f)
+            for line in reader:
+                name = line['name']
+                price = float(line['price'])
+                quantity = int(line['quantity'])
+                Item(name, price, quantity)
