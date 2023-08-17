@@ -27,6 +27,10 @@ class Item:
 
     @name.setter
     def name(self, value):
+        """
+        проверяет, что длина наименования товара не больше 10 симвовов.
+        В противном случае, обрезаут строку, оставляя первые 10 символов
+        """
         if len(value) > 10:
             self.__name = value[:10]
         else:
@@ -34,18 +38,23 @@ class Item:
 
     @staticmethod
     def string_to_number(string):
+        """
+        статический метод, возвращающий число из числа-строки
+        """
         return int(string)
 
     @classmethod
     def instantiate_from_csv(cls):
+        """
+        класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_
+        """
         items = []
         with open('src/items.csv', 'r', encoding='utf-8') as csv_file:
             csv_reader = csv.DictReader(csv_file)
-            for x in csv_reader:
-                price = cls.string_to_number(x[price])
-                quantity = cls.string_to_number(x[quantity])
-                item = cls(price, quantity)
-                item.name = x['name']
+            for row in csv_reader:
+                price = cls.string_to_number(row['price'])
+                quantity = cls.string_to_number(row['quantity'])
+                item = cls(row['name'], price, quantity)
                 items.append(item)
         return items
 
