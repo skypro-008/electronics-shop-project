@@ -49,7 +49,8 @@ class Item:
             self.__name = newname
 
     @classmethod
-    def instantiate_from_csv(cls, path_from_csv="/home/stanislav/skypro_project/electronics-shop-project/src/items.csv") -> None:
+    def instantiate_from_csv(cls,
+                             path_from_csv="/home/stanislav/skypro_project/electronics-shop-project/src/items.csv") -> None:
         with open(path_from_csv, newline="", encoding="utf-8") as csvfile:
             reader = DictReader(csvfile, fieldnames=["name", "price", "quantity"], dialect=csv.unix_dialect)
             count = 0
@@ -63,6 +64,3 @@ class Item:
     @staticmethod
     def string_to_number(str_number: str):
         return int(float(str_number))
-
-
-# print(Item.string_to_number('5.0'))
