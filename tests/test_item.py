@@ -22,3 +22,12 @@ def test_string_to_number():
     assert Item.string_to_number("5") == 5
     assert Item.string_to_number("5.2") == 5
     assert Item.string_to_number("5.0") == 5
+
+
+def test_name(test_item):
+    item1 = test_item
+    item1.name = "WIN"
+    assert item1.name == "WIN"
+    item1.name = "012345678910"
+    assert item1.name == "0123456789"
+
