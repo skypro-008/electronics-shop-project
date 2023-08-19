@@ -54,7 +54,7 @@ class Item:
         """
         класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
-        with open(path_from_csv, newline="", encoding="utf-8") as csvfile:
+        with open(path_from_csv, newline="", encoding="cp1251") as csvfile:
             reader = DictReader(csvfile, fieldnames=["name", "price", "quantity"], dialect=csv.unix_dialect)
             count = 0
             for row in reader:
