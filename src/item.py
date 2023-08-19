@@ -72,4 +72,3 @@ class Item:
         Возвращает число из числа-строки
         """
         return int(float(str_number))
-
