@@ -1,6 +1,8 @@
 from csv import DictReader
 import csv
 
+PATH_ABSOLUTE = "/home/stanislav/skypro_project/electronics-shop-project/src/items.csv"
+
 
 class Item:
     """
@@ -50,7 +52,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls,
-                             path_from_csv="/home/stanislav/skypro_project/electronics-shop-project/src/items.csv") -> None:
+                             path_from_csv=PATH_ABSOLUTE) -> None:
         """
         класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
@@ -70,3 +72,4 @@ class Item:
         Возвращает число из числа-строки
         """
         return int(float(str_number))
+
