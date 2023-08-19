@@ -29,5 +29,6 @@ def test_name(test_item):
     item1.name = "WIN"
     assert item1.name == "WIN"
     item1.name = "012345678910"
+    assert len(item1.name) == 10
     assert item1.name == "0123456789"
 
