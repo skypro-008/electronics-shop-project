@@ -26,7 +26,6 @@ class Item:
     def __str__(self):
         return f"{self.__name}"
 
-
     @property
     def name(self):
         return self.__name
@@ -61,8 +60,6 @@ class Item:
             for row in reader:
                 list_item = cls(row["name"], row["price"], row["quantity"])
                 cls.all.append(list_item)
-
-
 
     @staticmethod
     def string_to_number(str_number):

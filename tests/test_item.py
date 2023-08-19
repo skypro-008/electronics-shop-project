@@ -2,12 +2,18 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture
 def item_data():
     item = Item("Смартфон", 10000, 20)
     return item
+
+@pytest.fixture
+def phone_data():
+    phone = Phone("iPhone 14", 120_000, 5, 2)
+    return phone
 
 
 def test_item_calculate_total_price(item_data):
@@ -27,17 +33,26 @@ def test_item_instantiate_from_csv():
     assert item_data.name == 'Смартфон'
     assert int(item_data.price) == 100
     assert int(item_data.quantity) == 1
+
+
 def test_item_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
 
+
 def test_item_name(item_data):
     item_data.name = 'СуперСмартфон'
     assert item_data.name == "СуперСмарт"
 
+
 def test_item_repr(item_data):
     assert repr(item_data) == "Item('Смартфон', 10000, 20)"
+
+
 def test_item_srt(item_data):
     assert str(item_data) == 'Смартфон'
 
+def test_item_add(phone_data, item_data):
+    assert item_data + phone_data == 25
+    assert phone_data + phone_data == 10
