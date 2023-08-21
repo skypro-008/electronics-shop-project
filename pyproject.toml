@@ -10,6 +10,8 @@ packages = [{include = "electronics_shop_project"}]
 python = "^3.11"
 pytest = "^7.4.0"
 pytest-cov = "^4.1.0"
+path = "^16.7.1"
+pathlib = "^1.0.1"
 
 
 [build-system]

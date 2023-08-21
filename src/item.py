@@ -1,3 +1,7 @@
+from csv import DictReader
+from pathlib import Path
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -29,7 +33,21 @@ class Item:
         if len(self.__name) > 10:
             self.__name = __name[0:11]
 
+    @classmethod
+    def instantiate_from_csv(cls):
+        """
+        Инициализирует экземпляры класса Item данными из файла items.csv
+        """
+        # Переменная для csv-файла
+        from_csv = Path(Path.home() / "py_project" / 'electronics-shop-project' / 'src', "items.csv")
 
+        with open(from_csv, encoding='cp1251') as file_csv:
+            reader = DictReader(file_csv)
+            for unit in reader:
+                name = unit['name']
+                price = unit['price']
+                quantity = unit['quantity']
+            cls.all.append(Item(str(name), float(price), int(quantity)))
 
     def calculate_total_price(self) -> float:
         """
