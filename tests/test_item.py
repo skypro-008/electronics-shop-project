@@ -61,18 +61,13 @@ def test_repr(test_item):
 def test_str(test_item):
     assert str(test_item) == 'Ноутбук'
 
-
-def test_instantiate_csv_error():
-    with pytest.raises(InstantiateCSVError):
-        error = InstantiateCSVError('Exception: Файл поврежден.')
-        raise error
+def test_instantiate_from_csv_error():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('does_not_exists.csv')
 
 def test_instantiate_from_csv_error():
-    with pytest.raises(InstantiateCSVError):
-        if not os.path.exists('corrupted.csv'):
-            raise InstantiateCSVError('Exception: Файл поврежден.')
+    with pytest.raises(FileNotFoundError):
         Item.instantiate_from_csv('corrupted.csv')
-
 
 
 
