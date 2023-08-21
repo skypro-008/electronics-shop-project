@@ -22,3 +22,10 @@ def test_apply_discount(test_class):
     """
     test_class.apply_discount()
     assert test_class.price == test_class.price * Item.pay_rate
+
+
+def test_get_name(test_class):
+    """
+    Тестирует сеттер на проверку количества символов в name
+    """
+    assert test_class.get_name == "Смартфон"
