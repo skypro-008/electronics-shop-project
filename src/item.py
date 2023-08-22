@@ -9,6 +9,9 @@ class Item:
     pay_rate = 1.0
     all = []
 
+    # Переменная для csv-файла
+    from_csv = Path(Path.home() / "py_project" / 'electronics-shop-project' / 'src', "items.csv")
+
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
         Создание экземпляра класса item.
@@ -19,8 +22,6 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
-
-        Item.all.append(self)
 
     @property
     def get_name(self):
@@ -38,16 +39,10 @@ class Item:
         """
         Инициализирует экземпляры класса Item данными из файла items.csv
         """
-        # Переменная для csv-файла
-        from_csv = Path(Path.home() / "py_project" / 'electronics-shop-project' / 'src', "items.csv")
-
-        with open(from_csv, encoding='cp1251') as file_csv:
+        with open(Item.from_csv, encoding='cp1251') as file_csv:
             reader = DictReader(file_csv)
-            for unit in reader:
-                name = unit['name']
-                price = unit['price']
-                quantity = unit['quantity']
-            cls.all.append(Item(str(name), float(price), int(quantity)))
+            for line in reader:
+                cls.all.append(Item(line['name'], float(line['price']), int(line['quantity'])))
 
     def calculate_total_price(self) -> float:
         """
