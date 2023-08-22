@@ -1,7 +1,8 @@
 from csv import DictReader
 import csv
+import os
 
-PATH_ABSOLUTE = "/home/stanislav/skypro_project/electronics-shop-project/src/items.csv"
+PATH_ABSOLUTE = os.path.join(os.path.dirname(__file__), "items.csv")
 
 
 class Item:
@@ -72,3 +73,6 @@ class Item:
         Возвращает число из числа-строки
         """
         return int(float(str_number))
+
+    def __repr__(self):
+        return f"{Item.__name__}('{self.__name}', {self.price}, {self.quantity})"
