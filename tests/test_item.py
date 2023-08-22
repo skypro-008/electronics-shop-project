@@ -32,3 +32,10 @@ def test_name(test_item):
     assert len(item1.name) == 10
     assert item1.name == "0123456789"
 
+
+def test_repr(test_item):
+    assert repr(test_item) == "Item('Phone', 1000, 10)"
+
+
+def test_str(test_item):
+    assert str(test_item) == "Phone"
