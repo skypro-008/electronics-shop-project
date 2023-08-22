@@ -29,3 +29,14 @@ def test_get_name(test_class):
     Тестирует сеттер на проверку количества символов в name
     """
     assert test_class.get_name == "Смартфон"
+
+
+def test_string_to_number():
+    """
+    Тестирует функцию перевода числа-строки в число
+    """
+    number_string_1 = "5.0"
+    number_string_2 = "10"
+
+    assert Item.string_to_number(number_string_1) == 5
+    assert Item.string_to_number(number_string_2) == 10
