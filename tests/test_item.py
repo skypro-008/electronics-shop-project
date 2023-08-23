@@ -1,5 +1,5 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 import pytest
 
 
@@ -44,3 +44,8 @@ def test_str():
 
     assert str(item1) == 'Ноут'
     assert str(item2) == 'Смарт'
+
+
+def test_file_broken():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv()
