@@ -21,3 +21,16 @@ def test_apply_discount():
 
 def test_all_items():
     assert len(Item.all) == 2
+
+def test_long_name():
+    item1.name = 'СуперСмартфон'
+    assert item1.name == 'СуперСмарт'
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 7
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
