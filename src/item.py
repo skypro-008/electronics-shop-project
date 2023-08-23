@@ -1,5 +1,7 @@
 import csv
 
+from pathlib import Path
+
 
 class Item:
     """
@@ -16,10 +18,10 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.__name = name
+        self.name = name
         self.price = price
         self.quantity = quantity
-        self.__class__.all.append(self)
+        Item.all.append(self)
 
     @property
     def name(self):
@@ -43,20 +45,21 @@ class Item:
         """
         return int(string)
 
+    # noinspection PyTypeChecker
     @classmethod
     def instantiate_from_csv(cls):
         """
         класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_
         """
-        items = []
-        with open('src/items.csv', 'r', encoding='utf-8') as csv_file:
+        cls.all.clear()
+        file = Path(__file__).parent.joinpath('items.csv')
+        with open(file, 'r', encoding='windows-1251') as csv_file:
             csv_reader = csv.DictReader(csv_file)
             for row in csv_reader:
-                price = cls.string_to_number(row['price'])
-                quantity = cls.string_to_number(row['quantity'])
-                item = cls(row['name'], price, quantity)
-                items.append(item)
-        return items
+                price = cls.string_to_number(row["price"])
+                quantity = cls.string_to_number(row["quantity"])
+                item = cls(row["name"], price, quantity)
+        return cls.all
 
     def calculate_total_price(self) -> float:
         """

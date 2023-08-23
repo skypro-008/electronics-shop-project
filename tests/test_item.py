@@ -5,16 +5,12 @@ import pytest
 
 from src.item import Item
 
-#item_1 = Item('Ноутбук', 1000, 3)
-#item_2 = Item('Смартфон', 100, 1)
-#item_3 = Item('Кабель', 10, 5)
 
-#for item in Item.all:
-    #print(f'{item.name}\n{item.calculate_total_price()} руб\nЦена со скидкой - {item.apply_discount()}\n')
 
 if __name__ == '__main__':
     item1 = Item("Смартфон", 10000, 20)
-    item2 = Item("Ноутбук", 20000, 5)
+    item2 = Item("НоутбукЛалал", 20000, 5)
+    item3 = Item('Телефон', 10000, 5)
 
 def test_calculate_total_price():
     item1 = Item("Смартфон", 10000, 20)
@@ -34,4 +30,20 @@ def test_apply_discount():
     assert item2.price == 20000
 
 def test_length_of_the_name():
-    pass
+    # длина наименования товара меньше 10 символов
+    assert item3.name == 'Кабель'
+
+    # длина наименования товара больше 10 символов
+    assert item2.name == 'НоутбукЛал'
+    # Exception: Длина наименования товара превышает 10 символов.
+
+    Item.instantiate_from_csv()  # создание объектов из данных файла
+    assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
+
+    item1 = Item.all[0]
+    assert item1.name == 'Смартфон'
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
