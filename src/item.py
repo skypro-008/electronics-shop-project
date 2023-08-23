@@ -21,6 +21,18 @@ class Item:
         self.price = price
         self.quantity = quantity
 
+    def __repr__(self):
+        """
+        Возвращает экземпляр класса
+        """
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """
+        Возвращает название экземпляра класса
+        """
+        return f"{self.name}"
+
     @property
     def name(self):
         """
