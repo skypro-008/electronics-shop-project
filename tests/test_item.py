@@ -47,9 +47,17 @@ def test_string_to_number():
     assert Item.string_to_number(number_string_2) == 10
 
 
-def test_repr(test_class):
+def test_repr():
     """
     Тестирует метод repr
     """
-    item1 = test_class
-    assert print(repr(item1)) == "Item('Смартфон', 12000, 2)"
+    item1 = Item("Ноутбук", 100000, 4)
+    assert repr(item1) == "Item('Ноутбук', 100000, 4)"
+
+
+def test_str():
+    """
+    Тестирует метод str
+    """
+    item1 = Item("Ноутбук", 100000, 4)
+    assert str(item1) == 'Ноутбук'
