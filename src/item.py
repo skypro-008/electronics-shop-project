@@ -43,7 +43,7 @@ class Item:
         with open(Item.from_csv, encoding='cp1251') as file_csv:
             reader = DictReader(file_csv)
             for line in reader:
-                cls.all.append(Item(line['name'], float(line['price']), int(line['quantity'])))
+                cls.all.append(cls(line['name'], float(line['price']), int(line['quantity'])))
 
     def calculate_total_price(self) -> float:
         """
