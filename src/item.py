@@ -23,6 +23,10 @@ class Item:
         self.price = price
         self.quantity = quantity
 
+    def __repr__(self):
+        "Item('Смартфон', 10000, 20)"
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
     @property
     def name(self):
         """Геттер для name"""
