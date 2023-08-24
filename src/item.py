@@ -4,6 +4,7 @@ class Item:
     """
     pay_rate = 1.0
     all = []
+    keep = True
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -13,7 +14,12 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
+        self._name = name
+        self._price = price
+        self._quantity = quantity
+
+        if Item.keep:
+            Item.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -21,10 +27,14 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        pass
+        return self._price * self._quantity
 
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        pass
+        self._price *= self.pay_rate # мой ООП Мир покинул чат...
+
+    @property
+    def price(self) -> float:
+        return self._price
