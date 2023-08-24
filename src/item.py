@@ -24,15 +24,16 @@ class Item:
         self.quantity = quantity
 
     @property
-    def get_name(self):
+    def name(self):
         """Геттер для name"""
 
         return self.__name
 
-    @get_name.setter
-    def get_name(self, __name):
+    @name.setter
+    def name(self, new_name):
+        self.__name = new_name
         if len(self.__name) > 10:
-            self.__name = __name[0:11]
+            self.__name = self.__name[0:10]
 
     @classmethod
     def instantiate_from_csv(cls):
