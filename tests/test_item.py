@@ -1,4 +1,6 @@
 import pytest
+
+from src import item
 from src.item import Item
 
 
@@ -24,11 +26,14 @@ def test_apply_discount(test_class):
     assert test_class.price == test_class.price * Item.pay_rate
 
 
-def test_get_name(test_class):
+def test_name(test_class):
     """
     Тестирует сеттер на проверку количества символов в name
     """
-    assert test_class.get_name == "Смартфон"
+    item1 = test_class
+    assert item1.name == "Смартфон"
+    item1.name = "СуперСмартфон"
+    assert item1.name == "СуперСмарт"
 
 
 def test_string_to_number():
