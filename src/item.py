@@ -1,10 +1,26 @@
+import csv
+
+
 class Item:
     """
     Класс для представления товара в магазине.
     """
+    max_name_len = 10
     pay_rate = 1.0
     all = []
     keep = True
+
+    @classmethod
+    def instantiate_from_csv(cls, filename='src/items.csv', encoding='windows-1251', delimiter=','):
+        with open(filename, 'r', encoding=encoding) as file:
+            items = csv.reader(file, delimiter=delimiter)
+            next(items, None)
+            for name, price, quantity in items:
+                cls(name, float(price), int(quantity))
+
+    @staticmethod
+    def string_to_number(string: str) -> int:
+        return int(float(string))
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -33,8 +49,18 @@ class Item:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        self._price *= self.pay_rate # мой ООП Мир покинул чат...
+        self._price *= self.pay_rate
 
     @property
     def price(self) -> float:
         return self._price
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, value):
+        if len(value) > Item.max_name_len:
+            raise Exception(f'Длина наименования товара превышает {Item.max_name_len} символов')
+        self._name = value
