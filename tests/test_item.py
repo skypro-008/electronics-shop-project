@@ -4,16 +4,16 @@ import pytest
 
 from src.item import Item
 
-def test_calculate_total_price(item1=None):
-    assert 10000 * 20 == 200000
-    assert item1.price * item1.quantity == item1.total_price
+def test_init(some_item):
+    assert some_item.name == "Смартфон"
+    assert some_item.price == 10000
+    assert some_item.quantity == 5
+
+def test_calculate_total_price(some_item):
+    assert some_item.calculate_total_price() == 50000
 
 
-def test_apply_discount():
-    assert 30000 * 1 == 30000
-    assert 20000 * 0.8 == 16000
-
-
-def test_calculate_total_price():
-    with pytest.raises(TypeError):
-        Item()
+def test_apply_discount(some_item):
+    some_item.pay_rate = 0.5
+    some_item.apply_discount()
+    assert some_item.price == 5000
