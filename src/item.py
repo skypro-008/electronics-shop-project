@@ -9,7 +9,13 @@ class Item:
         Item.all.append(self)
 
     def calculate_total_price(self):
+        '''
+        Вычисляем стоймость товара в наличии.
+        '''
         return self.price * self.quantity
 
     def apply_discount(self):
+        '''
+        Вычисляем цену товара со скидкой.
+        '''
         self.price *= self.pay_rate
