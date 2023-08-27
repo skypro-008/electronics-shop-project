@@ -12,7 +12,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        """класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv"""
+        """класс-метод, инициализирующий экземпляры  класса Item данными из файла src/items.csv"""
         with open(cls.CSV_PATH, encoding='cp1251') as file:
             reader = csv.DictReader(file)
             cls.all.clear()
