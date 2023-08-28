@@ -37,6 +37,21 @@ class Item:
         if Item.keep:
             Item.all.append(self)
 
+    def __repr__(self):
+        # return (f"{self.__class__.__name__}("
+        #         f"name='{self.name}', "
+        #         f"price={self._price}, "
+        #         f"quantity={self._quantity}"
+        #         ")")
+        return (f"{self.__class__.__name__}("
+                f"'{self.name}', "
+                f"{self._price}, "
+                f"{self._quantity}"
+                ")")
+
+    def __str__(self):
+        return self._name
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.

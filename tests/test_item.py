@@ -79,3 +79,22 @@ def test_Item_name_prop_max_len(safe_item_class, name, max_len):
 
     with pytest.raises(Exception) as ex:
         item1.name = name
+
+
+@pytest.mark.parametrize('str_in, expected_result', [
+    ('12', 12),
+    ('12.0', 12),
+    ('12.6', 12)
+])
+def test_Item_str_to_num(str_in, expected_result):
+    assert Item.string_to_number(str_in) == expected_result
+
+
+def test_Item_repr(safe_item_class):
+    item1 = safe_item_class("Name", 1, 2)
+    assert repr(item1) == "Item('Name', 1, 2)"
+
+
+def test_Item_str(safe_item_class):
+    item1 = safe_item_class("Name", 0, 0)
+    assert str(item1) == "Name"
