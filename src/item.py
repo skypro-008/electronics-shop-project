@@ -75,7 +75,10 @@ class Item:
         return int(float(str_number))
 
     def __repr__(self):
-        return f"{Item.__name__}('{self.__name}', {self.price}, {self.quantity})"
+        return f"{__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
     def __str__(self):
         return self.__name
+
+    def __add__(self, other):
+        return self.quantity + other.quantity
