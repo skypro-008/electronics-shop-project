@@ -8,12 +8,12 @@ class Item:
     """
     pay_rate = 1.0
     all = []
-    CSV_PATH = os.path.join("src", "items.csv")  # путь к csv-файлу
+    CSV_PATH = os.path.join(os.path.dirname(__file__), "items.csv")  # путь к csv-файлу
 
     @classmethod
     def instantiate_from_csv(cls):
-        """класс-метод, инициализирующий экземпляры  класса Item данными из файла src/items.csv"""
-        with open(cls.CSV_PATH, encoding='cp1251') as file:
+        """класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv"""
+        with open(cls.CSV_PATH) as file:
             reader = csv.DictReader(file)
             cls.all.clear()
             for line in reader:
@@ -21,7 +21,7 @@ class Item:
 
     @staticmethod
     def string_to_number(string):
-        """Статический метод, возвращающий число из числа-строки"""
+        """Cтатический метод, возвращающий число из числа-строки"""
         return int(float(string))
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
