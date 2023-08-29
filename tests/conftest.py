@@ -7,3 +7,4 @@ from src.item import Item
 def some_item():
     item = Item("Смартфон", 10000, 5)
     return item
+
