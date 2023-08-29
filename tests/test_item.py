@@ -1,7 +1,7 @@
 import pytest
 
-from src import item
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture()
@@ -61,3 +61,14 @@ def test_str():
     """
     item1 = Item("Ноутбук", 100000, 4)
     assert str(item1) == 'Ноутбук'
+
+
+def test_add(test_class):
+    """
+    Тестируем метод add
+    """
+    item1 = test_class
+    phone1 = Phone("Iphone 13", 120000, 22, 2)
+
+    assert item1 + phone1 == 24
+    assert phone1 + phone1 == 44

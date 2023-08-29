@@ -33,5 +33,5 @@ def test_add(test_class):
     item1 = Item("Смартфон", 10000, 20)
     phone1 = test_class
 
-    #assert item1 + phone1 == 23
+    assert item1 + phone1 == 23
     assert phone1 + phone1 == 6
