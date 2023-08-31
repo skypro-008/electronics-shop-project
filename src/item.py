@@ -12,6 +12,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, filename='src/items.csv', encoding='windows-1251', delimiter=','):
+        Item.all.clear()
         with open(filename, 'r', encoding=encoding) as file:
             items = csv.reader(file, delimiter=delimiter)
             next(items, None)
