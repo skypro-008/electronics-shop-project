@@ -26,3 +26,13 @@ def test_apply_discount():
     assert item1.price == 40000
     assert item2.price == 80000
 
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5.5
+
+def test_name():
+    item = Item
+    item.name = "Apple"
+    assert item.name == "Apple"
+
