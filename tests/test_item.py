@@ -3,13 +3,19 @@ import pytest
 from src.item import Item
 from src.settings import CSV
 
-item1 = Item("Samsung Galaxy", 10000, 10)
+item1 = Item("Samsung", 10000, 10)
 
 
 def test_init():
-    assert item1.name == "Samsung Galaxy"
+    assert item1.name == "Samsung"
     assert item1.price == 10000
     assert item1.quantity == 10
+
+def test_repr():
+    assert item1 == 'Item(Samsung, 10000, 10)'
+
+def test_str():
+    assert str(item1) == "Samsung"
 
 
 def test_calculate_total_price():
@@ -23,7 +29,7 @@ def test_apply_discount():
 
 
 def test_property_name():
-    assert item1.name == "Samsung Galaxy"
+    assert item1.name == "Samsung"
 
 
 def test_instantiate_from_csv():
