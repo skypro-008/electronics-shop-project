@@ -31,6 +31,14 @@ class Item:
 
         return f"{self.__name}"
 
+    def __add__(self, other):
+        """
+        Сложение количества товара экземпляров классов Item и Phone
+        """
+        if isinstance(other, Item):
+
+            return self.quantity + other.quantity
+
     @property
     def name(self):
         """Геттер для name"""
