@@ -11,8 +11,10 @@ def test_init():
     assert item1.price == 10000
     assert item1.quantity == 10
 
+
 def test_repr():
-    assert item1 == 'Item(Samsung, 10000, 10)'
+    assert repr(item1) == 'Item(Samsung, 10000, 10)'
+
 
 def test_str():
     assert str(item1) == "Samsung"
