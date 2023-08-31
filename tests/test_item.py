@@ -45,3 +45,11 @@ def test_name(fix_item_class):
     assert item.name == 'Телефон'
     item.name = 'СуперСмартфон'
     assert item.name == 'СуперСмарт'
+
+def test_repr(fix_item_class):
+    """Возвращает строковое представление экземпляра класса"""
+    assert repr(fix_item_class) == f"Item('{fix_item_class.name}', {fix_item_class.price}, {fix_item_class.quantity})"
+
+def test_str(fix_item_class):
+    """Возвращает строковое представление экземпляра класса"""
+    assert str(fix_item_class) == fix_item_class.name
