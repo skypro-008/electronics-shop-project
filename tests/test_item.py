@@ -11,5 +11,7 @@ def test_item():
     assert Item.string_to_number('7') == 7
     assert type(Item.string_to_number('7')) == int
     assert type(Item.all) == list
-    assert os.path.isfile('../src/items.csv') == False
+    assert os.path.isfile('../src/items.csv') == True
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert str(item1) == 'Смартфон'
 
