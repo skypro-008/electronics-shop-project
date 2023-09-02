@@ -17,6 +17,7 @@ class Item:
     pay_rate = 1.0
     all = []
 
+
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
         Создание экземпляра класса item.
@@ -28,6 +29,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
+
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
