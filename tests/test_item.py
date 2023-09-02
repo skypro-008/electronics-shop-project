@@ -32,3 +32,9 @@ def test_name(some_item):
     assert some_item.name == 'Смартфон'
     some_item.name = 'СуперСмартфон'
     assert some_item.name == 'СуперСмарт'
+
+def test_repr(some_item):
+    assert repr(some_item) == "Item('Смартфон', 10000, 5)"
+
+def test_str(some_item):
+    assert str(some_item) == 'Смартфон'
