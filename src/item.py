@@ -8,7 +8,6 @@ class Item:
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
         Создание экземпляра класса item.
-
         :param name: Название товара.
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
@@ -21,7 +20,6 @@ class Item:
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
-
         :return: Общая стоимость товара.
         """
         return self.price * self.quantity
@@ -31,3 +29,11 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
+    def __add__(self, other):
+        """
+        Возвращение сложения экземпляров класса Phone и Item по количеству товара в магазине
+        """
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только объекты Phone или Item и дочерние от них.')
+        return self.quantity + other.quantity
