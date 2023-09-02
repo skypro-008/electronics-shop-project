@@ -82,3 +82,12 @@ class Item:
         self.price = self.price * self.pay_rate
         return self.price
 
+    def __add__(self, other):
+        """
+        Складывание колличества товаров одного или нескольких классов
+        :param other: количество товара того же или другого класса
+        :return: общая сумма или предварительная ошибка
+        """
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только объекты Item и дочерние от него')
+        return self.quantity + other.quantity

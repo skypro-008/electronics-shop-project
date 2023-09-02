@@ -55,6 +55,20 @@ def test___str__():
     assert str(item2) == 'Lenovo'
 
 
+def test_add_value_error():
+    """
+    Проверка типа для объектов суммы их количества
+    :return:
+    """
+    with pytest.raises(ValueError):
+        item1 = Item("iPhone 14", 120_000, 5)
+        class Tv:
+            pass
+        tv1 = Tv
+        assert item1 + tv1 == ValueError('Складывать можно только объекты Item и дочерние от него')
+        assert item1 + 15 == ValueError('Складывать можно только объекты Item и дочерние от него')
+
+
 
 
 
