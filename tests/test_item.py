@@ -1,4 +1,6 @@
+"""Тесты с использованием pytest для модуля item."""
 from src.item import Item
+from src.phone import Phone
 
 
 def test_item():
@@ -37,6 +39,13 @@ def test_apply_discount():
     assert item.price == 50_000
 
 
+def test__add__():
+    item1 = Item("Телевизор", 100_000, 6)
+    phone1 = Phone("Sumsung", 100_000, 3, 1)
+    assert item1 + phone1 == 9
+    assert phone1 + phone1 == 6
+
+    
 def test_name():
     """
     Проверка на превышение 10 символов в name
@@ -58,3 +67,4 @@ def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
