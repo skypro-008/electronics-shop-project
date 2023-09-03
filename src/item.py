@@ -59,7 +59,6 @@ class Item:
         """
         self.price *= self.pay_rate
 
-
     def __add__(self, other):
         """
         Возвращение сложения экземпляров класса Phone и Item по количеству товара в магазине
@@ -78,10 +77,7 @@ class Item:
             reader = csv.DictReader(f)
             for row in reader:
                 cls.all.append(
-                    Item(
-                        row['name'],
-                        cls.string_to_number(row['price']),
-                        cls.string_to_number(row['quantity'])))
+                    Item(row['name'], cls.string_to_number(row['price']), cls.string_to_number(row['quantity'])))
 
     @staticmethod
     def string_to_number(string):
@@ -90,3 +86,17 @@ class Item:
         """
         return int(float(string))
 
+
+class LanguageMixin:
+    __lang = "EN"
+
+    def change_lang(self):
+        if self.__lang == "EN":
+            self.__lang = "RU"
+        else:
+            self.__lang = "EN"
+        return self
+
+    @property
+    def language(self):
+        return self.__lang
