@@ -14,4 +14,10 @@ class Keyboard(Item):
         self.language = "EN"
 
     def change_lang(self):
-        pass
+        """
+        Метод меняет язык раскладки клавиатуры
+        """
+        if self.language == "EN":
+            self.language = "RU"
+        elif self.language == "RU":
+            self.language = "EN"
