@@ -14,14 +14,6 @@ class Phone(Item):
 
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.number_of_sim})"
 
-    def __add__(self, other):
-        """
-        Сложение количества товара экземпляров классов Phone и Item
-        """
-        if isinstance(other, Item):
-
-            return self.quantity + other.quantity
-
     def __setattr__(self, key, value):
         """
         Отбрасывает недопустимые данные для физических SIM-карт
