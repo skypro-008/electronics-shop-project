@@ -36,3 +36,11 @@ def test_name():
     item.name = "Apple"
     assert item.name == "Apple"
 
+def test_rerp():
+    item1 = Item("Смартфон", 10000, 20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert str(item1) == 'Смартфон'
+
+def test_str():
+    item1 = Item("Смартфон", 10000, 20)
+    assert str(item1) == "Cмартфон"
