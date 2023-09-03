@@ -22,8 +22,11 @@ class Phone(Item):
 
             return self.quantity + other.quantity
 
-    # def __set__(self, number):
-    #     if number > 0 and type(number) is int:
-    #         self.number_of_sim = number
-    #     else:
-    #         raise "ValueError: Количество физических SIM-карт должно быть целым числом больше нуля."
+    def __setattr__(self, key, value):
+        """
+        Отбрасывает недопустимые данные для физических SIM-карт
+        """
+        if key == 'number_of_sim' and (value <= 0 or not isinstance(value, int)):
+            raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
+        else:
+            object.__setattr__(self, key, value)
