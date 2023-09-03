@@ -1,5 +1,8 @@
 """Тесты с использованием pytest для модуля item."""
+import pytest
+
 from src.item import Item
+from src.keyboard import Keyboard
 from src.phone import Phone
 
 
@@ -12,9 +15,11 @@ def test_item():
     assert item.price == 100_000
     assert item.quantity == 3
 
+
 def test__repr__():
     item1 = Item("Смартфон", 10000, 20)
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
 
 def test__str__():
     item = Item("Телевизор", 100_000, 3)
@@ -40,12 +45,15 @@ def test_apply_discount():
 
 
 def test__add__():
+    """
+    Проверка сложения экземпляров
+    """
     item1 = Item("Телевизор", 100_000, 6)
     phone1 = Phone("Sumsung", 100_000, 3, 1)
     assert item1 + phone1 == 9
     assert phone1 + phone1 == 6
 
-    
+
 def test_name():
     """
     Проверка на превышение 10 символов в name
@@ -53,6 +61,8 @@ def test_name():
     item = Item('Телефон', 10000, 5)
     item.name = "СуперСмартфон"
     assert item.name == 'СуперСмарт'
+
+
 def test_instantiate_from_csv():
     """
     Проверка инифиализации экземпляра класса `Item`
@@ -63,8 +73,29 @@ def test_instantiate_from_csv():
     assert test_item.price == 10
     assert test_item.name == "Кабель"
 
+
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
 
+
+def test_number_of_sim():
+    """
+    Проверяем, чтобы кол-во сим-карт было целым, неотрицательным числом
+    """
+    phone3 = Phone("Супермегафон", 1000000, 2, 6)
+    with pytest.raises(ValueError):
+        phone3.number_of_sim = -1
+
+
+def test_keyboard():
+    kb1 = Keyboard('Dark', 7000, 5)
+    assert str(kb1) == "Dark"
+    assert str(kb1.language) == "EN"
+
+
+def test_change_lang():
+    kb1 = Keyboard('Dark', 7000, 5)
+    kb1.change_lang()
+    assert str(kb1.language) == "RU"
