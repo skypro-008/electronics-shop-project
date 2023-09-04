@@ -2,6 +2,7 @@
 import pytest
 from src.item import Item
 from src.phone import Phone
+from src.item import PATH_ABSOLUTE
 
 
 @pytest.fixture()
@@ -50,3 +51,14 @@ def test_str(test_item):
 def test_add(test_item, test_phone):
     assert test_item + test_phone == 11
     assert test_phone + test_item == 11
+
+
+def test_read_file():
+    Item.instantiate_from_csv(PATH_ABSOLUTE)
+    assert PATH_ABSOLUTE == '/home/stanislav/skypro_project/electronics-shop-project/src/items.csv'
+
+
+def test_read_file_error():
+    with pytest.raises(FileNotFoundError, match="Отсутствует файл item.csv"):
+        Item.instantiate_from_csv("not_file.csv")
+
