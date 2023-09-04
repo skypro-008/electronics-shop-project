@@ -8,17 +8,26 @@ class Phone(Item):
         Инициализация для класса Phone
         """
         super().__init__(name, price, quantity)
-        self.number_of_sim = number_of_sim
+        self._number_of_sim = number_of_sim
 
     def __repr__(self):
 
-        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.number_of_sim})"
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self._number_of_sim})"
 
-    def __setattr__(self, key, value):
+    @property
+    def number_of_sim(self):
         """
-        Отбрасывает недопустимые данные для физических SIM-карт
+        Геттер для number_of_sim
         """
-        if key == 'number_of_sim' and (value <= 0 or not isinstance(value, int)):
+
+        return self._number_of_sim
+
+    @number_of_sim.setter
+    def number_of_sim(self, new_number):
+        """
+        Сеттер для number_of_sim
+        """
+        self._number_of_sim = new_number
+
+        if self._number_of_sim <= 0 or not isinstance(self._number_of_sim, int):
             raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
-        else:
-            object.__setattr__(self, key, value)
