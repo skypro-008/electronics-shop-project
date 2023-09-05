@@ -27,7 +27,7 @@ class Phone(Item):
         """
         Сеттер для number_of_sim
         """
-        self._number_of_sim = new_number
-
-        if self._number_of_sim <= 0 or not isinstance(self._number_of_sim, int):
+        if not isinstance(new_number, int) or new_number <= 0:
             raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
+
+        self._number_of_sim = new_number
