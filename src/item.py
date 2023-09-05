@@ -62,6 +62,9 @@ class Item:
                 reader = DictReader(csvfile, fieldnames=["name", "price", "quantity"], dialect=csv.unix_dialect)
                 count = 0
                 for row in reader:
+                    for data in row.values():
+                        if data is None:
+                            raise InstantiateCSVError
                     if count == 0:
                         pass
                     else:
@@ -86,3 +89,12 @@ class Item:
     def __add__(self, other):
         if isinstance(other, Item):
             return self.quantity + other.quantity
+
+
+class InstantiateCSVError(Exception):
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else "Файл item.csv поврежден"
+
+    def __str__(self):
+        return self.message
