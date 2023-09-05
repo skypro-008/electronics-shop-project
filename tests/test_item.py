@@ -15,3 +15,8 @@ def test_calculate_total_price(product):
 def test_apply_discount(product):
     product.apply_discount()
     assert product.calculate_total_price() == 180000.0
+
+
+def test_magic(product):
+    assert repr(product) == "Item('Смартфон', 10000, 20)"
+    assert str(product) == 'Смартфон'
