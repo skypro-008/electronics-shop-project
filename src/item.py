@@ -13,7 +13,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
@@ -32,6 +32,41 @@ class Item:
         """
         self.price = self.price * self.pay_rate
 
+
+    @property
+    def name(self):
+        return self.__name
+
+
+    @name.setter
+    def name(self, name):
+        if len(name) > 10:
+            self.__name = name[:10]
+        else:
+            self.__name = name
+
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        """Загружает данные из файла csv"""
+        cls.all = []
+        with open('/home/fedor/PycharmProjects/electronics-shop-project/src/items.csv', newline='') as f:
+            reader = csv.DictReader(f)
+            for line in reader:
+                name = line['name']
+                price = float(line['price'])
+                quantity = int(line['quantity'])
+                Item(name, price, quantity)
+
+    @staticmethod
+    def string_to_number(digit):
+        numbers = ''
+        for i in range(len(digit)):
+            if digit[i].isdigit():
+                numbers += digit[i]
+            else:
+                break
+        return int(numbers)
     def __repr__(self):
         return f"Item('{self.name}', {self.price}, {self.quantity})"
 
