@@ -1,6 +1,9 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import csv
+from csv import DictReader
+
 import pytest
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 from src.item import PATH_ABSOLUTE
 
@@ -61,4 +64,10 @@ def test_read_file():
 def test_read_file_error():
     with pytest.raises(FileNotFoundError, match="Отсутствует файл item.csv"):
         Item.instantiate_from_csv("not_file.csv")
+
+
+def test_broken_file():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv("test_items.csv")
+        assert str(Item.instantiate_from_csv("test_items.csv")) == "Файл item.csv поврежден"
 
