@@ -57,15 +57,21 @@ class Item:
         """
         класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
-        with open(path_from_csv, newline="", encoding="cp1251") as csvfile:
-            reader = DictReader(csvfile, fieldnames=["name", "price", "quantity"], dialect=csv.unix_dialect)
-            count = 0
-            for row in reader:
-                if count == 0:
-                    pass
-                else:
-                    cls.all.append(Item(row["name"], float(row["price"]), int(row["quantity"])))
-                count += 1
+        try:
+            with open(path_from_csv, newline="", encoding="cp1251") as csvfile:
+                reader = DictReader(csvfile, fieldnames=["name", "price", "quantity"], dialect=csv.unix_dialect)
+                count = 0
+                for row in reader:
+                    for data in row.values():
+                        if data is None:
+                            raise InstantiateCSVError
+                    if count == 0:
+                        pass
+                    else:
+                        cls.all.append(Item(row["name"], float(row["price"]), int(row["quantity"])))
+                    count += 1
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
 
     @staticmethod
     def string_to_number(str_number: str):
@@ -83,3 +89,12 @@ class Item:
     def __add__(self, other):
         if isinstance(other, Item):
             return self.quantity + other.quantity
+
+
+class InstantiateCSVError(Exception):
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else "Файл item.csv поврежден"
+
+    def __str__(self):
+        return self.message
