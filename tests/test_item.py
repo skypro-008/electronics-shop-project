@@ -2,23 +2,6 @@ import pytest
 from src.item import Item
 
 
-@pytest.fixture()
-def item_instance_kept():
-    yield Item("", 0, 0)
-    Item.all.clear()
-
-
-@pytest.fixture()
-def safe_item_class():
-    Item.keep = False
-    max_name_len = Item.max_name_len
-
-    yield Item
-
-    Item.keep = True
-    Item.max_name_len = max_name_len
-
-
 @pytest.mark.parametrize("price, discount, expected_result", [
     (12, 0.5, 6),
     (18, 1, 18),
@@ -98,3 +81,18 @@ def test_Item_repr(safe_item_class):
 def test_Item_str(safe_item_class):
     item1 = safe_item_class("Name", 0, 0)
     assert str(item1) == "Name"
+
+
+def test_Item_add(safe_item_class):
+    item1 = safe_item_class("", 0, 5)
+    item2 = safe_item_class("", 0, 10)
+
+    assert item1 + item2 == 15
+
+
+def test_Item_add_raise_TypeError(safe_item_class):
+    item1 = safe_item_class("", 0, 5)
+    item2 = 10
+
+    with pytest.raises(TypeError):
+        _ = item1 + item2

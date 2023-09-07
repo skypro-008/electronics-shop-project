@@ -38,6 +38,11 @@ class Item:
         if Item.keep:
             Item.all.append(self)
 
+    def __add__(self, other):
+        if issubclass(other.__class__, self.__class__):
+            return self._quantity + other._quantity
+        raise TypeError(f"Can`t sum '{type(self)}' and '{type(other)}'")
+
     def __repr__(self):
         # return (f"{self.__class__.__name__}("
         #         f"name='{self.name}', "
