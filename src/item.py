@@ -31,7 +31,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self._name = name
+        self.name = name
         self._price = price
         self._quantity = quantity
 
