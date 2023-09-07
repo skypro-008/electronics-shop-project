@@ -1,9 +1,11 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 from src.settings import CSV
 
 item1 = Item("Samsung", 10000, 10)
+phone1 = Phone("IPhone", 100000, 15, 2)
 
 
 def test_init():
@@ -43,3 +45,8 @@ def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
+
+def test_add():
+    assert item1 + phone1 == 25
+    assert phone1 + phone1 == 30

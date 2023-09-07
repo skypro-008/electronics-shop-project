@@ -28,7 +28,7 @@ class Item:
         return f"{self.__name}"
 
     def __add__(self, other):
-        if not isinstance(__class__, other):
+        if not isinstance(other, self.__class__):
             return f"Можно складывать только экзепляры класса Item либо его дочерних классов"
         return self.quantity + other.quantity
 
