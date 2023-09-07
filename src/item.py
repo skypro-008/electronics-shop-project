@@ -38,10 +38,18 @@ class Item:
         self.all.append(self)
 
     def __repr__(self):
-        return f"Item('{self.name}', {self.price}, {self.quantity})"
+        """Отображение информации об объекте класса в режиме отладки"""
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
     def __str__(self):
-        return self.name
+        """Отображение информации об объекте класса для пользователей"""
+        return f"{self.__name}"
+
+    def __add__(self, other):
+        """Складываем только экземпляры класса Item и его дочерних классов"""
+        if not issubclass(other.__class__, self.__class__):
+            raise ValueError('Складывать можно только объекты Item и дочерние от них.')
+        return self.quantity + other.quantity
 
     @property
     def name(self):
