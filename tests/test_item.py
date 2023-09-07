@@ -56,3 +56,11 @@ def test_string_to_number():
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
 
+def test_repr_output():
+    item = Item("Mac", randint(10000, 100000), randint(1, 100))
+    assert repr(item) == f"Item('{item.name}', {item.price}, {item.quantity})"
+
+#T
+def test_str_output():
+    item = Item("Mac", randint(10000, 100000), randint(1, 100))
+    assert str(item) == item.name
