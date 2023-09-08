@@ -16,7 +16,7 @@ class Item:
         self.name = name
         self.price = price
         self.quantity = quantity
-        self.all.append(self)
+        Item.all.append(self)
 
 
 
@@ -34,4 +34,5 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
         return self.price
