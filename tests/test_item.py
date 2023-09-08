@@ -3,6 +3,7 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 
 def test_init(some_item):
     assert some_item.name == "Смартфон"
@@ -38,3 +39,10 @@ def test_repr(some_item):
 
 def test_str(some_item):
     assert str(some_item) == 'Смартфон'
+
+def test_add(some_item, some_phone):
+    assert some_item + some_phone == 10
+    assert some_phone + some_phone == 10
+    with pytest.raises(ValueError):
+        assert some_item + 5 == 'Проверка, что можно сложить `Phone` или `Item` только с экземплярами `Phone` или `Item` классов.'
+        assert some_phone + 5 == 'Проверка, что можно сложить `Phone` или `Item` только с экземплярами `Phone` или `Item` классов.'
