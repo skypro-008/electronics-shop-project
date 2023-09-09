@@ -66,3 +66,8 @@ class Item:
             for line in reader:
                 item1 = (cls(line['name'], line['price'], line['quantity']))
                 cls.all.append(item1)
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только объекты Item и дочерние от них.')
+        return int(self.quantity + other.quantity)
