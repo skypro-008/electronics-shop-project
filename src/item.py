@@ -49,7 +49,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
-        with open('/Users/macbook/electronics-shop-project/src/items.csv', 'r') as f:
+        with open('../src/items.csv', 'r') as f:
             reader = csv.DictReader(f, delimiter=",")
             for row in reader:
                 item = cls(row['name'], row['price'], row['quantity'])
