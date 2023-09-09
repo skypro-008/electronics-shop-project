@@ -23,7 +23,7 @@ class Item:
     def string_to_number(string: str) -> int:
         return int(float(string))
 
-    def __init__(self, name: str, price: float, quantity: int) -> None:
+    def __init__(self, name: str, price: float, quantity: int, **kwargs) -> None:
         """
         Создание экземпляра класса item.
 
@@ -31,6 +31,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
+        super().__init__(**kwargs)
         self.name = name
         self._price = price
         self._quantity = quantity
@@ -82,6 +83,6 @@ class Item:
 
     @name.setter
     def name(self, value):
-        if len(value) > Item.max_name_len:
-            raise Exception(f'Длина наименования товара превышает {Item.max_name_len} символов')
+        if len(value) > self.max_name_len:
+            raise Exception(f'Длина наименования товара превышает {self.max_name_len} символов')
         self._name = value
