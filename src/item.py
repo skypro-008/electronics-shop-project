@@ -68,16 +68,23 @@ class Item:
         return self.quantity + other.quantity
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, filename='items.csv'):
         """
         Класс-метод, инициализирующий экземпляры класса `Item` данными из файла src/items.csv
         """
-        csv_file_path = pathlib.Path(__file__).parent.resolve() / 'items.csv'
-        with open(csv_file_path, 'r', encoding='windows-1251') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                cls.all.append(
-                    Item(row['name'], cls.string_to_number(row['price']), cls.string_to_number(row['quantity'])))
+        csv_file_path = pathlib.Path(__file__).parent.resolve() / filename
+        try:
+            with open(csv_file_path, 'r', encoding='windows-1251') as f:
+                reader = csv.DictReader(f)
+                for row in reader:
+                    name = row['name']
+                    price = row['price']
+                    quantity = row['quantity']
+                    if name is None or price is None or quantity is None:
+                        raise InstantiateCSVError
+                    cls.all.append(Item(name, cls.string_to_number(price), cls.string_to_number(quantity)))
+        except FileNotFoundError:
+            raise NotFoundCSVError
 
     @staticmethod
     def string_to_number(string):
@@ -100,3 +107,24 @@ class LanguageMixin:
     @property
     def language(self):
         return self.__lang
+
+
+class CSVError(Exception):
+    """Класс на ошибку в читаемом файле"""
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else "Неизвестная ошибка в CSV файле"
+
+    def __str__(self):
+        return self.message
+
+
+class InstantiateCSVError(CSVError):
+    """Класс на ошибку в читаемом файле, например, отсутствует одна из колонок данных"""
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else "Файл item.csv поврежден"
+
+
+class NotFoundCSVError(CSVError):
+    """Класс на проверку наличия файла"""
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else "Отсутствует файл item.csv"

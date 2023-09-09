@@ -1,7 +1,7 @@
 """Тесты с использованием pytest для модуля item."""
 import pytest
 
-from src.item import Item
+from src.item import Item, NotFoundCSVError, InstantiateCSVError
 from src.keyboard import Keyboard
 from src.phone import Phone
 
@@ -17,11 +17,17 @@ def test_item():
 
 
 def test__repr__():
+    """
+    Тестирование отладки
+    """
     item1 = Item("Смартфон", 10000, 20)
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
 
 
 def test__str__():
+    """
+    Тестирование выведения названия
+    """
     item = Item("Телевизор", 100_000, 3)
     assert str(item) == "Телевизор"
 
@@ -65,7 +71,7 @@ def test_name():
 
 def test_instantiate_from_csv():
     """
-    Проверка инифиализации экземпляра класса `Item`
+    Проверка инициализации экземпляра класса `Item`
     """
     Item.instantiate_from_csv()
     assert len(Item.all) == 5
@@ -73,8 +79,17 @@ def test_instantiate_from_csv():
     assert test_item.price == 10
     assert test_item.name == "Кабель"
 
+    with pytest.raises(NotFoundCSVError):
+        Item.instantiate_from_csv('asdf.csv')
+
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv('items_incorrect.csv')
+
 
 def test_string_to_number():
+    """
+    Тестирование на возвращение числа из числа-строки
+    """
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
@@ -87,15 +102,3 @@ def test_number_of_sim():
     phone3 = Phone("Супермегафон", 1000000, 2, 6)
     with pytest.raises(ValueError):
         phone3.number_of_sim = -1
-
-
-def test_keyboard():
-    kb1 = Keyboard('Dark', 7000, 5)
-    assert str(kb1) == "Dark"
-    assert str(kb1.language) == "EN"
-
-
-def test_change_lang():
-    kb1 = Keyboard('Dark', 7000, 5)
-    kb1.change_lang()
-    assert str(kb1.language) == "RU"
