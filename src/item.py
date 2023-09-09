@@ -39,12 +39,12 @@ class Item:
         return self._name
 
     @name.setter
-    def name(self, name_1):
-        if len(name_1) > 10:
-            self._name = name_1[:10]
+    def name(self, name):
+        if len(name) > 10:
+            self._name = name[:10]
             print(self._name)
         else:
-            self._name = name_1
+            self._name = name
             print(self._name)
 
 
