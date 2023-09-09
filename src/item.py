@@ -1,6 +1,10 @@
 import csv
 
 
+class InstantiateCSVError(Exception):
+    FILE_CORRUPTED = "Файл поврежден"
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -11,7 +15,6 @@ class Item:
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
         Создание экземпляра класса item.
-
         :param name: Название товара.
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
@@ -35,7 +38,6 @@ class Item:
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
-
         :return: Общая стоимость товара.
         """
         return self.price * self.quantity
@@ -68,10 +70,15 @@ class Item:
         :path: путь к файлу
         """
         Item.all = []
-        with open(path, "r") as file:
-            file_reader = csv.DictReader(file)
-            for product in file_reader:
-                cls(product["name"], float(product["price"]), int(product["quantity"]))
+        try:
+            with open(path, "r") as file:
+                file_reader = csv.DictReader(file)
+                if file_reader.fieldnames != ["name", "price", "quantity"]:
+                    raise InstantiateCSVError.FILE_CORRUPTED
+                for product in file_reader:
+                    cls(product["name"], float(product["price"]), int(product["quantity"]))
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
 
     @staticmethod
     def string_to_number(string_number):

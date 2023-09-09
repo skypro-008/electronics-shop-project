@@ -1,6 +1,7 @@
 import pytest
 
 from src.item import Item
+from src.item import InstantiateCSVError
 from src.phone import Phone
 from src.settings import CSV
 
@@ -39,6 +40,7 @@ def test_property_name():
 def test_instantiate_from_csv():
     Item.instantiate_from_csv(CSV)
     assert len(Item.all) == 5
+    assert Item.instantiate_from_csv("test") == FileNotFoundError
 
 
 def test_string_to_number():
@@ -50,3 +52,13 @@ def test_string_to_number():
 def test_add():
     assert item1 + phone1 == 25
     assert phone1 + phone1 == 30
+
+
+def test_instantiate_from_csv_file_not_found():
+    with pytest.raises(FileNotFoundError, match="Отсутствует файл item.csv"):
+        Item.instantiate_from_csv("test")
+
+
+def test_instantiate_from_csv_file_corrupted():
+    with pytest.raises(InstantiateCSVError, match=InstantiateCSVError.FILE_CORRUPTED):
+        Item.instantiate_from_csv("test")
