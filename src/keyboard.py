@@ -14,7 +14,7 @@ class MixinLog:
             self.language = "EN"
         return self.language
 
-    def language(self):
+    def get_language(self):
         return self.language
 
 
