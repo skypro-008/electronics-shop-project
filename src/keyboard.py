@@ -10,7 +10,7 @@ class Mix_Language:
         self._RU = ru
         self._language = self._EN
 
-    def change_language(self):
+    def change_lang(self):
         if self._language == self._EN:
             self._language = self._RU
         else:

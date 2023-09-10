@@ -20,17 +20,10 @@ class Item:
     def __str__(self):
         return f"{self.__name}"
 
-
-    @property
-    def name(self) -> str:
-        return self.__name
-
-    @name.setter
-    def name(self, amount: str) -> None:
-        if len(amount) <= 10:
-            self.__name = amount
-        else:
-            raise Exception("Длина наименования товара превышает 10 символов.")
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        raise Exception
 
 
     def calculate_total_price(self) -> float:
@@ -45,6 +38,19 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
+
+    @property
+    def name(self) -> str:
+        return self.__name
+
+
+    @name.setter
+    def name(self, amount: str) -> None:
+        if len(amount) <= 10:
+            self.__name = amount
+        else:
+            raise Exception("Длина наименования товара превышает 10 символов.")
 
 
     @classmethod

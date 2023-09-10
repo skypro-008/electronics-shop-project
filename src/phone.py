@@ -9,6 +9,14 @@ class Phone(Item):
         super().__init__(name, price, quantity)
         self.__number_of_sim = number_of_sim
 
+    def __add__(self, other):
+        if isinstance(other, Phone):
+            return self.quantity + other.quantity
+        elif isinstance(other, Item):
+            return self.quantity + other.quantity
+        else:
+            raise TypeError("Невозможно сложить Phone или Item с экземплярами других классов")
+
     @property
     def number_of_sim(self):
         """
@@ -22,8 +30,8 @@ class Phone(Item):
         """
         сеттер для сим
         """
-        if not isinstance(num_of_sim, int) or num_of_sim <= 0:
-            raise ValueError('Количество сим должно быть целым положительным числом')
+        if not isinstance(num_of_sim, int) and num_of_sim <= 0:
+            raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля')
         self.__number_of_sim = num_of_sim
 
     def __repr__(self):
