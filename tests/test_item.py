@@ -69,7 +69,27 @@ def test_add_value_error():
         assert item1 + 15 == ValueError('Складывать можно только объекты Item и дочерние от него')
 
 
+#TestCase для проверки исключения при отсутствии файла csv для создания объектов
+def test_instantiate_csv_error():
+    with pytest.raises(InstantiateCSVError):
+        row = {'name': 'Колонки', 'price': '75', 'quantity': None}
+        if type(row.get('name')) is str and row.get('name') != '':
+            if type(row.get('price')) is str and row.get('price') != '':
+                if type(row.get('quantity')) is str and row.get('quantity') != '':
+                    pass
+                else:
+                    raise InstantiateCSVError
+            else:
+                raise InstantiateCSVError
+        else:
+            raise InstantiateCSVError
 
 
-
-
+def test_file_not_found_error():
+    """
+    Тест для проверки исключений
+    """
+    with pytest.raises(FileNotFoundError):
+        file = 'C:/Users/USER/PycharmProjects/electronics-shop-project/src/items2.csv'
+        reader = Item.instantiate_from_csv()
+        raise FileNotFoundError

@@ -52,11 +52,41 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        """
+        Класс метод для создания объектов из файла
+        """
         cls.all = []
-        with open('C:/Users/USER/PycharmProjects/electronics-shop-project/src/items.csv', newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                cls(row.get('name'), float(row.get('price')), int(row.get('quantity')))
+        # Пытаемся открыть файл и создать объекты из данных файла
+        file = 'C:/Users/USER/PycharmProjects/electronics-shop-project/src/items.csv'
+        if file != 'C:/Users/USER/PycharmProjects/electronics-shop-project/src/items.csv':
+            raise FileNotFoundError('Отсутствует файл item.csv')
+        else:
+            with open('C:/Users/USER/PycharmProjects/electronics-shop-project/src/items.csv', newline='') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    read_name = row.get('name')
+                    read_price = row.get('price')
+                    read_quantity = row.get('quantity')
+                    if read_name is None or read_price is None or read_quantity is None:
+                        cls.all = []
+                        raise InstantiateCSVError('Файл items.csv поврежден')
+                    cls(read_name, float(read_price), int(read_quantity))
+
+
+    class InstantiateCSVError(Exception):
+        """
+        Класс для исключения класс метода в случае повреждения файла
+        """
+
+        def __init__(self, message):
+            super().__init__(message)
+
+    class FileNotFoundError(Exception):
+        """
+
+        """
+        def __init__(self, message):
+            super().__init__(message)
 
 
 
