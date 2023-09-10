@@ -40,3 +40,4 @@ def test_instantiate_from_csv(item):
     result = item.instantiate_from_csv(csv_date)
 
     assert result.name == 'dsa'
+#
