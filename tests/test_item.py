@@ -13,6 +13,7 @@ def test_apply_discount():
     assert item1.price == Item.pay_rate * 10000
 
 def test_instantiate_from_csv():
+    Item.all = []
     Item.instantiate_from_csv()  # создание объектов из данных файла
     assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
 
