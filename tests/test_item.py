@@ -1,6 +1,6 @@
 import pytest
 
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 
 
@@ -75,7 +75,16 @@ def test_add(test_class):
 
 def test_instantiate_from_csv_not_found():
     """
-    Тестирует метод instantiate_from_csv
+    Тестирует метод instantiate_from_csv если файл отсутствует
     """
-    with pytest.raises(FileNotFoundError, match='Отсутствует файл item.csv'):
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv()
+
+
+def test_instantiate_from_csv_error():
+    """
+    Тестирует метод instantiate_from_csv если файл поврежден (отсутствует одна из колонок данных)
+    """
+
+    with pytest.raises(InstantiateCSVError):
         Item.instantiate_from_csv()

@@ -3,6 +3,18 @@ from csv import DictReader
 from pathlib import Path
 
 
+class InstantiateCSVError(Exception):
+    """
+    Класс для исключения при поврежденном файле(отсутствует одна из колонок данных)
+    """
+
+    def __init__(self,  *args):
+        self.message = args[0] if args else None
+
+    def __str__(self):
+        return self.message
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -61,10 +73,12 @@ class Item:
         if os.path.exists(cls.from_csv):
             with open(cls.from_csv, encoding='cp1251') as file_csv:
                 reader = DictReader(file_csv)
+                if len(reader.fieldnames) != 3:
+                    raise InstantiateCSVError(f"Файл {cls.from_csv.name} поврежден")
                 for line in reader:
                     cls.all.append(cls(line['name'], float(line['price']), int(line['quantity'])))
         else:
-            raise FileNotFoundError("Отсутствует файл item.csv")
+            raise FileNotFoundError(f"Отсутствует файл {cls.from_csv.name}")
 
     def calculate_total_price(self) -> float:
         """
