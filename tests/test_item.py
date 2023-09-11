@@ -6,7 +6,6 @@ from src.phone import Phone
 
 @pytest.fixture()
 def test_class():
-
     return Item("Смартфон", 12000, 2)
 
 
@@ -72,3 +71,11 @@ def test_add(test_class):
 
     assert item1 + phone1 == 24
     assert phone1 + phone1 == 44
+
+
+def test_instantiate_from_csv_not_found():
+    """
+    Тестирует метод instantiate_from_csv
+    """
+    with pytest.raises(FileNotFoundError, match='Отсутствует файл item.csv'):
+        Item.instantiate_from_csv()
