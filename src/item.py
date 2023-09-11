@@ -1,3 +1,4 @@
+import os.path
 from csv import DictReader
 from pathlib import Path
 
@@ -57,10 +58,13 @@ class Item:
         """
         Инициализирует экземпляры класса Item данными из файла items.csv
         """
-        with open(Item.from_csv, encoding='cp1251') as file_csv:
-            reader = DictReader(file_csv)
-            for line in reader:
-                cls.all.append(cls(line['name'], float(line['price']), int(line['quantity'])))
+        if os.path.exists(cls.from_csv):
+            with open(cls.from_csv, encoding='cp1251') as file_csv:
+                reader = DictReader(file_csv)
+                for line in reader:
+                    cls.all.append(cls(line['name'], float(line['price']), int(line['quantity'])))
+        else:
+            raise FileNotFoundError("Отсутствует файл item.csv")
 
     def calculate_total_price(self) -> float:
         """
