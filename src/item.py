@@ -3,6 +3,7 @@ import csv
 from pathlib import Path
 
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -33,6 +34,14 @@ class Item:
         выводит информацию об объекте для пользователя
         """
         return f'{self.name}'
+
+    def __add__(self, other):
+        """
+        складывает количество товра в из класса Item с твоаром
+        из другого класса
+        """
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
 
 
 
