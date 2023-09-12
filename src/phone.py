@@ -22,13 +22,7 @@ class Phone(Item):
         """
         return f'{self.name}'
 
-    def __add__(self, other):
-        """
-        складывает количество товра в из класса Phone с твоаром
-        из другого класса
-        """
-        if isinstance(other, Phone):
-            return self.quantity + other.quantity
+
 
 
 
