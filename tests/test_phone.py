@@ -1,6 +1,6 @@
 from src.phone import Phone
 import pytest
-from test_item import product
+from tests.test_item import product
 
 
 @pytest.fixture()
