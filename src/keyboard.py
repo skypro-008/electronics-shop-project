@@ -10,6 +10,11 @@ class Mix_Language:
         self._RU = ru
         self._language = self._EN
 
+    @property
+    def language(self):
+        return self._language
+
+
     def change_lang(self):
         if self._language == self._EN:
             self._language = self._RU
@@ -34,6 +39,3 @@ class Keyboard(Item, Mix_Language):
     def __str__(self):
         return f"{self.name}"
 
-    @property
-    def language(self):
-        return self._language
