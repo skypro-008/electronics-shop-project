@@ -47,5 +47,7 @@ def test_str():
     item1 = Item("Смартфон", 10000, 20)
     assert str(item1) == "Смартфон"
 
-
-
+def test_raise():
+    item1 = Item("Смартфон", 10000, 20)
+    with pytest.raises(Exception):
+        item1.name = 'Смартфон Айфон'
