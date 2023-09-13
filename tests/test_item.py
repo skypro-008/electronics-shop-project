@@ -40,4 +40,11 @@ def test_instantiate_from_csv(item):
     result = item.instantiate_from_csv(csv_date)
 
     assert result.name == 'dsa'
-#
+def test_repr():
+    item1 = Item("кандибобер на голове", 1000, 0)
+    assert repr(item1) == "Item('кандибобер на голове', 1000, 0)"
+def test_str():
+    item1 = Item("кандибобер на голове", 1000, 0)
+    assert str(item1)=='кандибобер на голове'
+
+
