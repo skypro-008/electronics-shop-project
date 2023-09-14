@@ -1,3 +1,5 @@
+import csv
+
 from src.item import Item
 
 
@@ -10,3 +12,23 @@ def test_apply_discount():
     test_item = Item('Товар', 200, 1)
     Item.pay_rate = 0.10
     assert test_item.apply_discount() == 20
+
+
+def test_instantiate_from_csv(tmp_path):
+    test_csv_file = tmp_path / "test_items.csv"
+    with open(test_csv_file, 'w',encoding='windows-1251', newline='') as csvfile:
+        fieldnames = ['name', 'price', 'quantity']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerow({'name': 'Тестовый товар 1', 'price': '100', 'quantity': '5'})
+        writer.writerow({'name': 'Тестовый товар 2', 'price': '200', 'quantity': '3'})
+
+    Item.instantiate_from_csv(test_csv_file)
+    items = Item.all
+    assert len(items) == 2
+    assert items[0].name == 'Тестовый товар 1'
+    assert items[0].price == 100.0
+    assert items[0].quantity == 5
+    assert items[1].name == 'Тестовый товар 2'
+    assert items[1].price == 200.0
+    assert items[1].quantity == 3
