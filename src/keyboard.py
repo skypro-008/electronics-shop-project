@@ -5,18 +5,25 @@ class MixinLog:
     ENG = "EN"
 
     def __init__(self):
-        self.language = self.ENG
+        self.__language = self.ENG
 
-    def change_lang(self) -> str:
-        if self.language == "EN":
-            self.language = "RU"
-        elif self.language == "RU":
-            self.language = "EN"
+    @property
+    def language(self):
+        return self.__language
+
+    @language.setter
+    def language(self, value):
+        if value == "RU" or value == "EN":
+            self.__language = value
+        else:
+            raise AttributeError
+
+    def change_lang(self):
+        if self.__language == "EN":
+            self.__language = "RU"
+        elif self.__language == "RU":
+            self.__language = "EN"
         return self
-
-    def get_language(self):
-        return self.language
-
 
 class Keyboard(Item, MixinLog):
     def __init__(self, name: str, price: float, quantity: int):
