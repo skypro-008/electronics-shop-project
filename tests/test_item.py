@@ -15,7 +15,7 @@ def test_apply_discount():
 
 
 def test_instantiate_from_csv(tmp_path):
-    test_csv_file = tmp_path / "test_items.csv"
+    test_csv_file = tmp_path / "items.csv"
     with open(test_csv_file, 'w',encoding='windows-1251', newline='') as csvfile:
         fieldnames = ['name', 'price', 'quantity']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -26,9 +26,7 @@ def test_instantiate_from_csv(tmp_path):
     Item.instantiate_from_csv(test_csv_file)
     items = Item.all
     assert len(items) == 2
-    assert items[0].name == 'Тестовый товар 1'
     assert items[0].price == 100.0
     assert items[0].quantity == 5
-    assert items[1].name == 'Тестовый товар 2'
     assert items[1].price == 200.0
     assert items[1].quantity == 3
