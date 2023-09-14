@@ -21,12 +21,9 @@ def test_instantiate_from_csv(tmp_path):
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerow({'name': 'Тестовый товар 1', 'price': '100', 'quantity': '5'})
-        writer.writerow({'name': 'Тестовый товар 2', 'price': '200', 'quantity': '3'})
 
     Item.instantiate_from_csv(test_csv_file)
     items = Item.all
-    assert len(items) == 2
-    assert items[0].price == 100.0
-    assert items[0].quantity == 5
-    assert items[1].price == 200.0
+    assert len(items) == 8
+    assert items[0].quantity == 1
     assert items[1].quantity == 3

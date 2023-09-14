@@ -32,9 +32,12 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, csv_data):
         with open(csv_data, 'r', encoding='windows-1251') as file:
-            file = csv.DictReader(file)
-            for info in file:
-                print(info)
+            csv_reader = csv.DictReader(file)
+            for row in csv_reader:
+                name = row['name']
+                price = float(row['price'])
+                quantity = int(row['quantity'])
+                item = cls(name, price, quantity)
 
 
 Item.instantiate_from_csv('../src/items.csv')
