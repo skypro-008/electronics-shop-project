@@ -1,5 +1,5 @@
 import pytest
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 
 
 @pytest.mark.parametrize("price, discount, expected_result", [
@@ -29,13 +29,18 @@ def test_Item_all(item_instance_kept):
 
 
 @pytest.mark.parametrize('file_name, expected_result', [
-    ('src/items.csv', 5)
+    ('src/items.csv', 5),
+    ('tests/no_file.csv', FileNotFoundError),
+    ('tests/wrong_items.csv', InstantiateCSVError)
 ])
 def test_Item_instantiate_from_csv(file_name, expected_result):
     try:
-        Item.instantiate_from_csv(file_name)
-
-        assert len(Item.all) == expected_result
+        if issubclass(type(expected_result), type(Exception)):
+            with pytest.raises(expected_result):
+                Item.instantiate_from_csv(file_name)
+        else:
+            Item.instantiate_from_csv(file_name)
+            assert len(Item.all) == expected_result
 
     finally:
         Item.all.clear()

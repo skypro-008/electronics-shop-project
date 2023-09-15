@@ -12,12 +12,24 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, filename='src/items.csv', encoding='windows-1251', delimiter=','):
-        Item.all.clear()
-        with open(filename, 'r', encoding=encoding) as file:
-            items = csv.reader(file, delimiter=delimiter)
-            next(items, None)
-            for name, price, quantity in items:
-                cls(name, float(price), int(quantity))
+        try:
+            new_items = []
+            with open(filename, 'r', encoding=encoding) as file:
+                items = csv.reader(file, delimiter=delimiter)
+                cls.keep = False
+
+                next(items, None)
+                for name, price, quantity in items:
+                    new_items.append(cls(name, float(price), int(quantity)))
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Items file:'{filename}' not found!")
+        except Exception:
+            raise InstantiateCSVError(f"Items file: '{filename}' parse error")
+        else:
+            cls.all.clear()
+            cls.all.extend(new_items)
+        finally:
+            cls.keep = True
 
     @staticmethod
     def string_to_number(string: str) -> int:
@@ -86,3 +98,7 @@ class Item:
         if len(value) > self.max_name_len:
             raise Exception(f'Длина наименования товара превышает {self.max_name_len} символов')
         self._name = value
+
+
+class InstantiateCSVError(Exception):
+    pass
