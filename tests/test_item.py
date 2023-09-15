@@ -13,9 +13,9 @@ def test_apply_discount():
     item = Item("Смартфон", 10000, 20)
 
     Item.pay_rate = 0.8
-    item.apply_discount(0.2)
+    item.apply_discount(0.8)
 
-    assert item.price == 1600.0000000000002
+    assert item.price == 8000
 
 def test_apply_discount_for_all_items():
 
@@ -25,11 +25,11 @@ def test_apply_discount_for_all_items():
 
     Item.pay_rate = 0.8
 
-    item1.apply_discount(1)
-    item2.apply_discount(1)
+    item1.apply_discount(0.8)
+    item2.apply_discount(0.5)
 
 
     assert item1.price == 8000
-    assert item2.price == 16000
+    assert item2.price == 10000
     assert item1.calculate_total_price() == 128000.0
-    assert item2.calculate_total_price() == 64000.0
+    assert item2.calculate_total_price() == 40000.0
