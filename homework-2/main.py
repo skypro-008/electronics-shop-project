@@ -10,7 +10,7 @@ if __name__ == '__main__':
     assert item.name == 'СуперСмарт'
 
     Item.instantiate_from_csv()  # создание объектов из данных файла
-    assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
+    assert len(Item.all) == 5  # в файле 5 записей с данными по товара
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
 
