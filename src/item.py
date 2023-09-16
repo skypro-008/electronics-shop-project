@@ -1,5 +1,9 @@
+# -*- coding: utf-8 -*-
 import csv
 import os.path
+
+from src.errors import InstantiateCSVError
+
 
 class Item:
     """
@@ -7,15 +11,30 @@ class Item:
     """
     pay_rate = 1.0
     all = []
+    CSV_PATH = os.path.join(os.path.dirname(__file__), "items.csv")  # путь к csv-файлу
 
     @classmethod
-    def instantiate_from_csv(cls, file_name):
+    def instantiate_from_csv(cls):
         """класс-метод, инициализирующий экземпляры класса `Item` данными из файла src/items.csv"""
-        with open(file_name, encoding='windows-1251') as csvfile:
+        with open(cls.CSV_PATH, encoding='windows-1251') as csvfile:
             cls.all.clear()
             reader = csv.DictReader(csvfile)
             for attribute in reader:
                 cls(attribute['name'], float(attribute['price']), int(attribute['quantity']))
+
+        try:
+            with open(cls.CSV_PATH, encoding='windows-1251') as csvfile:
+                reader = csv.DictReader(csvfile)
+                if reader.fieldnames != ['name', 'price', 'quantity']:
+                    raise InstantiateCSVError
+                cls.all.clear()
+                for attribute in reader:
+                    if any(value is None for value in attribute.values()):
+                        raise InstantiateCSVError
+                    cls(attribute['name'], float(attribute['price']), int(attribute['quantity']))
+        except FileNotFoundError:
+            raise FileNotFoundError('Отсутствует файл item.csv')
+
 
     @staticmethod
     def string_to_number(string):
@@ -55,6 +74,14 @@ class Item:
     def name(self):
         """Возвращает имя"""
         return self.__name
+
+    @name.setter
+    def name(self, name):
+        """Обрезает имя, если оно больше 10 символов"""
+        if len(name) > 10:
+            self.__name = name[0:10]
+        else:
+            self.__name = name
 
 
     def calculate_total_price(self) -> float:
