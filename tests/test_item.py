@@ -64,3 +64,8 @@ def test_repr_output():
 def test_str_output():
     item = Item("Mac", randint(10000, 100000), randint(1, 100))
     assert str(item) == item.name
+
+def test_add():
+    item1 = Item("Mac", price=randint(10000, 100000), quantity=randint(1, 100))
+    item2 = Item("HP", price=randint(10000, 100000), quantity=randint(1, 100))
+    assert item1 + item2 == item1.quantity + item2.quantity
