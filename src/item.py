@@ -8,6 +8,7 @@ class Item:
     all = []
 
     def __init__(self, name: str, price: float, quantity: int):
+        super().__init__()
         """
         Создание экземпляра класса item.
 
@@ -18,7 +19,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
-
+        
         Item.all.append(self)
 
     def __repr__(self):
