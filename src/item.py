@@ -59,15 +59,29 @@ class Item:
             return int(s[0])
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, filepath = '../src/items.csv'):
         """класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_"""
-        with open('../src/items.csv', 'r') as f:
-            reader = csv.DictReader(f)
-            for line in reader:
-                item1 = (cls(line['name'], line['price'], line['quantity']))
-                cls.all.append(item1)
+
+        try:
+            cls.all = []
+            with open(filepath, 'r') as f:
+                reader = csv.DictReader(f)
+                for line in reader:
+                    item1 = (cls(line['name'], line['price'], line['quantity']))
+                    cls.all.append(item1)
+        except FileNotFoundError:
+            return f"Отсутствует файл"
+        except InstantiateCSVError:
+            return f"Файл поврежден"
 
     def __add__(self, other):
         if not isinstance(other, Item):
             raise ValueError('Складывать можно только объекты Item и дочерние от них.')
         return int(self.quantity + other.quantity)
+
+class InstantiateCSVError(Exception):
+    def __init__(self):
+        pass
+
+    def __str__(self):
+        return 'Файл item.csv поврежден'
