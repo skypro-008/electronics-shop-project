@@ -10,7 +10,7 @@ def fix_keyboard_class():
 def test_init(fix_keyboard_class):
     """Тест Инициализация"""
     assert str(fix_keyboard_class) == "Dark Project KD87A"
-    # тест языка по-умолчанию
+    # Тест языка по-умолчанию
     assert str(fix_keyboard_class.language) == "EN"
 
 

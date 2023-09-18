@@ -1,5 +1,7 @@
 import csv
 import os
+from pathlib import Path
+from src.errors import InstantiateCSVError
 
 
 class Item:
@@ -13,11 +15,17 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls):
         """класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv"""
-        with open(cls.CSV_PATH) as file:
-            reader = csv.DictReader(file)
-            cls.all.clear()
-            for line in reader:
-                item = cls(line['name'], float(line['price']), int(line['quantity']))
+        if not os.path.exists(cls.CSV_PATH):
+            raise FileNotFoundError(f"Отсутствует файл {Path(cls.CSV_PATH).name}")
+
+        try:
+            with open(cls.CSV_PATH) as file:
+                reader = csv.DictReader(file)
+                cls.all.clear()
+                for line in reader:
+                    item = cls(line['name'], float(line['price']), int(line['quantity']))
+        except (KeyError, TypeError):
+            raise InstantiateCSVError(f"Файл {Path(cls.CSV_PATH).name} поврежден")
 
     @staticmethod
     def string_to_number(string):

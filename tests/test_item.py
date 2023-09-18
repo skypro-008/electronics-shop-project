@@ -1,3 +1,6 @@
+import os
+from pathlib import Path
+import csv
 import pytest
 from src.item import Item
 from src.phone import Phone
@@ -32,9 +35,38 @@ def test_all(fix_item_class):
 
 
 def test_instantiate_from_csv():
-    """Класс-метод инициализирует экземпляры из файла csv"""
-    Item.instantiate_from_csv()  # создание объектов из данных файла
-    assert len(Item.all) == 5
+    """С помощью временно csv файла
+    проверяем корректность получения данных и обработки ошибок"""
+    data = [
+        {'name': 'item_1', 'price': '1.0', 'quantity': '1'},
+        {'name': 'item_2', 'price': '2.0', 'quantity': '2'},
+        {'name': 'item_3', 'price': '3.0', 'quantity': '3'}
+    ]
+
+    """Создаём временный csv файл с помощью модуля csv"""
+    with open('test.csv', 'w', encoding='cp1251', newline='') as file:
+        fieldnames = ['name', 'price', 'quantity']
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(data)
+
+    """Создание объектов из данных временного файла csv"""
+    Item.CSV_PATH = 'test.csv'
+    Item.all = []
+    Item.instantiate_from_csv()
+
+    """Проверка данных на корректность записи"""
+    assert len(Item.all) == 3
+    assert Item.all[1].name == 'item_2'
+    assert Item.all[0].price == 1.0
+    assert Item.all[2].quantity == 3
+
+    """Удаляем временный csv файл"""
+    os.remove('test.csv')
+
+    """Проверяем отработку исключений, если файл не существует"""
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv() == f"Отсутствует файл {Path(Item.CSV_PATH).name}"
 
 
 def test_string_to_number():
