@@ -12,6 +12,12 @@ class Item:
         self.quantity = quantity
         self.all.append(self)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f"{self.__name}"
+
     @classmethod
     def instantiate_from_csv(cls):
         csv_import = os.path.join(os.path.dirname(__file__), "items.csv")
@@ -34,7 +40,7 @@ class Item:
 
     @staticmethod
     def string_to_number(string):
-        return int(float(string))
+        return float(string)
 
     def calculate_total_price(self):
         return self.price * self.quantity
@@ -42,3 +48,5 @@ class Item:
     def apply_discount(self) -> float:
         self.price *= self.pay_rate
         return self.price
+
+

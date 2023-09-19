@@ -18,7 +18,6 @@ def test_instantiate_from_csv():
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
-    assert Item.string_to_number('5.5') == 5
 
 
 def test_calculate_total_price():
@@ -30,3 +29,13 @@ def test_apply_discount():
     item = Item('Товар', 200, 1)
     Item.pay_rate = 0.10
     assert item.apply_discount() == 20
+
+
+def test__repr__():
+    item = Item('Товар', 200, 1)
+    assert repr(item) == "Item('Товар', 200, 1)"
+
+
+def test__str__():
+    item = Item('Товар', 200, 1)
+    assert str(item) == 'Товар'
