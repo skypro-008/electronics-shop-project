@@ -14,21 +14,25 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self._name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
 
+    def __repr__(self):
+        return f"Item('{self.__name}', {self.price}, {self.quantity})"
 
+    def __str__(self):
+        return f'{self.__name}'
     @property
     def name(self) -> str:
-        return self._name
+        return self.__name
 
     @name.setter
     def name(self, name: str) -> None:
         if len(name) > 10:
             return f'{name[0:10]}'
-        self._name = name
+        self.__name = name
 
     def calculate_total_price(self) -> float:
         """
