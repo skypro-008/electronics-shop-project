@@ -34,7 +34,6 @@ def test_apply_discount_for_all_items():
     assert item1.calculate_total_price() == 128000.0
     assert item2.calculate_total_price() == 40000.0
 
-import pytest
 from src.item import Item
 
 
@@ -69,3 +68,10 @@ def test_item():
     assert Item.string_to_number('5') == 5.0
     assert Item.string_to_number('5.0') == 5.0
     assert Item.string_to_number('5.5') == 5.5
+
+def test___repr__():
+    item = Item("Ноутбук", 20000, 5)
+    assert item.__repr__() == "Item('Ноутбук', 20000, 5)"
+def test___str__():
+    item = Item("Ноутбук", 20000, 5)
+    assert item.__str__() == 'Ноутбук'
