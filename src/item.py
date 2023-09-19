@@ -21,6 +21,13 @@ class Item:
         self.quantity = quantity
         self.all.append(self)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+
+        return f"{self.__name}"
+
     @property
     def name(self):
         return f'{self.__name}'
@@ -65,3 +72,9 @@ class Item:
     @staticmethod
     def string_to_number(string: str):
         return int(float(string))
+
+
+item1 = Item("Смартфон", 10000, 20)
+assert repr(item1) == "Item('Смартфон', 10000, 20)"
+assert str(item1) == 'Смартфон'
+
