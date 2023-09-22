@@ -2,6 +2,7 @@ import csv
 
 
 class Item:
+    max_name = 10
     pay_rate = 1.0
     all = []
 
@@ -22,8 +23,8 @@ class Item:
 
     @name.setter
     def name(self, new_name):
-        if len(new_name) > 10:
-            self.__name = new_name[:10]
+        if len(new_name) > self.max_name:
+            self.__name = new_name[:self.max_name]
         else:
             self.__name = new_name
 
