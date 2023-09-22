@@ -34,3 +34,10 @@ def test_item_instantiate_from_csv():
     assert Item.all[0].quantity == 0
     assert Item.all[2].quantity == 5
     assert Item.all[3].price == 50.5
+
+def test_item__repr__(item_test):
+    assert repr(item_test) == "Item('Миксер', 10.2, 15)"
+
+def test_item__str__(item_test):
+    assert str(item_test) == "Миксер"
+
