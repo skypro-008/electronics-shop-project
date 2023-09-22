@@ -17,18 +17,23 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.__name = name_
+        self.name = name_
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.__name
 
     @property
     def name(self):
         return self.__name
 
     @name.setter
-    def name(self,name_: str):
+    def name(self, name_: str):
         """
         Присваивает экземпляру атрибут __name: str ,
         после проверки: длина строки должна быть не более 10,
