@@ -2,12 +2,11 @@ import csv
 
 
 class Item:
-    path = 'src/items.csv'
     pay_rate = 1.0
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
-        self.__name = name
+        self.name = name
         self.price = price
         self.quantity = quantity
 
@@ -49,6 +48,11 @@ class Item:
 
     def __str__(self):
         return self.name
+
+    def __add__(self, other):
+        if issubclass(other.__class__, self.__class__):
+            return self.quantity + other.quantity
+        raise ValueError('ошибка')
 
 
 
