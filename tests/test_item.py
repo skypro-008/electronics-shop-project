@@ -2,6 +2,7 @@
 from src.item import Item
 import pytest
 from src.phone import Phone
+from src.keyboard import Keyboard
 
 
 
@@ -69,5 +70,10 @@ def test_add_phone():
     phone_1 = Item("кандибобер на голове", 1000, 15)
     assert phone + phone_1 == 25
     assert phone + phone == 20
+
+
+def test_():
+    kb = Keyboard('Dark Project KD87A', 9600, 5)
+    assert str(kb) == "Dark Project KD87A"
 
 
