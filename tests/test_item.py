@@ -2,11 +2,15 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 
 @pytest.fixture
 def item_test():
     return Item("Миксер", 10.2, 15)
 
+@pytest.fixture
+def phone_test():
+    return Phone("Хонор", 100.1, 5, 1)
 
 def test_item_init(item_test):
 
@@ -40,4 +44,17 @@ def test_item__repr__(item_test):
 
 def test_item__str__(item_test):
     assert str(item_test) == "Миксер"
+
+def test_item_add (item_test, phone_test):
+    assert item_test + phone_test == 20
+
+def test_item_add_noclass(phone_test):
+    '''
+    проверка на сложение экземпляров вне класса
+    '''
+    try:
+        phone_test + 10
+    except Exception as e:
+        assert e
+
 
