@@ -13,7 +13,7 @@ class Item:
         """
         Создание экземпляра класса item.
 
-        :param name: Название товара.
+        :param __name: Название товара.
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
@@ -82,4 +82,10 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price*self.pay_rate
+
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise TypeError(f'{other} не принадлежит классу Item и его подклассам')
+        return self.quantity + other.quantity
+
 
