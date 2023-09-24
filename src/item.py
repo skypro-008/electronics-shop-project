@@ -69,10 +69,10 @@ class Item:
                 for line in reader:
                     item1 = (cls(line['name'], line['price'], line['quantity']))
                     cls.all.append(item1)
+        except KeyError:
+            raise InstantiateCSVError("Файл item.csv поврежден")
         except FileNotFoundError:
-            return f"Отсутствует файл"
-        except InstantiateCSVError:
-            return f"Файл поврежден"
+            return f"Отсутствует файл item.csv"
 
     def __add__(self, other):
         if not isinstance(other, Item):
