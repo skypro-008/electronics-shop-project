@@ -21,24 +21,3 @@ def test_apply_discount():
 
 if __name__ == '__main__':
     pytest.main()
-
-#
-# # пример класса для тестирования
-# class MyClass:
-#     def __init__(self, a, b):
-#         self.a = a
-#         self.b = b
-#
-#     def sum(self):
-#         return self.a + self.b
-#
-#
-# # создание fixture для создания экземпляра класса в каждом тесте
-# @pytest.fixture
-# def my_class():
-#     return MyClass(2, 3)
-#
-#
-# # тест функции sum класса MyClass
-# def test_sum(my_class):
-#     assert my_class.sum() == 5
