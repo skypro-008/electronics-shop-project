@@ -1,13 +1,23 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-import unittest
+import pytest
 from src import item
-class TestItem(unittest.TestCase):
-    """Тест для класса Item"""
 
-    def test_calculate_total_price(self):
-        item1 = item.Item("Смартфон", 10000, 20)
-        self.assertEqual(item1.calculate_total_price(), 200000)
+
+def item_item():
+    return item.Item("Смартфон", 10000, 20)
+
+
+def test___init__():
+    assert item_item().__init__("Смартфон", 10000, 20) is None
+
+
+def test_calculate_total_price():
+    assert item_item().calculate_total_price() == 200000
+
+
+def test_apply_discount():
+    assert item_item().apply_discount() is None
 
 
 if __name__ == '__main__':
-    unittest.main()
+    pytest.main()
