@@ -21,6 +21,13 @@ class Item:
         self.quantity = quantity
         self.all.append(self)
 
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        elif issubclass(other.__class__, self.__class__):
+            return self.quantity + other.quantity
+        return Exception  # Исключение
+
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 

@@ -44,3 +44,4 @@ def test_str(item2):
     Тестирует метод str
     """
     assert str(item2) == 'Ноутбук'
+
