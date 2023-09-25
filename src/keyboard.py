@@ -5,14 +5,14 @@ class MixinLog:
     lang = 'EN'
 
     def __init__(self):
-        self.language = 'EN'
-        MixinLog.language = self.language
+        self._language = 'EN'
+        MixinLog.language = self._language
 
     def change_lang(self):
-        if self.language == 'EN':
-            self.language = 'RU'
-        elif self.language == 'RU':
-            self.language = 'EN'
+        if self._language == 'EN':
+            self._language = 'RU'
+        elif self._language == 'RU':
+            self._language = 'EN'
 
 
 class Keyboard(Item, MixinLog):
@@ -25,8 +25,4 @@ class Keyboard(Item, MixinLog):
     def language(self):
         return self._language
 
-    @language.setter
-    def language(self, lang):
-        if lang!='EN' and lang!='RU':
-            raise AttributeError("property 'language' of 'Keyboard' object has no setter")
-        self._language=lang
+
