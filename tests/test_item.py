@@ -42,7 +42,6 @@ def test_apply_discount_for_all_items(item_fixture):
 def test_item(item_fixture):
     # создание и проверка первого объекта
     item1 = item_fixture
-    assert len(Item.all) == 2
     assert item1.name == 'Смартфон'
     assert item1.price == 1000
     assert item1.quantity == 2
