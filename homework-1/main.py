@@ -19,5 +19,5 @@ if __name__ == '__main__':
 
     Item.all.append(item1)
     Item.all.append(item2)
-    print(Item.all)  # [<__main__.Item object at 0x000001EC6250C690>, <__main__.Item object at 0x000001EC6250C6D0>]
+    print(Item.all)
 
