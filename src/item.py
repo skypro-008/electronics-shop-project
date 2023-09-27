@@ -1,6 +1,5 @@
 import csv
 import os
-import ast
 
 
 class Item:
@@ -23,6 +22,12 @@ class Item:
         self.quantity = quantity
         Item.all.append(self)
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.__name
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -36,8 +41,7 @@ class Item:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        self.price = self.price - self.price * self.pay_rate / 100
-        self.all.append(Item(self.__name, self.price, self.quantity))
+        self.price *= self.pay_rate
 
     @property
     def fullname(self):
@@ -45,12 +49,12 @@ class Item:
         return self.__name
 
     @fullname.setter
-    def fullname(self, __name):
+    def fullname(self, new_name):
         """Проверяет длину наименования товара"""
-        if len(self.__name) < 10:
-            print(self.__name)
+        if len(new_name) < 10:
+            self.__name = new_name
         else:
-            print(self.__name[:11])
+            self.__name = new_name[:10]
 
     @classmethod
     def instantiate_from_csv(cls, file_name):
@@ -69,4 +73,4 @@ class Item:
 
     @staticmethod
     def string_to_number(number):
-        return ast.literal_eval(number[0])
+        return int(float(number))
