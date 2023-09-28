@@ -8,6 +8,9 @@ packages = [{include = "electronics_shop_project"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pip = "^23.2.1"
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
 
 
 [build-system]
