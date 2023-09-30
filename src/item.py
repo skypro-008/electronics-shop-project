@@ -1,5 +1,6 @@
 import csv
 class InstantiateCSVError(Exception):
+    #
     pass
 class Item:
     """
