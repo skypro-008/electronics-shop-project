@@ -1,5 +1,6 @@
 from csv import DictReader
 from pathlib import Path
+from src.errors import InstantiateCSVError
 
 
 class Item:
@@ -40,13 +41,18 @@ class Item:
         cls.all.clear()
         work_dir = Path.cwd()
         path = Path(work_dir.parent, path)
-        with open(path, encoding='Windows-1251') as csv:
-            reader = DictReader(csv)
-            for row in reader:
-                cls(name=row['name'],
-                    price=row['price'],
-                    quantity=row['quantity']
-                    )
+        try:
+            with open(path, encoding='Windows-1251') as csv:
+                reader = DictReader(csv)
+                for row in reader:
+                    if len(row.keys()) <= 4 or any(value is None or value == '' for value in row.values()):
+                        raise InstantiateCSVError()
+                    cls(name=row['name'],
+                        price=row['price'],
+                        quantity=row['quantity']
+                        )
+        except FileNotFoundError:
+            raise FileNotFoundError(f'Отсутствует файл {str(path)}')
 
     @staticmethod
     def string_to_number(string: str) -> int:
@@ -77,3 +83,6 @@ class Item:
         if issubclass(type(other), self.__class__):
             return self.quantity + other.quantity
         return NotImplemented
+
+
+
