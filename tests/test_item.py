@@ -28,3 +28,9 @@ def test_apply_discount(item):
 def test_name_setter(item):
     item.name = 'FLŰGGÅƏNK∂€ČHIŒβØL∫ÊN'
     assert item._name == "FLŰGGÅƏNK∂"
+
+def test__repr__(item):
+    assert repr(item) == "Item('Смартфон', 10000, 20)"
+
+def test__str__(item):
+    assert str(item) == 'Смартфон'

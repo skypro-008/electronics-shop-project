@@ -19,22 +19,28 @@ class Item:
         self.price = price
         self.quantity = quantity
 
-        @property
-        def name(self):
-            return self._name
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self._name}', {self.price}, {self.quantity})"
 
-        @name.setter
-        def name(self, name):
+    def __str__(self):
+        return f'{self._name}'
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
         """проверка длины"""
 
-            self._name = name[:10]
+        self._name = name[:10]
 
     @classmethod
     def string_to_number(cls, string):
         pass
 
 
-def calculate_total_price(self) -> float:
+    def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
 
