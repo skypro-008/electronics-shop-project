@@ -49,3 +49,30 @@ def test__item_repr(smartphone, notebook):
 
     assert smartphone.__repr__() == f'Item({smartphone.name}, {smartphone.price}, {smartphone.quantity})'
     assert notebook.__repr__() == f'Item({notebook.name}, {notebook.price}, {notebook.quantity})'
+
+
+def test__item_name(smartphone):
+    """тестирем сеттер установки значения атрибуте name"""
+
+    item1 = smartphone
+    item1.name = 'Тестировщик'
+    assert smartphone.name == 'Тестировщи'
+
+    item1.name = 'Тест'
+    assert smartphone.name == 'Тест'
+
+
+def test__string_to_number():
+    """тестируем метод конвертации строки в число"""
+
+    assert Item.string_to_number("10.5") == 10
+    with pytest.raises(ValueError):
+        Item.string_to_number("abc")
+    assert Item.string_to_number(10) == print('Данная запись не является числом-строкой')
+
+
+def test__instantiate_from_csv():
+    """тестируем создание экземпляров класса Item из item.csv и запись в Item.all"""
+
+    Item.instantiate_from_csv('src/items.csv')
+    assert len(Item.all) == 5
