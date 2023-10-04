@@ -29,3 +29,23 @@ def test_apply_discount():
     Item.pay_rate = 1.5
     assert item.apply_discount() is None
     assert item.price == 149.85
+
+
+def test_name():
+    item = Item(name='Device', price=10.0, quantity=5)
+    item.name = 'Smart2'
+    assert item.name == 'Smart2'
+    item.name = 'SmartPhone10'
+    assert item.name == 'SmartPhone'
+
+
+def test_create_from_csv():
+    Item.instantiate_from_csv('src/items.csv')
+    assert len(Item.all) == 5
+    item1 = Item.all[0]
+    assert item1.name == 'Смартфон'
+
+def test_convert_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
