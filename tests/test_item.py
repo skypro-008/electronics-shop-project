@@ -1,5 +1,7 @@
 import pytest
-from src.item import Item
+import csv
+from src.item import Item, InstantiateCSVError
+
 
 @pytest.fixture
 def item_fixture() -> Item:
@@ -77,3 +79,11 @@ def test___repr__():
 def test___str__():
     item = Item("Ноутбук", 20000, 5)
     assert item.__str__() == 'Ноутбук'
+
+def test_instantiate_from_csv_not_file():
+    '''
+    Отсутствие файла
+    '''
+    with pytest.raises(FileNotFoundError):
+        with open('../src/items_1.csv', encoding='cp1251') as csvfile:
+            item = csv.DictReader(csvfile)
