@@ -38,10 +38,12 @@ class Item:
 
     @property
     def name(self):
+        ''' Имя getter '''
         return self.__name
 
     @name.setter
     def name(self, name):
+        ''' Имя сеттер '''
         if len(name) > 10:
             self.__name = name[:10]
         else:
