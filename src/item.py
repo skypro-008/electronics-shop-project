@@ -1,5 +1,9 @@
 import csv
 
+class InstantiateCSVError(Exception):
+    pass
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -30,6 +34,7 @@ class Item:
             return self.quantity + other.quantity
         else:
             raise TypeError("Нельзя складывать разные типы товаров!")
+
     @property
     def name(self) -> str:
         return self.__name
@@ -54,21 +59,24 @@ class Item:
         self.price *= discount
 
     @classmethod
-    def instantiate_from_csv(cls, filename: str) -> None:
+    def instantiate_from_csv(cls, filename: str = '../src/items.csv') -> None:
         """
         Инициализирует экземпляры класса Item данными из файла.
         :param filename: Имя файла.
         :return: None
         """
-
-        with open('../src/items.csv', newline='', encoding='windows-1251') as csvfile:
-            csv_dict = csv.DictReader(csvfile, delimiter=',')
-            for row in csv_dict:
-                name = row['name']
-                price = cls.string_to_number(row['price'])
-                quantity = cls.string_to_number(row['quantity'])
-                item = cls(name, price, quantity)
-
+        try:
+            with open(filename, newline='', encoding='windows-1251') as csvfile:
+                csv_dict = csv.DictReader(csvfile, delimiter=',')
+                for row in csv_dict:
+                    name = row.get('name')
+                    price = cls.string_to_number(row.get('price'))
+                    quantity = cls.string_to_number(row.get('quantity'))
+                    item = cls(name, price, quantity)
+        except FileNotFoundError as e:
+            raise e("Отсутствует файл item.csv")
+        except Exception as e:
+            raise InstantiateCSVError(f"Файл item.csv поврежден: {e}")
 
     @staticmethod
     def string_to_number(string_value: str) -> float:
