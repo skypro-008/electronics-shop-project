@@ -59,7 +59,7 @@ def test_item(item_fixture):
     assert big_item.name == 'СуперСмартфон'
 
     # создание объектов из файла csv
-    Item.instantiate_from_csv('src/items.csv')
+    Item.instantiate_from_csv('../src/items.csv')
     assert len(Item.all) == 9
     item2 = Item.all[0]
     assert item2.name == 'Телефон'
@@ -71,7 +71,7 @@ def test_item(item_fixture):
     assert Item.string_to_number('5') == 5.0
     assert Item.string_to_number('5.0') == 5.0
     assert Item.string_to_number('5.5') == 5.5
-
+    assert Item.string_to_number('e') == None
 def test___repr__():
     item = Item("Ноутбук", 20000, 5)
     assert item.__repr__() == "Item('Ноутбук', 20000, 5)"

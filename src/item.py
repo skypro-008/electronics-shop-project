@@ -80,4 +80,7 @@ class Item:
 
     @staticmethod
     def string_to_number(string_value: str) -> float:
-        return float(string_value)
+        try:
+            return float(string_value)
+        except ValueError:
+            return None
