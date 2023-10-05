@@ -80,10 +80,24 @@ def test___str__():
     item = Item("Ноутбук", 20000, 5)
     assert item.__str__() == 'Ноутбук'
 
-def test_instantiate_from_csv_not_file():
-    '''
-    Отсутствие файла
-    '''
-    with pytest.raises(FileNotFoundError):
-        with open('../src/items_1.csv', encoding='cp1251') as csvfile:
-            item = csv.DictReader(csvfile)
+
+def test_instantiate_from_csv_file_not_found():
+    '''Тест для несуществующего файла'''
+    assert Item.instantiate_from_csv() == None
+    try:
+        Item.instantiate_from_csv()
+    except FileNotFoundError as e:
+        assert str(e) == 'Отсутствует файл items.csv'
+
+def test_instantiate_from_csv_invalid_data(tmp_path):
+    '''Тест для поврежденнного файла'''
+    # Создаем временный файл item.csv для тестирования, в котором есть некорректные данные
+    file_data = "name,price,quantity\nТовар1,2.0,3.0\nТовар2,invalid,4.0\nТовар3,1.0,lol\n"
+    file_path = tmp_path / "item.csv"
+    with open(file_path, "w", encoding='windows-1251') as f:
+        f.write(file_data)
+
+    with pytest.raises(InstantiateCSVError) as exc_info:
+        Item.instantiate_from_csv(str(file_path))
+    assert str(exc_info.value).startswith('Файл item.csv поврежден:')
+
