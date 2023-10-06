@@ -9,7 +9,7 @@ class Item:
         self.all_items.append({"название": self.name, "цена": self.price, "количество": self.amount})
 
     def __str__(self):
-        return f"товар {self.name} цена за единицу {self.price} количество {self.amount}"
+        return f"товар {self.name}, цена за единицу {self.price}, количество {self.amount}"
 
     def __repr__(self):
         return f'Item(\'{self.name}\', {self.price}, {self.amount})'
