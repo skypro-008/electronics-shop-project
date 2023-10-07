@@ -50,7 +50,6 @@ class Item:
         else:
             self.__name = name[0:10]
 
-
     @classmethod
     def instantiate_from_csv(cls, filename: str) -> None:
         cls.all.clear()
@@ -62,8 +61,6 @@ class Item:
                 price = float(word["price"])
                 quantity = int(word["quantity"])
                 cls(name, price, quantity)
-
-
 
     @staticmethod
     def string_to_number(str_number: str) -> int:
