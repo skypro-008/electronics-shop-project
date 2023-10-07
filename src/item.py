@@ -49,23 +49,20 @@ class Item:
             self.__name = name
         else:
             self.__name = name[0:10]
-        Item.all.remove(self)
-        Item.all.append(self)
+
 
     @classmethod
     def instantiate_from_csv(cls, filename: str) -> None:
         cls.all.clear()
         with open(filename, encoding="UTF-8", errors='replace') as file:
             words = csv.DictReader(file)
-            items = []
+            # items = []
             for word in words:
                 name = word["name"]
                 price = float(word["price"])
                 quantity = int(word["quantity"])
-                item = cls(name, price, quantity)
-                items.append(item)
+                cls(name, price, quantity)
 
-            cls.all = items
 
 
     @staticmethod
