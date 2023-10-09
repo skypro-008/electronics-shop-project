@@ -17,7 +17,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.__name = name
+        self.item_name = name
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
@@ -39,15 +39,15 @@ class Item:
     @property
     def name(self):
         ''' Имя getter '''
-        return self.__name
+        return self.item_name
 
     @name.setter
     def name(self, name):
         ''' Имя сеттер '''
         if len(name) > 10:
-            self.__name = name[:10]
+            self.item_name = name[:10]
         else:
-            self.__name = name
+            self.item_name = name
 
     @classmethod
     def instantiate_from_csv(cls, filename):
@@ -60,7 +60,9 @@ class Item:
             with open(filepath, newline='') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
-                    new_item = cls(name=row.get('name'), price=row.get('price'), quantity=row.get('quantity'))
+                    new_item = cls(name=row.get('name'),
+                                   price=row.get('price'),
+                                   quantity=row.get('quantity'))
 
     @staticmethod
     def string_to_number(number):
@@ -69,3 +71,9 @@ class Item:
         if rnumber:
             onumber = float(number)
             return int(onumber)
+
+    def __repr__(self):
+        return f"Item('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.name
