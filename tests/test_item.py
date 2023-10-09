@@ -35,3 +35,10 @@ def test_name():
     item_1.name = 'Smart Televizor'
     assert item_1.name == 'Smart Tele'
 
+
+def test__repr__():
+    assert repr(item_1) == "Item(TV,20000,100)"
+
+
+def test__str__():
+    assert str(item_1) == "TV"
