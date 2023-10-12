@@ -29,6 +29,11 @@ class Item:
     def __str__(self):
         return f"{self.__name}"
 
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError("No")
+        return self.quantity + other.quantity
+
     @property
     def calculate_total_price(self) -> float:
         """
