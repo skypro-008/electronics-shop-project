@@ -51,12 +51,12 @@ def test__add__():
     assert item1 + phone1 == 25
     assert phone1 + phone1 == 10
 
+
 def test_number_of_sim():
     assert phone1.number_of_sim == 2
     phone2 = Phone("iPhone 14", 120_000, 5, 0)
     assert phone2.number_of_sim == 0
 
+
 def test_repr_phone():
     assert repr(phone1) == "Phone('iPhone 14', 120000, 5, 2)"
-
-
