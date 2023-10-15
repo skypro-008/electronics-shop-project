@@ -43,6 +43,12 @@ class Item:
         """
         self.price *= self.pay_rate
 
+    def __add__(self, other):
+        """Сложение экземпляров класса по количеству товара в магазине"""
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        return 'Некорректная операция'
+
     @property
     def fullname(self):
         """Возвращает полное наименование товара"""
