@@ -26,5 +26,14 @@ def test_instantiate_from_csv(item):
     Item.instantiate_from_csv('src/items.csv')
     assert len(Item.all) == 5
 
+
 def test_string_to_number(item):
     assert Item.string_to_number('6.5') == 6
+
+
+def test___repr__(item):
+    assert repr(item) == "Item('Смартфон', 10000, 20)"
+
+
+def test___str__(item):
+    assert str(item) == 'Смартфон'
