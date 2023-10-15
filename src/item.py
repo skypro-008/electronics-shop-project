@@ -1,5 +1,6 @@
 from csv import DictReader
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -13,6 +14,12 @@ class Item:
         self.price = price
         self.amount = amount
         self.all.append(self)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.amount})"
+
+    def __str__(self):
+        return f'{self.__name}'
 
     def calculate_total_price(self):
         """Рассчитывает общую стоимость конкретного товара в магазине."""

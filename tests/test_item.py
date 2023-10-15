@@ -8,6 +8,16 @@ def test_item():
     return Item("TV", 10000, 5)
 
 
+@pytest.fixture
+def test__repr__():
+    assert repr(test_item()) == "Item('Смартфон', 10000, 20)"
+
+
+@pytest.fixture
+def test__str():
+    assert str(test__str()) == 'Смартфон'
+
+
 def test_calculate_total_price(test_item):
     assert test_item.calculate_total_price() == 50000
 
