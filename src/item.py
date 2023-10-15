@@ -13,7 +13,19 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
+        super().__init__()
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+
+    def __add__(self, other):
+        '''
+        Складывает два обьекты, относящиеся к
+        классу Item или его подклассам
+        '''
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+
 
     def calculate_total_price(self) -> float:
         """
@@ -21,10 +33,10 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        pass
+        return self.price * self.quantity
 
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        pass
+        self.price *= self.pay_rate
