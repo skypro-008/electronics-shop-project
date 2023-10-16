@@ -49,15 +49,15 @@ class Item:
         else:
             self.__name = new_name
 
-    # @classmethod
-    # def instantiate_from_csv(cls, new_data):
-    #     with open(new_data, 'r', newline='', encoding='Windows-1251') as csvfile:
-    #         fieldnames = ['name', 'price', 'quantity']
-    #         reader = csv.DictReader(csvfile, fieldnames=fieldnames)
-    #         for row in reader:
-    #             name = row['name']
-    #             price = row['price']
-    #             quantity = row['quantity']
+    @classmethod
+    def instantiate_from_csv(cls, new_data):
+        cls.all = []
+        with open(new_data, 'r', newline='', encoding='Windows-1251') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                cls.all.append(row)
+
+
 
 
     @staticmethod
