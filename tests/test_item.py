@@ -1,4 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import pytest
+
 from src.item import Item
 from src.phone import Phone
 
@@ -54,8 +56,8 @@ def test__add__():
 
 def test_number_of_sim():
     assert phone1.number_of_sim == 2
-    phone2 = Phone("iPhone 14", 120_000, 5, 0)
-    assert phone2.number_of_sim == 0
+    with pytest.raises(ValueError):
+        phone1.number_of_sim = -1
 
 
 def test_repr_phone():
