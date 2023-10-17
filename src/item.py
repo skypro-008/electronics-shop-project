@@ -22,6 +22,14 @@ class Item:
         self.quantity = quantity
         self.total_ = 0
 
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.__name}, {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.__name
+
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -37,6 +45,8 @@ class Item:
         """
         self.price = self.price * self.pay_rate
         return self.price
+
+
 
     @property
     def name(self):
