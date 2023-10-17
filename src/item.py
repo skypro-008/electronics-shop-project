@@ -17,6 +17,7 @@ class Item:
         self.name = name
         self.price = price
         self.quantity = quantity
+        Item.all.append(self)
 
     def __add__(self, other):
         '''
