@@ -18,8 +18,8 @@ def test_apply_discount(item):
 
 
 def test_name(item):
-    item.name = "СуперCмартфон"
-    assert item.name == "CуперCмарт"
+    item.name = "СуперСмартфон"
+    assert item.name == "СуперСмарт"
 
 
 def test_instantiate_from_csv(item):
