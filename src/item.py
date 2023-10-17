@@ -3,7 +3,6 @@ import csv
 from pathlib import Path
 
 
-
 class Item:
     """
     Класс для представления товара в магазине.
@@ -29,6 +28,7 @@ class Item:
         выводит информацию об объекте для backend
         """
         return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
     def __str__(self):
         """
         выводит информацию об объекте для пользователя
@@ -43,31 +43,28 @@ class Item:
         if isinstance(other, Item):
             return self.quantity + other.quantity
 
-
-
     @property
     def name(self):
         return self.__name
 
     @name.setter
-    def name(self, value):
+    def name(self, value: str):
         """
         проверяет, что длина наименования товара не больше 10 симвовов.
         В противном случае, обрезаут строку, оставляя первые 10 символов
         """
-        if len(value) > 10:
+        if int(len(value)) > 10:
             self.__name = value[:10]
         else:
             self.__name = value
 
     @staticmethod
-    def string_to_number(string):
+    def string_to_number(string: str):
         """
         статический метод, возвращающий число из числа-строки
         """
-        return int(string)
+        return int(float(string))
 
-    # noinspection PyTypeChecker
     @classmethod
     def instantiate_from_csv(cls):
         """
@@ -78,9 +75,9 @@ class Item:
         with open(file, 'r', encoding='windows-1251') as csv_file:
             csv_reader = csv.DictReader(csv_file)
             for row in csv_reader:
-                price = cls.string_to_number(row["price"])
+                price = cls.string_to_number(row['price'])
                 quantity = cls.string_to_number(row["quantity"])
-                item = cls(row["name"], price, quantity)
+                cls(row["name"], price, quantity)
         return cls.all
 
     def calculate_total_price(self) -> float:

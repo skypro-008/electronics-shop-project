@@ -30,8 +30,10 @@ def test_apply_discount():
     assert item2.price == 20000
 
 def test_length_of_the_name():
+    item1 = Item('Смартфон',100,1)
+    item2 = Item('НоутбукЛал', 200, 3)
     # длина наименования товара меньше 10 символов
-    assert item3.name == 'Кабель'
+    assert item1.name == 'Смартфон'
 
     # длина наименования товара больше 10 символов
     assert item2.name == 'НоутбукЛал'
