@@ -3,10 +3,12 @@ import pytest
 
 from src.item import Item
 from src.phone import Phone
+from src.keyboard import Keyboard
 
 item_1 = Item("TV", 20000, 100)
 Item.pay_rate = 2.0
 phone1 = Phone("iPhone 14", 120_000, 5, 2)
+kb = Keyboard('Dark Project KD87A', 9600, 5)
 
 
 def test_calculate_total_price():
@@ -62,3 +64,16 @@ def test_number_of_sim():
 
 def test_repr_phone():
     assert repr(phone1) == "Phone('iPhone 14', 120000, 5, 2)"
+
+
+def test_str_kb():
+    assert str(kb) == "Dark Project KD87A"
+
+
+def test_change_lang():
+    assert str(kb.language) == "EN"
+    kb.change_lang()
+    assert str(kb.language) == "RU"
+
+
+
