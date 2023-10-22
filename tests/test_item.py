@@ -43,6 +43,13 @@ def test_instantiate_from_csv(sample_csv):
     assert Item.all[1].price == 20000.0
     assert Item.all[1].quantity == 5
 
+def test_repr():
+    item = Item("Ноутбук", 156, 11)
+    assert repr(item) == "Item('Ноутбук', 156, 11)"
+
+def test_str():
+    item = Item("Ноутбук", 156, 11)
+    assert str(item) == "Ноутбук"
 
 if __name__ == '__main__':
     pytest.main([__file__])
