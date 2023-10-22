@@ -5,13 +5,17 @@ class MixinLog:
 
     def __init__(self):
         language = 'EN'
-        self.language = language
+        self.__language = language
+
+    @property
+    def language(self):
+        return self.__language
 
     def change_lang(self):
         if self.language == 'EN':
-            self.language = 'RU'
+            self.__language = 'RU'
         else:
-            self.language = 'EN'
+            self.__language = 'EN'
 
 
 class Keyboard(Item, MixinLog):
@@ -24,13 +28,5 @@ class Keyboard(Item, MixinLog):
 
     def __str__(self):
         return f'{self.name}'
-
-    @property
-    def language(self):
-        return f"{self.language}"
-
-
-
-
 
 
