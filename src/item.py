@@ -1,5 +1,11 @@
 import csv
-import math
+
+
+class InstantiateCSVError(Exception):
+    def __init__(self):
+        self.message = "Файл item.csv поврежден"
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -29,20 +35,6 @@ class Item:
         if not isinstance(other, Item):
             return ValueError
         return self.quantity + other.quantity
-    @property
-    def name(self):
-        return self._name
-
-    @name.setter
-    def name(self, name):
-        """проверка длины"""
-
-        self._name = name[:10]
-
-    @classmethod
-    def string_to_number(cls, string):
-        pass
-
 
     def calculate_total_price(self) -> float:
         """
@@ -50,30 +42,45 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        self.total_price = self.price * self.quantity
-        return self.total_price
+        result = self.quantity * self.price
+        return result
 
     def apply_discount(self):
         """
         Применяет установленную скидку для конкретного товара.
         """
-        self.price = self.price * self.pay_rate
+        self.price = self.price * Item.pay_rate
         return self.price
+
+    @property
+    def name(self):
+        """ Добавление getter к name"""
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        """Добавление setter к name и проверка длины"""
+        self._name = name[:10]
 
     @classmethod
     def instantiate_from_csv(cls):
-        with open('../src/items.csv', encoding='cp1251') as csvfile:
-            read = csv.DictReader(csvfile)
-            for x in read:
-               name = x["name"]
-               price = x["price"]
-               quantity = x["quantity"]
-               item = cls(name, price, quantity)
-               Item.all.append(item)
-            return Item.all
-
+        try:
+            with open('../items.csv', encoding='cp1251') as file: #менял путь к файлу для вызова исключения FileNotFoundError
+                read = csv.DictReader(file)
+                for x in read:
+                    name = x["name"]
+                    price = x["price"]
+                    quantity = x["quantity"] #None для вызова исключения InstantiateCSVError
+                    if name is None or price is None or quantity is None:
+                        raise InstantiateCSVError
+                    item = cls(name, price, quantity)
+                    cls.all.append(item)
+        except FileNotFoundError:
+            print("Отсутствует файл items.csv")
+        except InstantiateCSVError as m:
+            print(m.message)
 
     @staticmethod
-    def string_to_number(line):
-        x = float(line)
+    def string_to_number(string: str):
+        x = float(string)
         return int(x)
