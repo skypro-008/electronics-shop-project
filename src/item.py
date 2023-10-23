@@ -1,5 +1,4 @@
 import csv
-import os
 
 
 class Item:
@@ -22,13 +21,16 @@ class Item:
         self.quantity = quantity
         self.total_ = 0
 
-
     def __repr__(self):
         return f"{self.__class__.__name__}({self.__name}, {self.price}, {self.quantity})"
 
     def __str__(self):
         return self.__name
 
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        raise AssertionError
 
     def calculate_total_price(self) -> float:
         """
@@ -45,8 +47,6 @@ class Item:
         """
         self.price = self.price * self.pay_rate
         return self.price
-
-
 
     @property
     def name(self):
@@ -67,13 +67,6 @@ class Item:
             for row in reader:
                 cls.all.append(row)
 
-
-
-
     @staticmethod
     def string_to_number(num):
         return int(float(num))
-
-
-
-

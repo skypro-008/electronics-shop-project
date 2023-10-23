@@ -22,6 +22,19 @@ def test_name():
     item.name = 'Смартфон'
     assert item.name == 'Смартфон'
 
+def test___repr__():
+    item = Item('Телефон', 10000, 5)
+    assert repr(item) == "Item(Телефон, 10000, 5)"
+
+def test___str__():
+    item = Item('Телефон', 10000, 5)
+    assert str(item) == ('Телефон')
+
+def test____add__():
+        item1 = Item('Телефон', 10000, 5)
+        item2 = Item('Телефон', 10000, 5)
+        assert  item1 + item2 == 10
+
 
 
 
