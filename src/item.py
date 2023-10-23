@@ -21,6 +21,11 @@ class Item:
     def __str__(self):
         return f'{self.__name}'
 
+    def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
+        return self.amount + other.amount
+
     def calculate_total_price(self):
         """Рассчитывает общую стоимость конкретного товара в магазине."""
         return self.price * self.amount
