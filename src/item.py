@@ -56,3 +56,4 @@ class Item:
     @staticmethod
     def string_to_number(string):
         return int(float(string))
+
