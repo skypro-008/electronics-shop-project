@@ -1,45 +1,33 @@
 from src.item import Item
 
 
-class Keyboard(Item):
-    __slots__ = ('EN', 'RU')
+class MixinLog:
+    __language = 'EN'
+    keyboard_lang = []
 
-    def __init__(self, name: str, price: float, quantity: int):
-        super().__init__(name, price, quantity)
-        self.language = 'EN'
+    def __init__(self):
+        self.keyboard_lang = []
 
-    def __repr__(self):
-        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.language})"
+    def add_to_keyboard_lang(self, value):
+        self.keyboard_lang.append(value)
 
     @property
+    def language(self):
+        return self.__language
+
+    # @property
     def change_lang(self):
-        return self.language
-
-    @change_lang.setter
-    def change_lang(self, lang):
-        if self.language == 'EN':
-            self.language = 'EN'
-            MixinLog.add_lang_in_list(MixinLog, self.language)
-        elif self.language == 'RU':
-            self.language = 'RU'
-            MixinLog.add_lang_in_list(MixinLog, self.language)
+        if self.__language == 'EN':
+            self.__language = 'RU'
+            MixinLog.add_to_keyboard_lang(MixinLog, self.__language)
+        else:
+            self.__language = 'EN'
+            MixinLog.add_to_keyboard_lang(MixinLog, self.__language)
 
 
-class MixinLog:
-    list_lang = []
+class Keyboard(Item, MixinLog):
+    def __init__(self, name: str, price: float, quantity: int):
+        super().__init__(name, price, quantity)
 
-    def __init__(self, list_lang):
-        self.list_lang = list_lang
-
-    def add_lang_in_list(self, lang):
-        return self.list_lang.append(lang)
-
-
-kb = Keyboard('Dark Project KD87A', 9600, 5)
-print(repr(kb))
-kb.language = "RU"
-print(repr(kb))
-kb.language = "CH"
-print(repr(kb))
-
-
+    def __str__(self):
+        return f'{self.name}'
