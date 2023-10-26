@@ -53,8 +53,11 @@ class Item:
 
     def __add__(self, other):
         if isinstance(other, self.__class__):
-            if self.quantity and other.quantity > 0:
-                return int(self.quantity + other.quantity)
+            if isinstance(self.quantity, int) and isinstance(other.quantity, int):
+                if self.quantity > 0 and other.quantity > 0:
+                    return self.quantity + other.quantity
+                else:
+                    raise ValueError("Количество физических SIM-карт должно быть больше нуля")
             else:
-                raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля")
+                raise ValueError("Количество физических SIM-карт должно быть целым числом")
         return None
