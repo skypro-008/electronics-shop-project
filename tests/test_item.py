@@ -44,8 +44,10 @@ def test_name(items_fixture):
 def test__repr__(items_fixture):
     item1, item2 = items_fixture
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert repr(item2) == "Item('Ноутбук', 20000, 5)"
 
 
 def test__str__(items_fixture):
     item1, item2 = items_fixture
     assert str(item1) == 'Смартфон'
+    assert str(item2) == 'Ноутбук'
