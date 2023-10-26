@@ -1,7 +1,7 @@
 import csv
 
-class Item:
 
+class Item:
     pay_rate: int = 1.0
     all = []
 
@@ -38,7 +38,6 @@ class Item:
                 quantity = cls.string_to_number(row['quantity'])
                 item = cls(name, price, quantity)
 
-
     @staticmethod
     def string_to_number(value: str) -> float:
         try:
@@ -56,7 +55,6 @@ class Item:
         if isinstance(other, self.__class__):
             if self.quantity and other.quantity > 0:
                 return int(self.quantity + other.quantity)
-
+            else:
+                raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля")
         return None
-
-

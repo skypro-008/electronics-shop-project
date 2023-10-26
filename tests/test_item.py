@@ -58,11 +58,15 @@ def test__add_(items_fixture):
     item1, item2 = items_fixture
     phone1 = Phone("iPhone 14", 120_000, 5, 2)
     phone2 = Phone("iPhone 14", 120_000, 5.5, 2)
+    phone3 = Phone("iPhone 14", 120_000, 4, 0)
+
     assert item1 + phone2 == 25
     assert phone1 + phone1 == 10
     assert item1 + phone2 != 25.5
     assert isinstance(Phone, Item) == isinstance(Phone, Item)
     assert item1.quantity > 0
-    assert phone1.quantity > 0
+    if phone3.number_of_sim <= 0:
+        assert ValueError("Количество физических SIM-карт должно быть целым числом больше нуля")
+
 
 
