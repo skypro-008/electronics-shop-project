@@ -6,11 +6,11 @@ if __name__ == '__main__':
 
     assert str(kb.language) == "EN"
 
-    change_lang()
+    kb.change_lang()
     assert str(kb.language) == "RU"
 
     # Сделали EN -> RU -> EN
-    change_lang()
+    kb.change_lang()
     assert str(kb.language) == "EN"
 
     kb.language = 'CH'
