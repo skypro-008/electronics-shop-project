@@ -2,6 +2,7 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture
@@ -51,3 +52,17 @@ def test__str__(items_fixture):
     item1, item2 = items_fixture
     assert str(item1) == 'Смартфон'
     assert str(item2) == 'Ноутбук'
+
+
+def test__add_(items_fixture):
+    item1, item2 = items_fixture
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    phone2 = Phone("iPhone 14", 120_000, 5.5, 2)
+    assert item1 + phone2 == 25
+    assert phone1 + phone1 == 10
+    assert item1 + phone2 != 25.5
+    assert isinstance(Phone, Item) == isinstance(Phone, Item)
+    assert item1.quantity > 0
+    assert phone1.quantity > 0
+
+
