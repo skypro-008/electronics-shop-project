@@ -61,3 +61,6 @@ class Item:
             else:
                 raise ValueError("Количество физических SIM-карт должно быть целым числом")
         return None
+
+
+
