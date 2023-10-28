@@ -1,6 +1,18 @@
 import csv
+from pathlib import Path
+
+from src.settings import bath_dir
 
 word_csv = []
+
+
+class InstantiateCSVError(Exception):
+
+    def __init__(self, *args, **kwargs):
+        self.message = args[0] if args else 'Файл item.csv поврежден'
+
+    def __str__(self):
+        return self.message
 
 
 class Item:
@@ -63,16 +75,26 @@ class Item:
             self.__name = name[0:10]
 
     @classmethod
-    def instantiate_from_csv(cls, filename: str) -> None:
+    def instantiate_from_csv(cls) -> None:
         cls.all.clear()
-        with open(filename, encoding="UTF-8", errors='replace') as file:
-            words = csv.DictReader(file)
-            # items = []
-            for word in words:
-                name = word["name"]
-                price = float(word["price"])
-                quantity = int(word["quantity"])
-                cls(name, price, quantity)
+        items_path = bath_dir.joinpath('items.csv')
+        try:
+            with open(items_path, encoding="UTF-8", errors='replace') as file:
+                words = csv.DictReader(file)
+                for word in words:
+                    if word['name'] is None or word['price'] is None or word['quantity'] is None:
+                        raise InstantiateCSVError
+                    else:
+                        name = word["name"]
+                        price = float(word["price"])
+                        quantity = int(word["quantity"])
+                    cls(name, price, quantity)
+        except FileNotFoundError:
+            print('Отсутствует файл item.csv')
+        except InstantiateCSVError as e:
+            print(e.message)
+
+
 
     @staticmethod
     def string_to_number(str_number: str) -> int:
