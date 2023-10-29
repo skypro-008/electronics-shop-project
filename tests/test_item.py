@@ -30,3 +30,13 @@ def test_instantiate_from_csv(test_class):
 
 def test_string_to_number(test_class):
     assert test_class.string_to_number('15.0') == 15
+
+
+def test_str(test_class):
+   assert str(test_class) == 'test'
+
+
+def test_repr(test_class):
+   assert repr(test_class) == "Item('test', 5, 10)"
+
+
