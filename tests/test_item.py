@@ -1,5 +1,6 @@
 import pytest
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture
@@ -43,13 +44,26 @@ def test_instantiate_from_csv(sample_csv):
     assert Item.all[1].price == 20000.0
     assert Item.all[1].quantity == 5
 
+
 def test_repr():
     item = Item("Ноутбук", 156, 11)
     assert repr(item) == "Item('Ноутбук', 156, 11)"
 
+
 def test_str():
     item = Item("Ноутбук", 156, 11)
     assert str(item) == "Ноутбук"
+
+
+def test_add_item_and_phone():
+    item1 = Item("Смартфон", 10000, 20)
+    phone1 = Phone("iPhone 14", 120000, 5, 2)
+    assert item1 + phone1 == 25
+
+def test_add_item_and_item():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item("Ноутбук", 20000, 5)
+    assert item1 + item2 == 25
 
 if __name__ == '__main__':
     pytest.main([__file__])
