@@ -6,6 +6,7 @@ class Item:
     """
     Класс для представления товара в магазине.
     """
+
     pay_rate = 1.0
     all = []
 
@@ -22,6 +23,14 @@ class Item:
         self.quantity = quantity
 
         Item.all.append(self)
+
+    def __repr__(self):
+        return (
+            f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+        )
+
+    def __str__(self):
+        return f"{self.name}"
 
     def calculate_total_price(self) -> float:
         """
@@ -62,12 +71,12 @@ class Item:
 
         items = []
         path_name = str(cls.path_file(path_name))
-        with open(path_name, newline='', encoding='windows-1251') as csv_f:
-            reader = DictReader(csv_f, delimiter=',')
+        with open(path_name, newline="", encoding="windows-1251") as csv_f:
+            reader = DictReader(csv_f, delimiter=",")
             for row in reader:
-                name = str(row['name'])
-                price = float(row['price'])
-                quantity = int(row['quantity'])
+                name = str(row["name"])
+                price = float(row["price"])
+                quantity = int(row["quantity"])
                 item = cls(name, price, quantity)
                 items.append(item)
             cls.all = items
@@ -79,11 +88,17 @@ class Item:
 
         :param path_name: путь к файлу в подобном формате 'src/items.csv'
         """
-        path_list = path_name.split('/')
-        path_file = os.path.join('..', path_list[0], path_list[1])
+        path_list = path_name.split("/")
+        path_file = os.path.join("..", path_list[0], path_list[1])
         return path_file
 
     @staticmethod
     def string_to_number(string):
-        string = string.split('.')
+        string = string.split(".")
         return int(string[0])
+
+
+# item1 = Item("Смартфон", 10000, 20)
+#
+# print(repr(item1))
+# print(str(item1))
