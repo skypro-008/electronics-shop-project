@@ -1,12 +1,11 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
-
 from src.item import Item
 
 
 @pytest.fixture
 def test_class():
-    item = Item(name='test', price=5, quantity=10,)
+    item = Item(name='test', price=5, quantity=10, )
     return item
 
 
@@ -33,10 +32,13 @@ def test_string_to_number(test_class):
 
 
 def test_str(test_class):
-   assert str(test_class) == 'test'
+    assert str(test_class) == 'test'
 
 
 def test_repr(test_class):
-   assert repr(test_class) == "Item('test', 5, 10)"
+    assert repr(test_class) == "Item('test', 5, 10)"
 
 
+def test_add(test_class):
+    item1 = Item('Sly', 50000, 30)
+    assert test_class.quantity + item1.quantity == 40

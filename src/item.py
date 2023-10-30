@@ -97,8 +97,6 @@ class Item:
         string = string.split(".")
         return int(string[0])
 
+    def __add__(self, other):
+        return int(self.quantity) + int(other.quantity)
 
-# item1 = Item("Смартфон", 10000, 20)
-#
-# print(repr(item1))
-# print(str(item1))
