@@ -75,26 +75,22 @@ class Item:
             self.__name = name[0:10]
 
     @classmethod
-    def instantiate_from_csv(cls) -> None:
+    def instantiate_from_csv(cls, path='items.csv') -> None:
         cls.all.clear()
-        items_path = bath_dir.joinpath('items.csv')
+        items_path = bath_dir.joinpath(path)
         try:
             with open(items_path, encoding="UTF-8", errors='replace') as file:
                 words = csv.DictReader(file)
                 for word in words:
-                    if word['name'] is None or word['price'] is None or word['quantity'] is None:
-                        raise InstantiateCSVError
+                    if word.get('name') is None or word.get('price') is None or word.get('quantity') is None:
+                        raise InstantiateCSVError()
                     else:
                         name = word["name"]
                         price = float(word["price"])
                         quantity = int(word["quantity"])
                     cls(name, price, quantity)
         except FileNotFoundError:
-            print('Отсутствует файл item.csv')
-        except InstantiateCSVError as e:
-            print(e.message)
-
-
+            raise FileNotFoundError('Отсутствует файл item.csv')
 
     @staticmethod
     def string_to_number(str_number: str) -> int:

@@ -1,14 +1,14 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
 
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 from src.keyboard import Keyboard
 
 item_1 = Item("TV", 20000, 100)
 Item.pay_rate = 2.0
 phone1 = Phone("iPhone 14", 120_000, 5, 2)
-kb = Keyboard('Dark Project KD87A', 9600, 5)
+# kb = Keyboard('Dark Project KD87A', 9600, 5)
 
 
 def test_calculate_total_price():
@@ -76,4 +76,12 @@ def test_change_lang():
     assert str(kb.language) == "RU"
 
 
+def test_instantiate_from_csv1():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('qwerty.py')
+
+
+def test_instantiate_from_csv2():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv('items(brake).csv')
 
