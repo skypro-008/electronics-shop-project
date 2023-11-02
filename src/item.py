@@ -13,11 +13,25 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
 
+
+    @property
+    def name(self):
+        """Возвращает полное наименование товара"""
+        return self.__name
+
+    @name.setter
+    def fullname(self, product_name):
+        """Если длина наименования товара больше 10 символов, сокращает наименование до 10 символов,
+        если нет - оставляет таким же"""
+        if len(product_name) < 10:
+            self.__name = product_name
+        else:
+            self.__name = product_name[:10]
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -31,4 +45,13 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * self.pay_rate
+
+    @staticmethod
+    def string_to_number(number):
+        """
+        Статический метод, возвращающий число из числа-строки
+        """
+        return int(float(number))
+
+
 
