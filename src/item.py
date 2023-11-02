@@ -1,3 +1,7 @@
+import csv
+import os
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -52,6 +56,19 @@ class Item:
         Статический метод, возвращающий число из числа-строки
         """
         return int(float(number))
+    @classmethod
+    def instantiate_from_csv(cls, file_name):
+        """
+        инициализирует экземпляры класса Item данными из файла src/items.csv
+        """
+        cls.all.clear()
+        with open("../src/items.csv", newline=" ") as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                name = row['name']
+                price = row["price"]
+                quantity = row["quantity"]
+                cls(name, price, quantity)
 
 
 
