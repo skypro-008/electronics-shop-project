@@ -87,7 +87,7 @@ class Item:
             try:
                 for row in reader:
                     cls.all.append(row)
-                    if row['name'] or row['price'] or row['quantity'] is None:
+                    if row['name'] or row['price'] or row["quantity"] is None:
                          raise InstantiateCSVError("Файл item.csv поврежден")
                     item = cls.all.append(row)
                     print(item)

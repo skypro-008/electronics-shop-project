@@ -1,4 +1,6 @@
-from src.item import Item
+import pytest
+
+from src.item import Item, InstantiateCSVError
 import os
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 
@@ -45,6 +47,18 @@ def test_instantiate_from_csv():
 
 
 
+
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
+
+
+def test_instantiate_from_csv_file_error():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv(os.path.join('..', 'src', 'items.csv'))
+
+
+
+def test_instantiate_from_csv_file_not_found():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv(os.path.join('..', 'src', 'items.csv'))
