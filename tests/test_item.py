@@ -55,10 +55,10 @@ def test_string_to_number():
 
 def test_instantiate_from_csv_file_error():
     with pytest.raises(InstantiateCSVError):
-        Item.instantiate_from_csv(os.path.join('..', 'src', 'items.csv'))
+        Item.instantiate_from_csv(os.path.join('..', 'src', 'test_items.csv'))
 
 
 
 def test_instantiate_from_csv_file_not_found():
     with pytest.raises(FileNotFoundError):
-        Item.instantiate_from_csv(os.path.join('..', 'src', 'items.csv'))
+        Item.instantiate_from_csv(os.path.join('..', 'sc', 'items.csv'))
