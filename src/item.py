@@ -24,15 +24,15 @@ class Item:
 
 
     @property
-    def person_name(self):
+    def name(self):
         """Возвращает полное наименование товара"""
         return self.__name
 
-    @person_name.setter
-    def person_name(self, product_name):
+    @name.setter
+    def name(self, product_name):
         """Если длина наименования товара больше 10 символов, сокращает наименование до 10 символов,
         если нет - оставляет таким же"""
-        if len(product_name) < 10:
+        if len(product_name) <= 10:
             self.__name = product_name
         else:
             self.__name = product_name[:10]
@@ -61,8 +61,7 @@ class Item:
         """
         инициализирует экземпляры класса Item данными из файла src/items.csv
         """
-        cls.all.clear()
-        with open(file_name, newline=" ") as csvfile:
+        with open(file_name, encoding="cp1251") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 name = row['name']
