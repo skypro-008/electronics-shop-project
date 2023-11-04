@@ -1,5 +1,5 @@
 import pytest
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 
 
@@ -64,6 +64,21 @@ def test_add_item_and_item():
     item1 = Item("Смартфон", 10000, 20)
     item2 = Item("Ноутбук", 20000, 5)
     assert item1 + item2 == 25
+
+def test_instantiate_from_csv_file_not_found():
+    ''' Проверка несуществующего файла item.csv'''
+    with pytest.raises(FileNotFoundError) as exc_info:
+        Item.instantiate_from_csv("../src/nonexistent_file.csv")
+    assert str(exc_info.value) == "Отсутствует файл item.csv"
+
+
+def test_instantiate_from_csv_broken_file():
+    ''' Проверка сломанного файла item.csv'''
+
+    with pytest.raises(InstantiateCSVError) as exc_info:
+        Item.instantiate_from_csv("../src/broken_file_items.csv")
+    assert str(exc_info.value) == "Файл item.csv поврежден"
+
 
 if __name__ == '__main__':
     pytest.main([__file__])

@@ -58,16 +58,21 @@ class Item:
         self.price *= self.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls, file_path):
-        with open(file_path, mode='r') as csv_file:
-            csv_reader = csv.DictReader(csv_file)
-            for row in csv_reader:
-                name = row["name"]
-                price = cls.string_to_number(row["price"])
-                quantity = int(row["quantity"])
-                item = cls(name, price, quantity)
-                if item not in cls.all:  # Проверка наличия объекта в списке перед добавлением
-                    cls.all.append(item)
+    def instantiate_from_csv(cls, file_path = '../src/items.csv'):
+        try:
+            with open(file_path, mode='r') as csv_file:
+                csv_reader = csv.DictReader(csv_file)
+                for row in csv_reader:
+                    if "name" not in row or "price" not in row or "quantity" not in row:
+                        raise InstantiateCSVError("Файл item.csv поврежден")
+                    name = row["name"]
+                    price = cls.string_to_number(row["price"])
+                    quantity = int(row["quantity"])
+                    item = cls(name, price, quantity)
+                    if item not in cls.all:  # Проверка наличия объекта в списке перед добавлением
+                        cls.all.append(item)
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
 
     @staticmethod
     def string_to_number(string):
@@ -78,3 +83,9 @@ class Item:
             return float(string)
         except ValueError:
             return None
+
+class InstantiateCSVError(Exception):
+
+    def __init__(self, message="Файл item.csv поврежден"):
+        self.message = message
+        super().__init__(self.message)
