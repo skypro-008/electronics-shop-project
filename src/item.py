@@ -1,4 +1,4 @@
-import csv
+import csv, os
 
 
 class InstantiateCSVError(Exception):
@@ -80,19 +80,18 @@ class Item:
             self.__name = new_name
 
     @classmethod
-    def instantiate_from_csv(cls, new_data):
+    def instantiate_from_csv(cls, new_data=os.path.join('..', 'src', 'test_items.csv')):
         cls.all = []
         try:
             with open(new_data, 'r', newline='', encoding='Windows-1251') as csvfile:
                 reader = csv.DictReader(csvfile)
                 for row in reader:
-                    if row['name'] or row['price'] or row["quantity"] is None:
+                    if row['name'] is None or row['price'] is None or row["quantity"] is None:
                         raise InstantiateCSVError("Файл item.csv поврежден")
                     else:
                         cls.all.append(row)
                         item = cls.all.append(row)
                         print(item)
-                        csvfile.close()
         except FileNotFoundError:
             raise FileNotFoundError("Отсутствует файл item.csv")
 
