@@ -98,5 +98,6 @@ class Item:
         return int(string[0])
 
     def __add__(self, other):
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только два объекта Item')
         return int(self.quantity) + int(other.quantity)
-
