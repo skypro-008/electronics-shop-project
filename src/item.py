@@ -32,10 +32,7 @@ class Item:
     def name(self, product_name):
         """Если длина наименования товара больше 10 символов, сокращает наименование до 10 символов,
         если нет - оставляет таким же"""
-        if len(product_name) <= 10:
-            self.__name = product_name
-        else:
-            self.__name = product_name[:10]
+        self.__name = product_name[:10]
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -61,7 +58,7 @@ class Item:
         """
         инициализирует экземпляры класса Item данными из файла src/items.csv
         """
-        with open(file_name, encoding="cp1251") as csvfile:
+        with open(file_name, encoding="utf-8") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 name = row['name']
