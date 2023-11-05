@@ -21,22 +21,20 @@ def test_apply_discount():
 
 item = Item('Телефон', 10000, 5)
 
-def test_name():
+def test_name1():
     # длина наименования товара меньше 10 символов
     item.name = 'Смартфон'
     assert item.name == 'Смартфон'
 
+def test_name2():
     # длина наименования товара больше 10 символов
     item.name = 'СуперСмартфон'
-    assert item.name == "Суперсмарт"
-    # Exception: Длина наименования товара превышает 10 символов.
+    assert item.name == 'Суперсмарт'
 
 def test_instantiate_from_csv():
     Item.all = []
     Item.instantiate_from_csv('../src/items.csv')  # создание объектов из данных файла
     assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
-
-def test_string_to_number():
-    assert Item.string_to_number('5') == 5
-    assert Item.string_to_number('5.0') == 5
-    assert Item.string_to_number('5.5') == 5
+@pytest.mark.parametrize('num', ['5', '5.0', '5.5'])
+def test_string_to_number(num):
+    assert Item.string_to_number(num) == 5
