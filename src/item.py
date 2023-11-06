@@ -1,5 +1,5 @@
 import csv
-
+import pytest
 
 class Item:
     pay_rate: int = 1.0
@@ -29,14 +29,27 @@ class Item:
         self.price *= self.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls, filename: str) -> None:
-        with open(filename, 'r') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                name = row['name']
-                price = cls.string_to_number(row['price'])
-                quantity = cls.string_to_number(row['quantity'])
-                item = cls(name, price, quantity)
+    def instantiate_from_csv(cls, filename) -> None:
+        items = []
+        try:
+            with open(filename, newline='', encoding='windows-1251') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    if len(reader.fieldnames) != 3:
+                        raise InstantiateCSVError()
+                    name = row['name']
+                    price = cls.string_to_number(row['price'])
+                    quantity = cls.string_to_number(row['quantity'])
+                    item = cls(name, price, quantity)
+                    items.append(item)
+        # return items
+        except FileNotFoundError:
+            print('FileNotFoundError: Отсутствует файл item.csv')
+
+        except InstantiateCSVError as err:
+            print(err)
+
+
 
     @staticmethod
     def string_to_number(value: str) -> float:
@@ -61,6 +74,15 @@ class Item:
             else:
                 raise ValueError("Количество физических SIM-карт должно быть целым числом")
         return None
+
+
+
+class InstantiateCSVError(Exception):
+    def __init__(self, *args, **kwargs):
+        self.message = 'InstantiateCSVError: Файл item.csv поврежден'
+
+    def __str__(self):
+        return self.message
 
 
 
