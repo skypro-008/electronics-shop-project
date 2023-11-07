@@ -44,10 +44,12 @@ class Item:
                     items.append(item)
         # return items
         except FileNotFoundError:
-            print('FileNotFoundError: Отсутствует файл item.csv')
+            # print('FileNotFoundError: Отсутствует файл item.csv')
+            raise FileNotFoundError('Отсутствует файл item.csv')
 
         except InstantiateCSVError as err:
-            print(err)
+            # print(err)
+            raise InstantiateCSVError(err)
 
 
 

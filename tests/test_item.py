@@ -67,23 +67,13 @@ def test__add_(items_fixture):
         assert ValueError("Количество физических SIM-карт должно быть целым числом больше нуля")
 
 
+
+
 def test_instantiate_from_csv_file_not_found():
-    f = 'items.csv'
-    assert FileNotFoundError(Item.instantiate_from_csv(not f))
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('tems.csv')
 
 
-def test_instantiate_from_csv_instantiate_error():
-    assert InstantiateCSVError(Item.instantiate_from_csv('../src/broken_items.csv'))
-
-
-
-
-
-# def test_instantiate_from_csv_file_not_found():
-#     with pytest.raises(FileNotFoundError):
-#         Item.instantiate_from_csv('tems.csv')
-#
-#
-# def test_instantiate_from_csv_instantiate_csv_error():
-#     with pytest.raises(InstantiateCSVError):
-#         Item.instantiate_from_csv('../src/broken_items.csv')
+def test_instantiate_from_csv_instantiate_csv_error():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv('../src/broken_items.csv')
