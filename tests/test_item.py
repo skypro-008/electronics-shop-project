@@ -4,13 +4,13 @@ from src.item import Item
 
 
 @pytest.fixture
-def item_test():
+def item_for_test():
     return Item("Телевизор", 150000, 5)
 
 
-def calculate_total_price():
-    assert item_test.calculate_total_price() == 750000
+def test_calculate_total_price(item_for_test):
+    assert item_for_test.calculate_total_price() == 750000
 
 
-def apply_discount():
-    assert item_test.apply_discount() == 150000
+def test_apply_discount(item_for_test):
+    assert item_for_test.apply_discount() == 150000
