@@ -1,10 +1,13 @@
+import csv
+
+
 class Item:
     """
     Класс для представления товара в магазине.
     """
 
     pay_rate = 1.0
-    all = []
+    all: list = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -14,10 +17,24 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
+
+    @property
+    def get_name(self) -> str:
+        """
+        Возвращает значение атрибута '__name'.
+        """
+        return self.__name
+
+    @get_name.setter
+    def get_name(self, name: str) -> None:
+        """
+        Записывает атрибут '__name' не длиннее 10 символов.
+        """
+        self.__name = name[:10]
 
     def calculate_total_price(self) -> float:
         """
@@ -32,3 +49,25 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
+    @classmethod
+    def instantiate_from_csv(cls, path_file: str) -> None:
+        """
+        Инициализирует экземпляры класса `Item` данными из файла csv.
+        """
+        # Получение данных из файла и преобразование их в list(dict).
+        with open(path_file, "r") as file:
+            reader = csv.DictReader(file)
+            items = list(reader)
+
+            # Инициализация экземпляров класса.
+            for item in items:
+                name = item["name"]
+                price = float(item["price"])
+                quantity = int(item["quantity"])
+                cls(name, price, quantity).get_name = name
+
+    @staticmethod
+    def string_to_number(data: str) -> int:
+        """Возвращает число из строки."""
+        return int(float(data))
