@@ -18,7 +18,8 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        super().__init__()
+        self.__name = name
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
@@ -27,13 +28,13 @@ class Item:
         """
         выводит информацию об объекте для backend
         """
-        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
     def __str__(self):
         """
         выводит информацию об объекте для пользователя
         """
-        return f'{self.name}'
+        return f'{self.__name}'
 
     def __add__(self, other):
         """
