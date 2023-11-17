@@ -1,6 +1,7 @@
 from settings import ITEM_CSV_PATH
 from csv import DictReader
 from src.exeption import InstantiateCSVError
+import os
 
 
 class Item:
@@ -67,9 +68,12 @@ class Item:
         self.price *= self.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, filename="../src/items.csv"):
         cls.all = []
-        try:
+        if os.path.exists(filename) == False:
+            raise FileNotFoundError('Отсутсвует файл items.csv')
+
+        else:
             with open(cls.items_csv, 'r', encoding='windows-1251') as csv:
                 data = DictReader(csv)
                 try:
@@ -81,8 +85,7 @@ class Item:
                         )
                 except KeyError:
                     raise InstantiateCSVError('Файл items.csv поврежден')
-        except FileNotFoundError:
-            raise FileNotFoundError('Отсутствует файл items.csv')
+
 
 
     @staticmethod
