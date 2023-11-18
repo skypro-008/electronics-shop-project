@@ -52,7 +52,7 @@ class Item:
         """
         Имя должно быть не больше 10 символов
         """
-        return name[:10]
+        return name
 
     @property
     def name(self):
