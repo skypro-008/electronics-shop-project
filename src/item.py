@@ -1,5 +1,9 @@
 import os.path
 from csv import DictReader
+from pathlib import Path
+
+filename = str(Path(Path(__file__).parent.parent, 'src', 'items.csv'))
+print(type(str(filename)))
 
 
 class Item:
@@ -70,7 +74,7 @@ class Item:
         """
 
         items = []
-        path_name = str(cls.path_file(path_name))
+        # path_name = str(cls.path_file(path_name))
         with open(path_name, newline="", encoding="windows-1251") as csv_f:
             reader = DictReader(csv_f, delimiter=",")
             for row in reader:

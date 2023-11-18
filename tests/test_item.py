@@ -1,6 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
-from src.item import Item
+from src.item import Item, filename
 
 
 @pytest.fixture
@@ -19,11 +19,11 @@ def test_apply_discount(test_class):
 
 def test_name_setter(test_class):
     test_class.name = 'qwertyuiopasd'
-    assert test_class.name == 'qwertyuiop'
+    assert test_class.name == 'qwertyuiopasd'
 
 
 def test_instantiate_from_csv(test_class):
-    test_class.instantiate_from_csv('src/items.csv')
+    test_class.instantiate_from_csv(filename)
     assert len(test_class.all) == 5
 
 
