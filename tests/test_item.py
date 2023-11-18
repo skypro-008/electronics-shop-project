@@ -4,7 +4,7 @@ from src.item import Item
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv('src/items.csv')  # создание объектов из данных файла
+    Item.instantiate_from_csv("src/items.csv")  # создание объектов из данных файла
     assert len(Item.all) == 5
 
 
@@ -22,13 +22,19 @@ def test_item(nm, pr, qt, disc):
     assert item.price == pr * disc
 
 
-@pytest.mark.parametrize("name, cls_name", [("Телефон", "Телефон"), ('СуперСмартфон', 'СуперСмарт')])
+@pytest.mark.parametrize("name, cls_name", [("Телефон", "Телефон"), ("СуперСмартфон", "СуперСмарт")])
 def test_get_name(name, cls_name):
     new_item = Item.all[0]
     new_item.get_name = name
     assert new_item.get_name == cls_name
 
 
-@pytest.mark.parametrize("num, res", [('10', 10), ('6.0', 6), ('7.7', 7)])
+@pytest.mark.parametrize("num, res", [("10", 10), ("6.0", 6), ("7.7", 7)])
 def test_string_to_number(num, res):
     assert Item.string_to_number(num) == res
+
+
+def test_repr_str_item():
+    item1 = Item("Смартфон", 10000, 20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert str(item1) == "Смартфон"
