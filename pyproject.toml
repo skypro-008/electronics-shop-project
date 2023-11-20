@@ -5,9 +5,10 @@ description = ""
 authors = ["kirillskyeng <kirill.netreba@skyeng.ru>"]
 readme = "README.md"
 packages = [{include = "electronics_shop_project"}]
-
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
+pytest = "^7.4.3"
+pytest-cov = "^4.1.0"
 
 
 [build-system]
