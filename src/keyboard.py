@@ -1,17 +1,30 @@
 from src.item import Item
 
 
-class Keyboard(Item):
-    def __init__(self, *args):
-        super().__init__(*args)
-        self.__language = 'EN'
+class MixinLanguage:
 
-    def __str__(self):
-        return f'{self.name}'
-
-    @property
-    def language(self):
-        return self.__language
+    def __init__(self, language='EN'):
+        self.language = language
 
     def change_lang(self):
-        self.__language = 'EN' if self.__language == 'RU' else 'RU'
+        if self.language == 'EN':
+            self.language = 'RU'
+            return self
+        else:
+            self.language = 'EN'
+            return self
+
+    # @property
+    # def language(self):
+    #     return self.language
+
+
+class KeyBoard(Item, MixinLanguage):
+    
+    def __init__(self, *args):
+        super().__init__(*args)
+
+
+
+    def __str__(self):
+        return super().__str__()

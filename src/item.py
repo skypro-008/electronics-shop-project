@@ -2,8 +2,9 @@ import os.path
 from csv import DictReader
 from pathlib import Path
 
+from exception.exception import InstantiateCSVError
+
 filename = str(Path(Path(__file__).parent.parent, 'src', 'items.csv'))
-print(type(str(filename)))
 
 
 class Item:
@@ -75,15 +76,23 @@ class Item:
 
         items = []
         # path_name = str(cls.path_file(path_name))
-        with open(path_name, newline="", encoding="windows-1251") as csv_f:
-            reader = DictReader(csv_f, delimiter=",")
-            for row in reader:
-                name = str(row["name"])
-                price = float(row["price"])
-                quantity = int(row["quantity"])
-                item = cls(name, price, quantity)
-                items.append(item)
-            cls.all = items
+        try:
+            with open(path_name, newline="", encoding="windows-1251") as csv_f:
+                reader = DictReader(csv_f, delimiter=",")
+                for row in reader:
+                    name = row.get("name")
+                    price = row.get("price")
+                    quantity = row.get("quantity")
+                    if not name or not price or not quantity:
+                        raise InstantiateCSVError
+                    item = cls(str(name), float(price), int(quantity))
+                    items.append(item)
+                cls.all = items
+        except FileNotFoundError:
+            print("Отсутствует файл item.csv")
+        except InstantiateCSVError:
+            print("Файл item.csv поврежден")
+
 
     @staticmethod
     def path_file(path_name):
