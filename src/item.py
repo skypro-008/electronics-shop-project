@@ -1,6 +1,10 @@
 import csv
 
 
+class InstantiateCSVError(Exception):
+    pass
+
+
 class Item:
     max_name = 10
     pay_rate = 1.0
@@ -30,16 +34,20 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, path):
-
-        with open(path) as file:
-            for row in csv.DictReader(file):
-                cls.all.append(
-                    Item(
-                        row["name"],
-                        row["price"],
-                        row["quantity"],
+        try:
+            with open(path) as file:
+                for row in csv.DictReader(file):
+                    cls.all.append(
+                        Item(
+                            row["name"],
+                            row["price"],
+                            row["quantity"],
+                        )
                     )
-                )
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        except Exception:
+            raise InstantiateCSVError("Файл item.csv поврежден")
 
     @staticmethod
     def string_to_number(string):
@@ -55,5 +63,3 @@ class Item:
         if issubclass(other.__class__, self.__class__):
             return self.quantity + other.quantity
         raise ValueError('ошибка')
-
-
