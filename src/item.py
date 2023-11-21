@@ -30,6 +30,7 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, path):
+
         with open(path) as file:
             for row in csv.DictReader(file):
                 cls.all.append(
@@ -54,7 +55,5 @@ class Item:
         if issubclass(other.__class__, self.__class__):
             return self.quantity + other.quantity
         raise ValueError('ошибка')
-
-
 
 
