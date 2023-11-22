@@ -1,3 +1,6 @@
+import pytest
+
+from exception.exception import InstantiateCSVError
 from src.item import Item, filename
 
 
@@ -7,4 +10,5 @@ def test_exception():
 
 
 def test_exception_break_file():
-    assert Item.instantiate_from_csv(filename) == "Файл item.csv поврежден"
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv(filename)
