@@ -89,10 +89,9 @@ class Item:
                     items.append(item)
                 cls.all = items
         except FileNotFoundError:
-            print("Отсутствует файл item.csv")
+            return "Отсутствует файл item.csv"
         except InstantiateCSVError:
-            print("Файл item.csv поврежден")
-
+            return "Файл item.csv поврежден"
 
     @staticmethod
     def path_file(path_name):
