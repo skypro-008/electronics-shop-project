@@ -1,13 +1,14 @@
 [tool.poetry]
 name = "electronics-shop-project"
 version = "0.1.0"
-description = ""
+description = "nikolay"
 authors = ["kirillskyeng <kirill.netreba@skyeng.ru>"]
 readme = "README.md"
 packages = [{include = "electronics_shop_project"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+flake8 = "^6.1.0"
 
 
 [build-system]
