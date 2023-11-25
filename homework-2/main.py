@@ -1,22 +1,20 @@
-from src.item import Item
+from src.channel import Channel
 
 if __name__ == '__main__':
-    item = Item('Телефон', 10000, 5)
+    moscowpython = Channel('UC-OVMPlMA3-YCIeg4z5z23A')
 
-    # длина наименования товара меньше 10 символов
-    item.name = 'Смартфон'
-    assert item.name == 'Смартфон'
+    # получаем значения атрибутов
+    print(moscowpython.title)  # MoscowPython
+    print(moscowpython.video_count)  # 685 (может уже больше)
+    print(moscowpython.url)  # https://www.youtube.com/channel/UC-OVMPlMA3-YCIeg4z5z23A
 
-    # длина наименования товара больше 10 символов
-    item.name = 'СуперСмартфон'
-    # Exception: Длина наименования товара превышает 10 символов.
+    # менять не можем
+    moscowpython.channel_id = 'Новое название'
+    # AttributeError: property 'channel_id' of 'Channel' object has no setter
 
-    Item.instantiate_from_csv('src/items.csv')  # создание объектов из данных файла
-    assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
+    # можем получить объект для работы с API вне класса
+    print(Channel.get_service())
+    # <googleapiclient.discovery.Resource object at 0x000002B1E54F9750>
 
-    item1 = Item.all[0]
-    assert item1.name == 'Смартфон'
-
-    assert Item.string_to_number('5') == 5
-    assert Item.string_to_number('5.0') == 5
-    assert Item.string_to_number('5.5') == 5
+    # создаем файл 'moscowpython.json' в данными по каналу
+    moscowpython.to_json('moscowpython.json')

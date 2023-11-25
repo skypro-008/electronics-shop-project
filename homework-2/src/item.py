@@ -1,21 +1,18 @@
-import csv
-
 class Item:
-    def __init__(self, id, name, price):
-        self._id = id
-        self._name = name
-        self._price = price
+    def __init__(self, name, price):
+        self.__name = name
+        self.price = price
 
     @property
     def name(self):
-        return self._name
+        return self.__name
 
     @name.setter
     def name(self, value):
         if len(value) > 10:
-            self._name = value[:10]
+            self.__name = value[:10]
         else:
-            self._name = value
+            self.__name = value
 
     @classmethod
     def instantiate_from_csv(cls):
@@ -23,7 +20,7 @@ class Item:
         with open('src/items.csv', 'r') as file:
             reader = csv.DictReader(file)
             for row in reader:
-                item = cls(row['id'], row['name'], row['price'])
+                item = cls(row['name'], row['price'])
                 items.append(item)
         return items
 
