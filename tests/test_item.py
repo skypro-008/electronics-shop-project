@@ -1,3 +1,5 @@
+from unittest import mock
+
 import pytest
 from src.item import Item
 
@@ -30,3 +32,14 @@ def test_apply_discount_total_2(total_2):
     if Item.pay_rate == 0.8:
         total_2.price = total_2.price * total_2.pay_rate
         assert total_2.price == 20000
+
+
+def test_name_setter():
+    item = Item('Компьютер', 100,2)
+    assert item.name == 'Компьютер'
+
+
+def test_instantiate_from_csv():
+    file_csv = "Смартфон,100,1\nНоутбук, 1000, 3\n"
+    with open("test_items.csv", "w", encoding="utf-8") as f:
+        f.write(file_csv)
