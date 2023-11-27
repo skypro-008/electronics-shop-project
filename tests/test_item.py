@@ -8,11 +8,6 @@ def tv():
     return Item("tv", 10000, 2)
 
 
-@pytest.fixture
-def ctv():
-    return Item("colortelevision", 15000, 3)
-
-
 def test_item_initialization(tv):
     """Тест конструктора"""
     assert tv.name == "tv"
@@ -31,25 +26,22 @@ def test_apply_discount(tv):
     assert tv.apply_discount() is None
 
 
-def test_name_property(ctv):
+def test_name_property(tv):
     """Переименование"""
-    assert ctv.name == "colortelevision"
+    tv.name = "colortv"
+    assert tv.name == "colortv"
 
 
-def test_name_setter(ctv):
+def test_name_setter(tv):
     """Сокращение переименования"""
-    ctv.name = ctv.name[0:10]
-    assert ctv.name == "colortelev"
-
-
-def test_name_property_1(tv):
-    """Короткое переименование"""
-    assert tv.name == "tv"
+    tv.name = "colortelevision"
+    assert tv.name == "colortelev"
 
 
 def test_instantiate_from_csv():
     """Достаем из csv объекты класса"""
     Item.instantiate_from_csv('src/items.csv')
+
     assert len(Item.all) == 5
     assert Item.all[0].name == "Смартфон"
     assert Item.all[1].price == 1000

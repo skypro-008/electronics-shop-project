@@ -24,14 +24,17 @@ class Item:
 
     @property
     def name(self):
+        """Геттер имени"""
         return self.__name
 
     @name.setter
     def name(self, name):
+        """Сеттер имени из 10 символов"""
         self.__name = name[0:10]
 
     @classmethod
     def instantiate_from_csv(cls, file):
+        """Метод класса для экземпляров из csv"""
         cls.all = []
         with open(os.path.join('..', file), newline='', encoding='windows-1251') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -43,6 +46,7 @@ class Item:
 
     @staticmethod
     def string_to_number(data):
+        """Строка - целое число"""
         return int(float(data))
 
     def calculate_total_price(self) -> float:
