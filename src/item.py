@@ -48,6 +48,9 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        """
+        создает список экземпляров класса Item
+        """
         cls.all.clear()
         cls.all = []
         with open('../src/items.csv', 'r', newline='') as csv_file:
@@ -61,5 +64,8 @@ class Item:
 
     @staticmethod
     def string_to_number(num):
+        """
+        возвращающий число из числа-строки
+        """
         number = int(float(num))
         return number
