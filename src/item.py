@@ -20,6 +20,12 @@ class Item:
         self.price = price
         self.quantity = quantity
 
+    def __repr__(self):
+        return f"Item('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.__name
+
     @property
     def name(self):
         return self.__name
@@ -53,7 +59,7 @@ class Item:
         """
         cls.all.clear()
         cls.all = []
-        with open('../src/items.csv', 'r', newline='') as csv_file:
+        with open('../src/items.csv', 'r', encoding="utf-8", newline='') as csv_file:
             read_file = csv.DictReader(csv_file)
             for i in read_file:
                 name = i["name"]

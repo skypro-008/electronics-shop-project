@@ -5,6 +5,14 @@ item1 = Item("Смартфон", 10000, 20)
 item2 = Item("Смартфон", 10000, 0)
 
 
+def test__repr__():
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+
+def test__str__():
+    assert str(item1) == "Смартфон"
+
+
 def test_alculate_total_price():
     assert item1.calculate_total_price() == 200000
     assert item2.calculate_total_price() == 0
