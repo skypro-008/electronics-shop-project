@@ -1,5 +1,3 @@
-from unittest import mock
-
 import pytest
 from src.item import Item
 
@@ -43,3 +41,9 @@ def test_instantiate_from_csv():
     file_csv = "Смартфон,100,1\nНоутбук, 1000, 3\n"
     with open("test_items.csv", "w", encoding="utf-8") as f:
         f.write(file_csv)
+
+
+def test_repr_and_str():
+    item1 = Item("Смартфон", 10000, 20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    assert str(item1) == 'Смартфон'
