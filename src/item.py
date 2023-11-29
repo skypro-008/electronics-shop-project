@@ -54,6 +54,22 @@ class Item:
         """
         self.price = self.price * self.pay_rate
 
+    def __repr__(self):
+        """
+        Магический метод для отображения информации об объекте класса
+        (для разработчиков)
+        """
+        return (
+            f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+        )
+
+    def __str__(self):
+        """
+        Магический метод для отображения информации об объекте класса
+        (для пользователей)
+        """
+        return self.__name
+
     @classmethod
     def instantiate_from_csv(cls, file_path: Any) -> None:
         """
