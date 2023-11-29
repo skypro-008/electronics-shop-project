@@ -59,7 +59,7 @@ class Item:
         """
         cls.all.clear()
         cls.all = []
-        with open('../src/items.csv', 'r', encoding="utf-8", newline='') as csv_file:
+        with open('../src/items.csv', 'r', encoding="cp1251", newline='') as csv_file:
             read_file = csv.DictReader(csv_file)
             for i in read_file:
                 name = i["name"]
