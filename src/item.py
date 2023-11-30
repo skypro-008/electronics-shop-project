@@ -14,6 +14,7 @@ class Item:
         self.name = name
         self.price = price
         self.quantity = quantity
+        self.all.append(self)
 
     def calculate_total_price(self) -> float:
         return self.price * self.quantity
@@ -36,6 +37,7 @@ class Item:
     def instantiate_from_csv(cls, path):
         try:
             with open(path) as file:
+                cls.all.clear()
                 for row in csv.DictReader(file):
                     cls.all.append(
                         Item(
