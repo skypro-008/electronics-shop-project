@@ -22,6 +22,7 @@ class Item:
         self.__name = name
         self.price = price
         self.quantity = quantity
+        self.all.append(self)
 
     @property
     def name(self) -> str:
@@ -80,10 +81,9 @@ class Item:
             reader = csv.DictReader(f, delimiter=",")
             for row in reader:
                 name = row["name"]
-                price = Item.string_to_number(row["price"])
-                quantity = int(row["quantity"])
-                item = Item(name, price, quantity)
-                cls.all.append(item)
+                price = float(row["price"])
+                quantity = cls.string_to_number(row["quantity"])
+                cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(string: str) -> int:
