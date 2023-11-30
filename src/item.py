@@ -47,19 +47,19 @@ class Item:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        self.price = self.price - self.price * self.pay_rate
+        self.price = self.price * self.pay_rate
 
     @classmethod
     def instantiate_from_csv(cls, filename):
         """инициализирует экземпляры класса Item данными из файла src/items.csv"""
-        with open(filename, 'r') as file:
+        cls.all.clear()
+        with open(filename, 'r', encoding="windows-1251") as file:
             reader = csv.DictReader(file, delimiter=',')
             for line in reader:
-                name = line["name"]
+                name = line['name']
                 price = Item.string_to_number(line['price'])
                 quantity = int(line['quantity'])
-                item = cls(name, price, quantity)
-                Item.all.append(item)
+                cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(string: str) -> float:

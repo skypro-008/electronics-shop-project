@@ -4,32 +4,30 @@ from src.item import Item
 
 @pytest.fixture
 def item():
-    return Item("Смартфон", 10000, 20)
+    return Item("Смартфон", 150, 2)
 
 
 def test_calculate_total_price(item):
-    assert item.calculate_total_price() == 200000
+    assert item.calculate_total_price() == 300
 
 
 def test_apply_discount(item):
-    if Item.pay_rate == 0.8:
-        item.price = item.price * item.pay_rate
-        assert item.price == 8000.0
+    item.apply_discount()
+    assert item.price == 150.0
 
 
 @pytest.fixture
 def item_notebook():
-    return Item("Ноутбук", 20000, 5)
+    return Item("Ноутбук", 250, 2)
 
 
 def test_calculate_total_price_notebook(item_notebook):
-    assert item_notebook.calculate_total_price() == 100000
+    assert item_notebook.calculate_total_price() == 500
 
 
 def test_apply_discount_notebook(item_notebook):
-    if Item.pay_rate == 0.8:
-        item_notebook.price = item_notebook.price * item_notebook.pay_rate
-        assert item_notebook.price == 20000
+    item_notebook.apply_discount()
+    assert item_notebook.price == 250.0
 
 
 def test_name_setter():
@@ -39,5 +37,5 @@ def test_name_setter():
 
 def test_instantiate_from_csv():
     file_csv = "Смартфон,100,1\nНоутбук, 1000, 3\n"
-    with open("test_items.csv", "w", encoding="utf-8") as file:
-        file.write(file_csv)
+    with open("test_items.csv", "w", encoding="utf-8") as f:
+        f.write(file_csv)
