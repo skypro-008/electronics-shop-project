@@ -27,13 +27,19 @@ def test_name_setter():
 
 
 def test_instantiate_from_csv():
-    csv_data = "СуперСмартфон,500000,1\nKabel,15,5\n"
-    with open("test_item.csv", "w", encoding="utf-8") as csv_file:
-        csv_file.write(csv_data)
-
     Item.instantiate_from_csv("./src/items.csv")
     assert len(Item.all) == 5
 
 
 def test_string_to_number():
     assert Item.string_to_number('5.0') == 5
+
+
+def test_repr():
+    item1 = Item("Смартфон", 10000, 20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    
+
+def test_str():
+    item1 = Item("Смартфон", 10000, 20)
+    assert str(item1) == 'Смартфон'
