@@ -32,3 +32,37 @@ def test_apply_discount(test_data):
     assert test_data[0].price == 8000
     test_data[1].apply_discount()
     assert test_data[1].price == 23750
+
+
+@pytest.mark.parametrize("expected_name", ["John", "Alice"])
+def test_name(expected_name):
+    # Create an instance of the class and set the name
+    obj = Item()
+    obj.name = expected_name
+    # Assert that the property returns the expected value
+    assert obj.name == expected_name
+
+
+def test_string_to_number():
+    obj = Item()
+    assert obj.string_to_number("1.5") == 1
+    assert obj.string_to_number("3.7") == 3
+    assert obj.string_to_number("10.2") == 10
+    assert obj.string_to_number("0.8") == 0
+
+
+import pytest
+
+
+@pytest.mark.parametrize(
+    "csv_path, expected_length, expected_name, expected_price",
+    [
+        ("src/items.csv", 5, "Смартфон", 100),
+    ],
+)
+def test_instantiate_from_csv(csv_path, expected_length, expected_name, expected_price):
+    Item.all.clear()
+    Item.instantiate_from_csv(csv_path)
+    assert len(Item.all) == expected_length
+    assert Item.all[0].name == expected_name
+    assert Item.all[0].price == expected_price
