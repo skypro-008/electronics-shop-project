@@ -16,3 +16,16 @@ def test_calculate_total_price(test_item):
 def test_apply_discount(test_item):
     test_item.apply_discount()
     assert test_item.price == 10.0 * Item.pay_rate
+
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv('./src/items.csv')
+    assert len(Item.all) == 5
+    item1 = Item.all[0]
+    assert item1.name == 'Смартфон'
