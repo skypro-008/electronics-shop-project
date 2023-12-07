@@ -2,6 +2,7 @@ import os
 
 import pytest
 from src.item import Item
+from src.phone import Phone
 
 
 @pytest.fixture()
@@ -35,16 +36,27 @@ def test_apply_discount_2(total_2):
 
 
 def test_name_setter():
-    item = Item('Компьютер', 100, 2)
-    assert item.name == 'Компьютер'
+    item = Item("Компьютер", 100, 2)
+    assert item.name == "Компьютер"
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv(r"C:/Users/Admin/PycharmProjects/electronics-shop-project/src/items.csv")
+    path = os.path.abspath(
+        r"C:/Users/Admin/PycharmProjects/electronics-shop-project/src/items.csv"
+    )
+    Item.instantiate_from_csv(path)
     assert len(Item.all) == 5
 
 
 def test_repr_and_str():
     item1 = Item("Смартфон", 10000, 20)
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
-    assert str(item1) == 'Смартфон'
+    assert str(item1) == "Смартфон"
+
+
+def test_add():
+    phone1 = Phone("iPhone 14", 120_000, 5, 2)
+    item1 = Item("Смартфон", 10000, 20)
+    assert item1 + phone1 == 25
+    with pytest.raises(ValueError):
+        assert item1 + 100

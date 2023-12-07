@@ -91,3 +91,11 @@ class Item:
         Статический метод, возвращающий число из числа-строки
         """
         return int(math.floor(float((string.replace(",", ".")))))
+
+    def __add__(self, other):
+        """
+        Функция, для сложения атрибуов классов
+        """
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
+        raise ValueError("Складывать можно только объекты Item и дочерние от них.")
