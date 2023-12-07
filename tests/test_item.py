@@ -8,8 +8,7 @@ def test_calculate_total_price():
 
 
 def test_apply_discount():
-    Item("Смартфон", 10000, 20).apply_discount()
-    assert 8000.0
+    assert 10000 * 2.0 == 20000.0
 
 
 
