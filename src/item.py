@@ -65,3 +65,9 @@ class Item:
 
     def __repr__(self):
         return f"{__class__.__name__}('{str(self.__name)}', {str(self.price)}, {str(self.quantity)})"
+
+    def __add__(self, other):
+        """Метод сложения количества телефонов класса Item и его наследников"""
+        if not isinstance(other, Item):
+            raise ValueError('Складывать можно только экземпляры Item и Phone')
+        return self.quantity + other.quantity

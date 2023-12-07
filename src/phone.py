@@ -11,15 +11,9 @@ class Phone(Item):
         return (f"{__class__.__name__}('{str(self.name)}', {str(self.price)},"
                 f" {str(self.quantity)}, {str(self.__number_of_sim)})")
 
-    def __add__(self, other):
-        """ Переопределяет метод сложения количества товаров"""
-        if not isinstance(other, self.__class__):
-            raise ValueError("Невозможно сложить разные товары")
-        return self.quantity + other.quantity
-
     @classmethod
     def verify_sim(cls, __number_of_sim):
-        if __number_of_sim <= 0 or not isinstance(__number_of_sim, int):
+        if 0 > __number_of_sim or not isinstance(__number_of_sim, int):
             raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
 
     @property
