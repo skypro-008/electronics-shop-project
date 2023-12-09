@@ -13,7 +13,7 @@ class Phone(Item):
 
     @classmethod
     def verify_sim(cls, __number_of_sim):
-        if 0 > __number_of_sim or not isinstance(__number_of_sim, int):
+        if not isinstance(__number_of_sim, int) or __number_of_sim < 1:
             raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
 
     @property
