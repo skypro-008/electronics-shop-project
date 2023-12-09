@@ -1,4 +1,5 @@
 [flake8]
+max-line-length = 119
 extend-ignore = E203
 exclude =
     .git,
@@ -7,5 +8,5 @@ exclude =
     old,
     build,
     dist,
-    .venv/
+    venv/
 max-complexity = 10
