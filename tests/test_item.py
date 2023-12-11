@@ -54,4 +54,3 @@ def test_add():
     item2 = Item("Товар 2", 200, 3)
     result = item1 + item2
     assert result == 8
-

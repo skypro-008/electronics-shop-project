@@ -26,8 +26,3 @@ def test_verify_sim():
 def test_number_of_sim():
     phone2 = Phone("iPhone12", 70000, 5, 1)
     phone2.number_of_sim = 1
-
-
-
-
-
