@@ -65,3 +65,4 @@ class Item:
         if issubclass(other.__class__, self.__class__):
             return self.quantity + other.quantity
         raise ValueError('ошибка')
+
