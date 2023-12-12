@@ -1,4 +1,5 @@
 import csv
+from typing import Any
 
 
 class Item:
@@ -24,7 +25,7 @@ class Item:
 
     def __repr__(self) -> str:
         """
-        Предоставляет информацию о классе для разработчика.
+        Предоставляет информацию об объекте для разработчика.
         """
         return f"{self.__class__.__name__}{self.__name, self.price, self.quantity}"
 
@@ -83,3 +84,12 @@ class Item:
     def string_to_number(data: str) -> int:
         """Возвращает число из строки."""
         return int(float(data))
+
+    def __add__(self, other: Any) -> str | int:
+        """
+        Складывает количество товара у экземпляров классов 'Item' и 'Phone'.
+        """
+        if not isinstance(other, self.__class__):
+            return "Эти данные нельзя сложить"
+        else:
+            return self.quantity + other.quantity
