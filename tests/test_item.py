@@ -1,10 +1,19 @@
+import os
+
 import pytest
 
 from src.item import Item
 
+# Получение пути к текущему исполняемому файлу
+current_dir = os.path.dirname(os.path.abspath(__file__))
+base_dir = current_dir[: -(len(current_dir.split("\\")[-1]) + 1)]
+
+# Создание относительного пути к файлу от текущего файла
+file_path = os.path.join(base_dir, "src", "items.csv")
+
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv("src/items.csv")  # создание объектов из данных файла
+    Item.instantiate_from_csv(file_path)  # создание объектов из данных файла
     assert len(Item.all) == 5
 
 
@@ -38,3 +47,11 @@ def test_repr_str_item():
     item1 = Item("Смартфон", 10000, 20)
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
     assert str(item1) == "Смартфон"
+
+
+def test__add__():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item("Смартфон", 10000, 20)
+
+    assert item1 + item2 == 40
+    assert item1 + 20 == "Эти данные нельзя сложить"
