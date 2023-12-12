@@ -14,19 +14,15 @@ class MixinLanguage:
     def language(self) -> str:
         return self.__language
 
-    @language.setter
-    def language(self, language: str):
-        self.__language = language
-
     def change_lang(self):
         """
         Функция, которая изменяет расклад с EN/RU
         и наоборот
         """
-        if self.language == "EN":
-            self.language = "RU"
-        elif self.language == "RU":
-            self.language = "EN"
+        if self.__language == "EN":
+            self.__language = "RU"
+        elif self.__language == "RU":
+            self.__language = "EN"
 
 
 class Keyboard(Item, MixinLanguage):
