@@ -41,6 +41,7 @@ def test_add():
 
 
 def test_instantiate_from_csv():
+
     with open('test_items.csv', 'w') as file:
         file.write('item1,10.0')
         file.write('item2,20.0')
@@ -51,9 +52,11 @@ def test_instantiate_from_csv():
     except InstantiateCSVError as e:
         assert str(e) == "Файл item.csv поврежден"
 
+
     try:
         Item.instantiate_from_csv('nonexistent_file.csv')
     except FileNotFoundError as e:
         assert str(e) == "Отсутствует файл item.csv"
     else:
         assert False
+    os.remove('test_items.csv')
