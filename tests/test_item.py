@@ -3,6 +3,7 @@ import os
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 
 # Получение пути к текущему исполняемому файлу
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -10,6 +11,16 @@ base_dir = current_dir[: -(len(current_dir.split("\\")[-1]) + 1)]
 
 # Создание относительного пути к файлу от текущего файла
 file_path = os.path.join(base_dir, "src", "items.csv")
+
+
+@pytest.fixture
+def data_item():
+    return Item("Смартфон", 10000, 20)
+
+
+@pytest.fixture
+def data_phone():
+    return Phone("iPhone 14", 120_000, 5, 2)
 
 
 def test_instantiate_from_csv():
@@ -43,15 +54,22 @@ def test_string_to_number(num, res):
     assert Item.string_to_number(num) == res
 
 
-def test_repr_str_item():
-    item1 = Item("Смартфон", 10000, 20)
+def test_repr_str_item(data_item):
+    item1 = data_item
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
     assert str(item1) == "Смартфон"
 
 
-def test__add__():
-    item1 = Item("Смартфон", 10000, 20)
-    item2 = Item("Смартфон", 10000, 20)
+def test__add__(data_item, data_phone):
+    item1 = data_item
+    item2 = data_item
+    phone = data_phone
 
     assert item1 + item2 == 40
-    assert item1 + 20 == "Эти данные нельзя сложить"
+    assert item1 + phone == 25
+    assert phone + item2 == 25
+
+
+def test_raise_add__(data_item):
+    with pytest.raises(ValueError, match="Эти данные нельзя сложить."):
+        data_item + 20

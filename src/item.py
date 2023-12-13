@@ -89,7 +89,7 @@ class Item:
         """
         Складывает количество товара у экземпляров классов 'Item' и 'Phone'.
         """
-        if not isinstance(other, self.__class__):
-            return "Эти данные нельзя сложить"
-        else:
+        if isinstance(other, self.__class__) or issubclass(self.__class__, other.__class__):
             return self.quantity + other.quantity
+        else:
+            raise ValueError("Эти данные нельзя сложить.")
