@@ -75,3 +75,10 @@ class Item:
         """
         number = int(float(num))
         return number
+
+    def __add__(self, other):
+        """
+        складывает quantity экземпляров класса Item u Phone
+        """
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
