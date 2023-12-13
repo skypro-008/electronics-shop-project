@@ -41,22 +41,15 @@ def test_add():
 
 
 def test_instantiate_from_csv():
-
     with open('test_items.csv', 'w') as file:
-        file.write('item1,10.0')
-        file.write('item2,20.0')
-        file.write('item3')
+        file.write("item1,item2\n")
+        file.write("1,2")
 
-    try:
-        Item.instantiate_from_csv('test_items.csv')
-    except InstantiateCSVError as e:
-        assert str(e) == "Файл item.csv поврежден"
-
-
-    try:
+    with pytest.raises(FileNotFoundError):
         Item.instantiate_from_csv('nonexistent_file.csv')
-    except FileNotFoundError as e:
-        assert str(e) == "Отсутствует файл item.csv"
-    else:
-        assert False
+
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv('test_items.csv')
+
     os.remove('test_items.csv')
+
