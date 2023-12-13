@@ -18,11 +18,11 @@ class Item:
         self.quantity = quantity
         self.all.append(self)
 
-        def __repr__(self):
-            return f"Item('self.name', self.price, self.quantity)"
+     def __repr__(self):
+        return f"Item('self.name', self.price, self.quantity)"
 
-        def __str__(self):
-            return self.name
+    def __str__(self):
+        return self.name
 
 
 
@@ -64,38 +64,25 @@ class Item:
     @staticmethod
     def string_to_number(string):
         return int(string)
-class Phone(Item):
-    def __init__(self, name, price, quantity, number_of_sim):
-        super().__init__(name, price, quantity)
-        self.number_of_sim = number_of_sim
-
     def __add__(self, other):
-        if isinstance(other, Phone):
+        if isinstance(other, Item):
             return self.quantity + other.quantity
         else:
-            raise TypeError("Can only add Phone instances")
+            raise TypeError("Can only add Item instances")
 
-    def __radd__(self, other):
-        return self.__add__(other)
+class Keyboard(Item):
+    def __init__(self, model, manufacturer, color, language='EN'):
+        super().__init__(model, manufacturer, color)
+        self.language = language
 
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return f"Phone('{self.name}', {self.price}, {self.quantity}, {self.number_of_sim})"
-class Keyboard:
-    def __init__(self, name, price, weight, language="EN"):
-        self.name = name
-        self.price = price
-        self.weight = weight
-        self._language = language
-
-    @property
-    def language(self):
-        return self._language
+# src/keyboard_mixin.py
+class KeyboardMixin:
+    def __init__(self):
+        self.available_layouts = ['EN', 'RU']
+        self.current_layout = 'EN'
 
     def change_lang(self):
-        if self._language == "EN":
-            self._language = "RU"
+        if self.current_layout == 'EN':
+            self.current_layout = 'RU'
         else:
-            self._language = "EN"
+            self.current_layout = 'EN'

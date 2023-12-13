@@ -1,6 +1,5 @@
 
 from src.item import Item
-from src.item import Phone
 from src.item import Keyboard
 def test_calculate_total_price():
     item = Item("Test", 10, 5)
@@ -28,30 +27,6 @@ def test_str():
     item1 = Item("Смартфон", 10000, 20)
     assert str(item1) == 'Смартфон'
 
-def test_phone_str():
-    phone1 = Phone("iPhone 14", 120_000, 5, 2)
-    assert str(phone1) == 'iPhone 14'
-
-def test_phone_repr():
-    phone1 = Phone("iPhone 14", 120_000, 5, 2)
-    assert repr(phone1) == "Phone('iPhone 14', 120000, 5, 2)"
-
-def test_phone_number_of_sim():
-    phone1 = Phone("iPhone 14", 120_000, 5, 2)
-    assert phone1.number_of_sim == 2
-
-def test_phone_add_item():
-    phone1 = Phone("iPhone 14", 120_000, 5, 2)
-    item1 = Item("Смартфон", 10000, 20)
-    assert item1 + phone1 == 25
-
-def test_phone_add_phone():
-    phone1 = Phone("iPhone 14", 120_000, 5, 2)
-    assert phone1 + phone1 == 10
-
-def test_phone_invalid_number_of_sim():
-    phone1 = Phone("iPhone 14", 120_000, 5, -2)
-    assert phone1.number_of_sim == -2
 def test_keyboard_name():
     kb = Keyboard('Dark Project KD87A', 9600, 5)
     assert str(kb) == "Dark Project KD87A"
