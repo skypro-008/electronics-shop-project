@@ -18,8 +18,7 @@ class Item:
         self.quantity = quantity
         self.all.append(self)
 
-     def __repr__(self):
-        return f"Item('self.name', self.price, self.quantity)"
+
 
     def __str__(self):
         return self.name
@@ -70,12 +69,7 @@ class Item:
         else:
             raise TypeError("Can only add Item instances")
 
-class Keyboard(Item):
-    def __init__(self, model, manufacturer, color, language='EN'):
-        super().__init__(model, manufacturer, color)
-        self.language = language
 
-# src/keyboard_mixin.py
 class KeyboardMixin:
     def __init__(self):
         self.available_layouts = ['EN', 'RU']
@@ -86,3 +80,8 @@ class KeyboardMixin:
             self.current_layout = 'RU'
         else:
             self.current_layout = 'EN'
+
+class Keyboard(Item, KeyboardMixin):
+    def __init__(self, model, manufacturer, color, language='EN'):
+        super().__init__(model, manufacturer, color)
+        self.language = language

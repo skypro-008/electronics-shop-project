@@ -11,6 +11,16 @@ class Phone(Item):
         else:
             raise TypeError("Can only add Phone instances")
 
+    @property
+    def number_of_sim(self):
+        return self._number_of_sim
+
+    @number_of_sim.setter
+    def number_of_sim(self, value):
+        if value < 0:
+            raise ValueError("Number of SIM cards cannot be negative")
+        self._number_of_sim = value
+
     def __radd__(self, other):
         return self.__add__(other)
 
