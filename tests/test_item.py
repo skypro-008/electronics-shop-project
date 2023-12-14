@@ -1,41 +1,55 @@
 import pytest
 from src.item import Item
+import os
 
 
 @pytest.fixture
-def item():
-    return Item("Смартфон", 150, 2)
+def first_item():
+    return Item("Изделие", 149.99, 2)
 
 
-def test_calculate_total_price(item):
-    assert item.calculate_total_price() == 300
+def test_apply_discount(first_item):
+    first_item.apply_discount()
+    assert first_item.price == 149.99
 
 
-def test_apply_discount(item):
-    item.apply_discount()
-    assert item.price == 150.0
+def test_calculate_total_price(first_item):
+    assert first_item.calculate_total_price() == 299.98
 
 
 @pytest.fixture
-def item_notebook():
-    return Item("Ноутбук", 250, 2)
+def sample_item():
+    return Item("SampleItem", 49.99, 5)
 
 
-def test_calculate_total_price_notebook(item_notebook):
-    assert item_notebook.calculate_total_price() == 500
+def test_str_method(sample_item):
+    assert str(sample_item) == "SampleItem"
 
 
-def test_apply_discount_notebook(item_notebook):
-    item_notebook.apply_discount()
-    assert item_notebook.price == 250.0
-
-
-def test_name_setter():
-    item = Item('Компьютер', 100, 2)
-    assert item.name == 'Компьютер'
+def test_repr_method(sample_item):
+    assert repr(sample_item) == "Item('SampleItem', 49.99, 5)"
 
 
 def test_instantiate_from_csv():
-    file_csv = "Смартфон,100,1\nНоутбук, 1000, 3\n"
-    with open("test_items.csv", "w", encoding="utf-8") as f:
-        f.write(file_csv)
+    csv_data = "Phone,199.99,3\nLaptop,899.99,1\n"
+    with open("test_items.csv", "w", encoding="utf-8") as csv_file:
+        csv_file.write(csv_data)
+
+    Item.instantiate_from_csv("test_items.csv")
+    os.remove(csv_file.name)
+
+
+def test_add_items():
+    item1 = Item("Laptop", 1000, 2)
+    item2 = Item("Tablet", 500, 3)
+    result = item1 + item2
+    assert result == 5
+
+
+def test_add_invalid_type_raises_error():
+    item1 = Item("Laptop", 1000, 2)
+    invalid_type = "NotAnItemInstance"
+    try:
+        result = item1 + invalid_type
+    except TypeError as e:
+        assert str(e) == "Unsupported operation"
