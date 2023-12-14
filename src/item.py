@@ -85,7 +85,7 @@ class Item:
         """Возвращает число из строки."""
         return int(float(data))
 
-    def __add__(self, other: Any) -> str | int:
+    def __add__(self, other: Any) -> Any:
         """
         Складывает количество товара у экземпляров классов 'Item' и 'Phone'.
         """
