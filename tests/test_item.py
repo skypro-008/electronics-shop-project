@@ -1,7 +1,7 @@
 import os
 
 import pytest
-from src.item import Item
+from src.item import Item, InstantiateCSVError
 from src.phone import Phone
 
 
@@ -48,6 +48,16 @@ def test_instantiate_from_csv():
     assert len(Item.all) == 5
 
 
+def test_instantiate_from_csv_error():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('phone.csv')
+    path = os.path.abspath(
+        r"C:/Users/Admin/PycharmProjects/electronics-shop-project/src/error_csv.csv"
+    )
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv(path)
+
+
 def test_repr_and_str():
     item1 = Item("Смартфон", 10000, 20)
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
@@ -60,3 +70,5 @@ def test_add():
     assert item1 + phone1 == 25
     with pytest.raises(ValueError):
         assert item1 + 100
+
+
