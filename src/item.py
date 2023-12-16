@@ -82,6 +82,5 @@ class KeyboardMixin:
             self.current_layout = 'EN'
 
 class Keyboard(Item, KeyboardMixin):
-    def __init__(self, model, manufacturer, color, language='EN'):
+    def __init__(self, model, manufacturer, color):
         super().__init__(model, manufacturer, color)
-        self.language = language
