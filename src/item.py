@@ -1,19 +1,7 @@
 import csv
 import os
 
-path = os.path.join('..', 'src', 'item.csv')  # путь к файлу
-
-
-class InstantiateCSVError(Exception):
-    def __init__(self, message, base_message=None):
-        self.base_message = base_message
-        self.message = message
-
-    def __str__(self):
-        if self.base_message is None:
-            return self.base_message
-
-        return f'{self.message} - {str(self.base_message)}'
+#path = os.path.join('..', 'src', 'item.csv')  # путь к файлу
 
 
 class Item:
@@ -47,16 +35,20 @@ class Item:
             self.__name = self.__name[:11]
 
     @classmethod
-    def instantiate_from_csv(cls):
-        cls.all = []
+    def instantiate_from_csv(cls, path):
+        cls.all.clear()
         try:
             with open(path, encoding='windows-1251', newline='') as csvfile:
-                reader = csv.DictReader(csvfile)
-                cls.all = [cls((row['name']), float(row['price']), int(row['quantity'])) for row in reader]
+                reader = csv.DictReader(csvfile, delimiter=",")
+                for row in reader:
+                    if 'name' not in row or 'price' not in row or 'quantity' not in row:
+                        raise InstantiateCSVError("Файл item.csv поврежден.")
+                    name = row["name"]
+                    price = float(row["price"])
+                    quantity = cls.string_to_number(row["quantity"])
+                    cls(name, price, quantity)
         except FileNotFoundError:
-            print('_Отсутствует файл item.csv_')
-        except KeyError as e:
-            print(InstantiateCSVError('_Файл item.csv поврежден_', e))
+            raise FileNotFoundError('Отсутствует файл item.csv')
 
     @staticmethod
     def string_to_number(str_number):
@@ -90,23 +82,9 @@ class Item:
         return self.quantity + other.quantity
 
 
-    # @classmethod
-    # def instantiate_from_csv(cls):
-    #     cls.all.clear = []
-    #     try:
-    #         with open(path, encoding='windows-1251', newline='') as csvfile:
-    #             items = csv.DictReader(csvfile, delimitrer=",")
-    #             header = next(items)
-    #             if 'name' not in header or 'price' not in header or 'quantity' not in header:
-    #                 raise csv.Error('Отсутствует необходимая колона в заголовке файла CSV')
-    #             else:
-    #                 for item in items:
-    #                     name = item["name"]
-    #                     price = float(item["price"])
-    #                     quantity = cls.string_to_number(item["quantity"])
-    #                     cls(name, price, quantity)
-    #                     print(name, price, quantity )
-    #     except FileNotFoundError:
-    #         print('_Отсутствует файл item.csv_')
-    #     except csv.Error:
-    #         print('_Файл item.csv поврежден_')
+class InstantiateCSVError(Exception):
+    def __init__(self, message):
+        self.message = message  # Файл item.csv поврежден
+
+    def __str__(self):
+        return f'{self.message}'
