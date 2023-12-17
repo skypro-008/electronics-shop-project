@@ -1,8 +1,11 @@
-import os
+from pathlib import Path
 
 import pytest
 from src.item import Item, InstantiateCSVError
 from src.phone import Phone
+
+DATA_PATH = Path(__file__).parent.parent.joinpath("src", "items.csv")
+TEST_PATH = Path(__file__).parent.parent.joinpath("src", "error_csv.csv")
 
 
 @pytest.fixture()
@@ -41,21 +44,15 @@ def test_name_setter():
 
 
 def test_instantiate_from_csv():
-    path = os.path.abspath(
-        r"C:/Users/Admin/PycharmProjects/electronics-shop-project/src/items.csv"
-    )
-    Item.instantiate_from_csv(path)
+    Item.instantiate_from_csv(DATA_PATH)
     assert len(Item.all) == 5
 
 
 def test_instantiate_from_csv_error():
     with pytest.raises(FileNotFoundError):
         Item.instantiate_from_csv('phone.csv')
-    path = os.path.abspath(
-        r"C:/Users/Admin/PycharmProjects/electronics-shop-project/src/error_csv.csv"
-    )
     with pytest.raises(InstantiateCSVError):
-        Item.instantiate_from_csv(path)
+        Item.instantiate_from_csv(TEST_PATH)
 
 
 def test_repr_and_str():
