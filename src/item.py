@@ -1,7 +1,4 @@
 import csv
-import os
-
-#path = os.path.join('..', 'src', 'item.csv')  # путь к файлу
 
 
 class Item:
@@ -35,10 +32,10 @@ class Item:
             self.__name = self.__name[:11]
 
     @classmethod
-    def instantiate_from_csv(cls, path):
+    def instantiate_from_csv(cls, file_name):
         cls.all.clear()
         try:
-            with open(path, encoding='windows-1251', newline='') as csvfile:
+            with open(file_name, encoding='windows-1251', newline='') as csvfile:
                 reader = csv.DictReader(csvfile, delimiter=",")
                 for row in reader:
                     if 'name' not in row or 'price' not in row or 'quantity' not in row:
