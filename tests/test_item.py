@@ -1,4 +1,5 @@
-
+import pytest
+from src.item import Item, InstantiateCSVError
 from src.item import Item
 from src.item import Keyboard
 def test_calculate_total_price():
@@ -50,3 +51,10 @@ def test_cannot_set_language_directly():
     kb = Keyboard('Dark Project KD87A', 9600, 5)
     with pytest.raises(AttributeError):
         kb.language = 'CH'
+def test_instantiate_from_csv_file_not_found():
+    with pytest.raises(FileNotFoundError, match="Отсутствует файл item.csv"):
+        Item.instantiate_from_csv()
+
+def test_instantiate_from_csv_corrupted_file():
+    with pytest.raises(InstantiateCSVError, match="Файл item.csv поврежден"):
+        Item.instantiate_from_csv()
