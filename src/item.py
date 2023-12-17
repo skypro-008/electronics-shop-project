@@ -1,4 +1,7 @@
 import csv
+import os
+
+# file_path = os.path.join('..', 'src', 'items.csv')
 
 
 class Item:
@@ -7,6 +10,7 @@ class Item:
     """
     pay_rate = 1.0
     all = []
+    file_path = os.path.join('..', 'src', 'items.csv')
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -32,8 +36,12 @@ class Item:
             self.__name = self.__name[:11]
 
     @classmethod
-    def instantiate_from_csv(cls, file_name):
+    def instantiate_from_csv(cls, file_name=None):
+        cls.file_name = file_name
         cls.all.clear()
+        if not file_name:
+            raise FileNotFoundError(f"Отсутствует файл")
+
         try:
             with open(file_name, encoding='windows-1251', newline='') as csvfile:
                 reader = csv.DictReader(csvfile, delimiter=",")
@@ -80,6 +88,7 @@ class Item:
 
 
 class InstantiateCSVError(Exception):
+
     def __init__(self, message):
         self.message = message  # Файл item.csv поврежден
 
