@@ -1,4 +1,9 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import csv
+
+import pytest
+
+from src.error import InstantiateCSVError
 from src.item import Item
 from src.phone import Phone
 
@@ -47,3 +52,13 @@ def test__add__():
 def test_number_of_sim():
     assert phone2.number_of_sim(0) == 'Количество физических SIM-карт должно быть целым числом больше нуля.'
     assert phone1.number_of_sim(2) == 2
+
+
+def test_instantiate_from_csv_not_found():
+    with pytest.raises(FileNotFoundError):
+        with open("i.csv", encoding="cp1251") as csv_file:
+            read_file = csv.DictReader(csv_file)
+
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv('items_error.csv')
