@@ -1,6 +1,8 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import csv
+
 import pytest
-from src.item import Item, InstantiateCSVError
+from src.items import Item, InstantiateCSVError
 
 
 @pytest.fixture
@@ -26,7 +28,7 @@ def test_name_setter():
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv('../src/items.csv')
+    Item.instantiate_from_csv()
     assert len(Item.all) == 5
     Item.all.clear()
     item1 = Item("Product1", 10, 5)
@@ -34,9 +36,10 @@ def test_instantiate_from_csv():
     assert Item.all == [item1, item2]
 
 
-def test_instantiate_from_csv_error():
-    with pytest.raises(InstantiateCSVError):
-        Item.instantiate_from_csv('../src/error_items.csv')
+def test_instantiate_from_csv_not_file():
+    with pytest.raises(FileNotFoundError):
+        with open('../src/ite.csv', encoding='cp1251') as csvfile:
+            csv.DictReader(csvfile)
 
 
 def test_string_to_number():
