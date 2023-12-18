@@ -57,7 +57,7 @@ class Item:
         self.price *= self.pay_rate
 
     def __str__(self):
-        return f"{self.name}, price: {self.price}, quantity: {self.quantity}"
+        return f"{self.name}"
 
     def __repr__(self):
-        return f"{self.name}, price: {self.price}, quantity: {self.quantity}"
+        return f"{self.__class__}({self.name}, {self.price}, {self.quantity})"
