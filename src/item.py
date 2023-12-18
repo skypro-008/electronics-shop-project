@@ -56,10 +56,6 @@ class Item:
     def instantiate_from_csv(cls):
         try:
             with open('items.csv', 'r') as file:
-                # Чтение данных из файла items.csv
-                # ...
-                # Проверка наличия всех необходимых колонок данных
-                # ...
                 if not all_columns_present:
                     raise InstantiateCSVError("Файл item.csv поврежден")
         except FileNotFoundError:
