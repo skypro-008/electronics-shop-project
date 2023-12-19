@@ -56,9 +56,8 @@ def test_number_of_sim():
 
 def test_instantiate_from_csv_not_found():
     with pytest.raises(FileNotFoundError):
-        with open("i.csv", encoding="cp1251") as csv_file:
-            read_file = csv.DictReader(csv_file)
+        Item.instantiate_from_csv('../src/NotFound.csv')
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv('items_error.csv')
+    Item.instantiate_from_csv('./tests/items_error.csv')

@@ -74,9 +74,9 @@ class Item:
                         item = cls(name, price, quantity)
                         cls.all.append(item)
         except FileNotFoundError:
-            print("Отсутствует файл items.csv")
+            raise "Отсутствует файл items.csv"
         except InstantiateCSVError:
-            print("Файл items.csv поврежден")
+            raise InstantiateCSVError("Файл items.csv поврежден")
 
     @staticmethod
     def string_to_number(num):
