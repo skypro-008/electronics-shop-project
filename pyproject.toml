@@ -9,6 +9,8 @@ packages = [{include = "electronics_shop_project"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pandas = "^2.1.4"
+pandas-stubs = "^2.1.4.231218"
 
 
 [tool.poetry.group.lint.dependencies]
