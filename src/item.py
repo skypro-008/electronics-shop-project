@@ -1,6 +1,8 @@
 import csv
 from typing import Any
 
+from src.exception import AllError, InstantiateCSVError
+
 
 class Item:
     """
@@ -68,17 +70,31 @@ class Item:
         """
         Инициализирует экземпляры класса `Item` данными из файла csv.
         """
-        # Получение данных из файла и преобразование их в list(dict).
-        with open(path_file, "r") as file:
-            reader = csv.DictReader(file)
-            items = list(reader)
 
-            # Инициализация экземпляров класса.
-            for item in items:
-                name = item["name"]
-                price = float(item["price"])
-                quantity = int(item["quantity"])
-                cls(name, price, quantity).get_name = name
+        # Проверяем наличие указанного файла.
+        try:
+            with open(path_file) as file:
+                pass
+        except FileNotFoundError as err:
+            print(f'{type(err).__name__}: Отсутствует файл "{path_file}" ')
+        else:
+            # Проверяем пригодность файла.
+            try:
+                InstantiateCSVError(path_file)
+            except AllError as f:
+                print(f)
+            else:
+                # Получение данных из файла и преобразование их в list(dict).
+                with open(path_file, "r", encoding="utf-8") as file:
+                    reader = csv.DictReader(file)
+                    items = list(reader)
+
+                    # Инициализация экземпляров класса.
+                    for item in items:
+                        name = item["name"]
+                        price = float(item["price"])
+                        quantity = int(item["quantity"])
+                        cls(name, price, quantity).get_name = name
 
     @staticmethod
     def string_to_number(data: str) -> int:
