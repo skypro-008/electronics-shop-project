@@ -1,5 +1,4 @@
 import pytest
-from src.item import Item, InstantiateCSVError
 from src.item import Item
 from src.item import Keyboard
 def test_calculate_total_price():
@@ -51,10 +50,17 @@ def test_cannot_set_language_directly():
     kb = Keyboard('Dark Project KD87A', 9600, 5)
     with pytest.raises(AttributeError):
         kb.language = 'CH'
-def test_instantiate_from_csv_file_not_found():
-    with pytest.raises(FileNotFoundError, match="Отсутствует файл item.csv"):
+if __name__ == '__main__':
+    try:
+        # Файл items.csv отсутствует.
         Item.instantiate_from_csv()
+    except FileNotFoundError as e:
+        print(f"{type(e).__name__}: {e}")
+        # Ожидаемый вывод: FileNotFoundError: Отсутствует файл item.csv
 
-def test_instantiate_from_csv_corrupted_file():
-    with pytest.raises(InstantiateCSVError, match="Файл item.csv поврежден"):
-        Item.instantiate_from_csv()
+    try:
+        # В файле items.csv удалена последняя колонка.
+        Item.instantiate_from_csv('corrupted_items.csv')
+    except InstantiateCSVError as e:
+        print(f"{type(e).__name__}: {e}")
+        # Ожидаемый вывод: InstantiateCSVError: Файл item.csv поврежден

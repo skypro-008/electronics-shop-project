@@ -1,5 +1,4 @@
-class InstantiateCSVError(Exception):
-    pass
+import csv
 class Item:
     """
     Класс для представления товара в магазине.
@@ -53,11 +52,17 @@ class Item:
             self.__name = value
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, filename='items.csv'):
         try:
-            with open('items.csv', 'r') as file:
-                if not all_columns_present:
-                    raise InstantiateCSVError("Файл item.csv поврежден")
+            with open(filename, 'r', newline='', encoding='utf-8') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    # Проверяем, что все необходимые колонки присутствуют в CSV-файле
+                    if 'name' not in row or 'price' not in row or 'quantity' not in row:
+                        raise InstantiateCSVError("Файл item.csv поврежден")
+
+                    item = cls(row['name'], float(row['price']), int(row['quantity']))
+                    cls.items.append(item)
         except FileNotFoundError:
             raise FileNotFoundError("Отсутствует файл item.csv")
 
