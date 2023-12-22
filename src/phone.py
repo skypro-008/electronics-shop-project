@@ -21,7 +21,7 @@ class Phone(Item):
         """
         выдает ошибку если number_of_sim не равен 0
         """
-        if isinstance(i, int) and i > 0:
+        if i > 0:
             self.__number_of_sim = i
         else:
             raise ValueError('Количество физических SIM-карт должно быть целым числом больше нуля.')
