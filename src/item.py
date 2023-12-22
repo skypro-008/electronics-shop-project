@@ -1,4 +1,8 @@
 import csv
+class InstantiateCSVError(Exception):
+    def __init__(self, message="Файл item.csv поврежден"):
+        self.message = message
+        super().__init__(self.message)
 class Item:
     """
     Класс для представления товара в магазине.
@@ -59,7 +63,7 @@ class Item:
                 for row in reader:
                     # Проверяем, что все необходимые колонки присутствуют в CSV-файле
                     if 'name' not in row or 'price' not in row or 'quantity' not in row:
-                        raise InstantiateCSVError("Файл item.csv поврежден")
+                        raise InstantiateCSVError()
 
                     item = cls(row['name'], float(row['price']), int(row['quantity']))
                     cls.items.append(item)
