@@ -1,9 +1,17 @@
 import csv
+from pathlib import Path
+
+
+# Получаем абсолютный путь к файлу items.csv
+file_path = Path(__file__).parent / 'items.csv'
+
+
 class InstantiateCSVError(Exception):
     def __init__(self, message="Файл item.csv поврежден"):
         self.message = message
         super().__init__(self.message)
 class Item:
+    items = []
     """
     Класс для представления товара в магазине.
     """
@@ -56,19 +64,25 @@ class Item:
             self.__name = value
 
     @classmethod
-    def instantiate_from_csv(cls, filename='items.csv'):
+    def instantiate_from_csv(cls, filename=None):
+        if filename is None:
+            # Если filename не указан, используем относительный путь от текущей директории
+            filename = Path(__file__).parent / 'items.csv'
+        else:
+            # Иначе используем указанный путь
+            filename = Path(filename)
+
         try:
             with open(filename, 'r', newline='', encoding='utf-8') as file:
                 reader = csv.DictReader(file)
                 for row in reader:
-                    # Проверяем, что все необходимые колонки присутствуют в CSV-файле
                     if 'name' not in row or 'price' not in row or 'quantity' not in row:
-                        raise InstantiateCSVError()
+                        raise InstantiateCSVError("Файл item.csv поврежден")
 
                     item = cls(row['name'], float(row['price']), int(row['quantity']))
                     cls.items.append(item)
         except FileNotFoundError:
-            raise FileNotFoundError("Отсутствует файл item.csv")
+            raise FileNotFoundError(f"Отсутствует файл {filename}")
 
     @staticmethod
     def string_to_number(string):
