@@ -1,5 +1,8 @@
-from src.item import Item
 import os
+
+import pytest
+
+from src.exception import AllError, InstantiateCSVError
 
 # Получение пути к текущему исполняемому файлу
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -9,11 +12,12 @@ base_dir = current_dir[: -(len(current_dir.split("\\")[-1]) + 1)]
 non_existent_file = os.path.join(base_dir, "retest", "items.csv")
 broken_file = os.path.join(base_dir, "data", "broken_file.csv")
 
-if __name__ == '__main__':
-    # Файл new_items.csv отсутствует.
-    Item.instantiate_from_csv(non_existent_file)
-    # FileNotFoundError: Отсутствует файл item.csv
 
-    # В файле new_items.csv удалена последняя колонка.
-    Item.instantiate_from_csv(broken_file)
-    # InstantiateCSVError: Файл item.csv поврежден
+@pytest.fixture
+def item():
+    return InstantiateCSVError
+
+
+def test_instantiate(item):
+    with pytest.raises(AllError):
+        item(broken_file)
