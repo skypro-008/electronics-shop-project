@@ -60,4 +60,14 @@ class Item:
         return f"{self.name}"
 
     def __repr__(self):
-        return f"{self.__class__}({self.name}, {self.price}, {self.quantity})"
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __add__(self, other):
+        if isinstance(other, Item) or isinstance(other, Phone):
+            return self.quantity + other.quantity
+
+        elif isinstance(other, int):
+            return self.quantity + other
+
+        else:
+            return "Товар можно складывать только с числами!"
