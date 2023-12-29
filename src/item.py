@@ -1,7 +1,6 @@
 class Item:
     """
     Класс для представления товара в магазине.
-
     """
     pay_rate = 1.0
     all = []
@@ -35,4 +34,4 @@ class Item:
         self.price = self.price * self.pay_rate
         return self.price
 
-
+##############################
