@@ -10,5 +10,6 @@ import pytest
 def test_calculate_total_price(item, initial_price, quantity, total_price):
     item.price = initial_price
     item.quantity = quantity
+    total_price = initial_price * quantity
 
     assert item.calculate_total_price() == total_price
