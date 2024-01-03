@@ -17,7 +17,7 @@ def test_calculate_total_price(item, initial_price, quantity, total_price):
 
 @pytest.mark.parametrize('pay_rate, initial_price, expected_price', [
     (0.85, 80_000, 68_000),
-    (0.35, 120_000, 114_000),
+    (0.95, 120_000, 114_000),
     (0.5, 30_000, 15_000)
 ])
 def test_apply_discount(item, pay_rate, initial_price, expected_price):
