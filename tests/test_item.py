@@ -49,7 +49,7 @@ def test_name(item: object, name: str, result_name: str):
     ('4.0', 4),
     ('9', 9)
 ])
-def test_string_to_value(item, string_value, int_result):
+def test_string_to_number(item, string_value, int_result):
     try:
         int_result = int(string_value)
     except ValueError:
