@@ -60,25 +60,22 @@ def test_string_to_number(item, string_value, int_result):
     assert item.string_to_number(string_value) == int_result
 
 
-@pytest.mark.parametrize('csv_data, filename, name, price, quantity, lenght', [
-    ('name,price,quantity\nСмартфон,100,1\n', 'dummy.csv', 'Смартфон', '100', '1', 1),
-    ('name,price,quantity\nПланшет,359,2\nСмартфон,100,1\n', 'no_way.csv', 'Планшет', '359', '2', 2),
-    ('name,price,quantity\nНоутбук,580,3\nПланшет,359,2\nСмартфон,100,1\n', 'soup.csv', 'Ноутбук', '580', '3', 3)
+@pytest.mark.parametrize('csv_data, filename, name, price, quantity, length', [
+    ('name,price,quantity\nСмартфон,100,1\n', 'dummy.csv', 'Смартфон', 100, 1, 1),
+    ('name,price,quantity\nПланшет,359,2\nСмартфон,100,1\n', 'no_way.csv', 'Планшет', 359, 2, 2),
+    ('name,price,quantity\nНоутбук,580,3\nПланшет,359,2\nСмартфон,100,1\n', 'soup.csv', 'Ноутбук', 580, 3, 3)
 ])
-def test_instantiate_from_csv(item, mocker, csv_data, filename, name, price, quantity, lenght):
+def test_instantiate_from_csv(mocker, csv_data, filename, name, price, quantity, length):
     mocker.patch('builtins.open', mocker.mock_open(read_data=csv_data))
     mocker.patch('os.path.join', return_value=filename)
 
     Item.all = []
     Item.instantiate_from_csv(filename)
 
-    item.name = name
-    item.price = price
-    item.quantity = quantity
+    assert len(Item.all) == length
 
-    assert len(Item.all) == lenght
+    item = Item.all[0]
+
     assert item.name == name
     assert item.price == price
     assert item.quantity == quantity
-
-

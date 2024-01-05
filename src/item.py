@@ -1,3 +1,7 @@
+import os
+import csv
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -49,3 +53,21 @@ class Item:
             return int(value)
         except ValueError:
             return int(float(value))
+
+    @classmethod
+    def instantiate_from_csv(cls, filename: str):
+        new_items = []
+
+        parent_dir = os.pardir
+        path_to_csv = os.path.join(parent_dir, filename)
+
+        with open(path_to_csv, encoding='utf-8') as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+
+            for each_row in csv_reader:
+                name = each_row['name']
+                price = cls.string_to_number(each_row['price'])
+                quantity = cls.string_to_number(each_row['quantity'])
+
+                new_items.append(cls(name, price, quantity))
+        Item.all = new_items
