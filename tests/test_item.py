@@ -33,7 +33,9 @@ def test_apply_discount(item, pay_rate, initial_price, expected_price):
     ('IPhone X-Men Pro', 'IPhone X-M'),
     ('Smart Lamp But Not You', 'Smart Lamp'),
     ('AppleWatchingYou', 'AppleWatch'),
-    ('Lenovo 4Vova', 'Lenovo 4Vo')
+    ('Lenovo 4Vova', 'Lenovo 4Vo'),
+    ('This Is 10', 'This Is 10'),
+    ('Only 1', 'Only 1')
 ])
 def test_name(item: object, name: str, result_name: str):
     item.name = name
