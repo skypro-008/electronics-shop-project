@@ -55,4 +55,4 @@ def test_string_to_number(item, string_value, int_result):
     except ValueError:
         int_result = int(float(string_value))
 
-    assert item.string_to_value() == int_result
+    assert item.string_to_number(string_value) == int_result
