@@ -26,3 +26,16 @@ def test_apply_discount(item, pay_rate, initial_price, expected_price):
     item.apply_discount()
 
     assert item.price == expected_price
+
+
+@pytest.mark.parametrize('name, result_name', [
+    ('Laptop Top-Top', 'Laptop Top'),
+    ('IPhone X-Men Pro', 'IPhone X-M'),
+    ('Smart Lamp But Not You', 'Smart Lamp'),
+    ('AppleWatchingYou', 'AppleWatch'),
+    ('Lenovo 4Vova', 'Lenovo 4Vo')
+])
+def test_name(item: object, name: str, result_name: str):
+    item.name = name
+
+    assert item.name == result_name
