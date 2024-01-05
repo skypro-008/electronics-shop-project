@@ -41,3 +41,18 @@ def test_name(item: object, name: str, result_name: str):
     item.name = name
 
     assert item.name == result_name
+
+
+@pytest.mark.parametrize('string_value, int_result', [
+    ('3.5', 3),
+    ('8.2', 8),
+    ('4.0', 4),
+    ('9', 9)
+])
+def test_string_to_value(item, string_value, int_result):
+    try:
+        int_result = int(string_value)
+    except ValueError:
+        int_result = int(float(string_value))
+
+    assert item.string_to_value() == int_result
