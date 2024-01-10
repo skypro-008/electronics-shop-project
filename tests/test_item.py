@@ -38,4 +38,19 @@ def test_apply_discount():
     assert obj1.price == 8000
     assert obj2.price == 20000
 
+def test_instantiate_from_csv():
+    obj3 = Item.all[1]
+    assert obj3.name == "Ноутбук"
+    Item.instantiate_from_csv('src/items.csv')
+    assert len(Item.all) == 5
+def test_string_to_number():
+    assert Item.string_to_number("3.3") == 3
+    assert Item.string_to_number("3.0") == 3
+
+def test_name():
+    obj1.name = 'СуперСмартфон'
+    assert obj1.name =='СуперСмарт'
+    obj1.name = 'ноутбук'
+    assert obj2.name == 'Ноутбук'
+
 #############################################
