@@ -60,6 +60,6 @@ def test_name():
     obj1.name = 'СуперСмартфон'
     assert obj1.name =='СуперСмарт'
     obj1.name = 'ноутбук'
-    assert obj2.name == 'Ноутбук'
+    assert obj1.name == 'Ноутбук'
 
 #############################################
