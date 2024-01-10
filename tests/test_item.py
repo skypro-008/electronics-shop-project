@@ -39,15 +39,24 @@ def test_apply_discount():
     assert obj2.price == 20000
 
 def test_instantiate_from_csv():
+    """
+    Тест применения Класса-метода, инициализирующего экземпляры класса Item
+    """
     obj3 = Item.all[1]
     assert obj3.name == "Ноутбук"
     Item.instantiate_from_csv('src/items.csv')
     assert len(Item.all) == 5
 def test_string_to_number():
+    """
+    Тест применения статического метода перевода числа из строкового значения в числовое
+    """
     assert Item.string_to_number("3.3") == 3
     assert Item.string_to_number("3.0") == 3
 
 def test_name():
+    """
+    Тест длины имени товара
+    """
     obj1.name = 'СуперСмартфон'
     assert obj1.name =='СуперСмарт'
     obj1.name = 'ноутбук'
