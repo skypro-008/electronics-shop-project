@@ -1,5 +1,6 @@
 import csv
 import os
+from src.MyExceptions import InstantiateCSVError
 
 
 class Item:
@@ -40,12 +41,16 @@ class Item:
         self.__name = name[:10]
 
     @classmethod
-    def instantiate_from_csv(cls, path):
+    def instantiate_from_csv(cls, path='src/items.csv'):
         cls.all = []
-        with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), os.path.normpath(path))) as csv_file:
-            items = csv.DictReader(csv_file)
-            for item in items:
-                Item(item["name"], item["price"], item["quantity"])
+        try:
+            with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), os.path.normpath(path))) as csv_file:
+                items = csv.DictReader(csv_file)
+                for item in items:
+                    Item(item["name"], item["price"], item["quantity"])
+
+        except KeyError:
+            raise InstantiateCSVError('Файл item.csv поврежден.')
 
     @staticmethod
     def string_to_number(string):

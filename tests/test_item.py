@@ -1,7 +1,10 @@
 import csv
 import os.path
 
+import pytest
+
 from src.item import Item
+from src.MyExceptions import InstantiateCSVError
 
 
 def test_instantiate_from_csv():
@@ -30,4 +33,12 @@ def test_str():
 def test_repr():
     item1 = Item("Смартфон", 10000, 20)
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+
+def test_instantiate_from_csv_err():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('item.csv')
+
+    with pytest.raises(InstantiateCSVError, match=''):
+        Item.instantiate_from_csv('src/items_test.csv')
     
