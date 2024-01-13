@@ -1,4 +1,5 @@
 import csv
+import os
 
 
 class Item:
@@ -47,7 +48,8 @@ class Item:
         param quantity: Количество товара в магазине.
         """
         cls.all.clear()
-        with open(f"D:/Milyaev/leesons/electronics-shop-project/{data}", newline='') as csvfile:
+        file_path = os.path.abspath(data)
+        with open(file_path, newline='') as csvfile:
             content = csv.DictReader(csvfile)
 
             for row in content:
