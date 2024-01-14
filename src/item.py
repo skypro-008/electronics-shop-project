@@ -2,6 +2,7 @@ import csv
 import os
 from src.MyExceptions import InstantiateCSVError
 
+FILE = os.path.dirname(os.path.dirname(__file__))
 
 class Item:
     """
@@ -43,14 +44,16 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, path='src/items.csv'):
         cls.all = []
+        if not os.path.exists(os.path.join(FILE, os.path.normpath(path))):
+            raise FileNotFoundError('Отсутствует файл item.csv')
         try:
-            with open(os.path.join(os.path.dirname(os.path.dirname(__file__)), os.path.normpath(path))) as csv_file:
+            with open(os.path.join(FILE, os.path.normpath(path))) as csv_file:
                 items = csv.DictReader(csv_file)
                 for item in items:
                     Item(item["name"], item["price"], item["quantity"])
 
         except KeyError:
-            raise InstantiateCSVError('Файл item.csv поврежден.')
+            raise InstantiateCSVError()
 
     @staticmethod
     def string_to_number(string):
