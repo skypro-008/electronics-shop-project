@@ -1,8 +1,14 @@
+import csv
+import os
+from src.MyExceptions import InstantiateCSVError
+
+FILE = os.path.dirname(os.path.dirname(__file__))
+
 class Item:
     """
     Класс для представления товара в магазине.
     """
-    pay_rate = 1.0
+    pay_rate = 0.85
     all = []
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
@@ -13,7 +19,11 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
+        super().__init__()
+        self.__name = name
+        self.price = price
+        self.quantity = quantity
+        self.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -21,10 +31,42 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        pass
+        return self.price * self.quantity
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, name):
+        self.__name = name[:10]
+
+    @classmethod
+    def instantiate_from_csv(cls, path='src/items.csv'):
+        cls.all = []
+        if not os.path.exists(os.path.join(FILE, os.path.normpath(path))):
+            raise FileNotFoundError('Отсутствует файл item.csv')
+        try:
+            with open(os.path.join(FILE, os.path.normpath(path))) as csv_file:
+                items = csv.DictReader(csv_file)
+                for item in items:
+                    Item(item["name"], item["price"], item["quantity"])
+
+        except KeyError:
+            raise InstantiateCSVError()
+
+    @staticmethod
+    def string_to_number(string):
+        return int(float(string))
 
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        pass
+        self.price *= self.pay_rate
+
+    def __str__(self):
+        return f"{self.name}"
+
+    def __repr__(self):
+        return f"{self.__class__}({self.name}, {self.price}, {self.quantity})"
