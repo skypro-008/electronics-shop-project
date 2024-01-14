@@ -1,4 +1,9 @@
 import csv
+import os.path
+
+
+class InstantiateCSVError(Exception):
+    pass
 
 
 class Item:
@@ -59,14 +64,24 @@ class Item:
 
         :param filename: Имя CSV-файла.
         """
-        with open(filename, newline='', encoding='windows-1251') as csvfile:
-            reader = csv.reader(csvfile)
-            for row in reader:
-                name = row[0]
-                price = cls.string_to_number(row[1])
-                quantity = cls.string_to_number(row[2])
-                item = Item(name, price, quantity)
-                cls.all.append(item)
+        if filename is not None:
+            filename = os.path.join(os.path.dirname(__file__), "src.items.csv")
+            if not os.path.isfile(filename):
+                print(f"Файл '{filename}' не найден.")
+                return
+            try:
+                with open(filename, newline='', encoding='windows-1251') as csvfile:
+                    reader = csv.reader(csvfile)
+                    for row in reader:
+                        if len(row) == 3:
+                            raise InstantiateCSVError("Не достаточно колонок данных")
+                        name = row[0]
+                        price = cls.string_to_number(row[1])
+                        quantity = cls.string_to_number(row[2])
+                        item = Item(name, price, quantity)
+                        cls.all.append(item)
+            except FileNotFoundError:
+                raise FileNotFoundError(f"Файл '{filename}' отсутствует.")
 
     @staticmethod
     def string_to_number(value: str, default: float = 0.0,
