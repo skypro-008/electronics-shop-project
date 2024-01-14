@@ -51,7 +51,7 @@ def test_name(item: object, name: str, result_name: str):
     ('4.0', 4),
     ('9', 9)
 ])
-def test_string_to_number(item, string_value, int_result):
+def test_string_to_number(item, string_value: str, int_result: int):
     try:
         int_result = int(string_value)
     except ValueError:
@@ -79,3 +79,27 @@ def test_instantiate_from_csv(mocker, csv_data, filename, name, price, quantity,
     assert item.name == name
     assert item.price == price
     assert item.quantity == quantity
+
+
+@pytest.mark.parametrize('class_name, name, price, quantity, expected_repr', [
+    ('Item', 'Смартфон', 30_000, 7, "Item('Смартфон', 30000, 7)"),
+    ('Item', 'Часы', 4_000, 12, "Item('Часы', 4000, 12)"),
+    ('Item', 'Планшет', 8_000, 8, "Item('Планшет', 8000, 8)"),
+])
+def test_repr(item, class_name, name: str, price: int, quantity: int, expected_repr: str):
+    item.name = name
+    item.price = price
+    item.quantity = quantity
+
+    assert repr(item) == expected_repr
+
+
+@pytest.mark.parametrize('name, expected_name', [
+    ('Смартфон', 'Смартфон'),
+    ('Часы', 'Часы'),
+    ('Планшет', 'Планшет'),
+])
+def test_str(item, name: str, expected_name: str):
+    item.name = name
+
+    assert str(item) == expected_name
