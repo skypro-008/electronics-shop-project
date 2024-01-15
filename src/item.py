@@ -1,5 +1,5 @@
 import csv
-import os.path
+import os
 
 
 class InstantiateCSVError(Exception):
@@ -58,30 +58,31 @@ class Item:
         self.price *= self.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls, filename: str) -> None:
+    def instantiate_from_csv(cls, filename: str = None) -> None:
         """
         Создает объекты Item из данных CSV-файла.
 
         :param filename: Имя CSV-файла.
         """
-        if filename is not None:
+        if filename is None:
             filename = os.path.join(os.path.dirname(__file__), "src.items.csv")
-            if not os.path.isfile(filename):
-                print(f"Файл '{filename}' не найден.")
+            if not os.path.exists(filename):
+                print(f"Предупреждение: Файл {filename} не найден.")
                 return
-            try:
-                with open(filename, newline='', encoding='windows-1251') as csvfile:
-                    reader = csv.reader(csvfile)
-                    for row in reader:
-                        if len(row) == 3:
-                            raise InstantiateCSVError("Не достаточно колонок данных")
-                        name = row[0]
-                        price = cls.string_to_number(row[1])
-                        quantity = cls.string_to_number(row[2])
-                        item = Item(name, price, quantity)
-                        cls.all.append(item)
-            except FileNotFoundError:
-                raise FileNotFoundError(f"Файл '{filename}' отсутствует.")
+        try:
+            with open(filename, newline='', encoding='utf-8') as csvfile:
+                reader = csv.reader(csvfile)
+                for row in reader:
+                    if len(row) < 3:
+                        raise InstantiateCSVError("Файл item.csv поврежден. Недостаточно колонок данных.")
+
+                    name = row[0]
+                    price = cls.string_to_number(row[1])
+                    quantity = cls.string_to_number(row[2])
+                    item = Item(name, price, quantity)
+                    cls.all.append(item)
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
 
     @staticmethod
     def string_to_number(value: str, default: float = 0.0,
