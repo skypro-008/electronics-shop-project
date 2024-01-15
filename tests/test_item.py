@@ -1,5 +1,5 @@
 import pytest
-from src.item import Item, InstantiateCSVError
+from src.item import Item
 import os
 
 
@@ -15,6 +15,14 @@ def test_apply_discount(first_item):
 
 def test_calculate_total_price(first_item):
     assert first_item.calculate_total_price() == 299.98
+
+
+def test_name_setter_length_limit():
+    item = Item("ShortName", 99.99, 1)
+    assert item.name == "ShortName"
+
+    with pytest.raises(ValueError, match="Длина наименования товара превышает 10 символов."):
+        item.name = "TooLongNameToExceedTheLimit"
 
 
 @pytest.fixture
@@ -46,10 +54,15 @@ def test_add_items():
     assert result == 5
 
 
+def test_add_item_and_phone_raises_error():
+    item = Item("Laptop", 1000, 2)
+    phone = Item("Smartphone", 700, 5, 2)
+    with pytest.raises(TypeError, match="Unsupported operation: can only add Item instances"):
+        result = item + phone
+
+
 def test_add_invalid_type_raises_error():
     item1 = Item("Laptop", 1000, 2)
     invalid_type = "NotAnItemInstance"
-    try:
-        item1 + invalid_type
-    except TypeError as e:
-        assert str(e) == "Unsupported operation"
+    with pytest.raises(TypeError, match="Unsupported operation"):
+        result = item1 + invalid_type
