@@ -87,12 +87,19 @@ class Item:
         """
         Магические методы __repr__
         """
-        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+        return f"{self.__class__.__name__}('{self.__name}', {int(self.price)}, {self.quantity})"
 
     def __str__(self):
         """
         Магический методы __str__
         """
         return f"{self.__name}"
+
+    def __add__(self, other):
+        """
+        Магические методы __add__ сложение и проверка принадлежность к классу
+        """
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
 
 ##############################
