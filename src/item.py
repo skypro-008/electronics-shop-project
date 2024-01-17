@@ -1,3 +1,7 @@
+import csv
+import os
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -13,7 +17,55 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
+        self.__name = name
+        self.price = price
+        self.quantity = quantity
+        self.all.append(self)
+
+    @property
+    def name(self):
+        """
+        Геттер названия товара
+        """
+        return self.__name
+
+    @name.setter
+    def name(self, new_name):
+        """
+        Сеттер названия товара
+        """
+        if len(new_name) > 10:
+            self.__name = new_name[0:10]
+        else:
+            self.__name = new_name
+
+    @classmethod
+    def instantiate_from_csv(cls, data):
+        """
+        Класс-метод, инициализирующий экземпляры класса Item
+        param name: Название товара.
+        param price: Цена за единицу товара.
+        param quantity: Количество товара в магазине.
+        """
+        cls.all.clear()
+        file_path = os.path.abspath(data)
+        with open(file_path, newline='') as csvfile:
+            content = csv.DictReader(csvfile)
+
+            for row in content:
+                name = row['name']
+                price = float(row['price'])
+                quantity = int(row['quantity'])
+                cls(name, price, quantity)
+
+    @staticmethod
+    def string_to_number(string_namber):
+        """
+        Статический метод перевода числа из строкового значения в числовое
+
+        :return: Числовое значение
+        """
+        return int(float(string_namber))
 
     def calculate_total_price(self) -> float:
         """
@@ -21,10 +73,33 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        pass
+        self.total_price = self.price * self.quantity
+        return self.total_price
 
-    def apply_discount(self) -> None:
+    def apply_discount(self) -> float:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        pass
+        self.price = self.price * self.pay_rate
+        return self.price
+
+    def __repr__(self):
+        """
+        Магические методы __repr__
+        """
+        return f"{self.__class__.__name__}('{self.__name}', {int(self.price)}, {self.quantity})"
+
+    def __str__(self):
+        """
+        Магический методы __str__
+        """
+        return f"{self.__name}"
+
+    def __add__(self, other):
+        """
+        Магические методы __add__ сложение и проверка принадлежность к классу
+        """
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+
+##############################
