@@ -1,6 +1,9 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
+
+from config import CSV_PATH
 from src.item import Item
+
 
 @pytest.fixture
 def test_item():
@@ -19,3 +22,8 @@ def test_apply_discount(test_item):
     test_item[0].apply_discount()
     assert test_item[0].price == 8000.0
     assert test_item[1].price == 20000
+
+
+def instantiate_from_csv(instantiate_from_csv):
+
+    assert file[0].name == "Смартфон"
