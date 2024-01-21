@@ -103,3 +103,16 @@ def test_str(item, name: str, expected_name: str):
     item.name = name
 
     assert str(item) == expected_name
+
+
+@pytest.mark.parametrize('this_quantity, other_quantity, expected_result', [
+    (10, 13, 23),
+    (7, 19, 26),
+    (3, 12, 15),
+])
+def test_add(item, this_quantity, other_quantity, expected_result):
+    item1 = item
+    item1.quantity = this_quantity
+    item2 = Item('', 100, other_quantity)
+
+    assert item1 + item2 == expected_result
