@@ -13,3 +13,14 @@ def test_repr(phone, name, price, quantity, number_of_sim, expected_result):
     phone.number_of_sim = number_of_sim
 
     assert repr(phone) == expected_result
+
+
+@pytest.mark.parametrize('name, expected_result', [
+    ('Sony', 'Sony'),
+    ('OnePlus', 'OnePlus'),
+    ('LG', 'LG'),
+])
+def test_str(phone, name, expected_result):
+    phone.name = name
+
+    assert str(phone) == expected_result
