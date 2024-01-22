@@ -1,4 +1,6 @@
 import csv
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -29,6 +31,7 @@ class Item:
             self.__name = string_name[0:10]
         else:
             self.__name = string_name
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
