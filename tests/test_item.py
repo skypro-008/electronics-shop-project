@@ -1,8 +1,8 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
-
-from config import OPERATIONS_PATH
 from src.item import Item
 from src.phone import Phone
+import pytest
+from config import OPERATIONS_PATH
 
 
 def test_calculate_total_price():
@@ -16,21 +16,12 @@ def test_apply_discount():
     item1 = Item("Смартфон", 10000, 20)
     Item.pay_rate = 0.8
     assert item1.price * Item.pay_rate == 8000.0
-    assert item1.price * Item.pay_rate == 8000.0
 
 
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
-
-
-@property
-def test_name():
-    item = Item("Смартфон", 10000, 20)
-    assert item.name == 'Смартфон'
-    item1 = Item("СуперСмартфон", 10000, 20)
-    assert item1.name == 'СуперСмарт'
 
 
 def test_all():
@@ -41,13 +32,14 @@ def test_all():
 
 
 def test_repr():
-    item1 = Item('Смартфон', 10000, 20)
+    item1 = Item("Смартфон", 10000, 20)
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
 
 
 def test_str():
-    item1 = Item('Смартфон', 10000, 20)
+    item1 = Item("Смартфон", 10000, 20)
     assert str(item1) == 'Смартфон'
+
 
 def test_add():
     phone1 = Phone("iPhone 14", 120_000, 5, 2)
@@ -55,13 +47,16 @@ def test_add():
     assert item1 + phone1 == 25
     assert phone1 + phone1 == 10
 
-class Ph():
+
+class Ph:
     def __init__(self, name: str, price: float, quantity: int):
-        self.name = name
-        self.price = price
         self.quantity = quantity
+        self.price = price
+        self.name = name
+
 
 def another_class():
     ph = Ph("iPhone 14", 120_000, 5)
     item1 = Item('Смартфон', 10000, 20)
-    assert item1 + ph == TypeError
+    with pytest.raises(TypeError, match='Нельзя складывать с другими классами, кроме Phone'):
+        item1 + ph

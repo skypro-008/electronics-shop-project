@@ -1,16 +1,14 @@
 from src.item import Item
-
-
 class Phone(Item):
-    def __init__(self, name: str, price: float, quantity: int, sim):
+    def __init__(self, name: str, price: float, quantity: int, sim: int):
         super().__init__(name, price, quantity)
         self.__sim = sim
 
-    def __repr__(self):
-        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity}, {self.__sim})"
-
     def __str__(self):
-        return f'{self.__name}'
+        return f'{self.name}'
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity}, {self.__sim})"
 
     @property
     def number_of_sim(self):

@@ -1,6 +1,4 @@
 import csv
-
-
 class Item:
     """
     Класс для представления товара в магазине.
@@ -32,6 +30,7 @@ class Item:
         else:
             self.__name = string_name
 
+
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
@@ -56,7 +55,7 @@ class Item:
                 name = reader["name"]
                 price = reader["price"]
                 quantity = cls.string_to_number(reader["quantity"])
-                cls(name, price, quantity)
+                cls(name,price,quantity)
 
     @staticmethod
     def string_to_number(number):
@@ -67,3 +66,9 @@ class Item:
 
     def __str__(self):
         return f'{self.__name}'
+
+    def __add__(self,other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        else:
+            raise TypeError ("Нельзя складывать с другими классами, кроме Phone")
