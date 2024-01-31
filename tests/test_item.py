@@ -5,6 +5,10 @@ from src.item import Item
 def example():
     return(Item("Смартфон", 10000, 20))
 
+def test_init(example):
+    assert example.name == "Смартфон"
+    assert example.price == 10000
+    assert example.quantity == 20
 
 def test_calculate_total_price(example):
     assert example.calculate_total_price() == 200000
