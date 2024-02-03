@@ -1,4 +1,5 @@
-from src.item import Item
+from src.item import Item, InstantiateCSVError
+import pytest
 
 obj1 = Item("Смартфон", 10000, 20)
 obj2 = Item("Ноутбук", 20000, 5)
@@ -80,4 +81,19 @@ def test__add__():
     """
     assert obj1 + obj2 ==25
 
+def test_FileNotFoundError():
+    """
+    Тест исключения FileNotFoundError
+    """
+    with pytest.raises(FileNotFoundError):
+        a = 'test.csv'
+        Item.instantiate_from_csv(a)
+
+def test_InstantiateCSVError():
+    """
+    Тест исключения InstantiateCSVError
+    """
+    with pytest.raises(InstantiateCSVError):
+        a = '../src/items.csv'
+        Item.instantiate_from_csv(a)
 #############################################
