@@ -33,7 +33,8 @@ class Item:
         if len(value) <= 10:
             self.__name = value
         else:
-            self.__name = value [:10]
+            self.__name = value[:10]
+        return self.__name
 
 
     def calculate_total_price(self) -> float:
@@ -60,11 +61,11 @@ class Item:
         with open(file_path, 'r', newline='', encoding='cp1251') as file:
             data = csv.DictReader(file)
             for row in data:
-                #print(row['name'], row["price"], row['quantity'])
+                #print(row)
                 name = row['name']
                 price = cls.string_to_number(row['price'])
                 quantity = int(row['quantity'])
-                cls.all.append(cls(name, price, quantity))
+                cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(string):

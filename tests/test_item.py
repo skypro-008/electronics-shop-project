@@ -13,9 +13,10 @@ def test_item_apply_discount(item_example):
     assert item_example.apply_discount() == 5000
 
 def test_instantiate_from_csv():
+    Item.instantiate_from_csv('src/items.csv')
     assert len(Item.all) == 5
     item_two = Item.all[1]
-    assert item_two.__name == 'Ноутбук'
+    assert item_two.name == 'Ноутбук'
 
 def test_string_to_number():
     assert Item.string_to_number('4') == 4
