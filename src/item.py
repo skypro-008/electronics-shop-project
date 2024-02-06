@@ -16,7 +16,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         Item.all.append(self)
@@ -51,10 +51,8 @@ class Item:
         """
         if len(value) <= 10:
             self.__name = value
-            print(f'Корректное название - {value}')
         else:
             self.__name = value[:10]
-            print(f'Длинное слово - {value[:10]}')
 
     @classmethod
     def instantiate_from_csv(cls, data):
@@ -66,7 +64,7 @@ class Item:
                 lines = csvfile.readlines()
                 for i in lines:
                     name, price, quantity = i.split(',')
-                    print(cls(name, price, quantity))
+                    cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(str):
