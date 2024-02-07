@@ -2,12 +2,12 @@
 name = "electronics-shop-project"
 version = "0.1.0"
 description = ""
-authors = ["kirillskyeng <kirill.netreba@skyeng.ru>"]
+authors = ["mars aygistov<m.aygistov@mail.ru>"]
 readme = "README.md"
 packages = [{include = "electronics_shop_project"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.12"
 
 
 [build-system]
