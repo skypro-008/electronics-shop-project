@@ -23,7 +23,11 @@ def test_string_to_number():
     assert Item.string_to_number('4.0') == 4
     assert Item.string_to_number('4.7') == 4
 
+def test_repr(item_example):
+    assert repr(item_example) == "Item('Наушники', 5000, 10)"
 
+def test_str(item_example):
+    assert str(item_example) == "Наушники"
 
 
 
