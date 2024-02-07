@@ -1,6 +1,5 @@
 import csv
-import os
-from config import root_path
+from config import root_csv
 
 class Item:
     """
@@ -54,7 +53,7 @@ class Item:
         """
         cls.all = []
         count = 0
-        with open(os.path.join(root_path, csvfile), encoding='windows-1251') as r_file:
+        with open(csvfile, encoding='windows-1251') as r_file:
             file_reader = csv.DictReader(r_file, delimiter=",")
             for row in file_reader:
                 name, price, quantity = str(row['name']), float(row['price']), int(row['quantity'])
@@ -67,4 +66,3 @@ class Item:
         """
         number = float(str_number)
         return int(number)
-

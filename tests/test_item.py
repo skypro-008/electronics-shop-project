@@ -1,5 +1,6 @@
 import pytest
 from src.item import Item
+from config import root_csv
 
 @pytest.fixture
 def example():
@@ -22,7 +23,7 @@ def test_apply_discount(example):
     assert example.price == 5000.0
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv('src/items.csv')
+    Item.instantiate_from_csv(root_csv)
     assert len(Item.all) == 5
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
