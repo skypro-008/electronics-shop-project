@@ -1,7 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 
 from src.item import Item
-import pytest
+import os
 
 
 data = Item("Смартфон", 10000, 20)
@@ -29,12 +29,12 @@ def test_name_setter():
     assert item.name == 'Смартфон'
 
     # длина наименования товара больше 10 символов
-    item.name = 'СуперСмартфон'
-    assert item.name == 'СуперСмартфон'
+    item.name1 = 'СуперСмартфон'
+    assert item.name1 == 'СуперСмартфон'
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv()
+    Item.instantiate_from_csv(os.path.join('src', 'items.csv'))
     assert len(Item.all) == 5
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
@@ -44,5 +44,15 @@ def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
+
+def test_repr():
+    item1 = Item("Смартфон", 10000, 20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+def test_str():
+    item1 = Item("Смартфон", 10000, 20)
+    assert str(item1) == 'Смартфон'
+
 
 
