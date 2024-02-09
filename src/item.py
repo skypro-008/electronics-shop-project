@@ -1,5 +1,7 @@
 import csv
 
+import os
+
 
 class Item:
     """
@@ -22,7 +24,6 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
 
     def calculate_total_price(self) -> float:
         """
@@ -60,10 +61,10 @@ class Item:
     @classmethod
     #инициализирует экземпляры класса Item данными из файла src/items.csv
 
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, filename='../src/items.csv'):
         cls.all.clear()
-        with open('../src/items.csv', newline=',') as csvfile:
-            reader = csv.DictReader(csvfile)
+        with open(filename, encoding='windows-1251') as file:
+            reader = csv.DictReader(file)
             for row in reader:
                 name = row['name']
                 price = row['price']
@@ -76,4 +77,13 @@ class Item:
 
     def string_to_number(value):
         return int(float(value))
+
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f'{self.__name}'
+
+
 
