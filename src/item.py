@@ -29,6 +29,11 @@ class Item:
         """Отображает информацию для пользователя"""
         return f"{self.__name}"
 
+    def __add__(self, other):
+        """Производит операцию сложения для количества товаров в магазине"""
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+
     @property
     def name(self):
         """Геттер для приватного атрибута name"""
