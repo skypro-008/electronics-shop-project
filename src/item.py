@@ -1,3 +1,4 @@
+import csv
 class Item:
     """
     Класс для представления товара в магазине.
@@ -13,7 +14,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
         self.all.append(self)
@@ -25,6 +26,47 @@ class Item:
         :return: Общая стоимость товара.
         """
         return self.price*self.quantity
+
+    @property
+    def name(self):
+        """
+        Геттер
+        """
+        return self.__name
+
+    @name.setter
+    def name(self, value: str):
+        """
+        Сеттер с проверкой длины имени
+        """
+        if len(value) >= 10:
+            self.__name = value[:10]
+        else:
+            self.__name = value
+        return self.__name
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        """
+        Класс-метод, инициализирующий экземпляры
+        класса Item данными из файла src/items.csv
+        """
+        with cls.DATA_DIR.open(newline='') as csvfile:
+            reader = csv.DictReader(csvfile)
+            cls.all.clear()
+            for row in reader:
+                name = row['name']
+                price = row['price']
+                quantity = row['quantity']
+                cls(name, price, quantity)
+            return cls
+    @staticmethod
+    def string_to_number(self, value):
+        try:
+            value_int = int(float(value))
+        except ValueError:
+            print("Строка не может быть преобразована в число")
+        return value_int
 
 
 
