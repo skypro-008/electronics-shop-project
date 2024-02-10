@@ -18,3 +18,26 @@ def test_apply_discount():
     data.pay_rate = 0.7
     data.apply_discount()
     assert data.price == 7000
+
+
+def test_name():
+    item1 = Item.all[0]
+    assert item1.name == 'Смартфон'
+
+
+def test_instantiate_from_csv():
+    """
+    Cоздание объектов из данных файла
+    """
+    Item.instantiate_from_csv('src/items.csv')
+    assert len(Item.all) == 5
+
+
+def test_string_to_number():
+    """
+     Преобразование строки в число
+    """
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
+

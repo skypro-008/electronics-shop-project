@@ -1,10 +1,12 @@
 import csv
+from pathlib import Path
 class Item:
     """
     Класс для представления товара в магазине.
     """
     pay_rate = 1.0
     all = []
+    DATA_DIR = Path(__file__).parent.joinpath('items.csv')
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -46,7 +48,7 @@ class Item:
         return self.__name
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, file):
         """
         Класс-метод, инициализирующий экземпляры
         класса Item данными из файла src/items.csv
@@ -61,7 +63,10 @@ class Item:
                 cls(name, price, quantity)
             return cls
     @staticmethod
-    def string_to_number(self, value):
+    def string_to_number(value):
+        """
+        Преобразование строки в число
+        """
         try:
             value_int = int(float(value))
         except ValueError:
