@@ -24,6 +24,9 @@ def test_name():
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
 
+item = Item('Телефон', 10000, 5)
+item.name = 'Смартфон'
+item.name = 'СуперСмартфон'
 
 def test_instantiate_from_csv():
     """
