@@ -1,7 +1,5 @@
 import csv
 
-import os
-
 
 class Item:
     """
@@ -89,8 +87,7 @@ class Item:
         if isinstance(other, Item):
             return self.quantity + other.quantity
         else:
-            raise TypeError()''
-
+            raise TypeError("Складывать можно только объекты класса с родительским классом Item")
 
 
 
