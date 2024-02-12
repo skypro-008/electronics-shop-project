@@ -29,8 +29,13 @@ def test_name(constant):
     assert item.name == 'Смартфон'
     # длина наименования товара больше 10 символов
     item.name = 'СуперСмартфон'
-    assert item.name == 'СуперСмартфон'
+    assert item.name == 'СуперСмарт'
 
 def test_instantiate_from_csv():
     Item.instantiate_from_csv()  # создание объектов из данных файла
     assert len(Item.all) == 5
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5
