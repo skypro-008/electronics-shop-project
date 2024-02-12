@@ -40,5 +40,3 @@ def test_repr(example):
 
 def test_str(example):
     assert str(example) == 'Смартфон'
-
-
