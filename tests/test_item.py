@@ -1,8 +1,9 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
+from src.phone import Phone
 
 data = Item("Смартфон", 10000, 20)
-
+phone = Phone("iPhone 14", 120_000, 5, 2)
 
 def test_calculate():
     """
@@ -44,3 +45,17 @@ def test_string_to_number():
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
 
+item1 = Item("Смартфон", 10000, 20)
+def test_repr():
+    """
+    Тест магического метода __repr__
+    """
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+def test_str():
+    """
+    Тест магического метода  __str__.
+    """
+    assert str(item1) == 'Смартфон'
+def test__add__():
+    assert data + phone == 25
+    assert phone + phone == 10
