@@ -5,6 +5,7 @@ from src.phone import Phone
 data = Item("Смартфон", 10000, 20)
 phone = Phone("iPhone 14", 120_000, 5, 2)
 
+
 def test_calculate():
     """
     Тестируем рассчет общей стоимость конкретного товара в магазине.
@@ -23,11 +24,12 @@ def test_apply_discount():
 
 def test_name():
     item1 = Item.all[0]
-    assert item1.name == 'Смартфон'
+    assert item1.name == 'СуперСмарт'
 
-item = Item('Телефон', 10000, 5)
-item.name = 'Смартфон'
-item.name = 'СуперСмартфон'
+
+data.name = 'Смартфон'
+data.name = 'СуперСмартон'
+
 
 def test_instantiate_from_csv():
     """
@@ -45,17 +47,23 @@ def test_string_to_number():
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
 
-item1 = Item("Смартфон", 10000, 20)
+
 def test_repr():
     """
     Тест магического метода __repr__
+
     """
-    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+    data.price = data.string_to_number(data.price)
+    assert repr(data) == "Item('СуперСмарт', 7000, 20)"
+
+
 def test_str():
     """
     Тест магического метода  __str__.
     """
-    assert str(item1) == 'Смартфон'
+    assert str(data) == 'СуперСмарт'
+
+
 def test__add__():
     assert data + phone == 25
     assert phone + phone == 10

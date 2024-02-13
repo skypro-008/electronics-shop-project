@@ -13,6 +13,7 @@ def test_number_of_sim_0():
     """
     Тест на количество симм не равное 0
     """
+    data.number_of_sim = 2
     with pytest.raises(ValueError):
         data1.number_of_sim = 0
 
