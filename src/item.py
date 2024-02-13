@@ -1,5 +1,7 @@
 import csv
 from pathlib import Path
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -62,6 +64,7 @@ class Item:
                 quantity = row['quantity']
                 cls(name, price, quantity)
             return cls
+
     @staticmethod
     def string_to_number(value):
         """
@@ -73,10 +76,22 @@ class Item:
             print("Строка не может быть преобразована в число")
         return value_int
 
-
-
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f'{self.name}'
+
+    def __add__(self, other):
+        """
+        Реализация возможности сложения экземпляров классов
+        (сложение по количеству товара в магазине)
+        """
+        if isinstance(other, self.__class__):
+            return int(self.quantity) + int(other.quantity)
