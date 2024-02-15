@@ -3,6 +3,7 @@ from pathlib import Path
 
 
 class Item:
+
     """
     Класс для представления товара в магазине.
     """
@@ -11,6 +12,7 @@ class Item:
     DATA_DIR = Path(__file__).parent.joinpath('items.csv')
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
+        super().__init__()
         """
         Создание экземпляра класса item.
 
@@ -43,11 +45,7 @@ class Item:
         """
         Сеттер с проверкой длины имени
         """
-        if len(value) >= 10:
-            self.__name = value[:10]
-        else:
-            self.__name = value
-        return self.__name
+        self.__name = value[:10]
 
     @classmethod
     def instantiate_from_csv(cls, file):
@@ -70,10 +68,7 @@ class Item:
         """
         Преобразование строки в число
         """
-        try:
-            value_int = int(float(value))
-        except ValueError:
-            print("Строка не может быть преобразована в число")
+        value_int = int(float(value))
         return value_int
 
     def apply_discount(self) -> None:

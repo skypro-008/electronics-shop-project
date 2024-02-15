@@ -1,32 +1,30 @@
 from src.phone import Phone
 import pytest
-data = Phone("Смартфон", 10000, 20, 2)
-data1 = Phone("Смартфон", 10000, 20, 0)
 
 
-def test_number_of_sim():
+@pytest.fixture()
+def phone_test():
+    return Phone("Смартфон", 10000, 20, 2)
 
-    assert data.number_of_sim == 2
 
-
-def test_number_of_sim_0():
-    """
-    Тест на количество симм не равное 0
-    """
-    data.number_of_sim = 2
+def test_number_of_sims_must_be_positive(phone_test):
     with pytest.raises(ValueError):
-        data1.number_of_sim = 0
+        phone_test.number_of_sim = 0
 
 
-def test_repr():
+def test_number_of_sim(phone_test):
+    phone_test.number_of_sim = 2
+
+
+def test_repr(phone_test):
     """
     Тест магического метода __repr__
     """
-    assert repr(data) == "Phone('Смартфон', 10000, 20, 2)"
+    assert repr(phone_test) == "Phone('Смартфон', 10000, 20, 2)"
 
 
-def test_str():
+def test_str(phone_test):
     """
     Тест магического метода  __str__.
     """
-    assert str(data) == 'Смартфон'
+    assert str(phone_test) == 'Смартфон'
