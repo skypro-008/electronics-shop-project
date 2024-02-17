@@ -1,7 +1,7 @@
 import csv
 from config import root_csv
 
-class Item:
+class Item():
     """
     Класс для представления товара в магазине.
     """
@@ -76,3 +76,4 @@ class Item:
     def __add__(self, other):
         if isinstance(other, self.__class__):
             return self.quantity + other.quantity
+
