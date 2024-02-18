@@ -1,18 +1,18 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
 from src.phone import Phone
+from src.item import InstantiateCSVError
 import pytest
 
 
 @pytest.fixture()
 def phone_test():
     return Item("Смартфон", 10000, 20)
+
+
 @pytest.fixture()
 def phone_test1():
     return Phone("iPhone 14", 120_000, 5, 2)
-
-#phone_test = Item("Смартфон", 10000, 20)
-#phone = Phone("iPhone 1434", 120_000, 5, 2)
 
 
 def test_calculate(phone_test):
@@ -37,16 +37,28 @@ def test_name_setter(phone_test):
     assert item.name == 'СуперCмарт'
 
 
-#phone_test.name = 'Смартфон'
-#phone_test.name = 'СуперСмартон'
-
-
 def test_instantiate_from_csv():
     """
     Cоздание объектов из данных файла
     """
-    Item.instantiate_from_csv('src/items.csv')
+    Item.instantiate_from_csv("../src/item.csv")
     assert len(Item.all) == 5
+
+
+def test_instantiate_from_csv_not_file():
+    """
+    Отсутствие файла
+    """
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv("../src/item1.csv")
+
+
+def test_instantiate_from_csv_bad_file():
+    """
+    Поврежденный файл
+    """
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv("../src/item2.csv")
 
 
 def test_string_to_number():
@@ -74,6 +86,6 @@ def test_str(phone_test):
     assert str(phone_test) == 'Смартфон'
 
 
-def test__add__(phone_test,phone_test1):
+def test__add__(phone_test, phone_test1):
     assert phone_test + phone_test1 == 25
     assert phone_test1 + phone_test1 == 10
