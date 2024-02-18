@@ -2,6 +2,7 @@ class Item:
     """
     Класс для представления товара в магазине.
     """
+    instances: int
     pay_rate = 1.0
     all = []
 
@@ -13,7 +14,11 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
+        self.name = name
+        self.price = price
+        self.quantity = quantity
+        self.discount_level = 1.0
+        self.instances = 0
 
     def calculate_total_price(self) -> float:
         """
@@ -21,10 +26,16 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        pass
+        return self.price * self.discount_level * self.instances
 
-    def apply_discount(self) -> None:
+    def apply_discount(self, discount_level) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        pass
+        self.discount_level = discount_level
+
+    def get_total_price(self):
+        return self.price * self.discount_level * self.instances
+
+    def add_instance(self):
+        self.instances += 1
