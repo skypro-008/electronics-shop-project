@@ -1,5 +1,21 @@
 import csv
-from pathlib import Path
+import os
+
+# file_proba ="../src/item.csv" # тестируем правильный файла
+# file_proba ="../src/item1.csv" # тестируем отсутствие файла
+# file_proba ="../src/item2.csv" # тестируем повреждение файла
+
+
+class InstantiateCSVError(Exception):
+    """
+    Класс проверки на повреждение файла данных
+
+    """
+    def __init__(self, *args):
+        self.message = args[0] if args else "Файл item.csv поврежден"
+
+    def __str__(self):
+        return f'{self.message}'
 
 
 class Item:
@@ -9,7 +25,6 @@ class Item:
     """
     pay_rate = 1.0
     all = []
-    DATA_DIR = Path(__file__).parent.joinpath('items.csv')
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         super().__init__()
@@ -48,20 +63,26 @@ class Item:
         self.__name = value[:10]
 
     @classmethod
-    def instantiate_from_csv(cls, file):
+    def instantiate_from_csv(cls, file_proba):
+        cls.file_proba = file_proba
         """
-        Класс-метод, инициализирующий экземпляры
-        класса Item данными из файла src/items.csv
+        Формирование экземпляров класса Item из внешнего файла
         """
-        with cls.DATA_DIR.open(newline='') as csvfile:
-            reader = csv.DictReader(csvfile)
+        if not os.path.isfile(cls.file_proba):
+            raise FileNotFoundError("Отсутствует файл item.csv")
+        else:
             cls.all.clear()
-            for row in reader:
-                name = row['name']
-                price = row['price']
-                quantity = row['quantity']
-                cls(name, price, quantity)
-            return cls
+            with open(cls.file_proba, 'r', newline='', encoding='windows-1251') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    if len(row) < 3:
+                        raise InstantiateCSVError
+                    else:
+                        name = row['name']
+                        price = row['price']
+                        quantity = row['quantity']
+                        cls(name, price, quantity)
+        return cls
 
     @staticmethod
     def string_to_number(value):
