@@ -3,6 +3,7 @@ from src.item import Item
 from src.phone import Phone
 from src.item import InstantiateCSVError
 import pytest
+import os
 
 
 @pytest.fixture()
@@ -41,7 +42,9 @@ def test_instantiate_from_csv():
     """
     Cоздание объектов из данных файла
     """
-    Item.instantiate_from_csv("../src/item.csv")
+    relative_path = "src/item.csv"
+    file_path = os.path.abspath(relative_path)
+    Item.instantiate_from_csv(file_path)
     assert len(Item.all) == 5
 
 
@@ -49,16 +52,20 @@ def test_instantiate_from_csv_not_file():
     """
     Отсутствие файла
     """
+    relative_path = "src/item1.csv"
+    file_path = os.path.abspath(relative_path)
     with pytest.raises(FileNotFoundError):
-        Item.instantiate_from_csv("../src/item1.csv")
+        Item.instantiate_from_csv(file_path)
 
 
 def test_instantiate_from_csv_bad_file():
     """
     Поврежденный файл
     """
+    relative_path = "src/item2.csv"
+    file_path = os.path.abspath(relative_path)
     with pytest.raises(InstantiateCSVError):
-        Item.instantiate_from_csv("../src/item2.csv")
+        Item.instantiate_from_csv(file_path)
 
 
 def test_string_to_number():
