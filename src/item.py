@@ -60,15 +60,21 @@ class Item:
     #инициализирует экземпляры класса Item данными из файла src/items.csv
 
     def instantiate_from_csv(cls, filename='../src/items.csv'):
-        cls.all.clear()
-        with open(filename, encoding='windows-1251') as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                name = row['name']
-                price = row['price']
-                quantity = row['quantity']
-                cls(name, price, quantity)
-            return cls
+        try:
+            cls.all.clear()
+            with open(filename, encoding='windows-1251') as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    name = row['name']
+                    price = row['price']
+                    quantity = row['quantity']
+                    cls(name, price, quantity)
+                return cls
+        except FileNotFoundError:
+            raise FileNotFoundError('Отсутствует файл item.csv')
+        except KeyError:
+            raise InstantiateCSVError
+
 
     @staticmethod
     #возвращаает число из числа-строки
@@ -90,4 +96,10 @@ class Item:
             raise TypeError("Складывать можно только объекты класса с родительским классом Item")
 
 
+class InstantiateCSVError(Exception):
+    def __init__(self):
+        self.message = 'Файл item.csv поврежден'
+
+    def __str__(self):
+        return self.message
 
