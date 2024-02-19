@@ -68,6 +68,14 @@ def test_instantiate_from_csv_bad_file():
         Item.instantiate_from_csv(file_path)
 
 
+def test_str_error():
+    test_error = InstantiateCSVError()
+    """
+    Тестирование класса ошибки InstantiateCSVError
+    """
+    assert str(test_error) == "Файл item.csv поврежден"
+
+
 def test_string_to_number():
     """
      Преобразование строки в число
