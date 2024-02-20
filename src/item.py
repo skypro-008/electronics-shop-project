@@ -62,3 +62,11 @@ class Item:
         """Возвращает число из числа-строки"""
         number = float(str_number)
         return int(number)
+
+    def __repr__(self):
+        """Использование метода repr для вывода экземпляров класса"""
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """Создание метода str для вывода экземпляров класса"""
+        return f"{self.name}"
