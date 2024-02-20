@@ -37,34 +37,31 @@ class Item:
         self.price *= self.pay_rate
 
     @property
-    def name_item(self):
+    def name(self):
         return self.__name
 
-    @name_item.setter
-    def name_item(self, name):
-        """
-        Проверка на длину наименования товаров (не более 10 символов)
-        """
+    @name.setter
+    def name(self, name):
+        """Функция проверяет длину наименования товара, чтобы было не более 10 символов"""
         if len(name) > 10:
             self.__name = name[:10]
         else:
             self.__name = name
 
     @classmethod
-    def instantiate_from_csv(cls, csv_file):
+    def instantiate_from_csv(cls, path='../src/items.csv'):
         """
-        Добавление экземпляров класса из csv файла
+        Создает экземпляры класса Item из данных в файле items.csv
         """
         cls.all = []
-        with open(csv_file) as csv_file:
-            data = csv.DictReader(csv_file)
-            for item in data:
-                cls(str(item["name"]), float(item["price"]), int(item["quantity"]))
+        with open(path, 'r', encoding='windows-1251') as csv_file:
+            reader = csv.DictReader(csv_file)
+            rows = list(reader)
+            for row in rows:
+                Item(str(row['name']), float(row['price']), int(row['quantity']))
 
     @staticmethod
     def string_to_number(str_number):
-        """
-        Возвращает число из числа-строки
-        """
+        """Возвращает число из числа-строки"""
         number = float(str_number)
         return int(number)

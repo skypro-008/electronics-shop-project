@@ -1,5 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
+from config import ITEMS
 from src.item import Item
 
 
@@ -22,3 +23,23 @@ def teat_apply_discount(item):
     item.pay_rate = 0.8
     item.apply_discount()
     assert item.price == 8000.0
+
+
+def test_name(item):
+    """Тест проверки длины наименования товара(не больше 10 символов"""
+    item1 = Item("Смартфон", 10000, 20)
+    assert item1.name == "Смартфон"
+    item1.name = "Духовой шкаф"
+    assert item1.name == "Духовой шк"
+
+
+def test_instantiate_from_csv():
+    """Проверка добавления экземпляров класса из CSV файла"""
+    Item.instantiate_from_csv(ITEMS)
+    assert len(Item.all) == 5
+
+
+def test_string_to_number():
+    """Проверка возвращения числа из строки-числа"""
+    assert Item.string_to_number("5") == 5
+    assert Item.string_to_number("1.5") == 1
