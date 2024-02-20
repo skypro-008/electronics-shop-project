@@ -42,8 +42,7 @@ def test_instantiate_from_csv():
     """
     Cоздание объектов из данных файла
     """
-    relative_path = "src/item.csv"
-    file_path = os.path.abspath(relative_path)
+    file_path = os.path.abspath("src/item.csv")
     Item.instantiate_from_csv(file_path)
     assert len(Item.all) == 5
 
@@ -52,8 +51,7 @@ def test_instantiate_from_csv_not_file():
     """
     Отсутствие файла
     """
-    relative_path = "src/item1.csv"
-    file_path = os.path.abspath(relative_path)
+    file_path = os.path.abspath("src/item1.csv")
     with pytest.raises(FileNotFoundError):
         Item.instantiate_from_csv(file_path)
 
@@ -62,8 +60,7 @@ def test_instantiate_from_csv_bad_file():
     """
     Поврежденный файл
     """
-    relative_path = "src/item2.csv"
-    file_path = os.path.abspath(relative_path)
+    file_path = os.path.abspath("src/item2.csv")
     with pytest.raises(InstantiateCSVError):
         Item.instantiate_from_csv(file_path)
 
