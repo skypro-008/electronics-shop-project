@@ -2,6 +2,7 @@ import pytest
 from src.item import Item
 from src.phone import Phone
 from config import root_csv
+from src.item import InstantiateCSVError
 
 @pytest.fixture
 def example():
@@ -29,6 +30,14 @@ def test_instantiate_from_csv():
     assert len(Item.all) == 5
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
+
+def test_instantiate_from_csv2():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('')
+
+def test_instantiate_from_csv3():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv("../src/item.py")
 
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
