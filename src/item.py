@@ -1,6 +1,14 @@
 import csv
 from config import root_csv
 
+class InstantiateCSVError(Exception):
+    def __init__(self, *args, **kwargs):
+        self.message = 'Файл поврежден'
+
+    def __str__(self):
+        return self.message
+
+
 class Item():
     """
     Класс для представления товара в магазине.
@@ -51,13 +59,18 @@ class Item():
         """
         класс-метод, инициализирует экземпляры класса Item
         """
-        cls.all = []
-        count = 0
-        with open(csvfile, encoding='windows-1251') as r_file:
-            file_reader = csv.DictReader(r_file, delimiter=",")
-            for row in file_reader:
-                name, price, quantity = str(row['name']), float(row['price']), int(row['quantity'])
-                cls(name, price, quantity)
+        try:
+            cls.all = []
+            count = 0
+            with open(csvfile, encoding='windows-1251') as r_file:
+                file_reader = csv.DictReader(r_file, delimiter=",")
+                for row in file_reader:
+                    name, price, quantity = str(row['name']), float(row['price']), int(row['quantity'])
+                    cls(name, price, quantity)
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Отсутствует файл {csvfile}")
+        except KeyError:
+            raise InstantiateCSVError
 
     @staticmethod
     def string_to_number(str_number):
@@ -76,4 +89,3 @@ class Item():
     def __add__(self, other):
         if isinstance(other, self.__class__):
             return self.quantity + other.quantity
-
