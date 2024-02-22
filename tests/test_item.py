@@ -48,10 +48,12 @@ def test_instantiate_from_csv():
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
 
-    with pytest.raises(FileNotFoundError):
-        assert Item.instantiate_from_csv()
     with pytest.raises(InstantiateCSVError):
-         assert Item.instantiate_from_csv()
+        assert Item.instantiate_from_csv('../src/incorrect.csv')
+
+def test_instantiate_from_csv_error():
+    with pytest.raises(FileNotFoundError):
+        assert Item.instantiate_from_csv("error")
 
 
 def test_string_to_number():

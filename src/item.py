@@ -69,13 +69,14 @@ class Item:
         with open(path, encoding='windows-1251') as file:
             reader = csv.DictReader(file)
             for row in reader:
-                try:
+                if "name" not in row or "price" not in row or "quantity" not in row:
+                    raise InstantiateCSVError
+                else:
                     name = row['name']
                     price = row['price']
                     quantity = row['quantity']
                     cls(name, price, quantity)
-                except InstantiateCSVError:
-                    raise InstantiateCSVError
+
 
 
     @staticmethod
