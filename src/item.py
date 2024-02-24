@@ -1,5 +1,6 @@
 import csv
 
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -19,6 +20,14 @@ class Item:
         self.price = price
         self.quantity = quantity
         self.all.append(self)
+
+    def __repr__(self):
+        """Использование метода repr для вывода экземпляров класса"""
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """Создание метода str для вывода экземпляров класса"""
+        return f"{self.name}"
 
     def calculate_total_price(self) -> float:
         """
@@ -63,10 +72,11 @@ class Item:
         number = float(str_number)
         return int(number)
 
-    def __repr__(self):
-        """Использование метода repr для вывода экземпляров класса"""
-        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
-
-    def __str__(self):
-        """Создание метода str для вывода экземпляров класса"""
-        return f"{self.name}"
+    def __add__(self, other):
+        """
+        Реализация возможности сложения экземпляров класса `Phone` и `Item`
+        (сложение по количеству товара в магазине)
+        """
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        return ValueError("Складывать можно только объекты классов с родительским классом Item")
