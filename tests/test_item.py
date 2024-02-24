@@ -16,7 +16,4 @@ def test_apply_discount():
     assert date.price == 8000.0
 
 
-
-
-
 """Здесь надо написать тесты с использованием pytest для модуля item."""
