@@ -71,15 +71,19 @@ class Item:
         else:
             self.__name = value[:10]
 
+
     @classmethod
-    def instantiate_from_csv(cls, filepath = '../src/items.csv'):
+    def instantiate_from_csv(cls, data = '../src/items.csv'):
         try:
-            cls.all = []
-            with open(filepath, 'r') as f:
-                reader = csv.DictReader(f)
-                for line in reader:
-                    item = (cls(line['name'], line['price'], line['quantity']))
-                    cls.all.append(item)
+            data = f'../{data}'
+            Item.all = []
+            with open(data, 'r', newline='') as csvfile:
+                spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+                for row in spamreader:
+                    lines = csvfile.readlines()
+                    for i in lines:
+                        name, price, quantity = i.split(',')
+                        cls(name, price, quantity)
         except KeyError:
             raise InstantiateCSVError("Файл item.csv поврежден")
         except FileNotFoundError:
