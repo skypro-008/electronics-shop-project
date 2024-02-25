@@ -1,5 +1,7 @@
+from src.item import InstantiateCSVError
 from src.item import Item
 import pytest
+
 
 @pytest.fixture
 def item1():
@@ -46,3 +48,8 @@ def test_repr():
 def test_str():
     item1 = Item("Смартфон", 10000, 20)
     assert str(item1) == 'Смартфон'
+
+
+def test_instantiate_from_csv():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv('line.csv')
