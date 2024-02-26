@@ -2,6 +2,7 @@
 import pytest
 from src.item import Item
 from config import ITEMS
+from src.phone import Phone
 
 @pytest.fixture
 def item():
@@ -49,3 +50,10 @@ def test_str(item):
     """Тест для метода str"""
     item1 = Item("Смартфон", 10000, 20)
     assert str(item1) == "Смартфон"
+
+
+def test_sum_cls():
+    phone1 = Phone("iPhone 14", 120000, 5, 2)
+    item1 = Item("Смартфон", 10000, 20)
+    assert item1 + phone1 == 25
+    assert phone1 + phone1 == 10
