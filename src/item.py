@@ -1,4 +1,15 @@
-class Item:
+import csv
+from config import root_csv
+
+class InstantiateCSVError(Exception):
+    def __init__(self, *args, **kwargs):
+        self.message = 'Файл поврежден'
+
+    def __str__(self):
+        return self.message
+
+
+class Item():
     """
     Класс для представления товара в магазине.
     """
@@ -13,7 +24,10 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
+        self.__name = name
+        self.price = price
+        self.quantity = quantity
+        self.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -21,10 +35,57 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        pass
+        return self.price * self.quantity
 
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        pass
+        self.price *= self.pay_rate
+
+    def get_name(self):
+        return self.__name
+
+    def set_name(self, name):
+        if len(name) > 10:
+            self.__name = name[0:10]
+        else:
+            self.__name = name
+
+    name = property(get_name, set_name)
+
+    @classmethod
+    def instantiate_from_csv(cls, csvfile):
+        """
+        класс-метод, инициализирует экземпляры класса Item
+        """
+        try:
+            cls.all = []
+            count = 0
+            with open(csvfile, encoding='windows-1251') as r_file:
+                file_reader = csv.DictReader(r_file, delimiter=",")
+                for row in file_reader:
+                    name, price, quantity = str(row['name']), float(row['price']), int(row['quantity'])
+                    cls(name, price, quantity)
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Отсутствует файл {csvfile}")
+        except KeyError:
+            raise InstantiateCSVError
+
+    @staticmethod
+    def string_to_number(str_number):
+        """
+         статический метод, возвращающий число из числа-строки
+        """
+        number = float(str_number)
+        return int(number)
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return self.__name
+
+    def __add__(self, other):
+        if isinstance(other, self.__class__):
+            return self.quantity + other.quantity
