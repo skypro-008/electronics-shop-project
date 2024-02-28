@@ -1,3 +1,23 @@
+import os
+import csv
+
+
+class InstantiateCSVError(Exception):
+    def __init__(self):
+        pass
+
+    def __str__(self):
+        return 'Файл item.csv поврежден'
+
+
+class FileNotFoundError(Exception):
+    def __init__(self):
+        pass
+
+    def __str__(self):
+        return "Отсутствует файл item.csv"
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -13,7 +33,10 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        pass
+        self.__name = name
+        self.price = price
+        self.quantity = quantity
+        Item.all.append(self)
 
     def calculate_total_price(self) -> float:
         """
@@ -21,10 +44,65 @@ class Item:
 
         :return: Общая стоимость товара.
         """
-        pass
+        total_price = self.price * self.quantity
+        return total_price
+
 
     def apply_discount(self) -> None:
         """
         Применяет установленную скидку для конкретного товара.
         """
-        pass
+        self.price = float(self.pay_rate) * self.price
+        return self.price
+
+    @property
+    def name(self):
+        return self.__name
+
+    @name.setter
+    def name(self, value):
+        """
+        Проверяет, что длина наименования товара не больше 10 симвовов.
+        В противном случае,
+        обрезать строку (оставить первые 10 символов)
+        """
+        if len(value) <= 10:
+            self.__name = value
+        else:
+            self.__name = value[:10]
+
+
+    @classmethod
+    def instantiate_from_csv(cls, data = '../src/items.csv'):
+        try:
+            data = f'../{data}'
+            Item.all = []
+            with open(data, 'r', newline='') as csvfile:
+                spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+                for row in spamreader:
+                    lines = csvfile.readlines()
+                    for i in lines:
+                        name, price, quantity = i.split(',')
+                        cls(name, price, quantity)
+        except KeyError:
+            raise InstantiateCSVError("Файл item.csv поврежден")
+        except FileNotFoundError:
+            raise FileNotFoundError("Отсутствует файл item.csv")
+
+
+    @staticmethod
+    def string_to_number(str):
+        return(int(float(str)))
+
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self) -> str:
+        return f'{self.name}'
+
+    def __add__(self, other):
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        return ValueError("Складывать можно только объекты Item и дочерние от них.")
+
