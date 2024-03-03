@@ -1,5 +1,6 @@
 import pytest
 from src.item import Item
+import os
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 
 
@@ -22,3 +23,20 @@ def test_init_item(test_position):
     assert test_position.name == 'Smartphone'
     assert test_position.price == 550.00
     assert test_position.quantity == 10
+
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv(os.path.join('src', 'items.csv'))
+    assert len(Item.all) == 5
+    item1 = Item.all[0]
+    assert item1.name == 'Смартфон'
+
+    with pytest.raises(InstantiateCSVError):
+        assert Item.instantiate_from_csv('../src/incorrect.csv')
+
+
+
+
+def test_string_to_number():
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('5.0') == 5
+    assert Item.string_to_number('5.5') == 5

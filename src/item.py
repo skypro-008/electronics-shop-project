@@ -58,6 +58,8 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, file_name):
+
+
         cls.all.clear()
         with open(file_name, 'r') as f:
             reader = csv.DictReader(f)
