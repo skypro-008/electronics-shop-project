@@ -80,12 +80,12 @@ class Item:
     def __str__(self):
         return self.name
 
-    def __add__(self, other):
-        """
-        Метод сложения количества товаров двух классов
-         """
+    #def __add__(self, other):
+    #    """
+    #    Метод сложения количества товаров двух классов
+    #     """
 
-        if not isinstance(other, Item):
-            raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
-        else:
-            return self.quantity + other.quantity
+    #    if not isinstance(other, Item):
+    #        raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
+    #    else:
+    #        return self.quantity + other.quantity
