@@ -57,11 +57,14 @@ class Item:
         self.__name = value
 
     @classmethod
-    def instantiate_from_csv(cls, file_name):
+    def instantiate_from_csv(cls, path='../src/items.csv'):
 
+        if not os.path.exists(path):
+            raise FileNotFoundError('Отсутствует файл item.csv.')
 
         cls.all.clear()
-        with open(file_name, 'r') as f:
+
+        with open(path, 'r') as f:
             reader = csv.DictReader(f)
             items = list(reader)
             for item in items:
@@ -89,3 +92,18 @@ class Item:
            raise ValueError("Количество физических SIM-карт должно быть целым числом больше нуля.")
         else:
             return self.quantity + other.quantity
+
+class InstantiateCSVError(Exception):
+
+    def __init__(self):
+        self.message = 'Файл item.csv поврежден'
+
+    def __str__(self):
+        return self.message
+
+class FileNotFoundError(Exception):
+    def __init__(self):
+        self.message = '_Отсутствует файл item.csv_'
+
+    def __str__(self):
+        return self.message
