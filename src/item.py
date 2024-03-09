@@ -59,19 +59,21 @@ class Item:
     @classmethod
     def instantiate_from_csv(cls, path='../src/items.csv'):
 
-        if not os.path.exists(path):
-            raise FileNotFoundError('Отсутствует файл item.csv.')
-
-        cls.all.clear()
-
-        with open(path, 'r') as f:
-            reader = csv.DictReader(f)
-            items = list(reader)
-            for item in items:
-                name = item['name']
-                price = cls.string_to_number(item['price'])
-                quantity = int(item['quantity'])
-                cls(name, price, quantity)
+        try:
+            cls.all.clear()
+            with open(path, 'r') as f:
+                reader = csv.DictReader(f)
+                items = list(reader)
+                for item in items:
+                    name = item['name']
+                    price = cls.string_to_number(item['price'])
+                    quantity = int(item['quantity'])
+                    cls(name, price, quantity)
+                return cls
+        except FileNotFoundError:
+            raise FileNotFoundError('Отсутствует файл item.csv')
+        except KeyError:
+            raise InstantiateCSVError
 
     @staticmethod
     def string_to_number(number):
@@ -101,9 +103,3 @@ class InstantiateCSVError(Exception):
     def __str__(self):
         return self.message
 
-class FileNotFoundError(Exception):
-    def __init__(self):
-        self.message = '_Отсутствует файл item.csv_'
-
-    def __str__(self):
-        return self.message
