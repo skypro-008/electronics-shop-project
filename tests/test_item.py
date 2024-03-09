@@ -1,6 +1,9 @@
 import pytest
 from src.item import Item
 from src.phone import Phone
+from src.item import InstantiateCSVError
+
+
 import os
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 
@@ -36,12 +39,8 @@ def test_instantiate_from_csv():
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
 
-    #with pytest.raises(InstantiateCSVError):
-        #assert Item.instantiate_from_csv('../src/incorrect.csv')
-
-
-
-
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv('../src/items.csv')
 
 
 def test_string_to_number():
@@ -62,3 +61,7 @@ def test_add():
     phone1 = Phone("iPhone 14", 120_000, 5, 2)
     assert item1 + phone1 == 25
     assert phone1 + phone1 == 10
+
+def test_InstantiateCSVError():
+    with pytest.raises(InstantiateCSVError):
+        assert Item.instantiate_from_csv()
