@@ -1,25 +1,26 @@
+import pytest
+
 from src.item import Item
-
-# Создаем экземпляр товара
-item = Item("Название товара", 1000, 5)
-
-
 # Проверяем, что атрибуты класса Item были установлены правильно
-assert item.name == "Название товара"
-assert item.price == 1000
-assert item.quantity == 5
-assert item.discount_level == 1.0
-assert item.instances == 0
+@pytest.fixture
+def item():
+    return Item("Название товара", 1000, 5)
 
-# Применяем скидку к товару
-item.apply_discount(0.85)
+def test_init(item):
+    assert item.name == "Название товара"
+    assert item.price == 1000
+    assert item.quantity == 5
 
-# Проверяем, что уровень скидки был успешно применен
-assert item.discount_level == 0.85
 
-# Добавляем еще один экземпляр товара
-item.add_instance()
+def test_calculate_total_price(item):
+    assert item.calculate_total_price() == 5000
 
-# Проверяем, что количество экземпляров товара увеличилось
-assert item.instances == 1
-''' верно хоть?'''
+
+def test_discaunt_price(item):
+    item.pay_rate = 0.5
+    item.apply_discount()
+    assert item.price == 500
+
+
+
+
