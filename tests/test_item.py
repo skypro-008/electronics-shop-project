@@ -11,6 +11,9 @@ def test_init(item):
     assert item.price == 1000
     assert item.quantity == 5
 
+def test__repr__(test_item):
+    """Проверяет вывод объекта для разработчика"""
+    assert repr(test_item) == "Item('iphone', 20000.0, 2)"
 
 def test_calculate_total_price(item):
     assert item.calculate_total_price() == 5000

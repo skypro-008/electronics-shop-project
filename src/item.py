@@ -1,3 +1,7 @@
+import csv
+import os
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -13,10 +17,17 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        super().__init__()
+        self.__name = name
         self.price = price
         self.quantity = quantity
-        #self.instances = 0
+
+        self.all.append(self)
+        # self.instances = 0
+
+    def __repr__(self):
+        """Выводит объект для разработчика"""
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
 
     def calculate_total_price(self) -> float:
         """
@@ -26,8 +37,9 @@ class Item:
         """
         return self.price * self.quantity
 
-    def apply_discount(self) -> None:
+    def apply_discount(self) -> float:
         """
         Применяет установленную скидку для конкретного товара.
         """
         self.price *= self.pay_rate
+        return self.price
