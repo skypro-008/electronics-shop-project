@@ -23,7 +23,6 @@ class Item:
         self.quantity = quantity
 
         self.all.append(self)
-        # self.instances = 0
 
     def __repr__(self):
         """Выводит объект для разработчика"""
@@ -32,7 +31,6 @@ class Item:
     def calculate_total_price(self) -> float:
         """
         Рассчитывает общую стоимость конкретного товара в магазине.
-
         :return: Общая стоимость товара.
         """
         return self.price * self.quantity
