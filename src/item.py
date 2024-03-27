@@ -70,7 +70,7 @@ class Item:
         self.__name = name
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, s):
         """Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_"""
         try:
             with cls.DATA_DIR.open(newline='') as csvfile:
