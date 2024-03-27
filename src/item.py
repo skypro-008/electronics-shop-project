@@ -30,9 +30,9 @@ class Item:
         self.price = price
         self.quantity = quantity
 
-        self.all.append(self)
         # Добавляем объект в список all класса
         Item.all.append(self)
+        self.all.append(self)
 
     def __repr__(self):
         """Выводит объект для разработчика"""
@@ -53,43 +53,35 @@ class Item:
         return self.price
 
     @property
-    def name(self) -> str:
-        """
-        Сеттер для атрибута name.
-        :return: Название товара.
-        """
+    def name(self):
         return self.__name
 
     @name.setter
-    def name(self, value: str) -> None:
-        """
-        Сеттер для атрибута name.
-        :param value: Название товара.
-        """
-        name = value[:10]
+    def name(self, name):
+        if len(name) > 10:
+            raise Exception("Длина наименования товара превышает 10 символов.")
         self.__name = name
 
     @classmethod
-    def instantiate_from_csv(cls, s):
-        """Класс-метод, инициализирующий экземпляры класса `Item` данными из файла _src/items.csv_"""
+    def instantiate_from_csv(cls, path_to_csv=r"../src/items.csv"):
+        """класс-метод, инициализирующий экземпляры класса Item данными из файла src/items.csv"""
+
         try:
-            with cls.DATA_DIR.open(newline='') as csvfile:
-                reader = csv.DictReader(csvfile)
-                cls.all.clear()
+            with open(path_to_csv, newline='', encoding='utf-8') as csvfile:
+                data = csv.DictReader(csvfile)
                 try:
-                    for row in reader:
+                    for row in data:
                         name = row['name']
                         price = row['price']
-                        quantity = row['quantity']
-                        cls(name, price, quantity)
-                except KeyError:
-                    raise InstantiateCSVError(f'Файл items.csv поврежден')
+                        quantity = int(row['quantity'])
+                        item = cls(name, price, quantity)
+                        cls.all.append(item)
+                except ValueError:
+                    raise InstantiateCSVError("Файл items.csv поврежден")
         except FileNotFoundError:
-            raise FileNotFoundError(f'Отсутствует файл items.csv')
-        else:
-            return cls
+            raise FileNotFoundError("Отсутствует файл items.csv")
 
     @staticmethod
-    def string_to_number(value: str) -> float:
-        """Преобразует строку с числом в число."""
-        return int(float(value))
+    def string_to_number(number):
+        """статический метод, возвращающий число из числа-строки"""
+        return int(float(number))
