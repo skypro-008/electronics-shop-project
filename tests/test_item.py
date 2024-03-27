@@ -1,6 +1,7 @@
-import pytest
 
-from src.item import Item
+import pytest
+import os
+from src.item import Item, InstantiateCSVError
 
 data = Item("Смартфон", 10000, 20)
 
@@ -45,3 +46,12 @@ def test_instantiate_from_csv():
     """
     Item.instantiate_from_csv('items.csv')
     assert len(Item.all) == 10
+
+
+def test_instantiate_from_csv():
+
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv(path_to_csv=r"../src/item.csv")
+
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv(path_to_csv=r"../src/items.csv")
