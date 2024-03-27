@@ -23,6 +23,8 @@ class Item:
         self.quantity = quantity
 
         self.all.append(self)
+        # Добавляем объект в список all класса
+        Item.all.append(self)
 
     def __repr__(self):
         """Выводит объект для разработчика"""
